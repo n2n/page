@@ -1,0 +1,653 @@
+{
+    "specs": {
+        "page-page-content": {
+            "type": "entity",
+            "entity": "page\\bo\\PageContent",
+            "dataSourceName": null,
+            "label": "Inhalt",
+            "pluralLabel": "Inhalte",
+            "defaultSort": [],
+            "fields": {
+                "id": {
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\numeric\\IntegerEiField",
+                    "props": {
+                        "displayInOverview": false,
+                        "displayInDetailView": false,
+                        "displayInEditView": false,
+                        "displayInAddView": false,
+                        "constant": false,
+                        "readOnly": true,
+                        "mandatory": false,
+                        "draft": false,
+                        "minValue": "0",
+                        "maxValue": "4294967295"
+                    },
+                    "label": "Id",
+                    "objectProperty": "id",
+                    "entityProperty": "id"
+                },
+                "pageContentTs": {
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\translation\\TranslationEiField",
+                    "props": {
+                        "useSystemN2nLocales": true,
+                        "systenN2nLocaleDefs": [],
+                        "customN2nLocaleDefs": []
+                    },
+                    "label": "Page Content Ts",
+                    "objectProperty": "pageContentTs",
+                    "entityProperty": "pageContentTs"
+                },
+                "ssl": {
+                    "class": "page\\rocket\\ei\\field\\PageSslEiField",
+                    "props": [],
+                    "label": "Ssl",
+                    "objectProperty": "ssl",
+                    "entityProperty": "ssl"
+                },
+                "pageController": {
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\relation\\EmbeddedOneToOneEiField",
+                    "props": {
+                        "displayInOverview": true,
+                        "displayInDetailView": true,
+                        "displayInEditView": true,
+                        "displayInAddView": true,
+                        "constant": false,
+                        "readOnly": false,
+                        "mandatory": true,
+                        "replaceable": true
+                    },
+                    "label": "Page Controller",
+                    "objectProperty": "pageController",
+                    "entityProperty": "pageController"
+                },
+                "page": {
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\relation\\EmbeddedOneToOneEiField",
+                    "props": {
+                        "mandatory": true,
+                        "displayInOverview": false,
+                        "displayInDetailView": false,
+                        "displayInEditView": false,
+                        "displayInAddView": false
+                    },
+                    "label": "Page",
+                    "objectProperty": "page",
+                    "entityProperty": "page"
+                }
+            },
+            "commands": [],
+            "modificators": [],
+            "defaultMaskId": null
+        },
+        "page-page-content-t": {
+            "type": "entity",
+            "entity": "page\\bo\\PageContentT",
+            "dataSourceName": null,
+            "label": "Page Content T",
+            "pluralLabel": "Page Content Ts",
+            "defaultSort": [],
+            "fields": {
+                "id": {
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\numeric\\IntegerEiField",
+                    "props": {
+                        "displayInOverview": false,
+                        "displayInDetailView": false,
+                        "displayInEditView": false,
+                        "displayInAddView": false,
+                        "readOnly": true,
+                        "minValue": 0,
+                        "maxValue": 4294967295
+                    },
+                    "label": "Id",
+                    "objectProperty": "id",
+                    "entityProperty": "id"
+                },
+                "seTitle": {
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\string\\StringEiField",
+                    "props": {
+                        "displayInOverview": false,
+                        "displayInDetailView": true,
+                        "displayInEditView": true,
+                        "displayInAddView": true
+                    },
+                    "label": "Se Title",
+                    "objectProperty": "seTitle",
+                    "entityProperty": "seTitle"
+                },
+                "seDescription": {
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\string\\StringEiField",
+                    "props": {
+                        "multiline": true,
+                        "displayInOverview": false,
+                        "displayInDetailView": true,
+                        "displayInEditView": true,
+                        "displayInAddView": true
+                    },
+                    "label": "Se Description",
+                    "objectProperty": "seDescription",
+                    "entityProperty": "seDescription"
+                },
+                "seKeywords": {
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\string\\StringEiField",
+                    "props": {
+                        "displayInOverview": false,
+                        "displayInDetailView": true,
+                        "displayInEditView": true,
+                        "displayInAddView": true
+                    },
+                    "label": "Se Keywords",
+                    "objectProperty": "seKeywords",
+                    "entityProperty": "seKeywords"
+                },
+                "pageContent": {
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\relation\\ManyToOneSelectEiField",
+                    "props": {
+                        "mandatory": true,
+                        "displayInOverview": false,
+                        "displayInDetailView": false,
+                        "displayInEditView": false,
+                        "displayInAddView": false
+                    },
+                    "label": "Inhalt",
+                    "objectProperty": "pageContent",
+                    "entityProperty": "pageContent"
+                }
+            },
+            "commands": [],
+            "modificators": [],
+            "defaultMaskId": null
+        },
+        "page-page": {
+            "type": "entity",
+            "entity": "page\\bo\\Page",
+            "dataSourceName": null,
+            "nestedSetStrategy": {
+                "left": "lft",
+                "right": "rgt"
+            },
+            "label": "Seite",
+            "pluralLabel": "Seiten",
+            "identityStringPattern": "{pageTs.name}",
+            "previewControllerLookupId": "page\\controller\\PagePreviewController",
+            "defaultSort": [],
+            "fields": {
+                "id": {
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\numeric\\IntegerEiField",
+                    "props": {
+                        "displayInOverview": false,
+                        "displayInDetailView": true,
+                        "displayInEditView": false,
+                        "displayInAddView": false,
+                        "constant": false,
+                        "readOnly": true,
+                        "mandatory": false,
+                        "draft": false,
+                        "minValue": "0",
+                        "maxValue": "4294967295"
+                    },
+                    "label": "Id",
+                    "objectProperty": "id",
+                    "entityProperty": "id"
+                },
+                "pageTs": {
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\translation\\TranslationEiField",
+                    "props": {
+                        "useSystemN2nLocales": true,
+                        "systenN2nLocaleDefs": [
+                            {
+                                "id": "de_CH",
+                                "mandatory": false,
+                                "label": null
+                            },
+                            {
+                                "id": "fr_CH",
+                                "mandatory": false,
+                                "label": null
+                            },
+                            {
+                                "id": "en",
+                                "mandatory": false,
+                                "label": null
+                            }
+                        ],
+                        "customN2nLocaleDefs": []
+                    },
+                    "label": "Page Leaf Ts",
+                    "objectProperty": "pageTs",
+                    "entityProperty": "pageTs"
+                },
+                "internalPage": {
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\relation\\ManyToOneSelectEiField",
+                    "props": {
+                        "displayInOverview": false,
+                        "displayInDetailView": true,
+                        "displayInEditView": true,
+                        "displayInAddView": true,
+                        "constant": false,
+                        "readOnly": false,
+                        "mandatory": false
+                    },
+                    "label": "Internal Page Leaf",
+                    "objectProperty": "internalPage",
+                    "entityProperty": "internalPage"
+                },
+                "externalUrl": {
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\string\\StringEiField",
+                    "props": {
+                        "displayInOverview": false,
+                        "displayInDetailView": true,
+                        "displayInEditView": true,
+                        "displayInAddView": true,
+                        "constant": false,
+                        "readOnly": false,
+                        "mandatory": false,
+                        "draft": false,
+                        "maxlength": null,
+                        "multiline": false
+                    },
+                    "label": "External Url",
+                    "objectProperty": "externalUrl",
+                    "entityProperty": "externalUrl"
+                },
+                "pageContent": {
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\relation\\EmbeddedOneToOneEiField",
+                    "props": {
+                        "displayInOverview": false,
+                        "displayInDetailView": true,
+                        "displayInEditView": true,
+                        "displayInAddView": true,
+                        "constant": false,
+                        "readOnly": false,
+                        "mandatory": false,
+                        "replaceable": false
+                    },
+                    "label": "Inhalt",
+                    "objectProperty": "pageContent",
+                    "entityProperty": "pageContent"
+                },
+                "lastMod": {
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\date\\DateTimeEiField",
+                    "props": {
+                        "displayInOverview": false,
+                        "displayInDetailView": true,
+                        "displayInEditView": false,
+                        "displayInAddView": false,
+                        "constant": false,
+                        "readOnly": false,
+                        "mandatory": false,
+                        "draft": false,
+                        "dateStyle": "medium",
+                        "timeStyle": "short"
+                    },
+                    "label": "Last Mod",
+                    "objectProperty": "lastMod",
+                    "entityProperty": "lastMod"
+                },
+                "subsystemName": {
+                    "class": "page\\rocket\\ei\\field\\PageSubsystemEiField",
+                    "props": [],
+                    "label": "Subsystem Name",
+                    "objectProperty": "subsystemName",
+                    "entityProperty": "subsystemName"
+                },
+                "inPath": {
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\bool\\BooleanEiField",
+                    "props": {
+                        "displayInOverview": false,
+                        "displayInDetailView": true,
+                        "displayInEditView": true,
+                        "displayInAddView": true,
+                        "constant": false,
+                        "readOnly": false,
+                        "mandatory": true,
+                        "draft": false
+                    },
+                    "label": "In Path",
+                    "objectProperty": "inPath",
+                    "entityProperty": "inPath"
+                },
+                "hookKey": {
+                    "class": "page\\rocket\\ei\\field\\PageHookEiField",
+                    "props": {
+                        "displayInOverview": false,
+                        "displayInDetailView": true,
+                        "displayInEditView": true,
+                        "displayInAddView": true,
+                        "constant": false,
+                        "readOnly": false,
+                        "mandatory": false,
+                        "draft": false
+                    },
+                    "label": "Hook Key",
+                    "objectProperty": "hookKey",
+                    "entityProperty": "hookKey"
+                },
+                "inNavigation": {
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\bool\\BooleanEiField",
+                    "props": {
+                        "displayInOverview": true,
+                        "displayInDetailView": true,
+                        "displayInEditView": true,
+                        "displayInAddView": true,
+                        "constant": false,
+                        "readOnly": false,
+                        "mandatory": true,
+                        "draft": false
+                    },
+                    "label": "In Nav",
+                    "objectProperty": "inNavigation",
+                    "entityProperty": "inNavigation"
+                },
+                "navTargetNewWindow": {
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\bool\\BooleanEiField",
+                    "props": {
+                        "displayInOverview": false,
+                        "displayInDetailView": true,
+                        "displayInEditView": true,
+                        "displayInAddView": false,
+                        "constant": false,
+                        "readOnly": false,
+                        "mandatory": true,
+                        "draft": false
+                    },
+                    "label": "Nav Target New Window",
+                    "objectProperty": "navTargetNewWindow",
+                    "entityProperty": "navTargetNewWindow"
+                },
+                "online": {
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\bool\\OnlineEiField",
+                    "props": {
+                        "displayInOverview": false,
+                        "displayInDetailView": true,
+                        "displayInEditView": true,
+                        "displayInAddView": true,
+                        "readOnly": false,
+                        "draft": false
+                    },
+                    "label": "Online",
+                    "objectProperty": "online",
+                    "entityProperty": "online"
+                }
+            },
+            "commands": {
+                "overview": {
+                    "class": "rocket\\spec\\ei\\component\\command\\impl\\common\\OverviewEiCommand",
+                    "props": []
+                },
+                "add": {
+                    "class": "rocket\\spec\\ei\\component\\command\\impl\\common\\AddEiCommand",
+                    "props": []
+                },
+                "detail": {
+                    "class": "rocket\\spec\\ei\\component\\command\\impl\\common\\DetailEiCommand",
+                    "props": []
+                },
+                "edit": {
+                    "class": "rocket\\spec\\ei\\component\\command\\impl\\common\\EditEiCommand",
+                    "props": []
+                },
+                "delete": {
+                    "class": "rocket\\spec\\ei\\component\\command\\impl\\common\\DeleteEiCommand",
+                    "props": []
+                },
+                "tree-move": {
+                    "class": "rocket\\spec\\ei\\component\\command\\impl\\tree\\TreeMoveEiCommand",
+                    "props": []
+                }
+            },
+            "modificators": [],
+            "defaultMaskId": null
+        },
+        "page-page-t": {
+            "type": "entity",
+            "entity": "page\\bo\\PageT",
+            "dataSourceName": null,
+            "label": "Page translation",
+            "pluralLabel": "Page translations",
+            "defaultSort": [],
+            "fields": {
+                "id": {
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\numeric\\IntegerEiField",
+                    "props": {
+                        "displayInOverview": false,
+                        "displayInDetailView": false,
+                        "displayInEditView": false,
+                        "displayInAddView": false,
+                        "constant": false,
+                        "readOnly": true,
+                        "mandatory": false,
+                        "draft": false,
+                        "minValue": "0",
+                        "maxValue": "4294967295"
+                    },
+                    "label": "Id",
+                    "objectProperty": "id",
+                    "entityProperty": "id"
+                },
+                "name": {
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\string\\StringEiField",
+                    "props": {
+                        "displayInOverview": true,
+                        "displayInDetailView": true,
+                        "displayInEditView": true,
+                        "displayInAddView": true,
+                        "constant": false,
+                        "readOnly": false,
+                        "mandatory": true,
+                        "draft": false,
+                        "maxlength": null,
+                        "multiline": false
+                    },
+                    "label": "Name",
+                    "objectProperty": "name",
+                    "entityProperty": "name"
+                },
+                "title": {
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\string\\StringEiField",
+                    "props": {
+                        "displayInOverview": false,
+                        "displayInDetailView": true,
+                        "displayInEditView": true,
+                        "displayInAddView": true,
+                        "constant": false,
+                        "readOnly": false,
+                        "mandatory": false,
+                        "draft": false,
+                        "maxlength": null,
+                        "multiline": false
+                    },
+                    "label": "Title",
+                    "objectProperty": "title",
+                    "entityProperty": "title"
+                },
+                "pathPart": {
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\string\\PathPartEiField",
+                    "props": {
+                        "displayInOverview": true,
+                        "displayInDetailView": true,
+                        "displayInEditView": true,
+                        "displayInAddView": true,
+                        "constant": false,
+                        "readOnly": false,
+                        "draft": false,
+                        "maxlength": "255",
+                        "basePropertyFieldId": "name",
+                        "allowEmpty": true,
+                        "critical": true
+                    },
+                    "label": "Path Part",
+                    "objectProperty": "pathPart",
+                    "entityProperty": "pathPart"
+                },
+                "n2nLocale": {
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\l10n\\N2nLocaleEiField",
+                    "props": {
+                        "displayInOverview": false,
+                        "displayInDetailView": false,
+                        "displayInEditView": false,
+                        "displayInAddView": false,
+                        "constant": false,
+                        "readOnly": false,
+                        "mandatory": true,
+                        "draft": false
+                    },
+                    "label": "Locale",
+                    "objectProperty": "n2nLocale",
+                    "entityProperty": "n2nLocale"
+                },
+                "page": {
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\relation\\ManyToOneSelectEiField",
+                    "props": {
+                        "displayInOverview": false,
+                        "displayInDetailView": false,
+                        "displayInEditView": false,
+                        "displayInAddView": false,
+                        "constant": false,
+                        "readOnly": false,
+                        "mandatory": true
+                    },
+                    "label": "Page Leaf",
+                    "objectProperty": "page",
+                    "entityProperty": "page"
+                },
+                "active": {
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\bool\\BooleanEiField",
+                    "props": {
+                        "displayInOverview": true,
+                        "displayInDetailView": true,
+                        "displayInEditView": true,
+                        "displayInAddView": true,
+                        "constant": false,
+                        "readOnly": false,
+                        "mandatory": true,
+                        "draft": false
+                    },
+                    "label": "Active",
+                    "objectProperty": "active",
+                    "entityProperty": "active"
+                }
+            },
+            "commands": [],
+            "modificators": [],
+            "defaultMaskId": null
+        },
+        "page-page-controller-t": {
+            "type": "entity",
+            "entity": "page\\bo\\PageControllerT",
+            "dataSourceName": null,
+            "label": "Page Controller T",
+            "pluralLabel": "Page Controller Ts",
+            "fields": {
+                "pageController": {
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\relation\\ManyToOneSelectEiField",
+                    "props": {
+                        "displayInOverview": false,
+                        "displayInDetailView": false,
+                        "displayInEditView": false,
+                        "displayInAddView": false,
+                        "constant": false,
+                        "readOnly": false,
+                        "mandatory": true
+                    },
+                    "label": "Page Controller",
+                    "objectProperty": "pageController",
+                    "entityProperty": "pageController"
+                },
+                "contentItems": {
+                    "class": "page\\rocket\\ei\\field\\PageContentItemsEiField",
+                    "props": {
+                        "displayInOverview": false,
+                        "displayInDetailView": true,
+                        "displayInEditView": true,
+                        "displayInAddView": true,
+                        "constant": false,
+                        "readOnly": false,
+                        "mandatory": false
+                    },
+                    "label": "Content Items",
+                    "objectProperty": "contentItems",
+                    "entityProperty": "contentItems"
+                }
+            },
+            "commands": [],
+            "modificators": [],
+            "defaultMaskId": null
+        },
+        "page-page-controller": {
+            "type": "entity",
+            "entity": "page\\bo\\PageController",
+            "dataSourceName": null,
+            "label": "Page Controller",
+            "pluralLabel": "Page Controllers",
+            "fields": {
+                "methodName": {
+                    "class": "page\\rocket\\ei\\field\\PageMethodEiField",
+                    "props": {
+                        "displayInOverview": false,
+                        "displayInDetailView": true,
+                        "displayInEditView": true,
+                        "displayInAddView": true,
+                        "constant": false,
+                        "readOnly": false,
+                        "mandatory": true,
+                        "draft": false
+                    },
+                    "label": "Method Name",
+                    "objectProperty": "methodName",
+                    "entityProperty": "methodName"
+                },
+                "pageContent": {
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\relation\\EmbeddedOneToOneEiField",
+                    "props": {
+                        "mandatory": true,
+                        "displayInOverview": false,
+                        "displayInDetailView": false,
+                        "displayInEditView": false,
+                        "displayInAddView": false
+                    },
+                    "label": "Inhalt",
+                    "objectProperty": "pageContent",
+                    "entityProperty": "pageContent"
+                },
+                "pageControllerTs": {
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\translation\\TranslationEiField",
+                    "props": {
+                        "useSystemN2nLocales": true,
+                        "systenN2nLocaleDefs": [
+                            {
+                                "id": "de_CH",
+                                "mandatory": false,
+                                "label": null
+                            },
+                            {
+                                "id": "fr_CH",
+                                "mandatory": false,
+                                "label": null
+                            },
+                            {
+                                "id": "it_CH",
+                                "mandatory": false,
+                                "label": null
+                            },
+                            {
+                                "id": "rm_CH",
+                                "mandatory": false,
+                                "label": null
+                            }
+                        ],
+                        "customN2nLocaleDefs": []
+                    },
+                    "label": "Page Controller Ts",
+                    "objectProperty": "pageControllerTs",
+                    "entityProperty": "pageControllerTs"
+                }
+            },
+            "commands": [],
+            "modificators": [],
+            "defaultMaskId": null
+        }
+    },
+    "commonEiMasks": [],
+    "menuItems": {
+        "page-page": []
+    }
+}
