@@ -1,7 +1,7 @@
 <?php
 namespace page\model\nav;
 
-use n2n\http\controller\ControllerContext;
+use n2n\web\http\controller\ControllerContext;
 
 interface LeafContent {
 	
@@ -12,7 +12,7 @@ interface LeafContent {
 	
 	/**
 	 * @throws IllegalStateException
-	 * @return \n2n\http\controller\ControllerContext
+	 * @return \n2n\web\http\controller\ControllerContext
 	 */
 	public function getControllerContext(): ControllerContext;
 	

@@ -9,7 +9,7 @@ use rocket\spec\ei\component\field\impl\adapter\AdaptableEiFieldConfigurator;
 use page\model\PageDao;
 use page\rocket\ei\field\PageHookEiField;
 use rocket\spec\ei\component\IndependentEiComponent;
-use n2n\dispatch\mag\MagDispatchable;
+use n2n\web\dispatch\mag\MagDispatchable;
 use page\rocket\ei\field\modificator\ConfigEiFieldModificator;
 
 class PageHookEiFieldConfigurator extends AdaptableEiFieldConfigurator {

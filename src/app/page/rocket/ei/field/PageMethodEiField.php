@@ -5,16 +5,16 @@ use rocket\spec\ei\component\field\impl\adapter\DraftableEiFieldAdapter;
 use rocket\spec\ei\manage\gui\FieldSourceInfo;
 use n2n\reflection\CastUtils;
 use page\bo\PageController;
-use n2n\dispatch\mag\impl\model\EnumMag;
+use n2n\web\dispatch\mag\impl\model\EnumMag;
 use page\model\PageControllerAnalyzer;
 use n2n\util\StringUtils;
 use rocket\spec\ei\manage\EiObject;
 use n2n\l10n\N2nLocale;
 use rocket\spec\ei\EiFieldPath;
-use n2n\ui\view\impl\html\HtmlView;
-use n2n\dispatch\mag\Mag;
-use n2n\dispatch\map\PropertyPath;
-use n2n\ui\UiComponent;
+use n2n\web\ui\view\impl\html\HtmlView;
+use n2n\web\dispatch\mag\Mag;
+use n2n\web\dispatch\map\PropertyPath;
+use n2n\web\ui\UiComponent;
 
 class PageMethodEiField extends DraftableEiFieldAdapter {
 	

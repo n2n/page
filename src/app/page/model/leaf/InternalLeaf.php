@@ -1,17 +1,17 @@
 <?php
 namespace page\model\leaf;
 
-use n2n\http\controller\Controller;
+use n2n\web\http\controller\Controller;
 use n2n\core\container\N2nContext;
-use n2n\http\controller\ControllerContext;
+use n2n\web\http\controller\ControllerContext;
 use n2n\util\uri\Path;
 use page\model\nav\LeafContent;
 use page\model\nav\NavBranch;
 use page\model\nav\impl\CommonLeafContent;
 use n2n\util\ex\IllegalStateException;
 use page\model\nav\murl\PageMurl;
-use n2n\http\Redirect;
-use n2n\http\Response;
+use n2n\web\http\Redirect;
+use n2n\web\http\Response;
 
 class InternalLeaf extends LeafAdapter {
 	private $targetNavBranch;

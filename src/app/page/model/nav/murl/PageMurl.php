@@ -5,9 +5,9 @@ use page\model\NavBranchCriteria;
 use page\ui\nav\NavComposer;
 /**
  * <p>PageMurl creates a {@link PageMurlComposer} which can be used to build Urls to pages. It can be used like 
- * {@link \n2n\http\nav\MurlComposer}. For example to link a page with 
- * {@link \n2n\ui\view\impl\html\HtmlBuilder::link()} or 
- * {@link \n2n\http\controller\impl\ControllingUtilsTrait::redirect()}</p> 
+ * {@link \n2n\web\http\nav\MurlComposer}. For example to link a page with 
+ * {@link \n2n\web\ui\view\impl\html\HtmlBuilder::link()} or 
+ * {@link \n2n\web\http\controller\impl\ControllingUtilsTrait::redirect()}</p> 
  * 
  * <p>
  * <strong>Example of usage in a {@link https://support.n2n.rocks/de/n2n/docs/html HtmlView}</strong>

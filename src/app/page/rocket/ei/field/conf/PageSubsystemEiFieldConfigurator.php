@@ -1,10 +1,10 @@
 <?php
 namespace page\rocket\ei\field\conf;
 
-use n2n\dispatch\mag\impl\model\MagForm;
+use n2n\web\dispatch\mag\impl\model\MagForm;
 use n2n\core\container\N2nContext;
-use n2n\dispatch\mag\MagDispatchable;
-use n2n\dispatch\mag\MagCollection;
+use n2n\web\dispatch\mag\MagDispatchable;
+use n2n\web\dispatch\mag\MagCollection;
 use rocket\spec\ei\component\EiSetupProcess;
 use page\config\PageConfig;
 use n2n\reflection\CastUtils;

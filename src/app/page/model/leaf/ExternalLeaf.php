@@ -2,11 +2,11 @@
 namespace page\model\leaf;
 
 use n2n\core\container\N2nContext;
-use n2n\http\controller\Controller;
-use n2n\http\controller\ControllerContext;
-use n2n\http\PageNotFoundException;
-use n2n\http\Response;
-use n2n\http\Redirect;
+use n2n\web\http\controller\Controller;
+use n2n\web\http\controller\ControllerContext;
+use n2n\web\http\PageNotFoundException;
+use n2n\web\http\Response;
+use n2n\web\http\Redirect;
 use n2n\l10n\N2nLocale;
 use page\model\nav\LeafContent;
 use n2n\util\uri\Path;
@@ -41,7 +41,7 @@ class ExternalController implements Controller {
 	
 	/**
 	 * {@inheritDoc}
-	 * @see \n2n\http\controller\Controller::execute($controllerContext)
+	 * @see \n2n\web\http\controller\Controller::execute($controllerContext)
 	 */
 	public function execute(ControllerContext $controllerContext): bool {
 		if (!$controllerContext->getCmdPath()->isEmpty()) {

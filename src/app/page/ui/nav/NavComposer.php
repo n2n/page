@@ -4,12 +4,12 @@ namespace page\ui\nav;
 use page\model\nav\NavBranch;
 use n2n\util\ex\IllegalStateException;
 use page\model\NavBranchCriteria;
-use n2n\ui\UiComponent;
+use n2n\web\ui\UiComponent;
 use n2n\reflection\ArgUtils;
 use page\ui\nav\NavItemBuilder;
 use page\ui\nav\impl\CommonNavItemBuilder;
-use n2n\ui\UiException;
-use n2n\ui\view\impl\html\HtmlView;
+use n2n\web\ui\UiException;
+use n2n\web\ui\view\impl\html\HtmlView;
 use page\model\PageState;
 use n2n\reflection\CastUtils;
 

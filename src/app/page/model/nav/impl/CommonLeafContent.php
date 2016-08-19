@@ -4,8 +4,8 @@ namespace page\model\nav\impl;
 use page\model\nav\LeafContent;
 use page\model\nav\Leaf;
 use n2n\util\uri\Path;
-use n2n\http\controller\Controller;
-use n2n\http\controller\ControllerContext;
+use n2n\web\http\controller\Controller;
+use n2n\web\http\controller\ControllerContext;
 use page\model\nav\UnknownContentItemPanelException;
 
 class CommonLeafContent implements LeafContent {
@@ -29,7 +29,7 @@ class CommonLeafContent implements LeafContent {
 	
 	/**
 	 * @throws IllegalStateException
-	 * @return \n2n\http\controller\ControllerContext
+	 * @return \n2n\web\http\controller\ControllerContext
 	 */
 	public function getControllerContext(): ControllerContext {
 		return $this->controllerContext;

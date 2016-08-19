@@ -8,8 +8,8 @@ use n2n\reflection\CastUtils;
 use page\config\PageConfig;
 use n2n\util\config\InvalidConfigurationException;
 use n2n\reflection\magic\MagicObjectUnavailableException;
-use n2n\http\ResponseCacheStore;
-use n2n\ui\view\ViewCacheStore;
+use n2n\web\http\ResponseCacheStore;
+use n2n\web\ui\view\ViewCacheStore;
 use n2n\reflection\ReflectionUtils;
 use n2n\reflection\magic\MagicMethodInvoker;
 

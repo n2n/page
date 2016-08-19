@@ -1,13 +1,13 @@
 <?php
 namespace page\model\nav\murl;
 
-use n2n\http\nav\Murlable;
+use n2n\web\http\nav\Murlable;
 use n2n\l10n\N2nLocale;
 use n2n\core\container\N2nContext;
-use n2n\http\controller\ControllerContext;
+use n2n\web\http\controller\ControllerContext;
 use page\model\nav\NavBranch;
 use page\model\nav\UnknownNavBranchException;
-use n2n\http\nav\UnavailableMurlException;
+use n2n\web\http\nav\UnavailableMurlException;
 use page\model\nav\NavUrlBuilder;
 use page\model\nav\BranchUrlBuildException;
 use n2n\reflection\CastUtils;
@@ -17,7 +17,7 @@ use page\model\NavBranchCriteria;
 
 /**
  * A PageMurlComposer is created by {@link PageMurl} and can be used like a 
- * {@link \n2n\http\nav\MurlComposer} to build urls to pages in a fluid way.
+ * {@link \n2n\web\http\nav\MurlComposer} to build urls to pages in a fluid way.
  */
 class PageMurlComposer implements Murlable {
 	private $navBranchCriteria;
@@ -131,7 +131,7 @@ class PageMurlComposer implements Murlable {
 	
 	/**
 	 * {@inheritDoc}
-	 * @see \n2n\http\nav\Murlable::toUrl($n2nContext, $controllerContext)
+	 * @see \n2n\web\http\nav\Murlable::toUrl($n2nContext, $controllerContext)
 	 */
 	public function toUrl(N2nContext $n2nContext, ControllerContext $controllerContext = null, 
 			string &$suggestedLabel = null): Url {

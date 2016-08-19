@@ -1,10 +1,10 @@
 <?php
 namespace page\ui\nav;
 
-use n2n\ui\view\impl\html\HtmlElement;
+use n2n\web\ui\view\impl\html\HtmlElement;
 use n2n\l10n\N2nLocale;
 use page\model\nav\NavBranch;
-use n2n\ui\view\impl\html\HtmlView;
+use n2n\web\ui\view\impl\html\HtmlView;
 use n2n\util\col\ArrayUtils;
 
 class NavFactory {

@@ -2,11 +2,11 @@
 namespace page\ui\nav\impl;
 
 use page\ui\nav\NavItemBuilder;
-use n2n\ui\view\impl\html\HtmlElement;
-use n2n\ui\view\impl\html\HtmlUtils;
+use n2n\web\ui\view\impl\html\HtmlElement;
+use n2n\web\ui\view\impl\html\HtmlUtils;
 use page\model\nav\Leaf;
-use n2n\ui\view\impl\html\HtmlView;
-use n2n\ui\UiComponent;
+use n2n\web\ui\view\impl\html\HtmlView;
+use n2n\web\ui\UiComponent;
 use page\model\nav\murl\PageMurl;
 
 abstract class NavItemBuilderAdapter implements NavItemBuilder {

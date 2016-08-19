@@ -11,7 +11,7 @@ use page\model\PageState;
 use page\model\NavInitProcess;
 use n2n\util\uri\Path;
 use page\model\nav\UnavailableLeafException;
-use n2n\http\PageNotFoundException;
+use n2n\web\http\PageNotFoundException;
 
 class PagePreviewController extends PreviewControllerAdapter {
 	

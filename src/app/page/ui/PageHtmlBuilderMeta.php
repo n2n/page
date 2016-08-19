@@ -2,7 +2,7 @@
 namespace page\ui;
 
 use page\model\PageState;
-use n2n\ui\view\View;
+use n2n\web\ui\view\View;
 use n2n\reflection\CastUtils;
 use n2n\core\config\GeneralConfig;
 use page\model\nav\murl\PageMurl;

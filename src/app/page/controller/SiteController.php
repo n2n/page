@@ -1,17 +1,17 @@
 <?php
 namespace page\controller;
 
-use n2n\http\controller\ControllerAdapter;
+use n2n\web\http\controller\ControllerAdapter;
 use page\model\PageState;
 use n2n\reflection\CastUtils;
 use page\config\PageConfig;
 use n2n\util\uri\Path;
 use n2n\l10n\IllegalN2nLocaleFormatException;
-use n2n\http\PageNotFoundException;
+use n2n\web\http\PageNotFoundException;
 use n2n\model\annotation\AnnoSessionScoped;
 use n2n\reflection\annotation\AnnoInit;
 use n2n\model\RequestScoped;
-use n2n\http\annotation\AnnoPath;
+use n2n\web\http\annotation\AnnoPath;
 
 class SiteController extends ControllerAdapter implements RequestScoped {
 	private static function _annos(AnnoInit $ai) {
