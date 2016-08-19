@@ -1,7 +1,7 @@
 <?php
 namespace page\model;
 
-use n2n\model\ThreadScoped;
+use n2n\context\ThreadScoped;
 use n2n\persistence\orm\EntityManager;
 use n2n\persistence\orm\util\NestedSetUtils;
 use page\bo\Page;

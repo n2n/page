@@ -8,9 +8,9 @@ use page\config\PageConfig;
 use n2n\util\uri\Path;
 use n2n\l10n\IllegalN2nLocaleFormatException;
 use n2n\web\http\PageNotFoundException;
-use n2n\model\annotation\AnnoSessionScoped;
+use n2n\context\annotation\AnnoSessionScoped;
 use n2n\reflection\annotation\AnnoInit;
-use n2n\model\RequestScoped;
+use n2n\context\RequestScoped;
 use n2n\web\http\annotation\AnnoPath;
 
 class SiteController extends ControllerAdapter implements RequestScoped {

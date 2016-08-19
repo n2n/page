@@ -1,7 +1,7 @@
 <?php
 namespace page\model;
 
-use n2n\model\RequestScoped;
+use n2n\context\RequestScoped;
 use page\model\nav\NavTree;
 use n2n\core\container\N2nContext;
 use page\model\nav\Leaf;

@@ -1,7 +1,7 @@
 <?php
 namespace page\model;
 
-use n2n\model\ThreadScoped;
+use n2n\context\ThreadScoped;
 use page\bo\Page;
 use n2n\core\container\N2nContext;
 use n2n\reflection\CastUtils;
