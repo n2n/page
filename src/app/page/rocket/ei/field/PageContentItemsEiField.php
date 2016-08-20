@@ -3,7 +3,7 @@ namespace page\rocket\ei\field;
 
 use n2n\persistence\orm\property\EntityProperty;
 use page\bo\Page;
-use n2n\persistence\orm\property\impl\ToManyEntityProperty;
+use n2n\impl\persistence\orm\property\ToManyEntityProperty;
 use n2n\reflection\ArgUtils;
 use rocket\spec\ei\component\field\impl\ci\model\ContentItem;
 use page\bo\PageControllerT;

@@ -2,7 +2,7 @@
 namespace page\rocket\ei\field;
 
 use n2n\l10n\DynamicTextCollection;
-use n2n\web\dispatch\mag\impl\model\EnumMag;
+use n2n\impl\web\dispatch\mag\model\EnumMag;
 use rocket\spec\ei\component\field\impl\enum\EnumEiField;
 use rocket\spec\ei\manage\gui\FieldSourceInfo;
 use n2n\web\dispatch\mag\Mag;

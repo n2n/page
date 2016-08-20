@@ -1,7 +1,7 @@
 <?php
 namespace page\rocket\ei\field\conf;
 
-use n2n\web\dispatch\mag\impl\model\MagForm;
+use n2n\impl\web\dispatch\mag\model\MagForm;
 use n2n\core\container\N2nContext;
 use n2n\web\dispatch\mag\MagDispatchable;
 use n2n\web\dispatch\mag\MagCollection;

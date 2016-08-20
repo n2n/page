@@ -1,7 +1,7 @@
 <?php
 namespace page\ui;
 
-use n2n\web\ui\view\impl\html\HtmlView;
+use n2n\impl\web\ui\view\html\HtmlView;
 use n2n\l10n\N2nLocale;
 use page\ui\locale\N2nLocaleNavConfig;
 use page\ui\nav\NavConfig;
@@ -15,12 +15,12 @@ use page\model\CiContainerPage;
 use page\model\PageState;
 use page\model\nav\NavBranch;
 use page\model\nav\Leaf;
-use n2n\web\ui\view\impl\html\HtmlSnippet;
+use n2n\impl\web\ui\view\html\HtmlSnippet;
 use page\ui\nav\NavComposer;
 use page\ui\nav\Nav;
-use n2n\web\ui\view\impl\html\HtmlElement;
+use n2n\impl\web\ui\view\html\HtmlElement;
 use page\model\nav\murl\PageMurl;
-use n2n\web\ui\view\impl\html\HtmlUtils;
+use n2n\impl\web\ui\view\html\HtmlUtils;
 
 /**
  * PageHtmlBuilder provides methods for simple html output in views dependent on the state of the site.
@@ -279,7 +279,7 @@ class PageHtmlBuilder {
 	
 // 	/**
 // 	 * @param N2nLocaleNavConfig $n2nLocaleNavConfig
-// 	 * @return \n2n\web\ui\view\impl\html\HtmlElement
+// 	 * @return \n2n\impl\web\ui\view\html\HtmlElement
 // 	 */
 // 	public function getN2nLocaleNavigation(N2nLocaleNavConfig $n2nLocaleNavConfig = null) {
 // 		$builder = new N2nLocaleNavBuilder($this->view, $this);
@@ -294,7 +294,7 @@ class PageHtmlBuilder {
 // 	 * @param mexed $target
 // 	 * @param BreadcrumbConfig $breadCrumbConfig
 // 	 * @param N2nLocale $n2nLocale
-// 	 * @return \n2n\web\ui\view\impl\html\HtmlElement
+// 	 * @return \n2n\impl\web\ui\view\html\HtmlElement
 // 	 */
 // 	public function getBreadCrumb($target = null, BreadcrumbConfig $breadCrumbConfig = null, 
 // 			N2nLocale $n2nLocale = null) {

@@ -2,10 +2,10 @@
 namespace page\ui\nav\impl;
 
 use page\ui\nav\NavItemBuilder;
-use n2n\web\ui\view\impl\html\HtmlElement;
-use n2n\web\ui\view\impl\html\HtmlUtils;
+use n2n\impl\web\ui\view\html\HtmlElement;
+use n2n\impl\web\ui\view\html\HtmlUtils;
 use page\model\nav\Leaf;
-use n2n\web\ui\view\impl\html\HtmlView;
+use n2n\impl\web\ui\view\html\HtmlView;
 use n2n\web\ui\UiComponent;
 use page\model\nav\murl\PageMurl;
 

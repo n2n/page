@@ -1,5 +1,5 @@
 <?php 
-	use n2n\web\ui\view\impl\xml\XmlView;
+	use n2n\impl\web\ui\view\xml\XmlView;
 	use page\model\nav\SitemapItem;
 
 	$view = XmlView::view($this);

@@ -8,7 +8,7 @@ use n2n\reflection\CastUtils;
 use rocket\spec\ei\manage\gui\DisplayDefinition;
 use n2n\core\container\N2nContext;
 use n2n\web\dispatch\mag\MagDispatchable;
-use n2n\web\dispatch\mag\impl\model\MagForm;
+use n2n\impl\web\dispatch\mag\model\MagForm;
 use n2n\web\dispatch\mag\MagCollection;
 use page\rocket\ei\field\PageSslEiField;
 

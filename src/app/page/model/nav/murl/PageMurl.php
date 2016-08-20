@@ -6,7 +6,7 @@ use page\ui\nav\NavComposer;
 /**
  * <p>PageMurl creates a {@link PageMurlComposer} which can be used to build Urls to pages. It can be used like 
  * {@link \n2n\web\http\nav\MurlComposer}. For example to link a page with 
- * {@link \n2n\web\ui\view\impl\html\HtmlBuilder::link()} or 
+ * {@link \n2n\impl\web\ui\view\html\HtmlBuilder::link()} or 
  * {@link \n2n\web\http\controller\impl\ControllingUtilsTrait::redirect()}</p> 
  * 
  * <p>

@@ -1,9 +1,9 @@
 <?php
 namespace page\ui\nav;
 
-use n2n\web\ui\view\impl\html\HtmlElement;
+use n2n\impl\web\ui\view\html\HtmlElement;
 use page\model\nav\Leaf;
-use n2n\web\ui\view\impl\html\HtmlView;
+use n2n\impl\web\ui\view\html\HtmlView;
 
 /**
  * Used by {@link NavComposer} to build navigation html components.
@@ -17,7 +17,7 @@ interface NavItemBuilder {
 	 * @param HtmlView $view
 	 * @param unknown $level
 	 * @param array $attrs
-	 * @return \n2n\web\ui\view\impl\html\HtmlElement
+	 * @return \n2n\impl\web\ui\view\html\HtmlElement
 	 */
 	public function buildRootUl(HtmlView $view, $level, array $attrs): HtmlElement;
 	
@@ -26,7 +26,7 @@ interface NavItemBuilder {
 	 * @param Leaf $parentLeaf
 	 * @param array $attrs
 	 * @param int $parentInfos
-	 * @return \n2n\web\ui\view\impl\html\HtmlElement
+	 * @return \n2n\impl\web\ui\view\html\HtmlElement
 	 */
 	public function buildUl(HtmlView $view, Leaf $parentLeaf, array $attrs, int $parentInfos): HtmlElement;
 	
@@ -35,7 +35,7 @@ interface NavItemBuilder {
 	 * @param Leaf $leaf
 	 * @param array $attrs
 	 * @param int $infos
-	 * @return \n2n\web\ui\view\impl\html\HtmlElement
+	 * @return \n2n\impl\web\ui\view\html\HtmlElement
 	 */
 	public function buildLi(HtmlView $view, Leaf $leaf, array $attrs, int $infos): HtmlElement;
 }
