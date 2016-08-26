@@ -6,7 +6,7 @@ use n2n\core\container\N2nContext;
 use page\model\ex\UrlBuildingException;
 use n2n\reflection\ObjectAdapter;
 use rocket\spec\ei\component\field\impl\string\wysiwyg\DynamicUrlBuilder;
-use n2n\core\config\HttpConfig;
+use n2n\core\config\WebConfig;
 use n2n\web\http\HttpContext;
 
 class PageWysiwygLinkBuilder extends ObjectAdapter implements DynamicUrlBuilder {
