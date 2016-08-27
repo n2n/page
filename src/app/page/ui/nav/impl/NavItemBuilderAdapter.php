@@ -10,14 +10,15 @@ use n2n\web\ui\UiComponent;
 use page\model\nav\murl\PageMurl;
 
 abstract class NavItemBuilderAdapter implements NavItemBuilder {
+	protected $classPrefix = '';
 	
 	public function buildRootUl(HtmlView $view, $level, array $attrs): HtmlElement {
-		$attrs = HtmlUtils::mergeAttrs(array('class' => 'level-' . $level), $attrs);
+		$attrs = HtmlUtils::mergeAttrs(array('class' => $this->classPrefix . 'level-' . $level), $attrs);
 		return new HtmlElement('ul', $attrs, '');
 	}
 	
 	public function buildUl(HtmlView $view, Leaf $parentLeaf, array $attrs, int $infos): HtmlElement {
-		$attrs = HtmlUtils::mergeAttrs(array('class' => 'level-' . ($parentLeaf->getNavBranch()->getLevel() + 1)), $attrs);
+		$attrs = HtmlUtils::mergeAttrs(array('class' => $this->classPrefix . 'level-' . ($parentLeaf->getNavBranch()->getLevel() + 1)), $attrs);
 		return new HtmlElement('ul', $attrs, '');
 	}
 	
@@ -36,18 +37,18 @@ abstract class NavItemBuilderAdapter implements NavItemBuilder {
 	protected function buildLiAttrs(HtmlView $view, Leaf $leaf, array $attrs, int $infos): array {
 		$attrs = HtmlUtils::mergeAttrs($this->buildAdditionalAttrs($view, $leaf, $attrs, $infos), $attrs);
 		
-		$classNames = array('level-' . $leaf->getNavBranch()->getLevel());
+		$classNames = array($this->classPrefix . 'level-' . $leaf->getNavBranch()->getLevel());
 		
 		if ($leaf->getNavBranch()->hasChildren()) {
-			$classNames[] = 'has-children';
+			$classNames[] = $this->classPrefix . 'has-children';
 		}
 		
 		if ($infos & self::INFO_CURRENT) {
-			$classNames[] = 'active';
+			$classNames[] = $this->classPrefix . 'active';
 		}
 		
 		if ($infos & self::INFO_OPEN) {
-			$classNames[] = 'open';
+			$classNames[] = $this->classPrefix . 'open';
 		}
 		
 		return HtmlUtils::mergeAttrs(array('class' => implode(' ', $classNames)), $attrs);
