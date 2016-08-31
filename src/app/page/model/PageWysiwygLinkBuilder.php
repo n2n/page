@@ -29,7 +29,7 @@ class PageWysiwygLinkBuilder extends ObjectAdapter implements DynamicUrlBuilder 
 		
 		try {
 			return $page->buildUrl($this->pageState->getNavTree(), $this->n2nContext, 
-					array($httpContext->getLocale(), $this->n2nContext->getDefaultLocale(), $this->n2nContext->getFallbackLocale()));
+					array($httpContext->getLocale(), $this->n2nContext->getDefaultN2nLocale(), $this->n2nContext->getFallbackLocale()));
 		} catch (UrlBuildingException $e) {
 			return null;
 		}
