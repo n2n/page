@@ -203,7 +203,7 @@ class Page extends ObjectAdapter {
 	 * @return PageT
 	 */
 	public function t(N2nLocale ...$n2nLocales) {
-		return Translator::find($this->pageTs, ...$n2nLocales);
+		return Translator::findAny($this->pageTs, ...$n2nLocales);
 	}
 	
 	/**
