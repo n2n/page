@@ -139,15 +139,15 @@ class PageHtmlBuilder {
 	 * @param string $divider Pass a {@link \n2n\web\ui\UiComponent} or string if a divider span element should be printed
 	 * in each li element. 
 	 */
-	public function breadcrumbs(array $attrs = null, array $liAttrs = null, $divider = null) {
-		$this->view->out($this->getBreadcrumbs($attrs, $liAttrs, $divider));
+	public function breadcrumbs(array $attrs = null, array $liAttrs = null, array $aAttrs = null, $divider = null) {
+		$this->view->out($this->getBreadcrumbs($attrs, $liAttrs, $aAttrs, $divider));
 	}
 	
 	/**
 	 * Same as {@link PageHtmlBuilder::breadcrumbs()} but returns the output.
 	 * @return \n2n\web\ui\UiComponent
 	 */
-	public function getBreadcrumbs(array $attrs = null, array $liAttrs = null, $divider = null) {
+	public function getBreadcrumbs(array $attrs = null, array $liAttrs = null, array $aAttrs = null, $divider = null) {
 		$navBranches = $this->meta->getBreadcrumbs();
 		if (empty($navBranches)) return null;
 		
@@ -156,14 +156,14 @@ class PageHtmlBuilder {
 		$lis = array();
 		$lastNavBranch = array_pop($navBranches);
 		foreach ($navBranches as $navBranch) {
-			$lis[] = $li = new HtmlElement('li', $liAttrs, $html->getLink(PageMurl::obj($navBranch)));
+			$lis[] = $li = new HtmlElement('li', $liAttrs, $html->getLink(PageMurl::obj($navBranch), null, $aAttrs));
 			if ($divider !== null) {
 				$li->appendContent(new HtmlElement('span', array('class' => 'divider'), $divider));
 			}
 		}
 		
 		$lis[] = new HtmlElement('li', HtmlUtils::mergeAttrs(array('class' => 'active'), $liAttrs), 
-				$html->getLink(PageMurl::obj($lastNavBranch)));
+				$html->getLink(PageMurl::obj($lastNavBranch), null, $aAttrs));
 		
 		return new HtmlElement('ul', $attrs, $lis);		
 	}
@@ -176,15 +176,15 @@ class PageHtmlBuilder {
 	 * @param array $ulAttrs
 	 * @param array $liAttrs
 	 */
-	public function localeSwitch(array $ulAttrs = null, array $liAttrs = null) {
-		$this->view->out($this->getN2nLocaleSwitch($ulAttrs, $liAttrs));
+	public function localeSwitch(array $ulAttrs = null, array $liAttrs = null, array $aAttrs = null) {
+		$this->view->out($this->getN2nLocaleSwitch($ulAttrs, $liAttrs, $aAttrs));
 	}
 	
 	/**
 	 * Same as {@link PageHtmlBuilder::breadcrumbs()} but returns the output.
 	 * @return \n2n\web\ui\UiComponent
 	 */
-	public function getN2nLocaleSwitch(array $ulAttrs = null, array $liAttrs = null) {
+	public function getN2nLocaleSwitch(array $ulAttrs = null, array $liAttrs = null, array $aAttrs = null) {
 		$urls = $this->meta->getN2nLocaleSwitchUrls();
 		if (empty($urls)) {
 			return null;
@@ -216,7 +216,7 @@ class PageHtmlBuilder {
 				$elemLiAttrs = HtmlUtils::mergeAttrs((array) $elemLiAttrs, array('class' => 'active'));
 			}
 			
-			$ul->appendNl(new HtmlElement('li', $elemLiAttrs, $html->getLink($navUrl, $label)));
+			$ul->appendNl(new HtmlElement('li', $elemLiAttrs, $html->getLink($navUrl, $label, $aAttrs)));
 		}
 		
 		return $ul;
