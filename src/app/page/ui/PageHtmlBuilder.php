@@ -111,8 +111,8 @@ class PageHtmlBuilder {
 	 * @param array $liAttrs html attributes of every li
 	 */
 	public function navigation(NavComposer $navComposer = null, array $attrs = null, array $ulAttrs = null, 
-			array $liAttrs = null) {
-		$this->view->out($this->getNavigation($navComposer, $attrs, $ulAttrs, $liAttrs));
+			array $liAttrs = null, array $aAttrs = null) {
+		$this->view->out($this->getNavigation($navComposer, $attrs, $ulAttrs, $liAttrs, $aAttrs));
 	}
 	
 	/**
@@ -121,12 +121,12 @@ class PageHtmlBuilder {
 	 * @return \n2n\web\ui\UiComponent
 	 */
 	public function getNavigation(NavComposer $navComposer = null, array $attrs = null, array $ulAttrs = null, 
-			array $liAttrs = null) {
+			array $liAttrs = null, array $aAttrs = null) {
 		if ($navComposer === null) {
 			$navComposer = Nav::root();
 		}
 		
-		return $navComposer->build($this->view, $attrs, $ulAttrs, $liAttrs);
+		return $navComposer->build($this->view, $attrs, $ulAttrs, $liAttrs, $aAttrs);
 	}	
 	
 	/**
