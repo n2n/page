@@ -37,5 +37,5 @@ interface NavItemBuilder {
 	 * @param int $infos
 	 * @return \n2n\impl\web\ui\view\html\HtmlElement
 	 */
-	public function buildLi(HtmlView $view, Leaf $leaf, array $attrs, int $infos): HtmlElement;
+	public function buildLi(HtmlView $view, Leaf $leaf, array $attrs, array $aAttrs, int $infos): HtmlElement;
 }

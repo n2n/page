@@ -127,7 +127,7 @@ class NavComposer {
 	 * @throws UiException
 	 * @return UiComponent
 	 */
-	public function build(HtmlView $view, array $attrs = null, array $ulAttrs = null, array $liAttrs = null) {
+	public function build(HtmlView $view, array $attrs = null, array $ulAttrs = null, array $liAttrs = null, array $aAttrs = null) {
 		$pageState = $view->lookup(PageState::class);
 		CastUtils::assertTrue($pageState instanceof PageState);
 		
@@ -152,6 +152,7 @@ class NavComposer {
 		$navFactory->setRootUlAttrs((array) $attrs);
 		$navFactory->setUlAttrs((array) $ulAttrs);
 		$navFactory->setLiAttrs((array) $liAttrs);
+		$navFactory->setAAttrs((array) $aAttrs);
 		
 		$n2nLocale = $view->getN2nLocale();
 		$navBranch = $this->navBranchCriteria->determine($pageState, $n2nLocale, $view->getN2nContext());

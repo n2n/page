@@ -1,7 +1,6 @@
 <?php
 namespace page\ui\nav;
 
-use n2n\impl\web\ui\view\html\HtmlElement;
 use n2n\l10n\N2nLocale;
 use page\model\nav\NavBranch;
 use n2n\impl\web\ui\view\html\HtmlView;
@@ -14,8 +13,9 @@ class NavFactory {
 	private $numOpenLevels = 0;
 	private $currentNavBranch;
 	private $rootUlAttrs;
-	private $ulAttrs;
-	private $liAttrs;
+	private $ulAttrs = array();
+	private $liAttrs = array();
+	private $aAttrs = array();
 	
 	public function __construct(NavItemBuilder $navItemBuilder, N2nLocale $n2nLocale) {
 		$this->navItemBuilder = $navItemBuilder;
@@ -44,6 +44,10 @@ class NavFactory {
 	
 	public function setLiAttrs(array $liAttrs) {
 		$this->liAttrs = $liAttrs;
+	}
+	
+	public function setAAttrs(array $aAttrs) {
+		$this->aAttrs = $aAttrs;
 	}
 	
 	public function create(HtmlView $view, array $baseNavBranches) {
@@ -97,7 +101,7 @@ class NavFactory {
 		}
 		
 		$infos = $this->buildInfos($navBranch);
-		$li = $this->navItemBuilder->buildLi($view, $leaf, $this->liAttrs, $infos);
+		$li = $this->navItemBuilder->buildLi($view, $leaf, $this->liAttrs, $this->aAttrs, $infos);
 		
 		$childNavBranches = $navBranch->getChildren();
 		$numProcessLevels--;

@@ -22,16 +22,15 @@ abstract class NavItemBuilderAdapter implements NavItemBuilder {
 		return new HtmlElement('ul', $attrs, '');
 	}
 	
-	public function buildLi(HtmlView $view, Leaf $leaf, array $attrs, int $infos): HtmlElement {
-		$linkAttrs = null;
+	public function buildLi(HtmlView $view, Leaf $leaf, array $attrs, array $aAttrs, int $infos): HtmlElement {
 		if ($leaf->isTargetNewWindow() && !($infos & self::INFO_OPEN || $infos & self::INFO_CURRENT)) {
-			$linkAttrs = array('target' => '_blank');
+			$aAttrs = HtmlUtils::mergeAttrs(array('target' => '_blank'), $aAttrs);
 		}
 		
 		return new HtmlElement('li', $this->buildLiAttrs($view, $leaf, $attrs, $infos), 
 				$view->getHtmlBuilder()->getLink(PageMurl::obj($leaf), 
 						$this->buildLiLabel($view, $leaf, $attrs, $infos),
-						$linkAttrs));
+						$aAttrs));
 	}
 	
 	protected function buildLiAttrs(HtmlView $view, Leaf $leaf, array $attrs, int $infos): array {
