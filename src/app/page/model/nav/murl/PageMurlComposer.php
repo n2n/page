@@ -154,9 +154,10 @@ class PageMurlComposer implements Murlable {
 		$navUrlBuilder->setAbsolute($this->absolute);
 		$navUrlBuilder->setAccessiblesOnly($this->accessiblesOnly);
 		$url = null;
+		$curNavBranch = null;
 		try {
-			$url = $navUrlBuilder->build($navBranch, $n2nLocale, true);
-			$suggestedLabel = $navBranch->getLeafByN2nLocale($n2nLocale)->getName();
+			$url = $navUrlBuilder->build($navBranch, $n2nLocale, true, $curNavBranch);
+			$suggestedLabel = $curNavBranch->getLeafByN2nLocale($n2nLocale)->getName();
 		} catch (BranchUrlBuildException $e) {
 			throw new UnavailableMurlException(false, 'NavBranch not available for locale: ' . $n2nLocale, 0, $e);
 		}

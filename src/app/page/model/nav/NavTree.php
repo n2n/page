@@ -300,11 +300,11 @@ class NavUrlBuilder {
 	 * @throws BranchUrlBuildException
 	 * @return \n2n\util\uri\Url
 	 */
-	public function build(NavBranch $navBranch, N2nLocale $n2nLocale, bool $required = false) {
+	public function build(NavBranch $navBranch, N2nLocale $n2nLocale, bool $required = false, NavBranch &$curNavBranch = null) {
 		$curNavBranch = $navBranch;
 		while (true) {
 			try {
-				return $this->buildUrl($this->buildUrlBuildTask($navBranch, $n2nLocale));
+				return $this->buildUrl($this->buildUrlBuildTask($curNavBranch, $n2nLocale));
 			} catch(UnavailableLeafException $e) {
 				if ($this->fallbackBackAllowed && null !== ($curNavBranch = $curNavBranch->getParent())) {
 					continue;
