@@ -19,7 +19,7 @@ class PageContent extends ObjectAdapter {
 		$ai->p('pageContentTs', new AnnoOneToMany(PageContentT::getClass(), 'pageContent', CascadeType::ALL, 
 				null, true));
 		$ai->p('pageController', new AnnoOneToOne(PageController::getClass(), null, CascadeType::ALL, 
-				FetchType::EAGER));
+				FetchType::EAGER, true));
 	}
 	
 	private $id;
