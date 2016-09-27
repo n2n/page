@@ -93,7 +93,7 @@ class PageDescriber extends ConfigDescriberAdapter {
 			
 			$pcMagCollection = new MagCollection();
 			$magCollection->addMag(new MagCollectionMag($subEiSpec->getId(), $subEiSpec->getEiMaskCollection()
-					->getOrCreateDefault()->getLabel(), $pcMagCollection));
+					->getOrCreateDefault()->getLabelLstr(), $pcMagCollection));
 			
 // 			$pcMagCollection->addMag(new StringMag(self::ATTR_PAGE_CONTROLLER_LABEL_KEY, 'Label', 
 // 					$pcLar->getString(self::ATTR_PAGE_CONTROLLER_LABEL_KEY)));
