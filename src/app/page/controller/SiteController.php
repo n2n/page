@@ -49,32 +49,40 @@ class SiteController extends ControllerAdapter implements RequestScoped {
 	
 	private function determineLeafContents(Path $cmdPath, Path $cmdContextPath) {
 		if (!$this->pageConfig->areN2nLocaleUrlsActive()) {
-			return $this->createLeafResults($cmdPath, $cmdContextPath);
+			return $this->createLeafResults($cmdPath, $cmdContextPath, false);
 		}
 
 		if ($cmdPath->isEmpty()) {
 			if ($this->n2nLocaleRedirect()) return null;
 		
 			$this->getRequest()->setN2nLocale($this->getHttpContext()->getMainN2nLocale());
-			return $this->createLeafResults($cmdPath, $cmdContextPath);
+			return $this->createLeafResults($cmdPath, $cmdContextPath, true);
 		}
 		
 		$n2nLocale = null;
 		try {
-			$n2nLocale = $this->getHttpContext()->httpIdToN2nLocale($cmdPath->getFirstPathPart());
+			$n2nLocale = $this->getHttpContext()->httpIdToN2nLocale($cmdPath->getFirstPathPart(), true);
 		} catch (IllegalN2nLocaleFormatException $e) {
-			throw new PageNotFoundException(null, 0, $e);
+// 			throw new PageNotFoundException(null, 0, $e);
 		}
-
+		
+		if ($n2nLocale === null) {
+			$this->getRequest()->setN2nLocale($this->getHttpContext()->getMainN2nLocale());
+			return $this->createLeafResults($cmdPath, $cmdContextPath, true);
+		} else if ($n2nLocale->equals($this->getHttpContext()->getMainN2nLocale())
+				&& $cmdPath->size() <= 1) {
+			throw new PageNotFoundException();
+		}
+		
 		if ($this->getHttpContext()->containsContextN2nLocale($n2nLocale)) {
 			$this->getRequest()->setN2nLocale($n2nLocale);
-			return $this->createLeafResults($cmdPath->sub(1), $cmdContextPath->ext($cmdPath->sub(0, 1)));
+			return $this->createLeafResults($cmdPath->sub(1), $cmdContextPath->ext($cmdPath->sub(0, 1)), false);
 		}
 		
 		throw new PageNotFoundException();
 	}
 		
-	private function createLeafResults(Path $cmdPath, Path $cmdContextPath) {
+	private function createLeafResults(Path $cmdPath, Path $cmdContextPath, bool $homeOnly) {
 		$n2nLocale = $this->getRequest()->getN2nLocale();
 		
 		$subsystemName = null;
@@ -83,7 +91,7 @@ class SiteController extends ControllerAdapter implements RequestScoped {
 		}
 		
 		return $this->pageState->getNavTree()->createLeafContents(
-				$this->getN2nContext(), $cmdPath, $cmdContextPath, $n2nLocale, $subsystemName);
+				$this->getN2nContext(), $cmdPath, $cmdContextPath, $n2nLocale, $subsystemName, $homeOnly);
 	}
 	
 	private function n2nLocaleRedirect() {

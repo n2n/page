@@ -30,10 +30,10 @@ class NavTree {
 	}
 	
 	public function createLeafContents(N2nContext $n2nContext, Path $cmdPath, Path $contextPath, 
-			N2nLocale $n2nLocale, string $subsystemName = null) {
+			N2nLocale $n2nLocale, string $subsystemName = null, bool $homeOnly = false) {
 		$resolver = new NavPathResolver($n2nContext, $n2nLocale, $subsystemName);
-		if ($cmdPath->isEmpty()) {
-			$resolver->analyzeHome($this->rootNavBranches, $contextPath->getPathParts());
+		if ($homeOnly || $cmdPath->isEmpty()) {
+			$resolver->analyzeHome($this->rootNavBranches, $cmdPath->getPathParts(), $contextPath->getPathParts());
 		} else {
 			$resolver->analyzeLevel($this->rootNavBranches, $cmdPath->getPathParts(), $contextPath->getPathParts());
 		}
@@ -183,18 +183,18 @@ class NavPathResolver {
 		return array_reverse($this->leafContents);
 	}
 	
-	public function analyzeHome(array $navBranches, array $contextPathParts) {
+	public function analyzeHome(array $navBranches, array $cmdPathParts, array $contextPathParts) {
 		foreach ($navBranches as $navBranch) {
 			if (!$navBranch->containsLeafN2nLocale($this->n2nLocale)) continue;
 			
 			$leaf = $navBranch->getLeafByN2nLocale($this->n2nLocale);
 			if ($leaf->isHome()) {
-				$this->leafContents[] = $leaf->createLeafContent($this->n2nContext, new Path(array()), 
+				$this->leafContents[] = $leaf->createLeafContent($this->n2nContext, new Path($cmdPathParts), 
 						new Path($contextPathParts));
 				return;
 			}
 			
-			$this->analyzeHome($navBranch->getChildren(), $contextPathParts);
+			$this->analyzeHome($navBranch->getChildren(), $cmdPathParts, $contextPathParts);
 		}
 		
 		return null;
