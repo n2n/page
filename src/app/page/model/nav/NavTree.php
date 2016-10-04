@@ -185,19 +185,21 @@ class NavPathResolver {
 	
 	public function analyzeHome(array $navBranches, array $cmdPathParts, array $contextPathParts) {
 		foreach ($navBranches as $navBranch) {
-			if (!$navBranch->containsLeafN2nLocale($this->n2nLocale)) continue;
-			
-			$leaf = $navBranch->getLeafByN2nLocale($this->n2nLocale);
-			if ($leaf->isHome()) {
-				$this->leafContents[] = $leaf->createLeafContent($this->n2nContext, new Path($cmdPathParts), 
-						new Path($contextPathParts));
-				return;
+			if ($navBranch->containsLeafN2nLocale($this->n2nLocale)) {
+				$leaf = $navBranch->getLeafByN2nLocale($this->n2nLocale);
+				if ($leaf->isHome()) {
+					$this->leafContents[] = $leaf->createLeafContent($this->n2nContext, new Path($cmdPathParts), 
+							new Path($contextPathParts));
+					return true;
+				}
 			}
 			
-			$this->analyzeHome($navBranch->getChildren(), $cmdPathParts, $contextPathParts);
+			if ($this->analyzeHome($navBranch->getChildren(), $cmdPathParts, $contextPathParts)) {
+				return true;
+			}
 		}
 		
-		return null;
+		return false;
 	}
 	
 	public function analyzeLevel(array $navBranches, array $cmdPathParts, array $contextPathParts): bool {

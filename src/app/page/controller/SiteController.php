@@ -33,7 +33,7 @@ class SiteController extends ControllerAdapter implements RequestScoped {
 	public function index(Path $cmdPath, Path $cmdContextPath, array $params = null) {
 		$leafContents = $this->determineLeafContents($cmdPath, $cmdContextPath);
 		if ($leafContents === null) return;
-
+		
 		$controllingPlan = $this->getControllingPlan();
 		foreach ($leafContents as $leafContent) {
 			$controllingPlan->addMain($leafContent->getControllerContext(), true);
@@ -54,7 +54,7 @@ class SiteController extends ControllerAdapter implements RequestScoped {
 
 		if ($cmdPath->isEmpty()) {
 			if ($this->n2nLocaleRedirect()) return null;
-		
+			
 			$this->getRequest()->setN2nLocale($this->getHttpContext()->getMainN2nLocale());
 			return $this->createLeafResults($cmdPath, $cmdContextPath, true);
 		}
