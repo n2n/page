@@ -292,7 +292,7 @@
                 "inPath": {
                     "class": "rocket\\spec\\ei\\component\\field\\impl\\bool\\BooleanEiField",
                     "props": {
-                        "displayInOverview": false,
+                        "displayInOverview": true,
                         "displayInDetailView": true,
                         "displayInEditView": true,
                         "displayInAddView": true,
