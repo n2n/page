@@ -26,7 +26,7 @@ abstract class PageController extends ObjectAdapter implements Controller {
 	private static function _annos(AnnoInit $ai) {
 		$ai->c(new AnnoEntityListeners(PageEntityListener::getClass()));
 		$ai->c(new AnnoInheritance(InheritanceType::JOINED));
-		$ai->p('pageContent', new AnnoOneToOne(PageContent::getClass(), 'pageController', CascadeType::PERSIST, null, true));
+		$ai->p('pageContent', new AnnoOneToOne(PageContent::getClass(), 'pageController', CascadeType::PERSIST));
 		$ai->p('pageControllerTs', new AnnoOneToMany(PageControllerT::getClass(), 'pageController', CascadeType::ALL,
 				null, true));
 		$ai->p('controllingUtils', new AnnoTransient());
