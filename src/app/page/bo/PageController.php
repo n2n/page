@@ -38,15 +38,21 @@ abstract class PageController extends ObjectAdapter implements Controller {
 	private $methodName;
 	
 	private function _prePersist(PageMonitor $pageMonitor) {
-		$pageMonitor->registerRelatedChange($this->pageContent->getPage());
+		if ($this->pageContent !== null) {
+			$pageMonitor->registerRelatedChange($this->pageContent->getPage());
+		}
 	}
 	
 	private function _preUpdate(PageMonitor $pageMonitor) {
-		$pageMonitor->registerRelatedChange($this->pageContent->getPage());
+		if ($this->pageContent !== null) {
+			$pageMonitor->registerRelatedChange($this->pageContent->getPage());
+		}
 	}
 	
 	private function _preRemove(PageMonitor $pageMonitor) {
-		$pageMonitor->registerRelatedChange($this->pageContent->getPage());
+		if ($this->pageContent !== null) {
+			$pageMonitor->registerRelatedChange($this->pageContent->getPage());
+		}
 	}
 	
 	public final function getId() {
