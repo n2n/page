@@ -14,6 +14,7 @@ use n2n\reflection\CastUtils;
 use page\model\PageState;
 use n2n\util\uri\Url;
 use page\model\NavBranchCriteria;
+use n2n\util\uri\Path;
 
 /**
  * A PageMurlComposer is created by {@link PageMurl} and can be used like a 
@@ -153,6 +154,7 @@ class PageMurlComposer implements Murlable {
 		$navUrlBuilder->setFallbackAllowed($this->fallbackAllowed);
 		$navUrlBuilder->setAbsolute($this->absolute);
 		$navUrlBuilder->setAccessiblesOnly($this->accessiblesOnly);
+		$navUrlBuilder->setPathExt((new Path(array()))->extEnc(...$this->pathExts));
 		$url = null;
 		$curNavBranch = null;
 		try {
@@ -162,6 +164,6 @@ class PageMurlComposer implements Murlable {
 			throw new UnavailableMurlException(false, 'NavBranch not available for locale: ' . $n2nLocale, 0, $e);
 		}
 
-		return $url->pathExtEnc(...$this->pathExts)->queryExt($this->queryExt)->chFragment($this->fragment);
+		return $url->queryExt($this->queryExt)->chFragment($this->fragment);
 	}
 }

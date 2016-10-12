@@ -61,16 +61,12 @@ class SiteController extends ControllerAdapter implements RequestScoped {
 		
 		$n2nLocale = null;
 		try {
-			$n2nLocale = $this->getHttpContext()->httpIdToN2nLocale($cmdPath->getFirstPathPart(), true);
+			$n2nLocale = $this->getHttpContext()->httpIdToN2nLocale($cmdPath->getFirstPathPart(), false);
 		} catch (IllegalN2nLocaleFormatException $e) {
-// 			throw new PageNotFoundException(null, 0, $e);
+			throw new PageNotFoundException(null, 0, $e);
 		}
 		
-		if ($n2nLocale === null) {
-			$this->getRequest()->setN2nLocale($this->getHttpContext()->getMainN2nLocale());
-			return $this->createLeafResults($cmdPath, $cmdContextPath, true);
-		} else if ($n2nLocale->equals($this->getHttpContext()->getMainN2nLocale())
-				&& $cmdPath->size() <= 1) {
+		if ($n2nLocale->equals($this->getHttpContext()->getMainN2nLocale()) && $cmdPath->size() <= 1) {
 			throw new PageNotFoundException();
 		}
 		
