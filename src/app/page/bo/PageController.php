@@ -100,7 +100,7 @@ abstract class PageController extends ObjectAdapter implements Controller {
 	
 	public final function execute(ControllerContext $controllerContext): bool {
 		$this->init($controllerContext);
-		
+
 		$request = $this->getRequest();
 		$invokerFactory = new ActionInvokerFactory(
 				$controllerContext->getCmdPath(), $controllerContext->getCmdContextPath(),
@@ -116,7 +116,7 @@ abstract class PageController extends ObjectAdapter implements Controller {
 			$this->invokerInfo = $prepareInvoker;
 			$prepareInvoker->getInvoker()->invoke($this);
 		}
-		
+
 		$invokerInfo = $interpreter->interpretCustom($this->getMethodName());
 		if ($invokerInfo === null) return false;
 		
