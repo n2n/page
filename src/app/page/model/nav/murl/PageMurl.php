@@ -2,7 +2,7 @@
 namespace page\model\nav\murl;
 
 use page\model\NavBranchCriteria;
-use page\ui\nav\NavComposer;
+
 /**
  * <p>PageMurl creates a {@link PageMurlComposer} which can be used to build Urls to pages. It can be used like 
  * {@link \n2n\web\http\nav\MurlComposer}. For example to link a page with 
