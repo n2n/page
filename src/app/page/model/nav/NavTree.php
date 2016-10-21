@@ -30,12 +30,12 @@ class NavTree {
 	}
 	
 	public function createLeafContents(N2nContext $n2nContext, Path $cmdPath, Path $contextPath, 
-			N2nLocale $n2nLocale, string $subsystemName = null) {
+			N2nLocale $n2nLocale, string $subsystemName = null, bool $homeOnly = false) {
 		$resolver = new NavPathResolver($n2nContext, $n2nLocale, $subsystemName);
-		if ($cmdPath->isEmpty()) {
-			$resolver->analyzeHome($this->rootNavBranches, $contextPath->getPathParts());
-		} else {
-			$resolver->analyzeLevel($this->rootNavBranches, $cmdPath->getPathParts(), $contextPath->getPathParts());
+		if ($homeOnly || $cmdPath->isEmpty()) {
+			$resolver->analyzeHome($this->rootNavBranches, $cmdPath->getPathParts(), $contextPath->getPathParts());
+		} else if (!$resolver->analyzeLevel($this->rootNavBranches, $cmdPath->getPathParts(), $contextPath->getPathParts())) {
+			$resolver->analyzeHome($this->rootNavBranches, $cmdPath->getPathParts(), $contextPath->getPathParts());
 		}
 		return $resolver->getLeafContents();
 	}
@@ -183,21 +183,24 @@ class NavPathResolver {
 		return array_reverse($this->leafContents);
 	}
 	
-	public function analyzeHome(array $navBranches, array $contextPathParts) {
+	public function analyzeHome(array $navBranches, array $cmdPathParts, array $contextPathParts) {
 		foreach ($navBranches as $navBranch) {
-			if (!$navBranch->containsLeafN2nLocale($this->n2nLocale)) continue;
-			
-			$leaf = $navBranch->getLeafByN2nLocale($this->n2nLocale);
-			if ($leaf->isHome()) {
-				$this->leafContents[] = $leaf->createLeafContent($this->n2nContext, new Path(array()), 
-						new Path($contextPathParts));
-				return;
+			if ($navBranch->containsLeafN2nLocale($this->n2nLocale)) {
+				$leaf = $navBranch->getLeafByN2nLocale($this->n2nLocale);
+				$subsystemName = $leaf->getSubsystemName();
+				if ($leaf->isHome() && ($subsystemName === null || $this->subsystemName === $subsystemName)) {
+					$this->leafContents[] = $leaf->createLeafContent($this->n2nContext, new Path($cmdPathParts), 
+							new Path($contextPathParts));
+					return true;
+				}
 			}
 			
-			$this->analyzeHome($navBranch->getChildren(), $contextPathParts);
+			if ($this->analyzeHome($navBranch->getChildren(), $cmdPathParts, $contextPathParts)) {
+				return true;
+			}
 		}
 		
-		return null;
+		return false;
 	}
 	
 	public function analyzeLevel(array $navBranches, array $cmdPathParts, array $contextPathParts): bool {
@@ -274,6 +277,7 @@ class NavUrlBuilder {
 	private $fallbackBackAllowed = false;
 	private $absolute = false;
 	private $accessiblesOnly = true;
+	private $pathExt;
 	
 	public function __construct(HttpContext $httpContext) {
 		$this->httpContext = $httpContext;
@@ -291,6 +295,10 @@ class NavUrlBuilder {
 	
 	public function setAccessiblesOnly(bool $accessiblesOnly) {
 		$this->accessiblesOnly = $accessiblesOnly;
+	}
+	
+	public function setPathExt(Path $pathExt = null) {
+		$this->pathExt = $pathExt;
 	}
 	
 	/**
@@ -366,12 +374,13 @@ class NavUrlBuilder {
 		}
 		
 		if ($this->pageConfig->areN2nLocaleUrlsActive() 
-				&& !($leaf->isHome() && $n2nLocale->equals($this->httpContext->getMainN2nLocale()))) {
+				&& !($leaf->isHome() && $n2nLocale->equals($this->httpContext->getMainN2nLocale())
+						&& ($this->pathExt === null || $this->pathExt->isEmpty()))) {
 			$pathParts[] = $this->httpContext->n2nLocaleToHttpId($n2nLocale);
 		}
 		
 		return $this->httpContext->buildContextUrl($ssl, $subsystemName, $this->absolute)
-				->extR(array_reverse($pathParts));
+				->pathExt(array_reverse($pathParts), $this->pathExt);
 	}
 	
 	

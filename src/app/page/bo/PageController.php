@@ -26,7 +26,7 @@ abstract class PageController extends ObjectAdapter implements Controller {
 	private static function _annos(AnnoInit $ai) {
 		$ai->c(new AnnoEntityListeners(PageEntityListener::getClass()));
 		$ai->c(new AnnoInheritance(InheritanceType::JOINED));
-		$ai->p('pageContent', new AnnoOneToOne(PageContent::getClass(), 'pageController', CascadeType::PERSIST, null, true));
+		$ai->p('pageContent', new AnnoOneToOne(PageContent::getClass(), 'pageController', CascadeType::PERSIST));
 		$ai->p('pageControllerTs', new AnnoOneToMany(PageControllerT::getClass(), 'pageController', CascadeType::ALL,
 				null, true));
 		$ai->p('controllingUtils', new AnnoTransient());
@@ -38,15 +38,21 @@ abstract class PageController extends ObjectAdapter implements Controller {
 	private $methodName;
 	
 	private function _prePersist(PageMonitor $pageMonitor) {
-		$pageMonitor->registerRelatedChange($this->pageContent->getPage());
+		if ($this->pageContent !== null) {
+			$pageMonitor->registerRelatedChange($this->pageContent->getPage());
+		}
 	}
 	
 	private function _preUpdate(PageMonitor $pageMonitor) {
-		$pageMonitor->registerRelatedChange($this->pageContent->getPage());
+		if ($this->pageContent !== null) {
+			$pageMonitor->registerRelatedChange($this->pageContent->getPage());
+		}
 	}
 	
 	private function _preRemove(PageMonitor $pageMonitor) {
-		$pageMonitor->registerRelatedChange($this->pageContent->getPage());
+		if ($this->pageContent !== null) {
+			$pageMonitor->registerRelatedChange($this->pageContent->getPage());
+		}
 	}
 	
 	public final function getId() {
@@ -94,7 +100,7 @@ abstract class PageController extends ObjectAdapter implements Controller {
 	
 	public final function execute(ControllerContext $controllerContext): bool {
 		$this->init($controllerContext);
-		
+
 		$request = $this->getRequest();
 		$invokerFactory = new ActionInvokerFactory(
 				$controllerContext->getCmdPath(), $controllerContext->getCmdContextPath(),
@@ -110,7 +116,7 @@ abstract class PageController extends ObjectAdapter implements Controller {
 			$this->invokerInfo = $prepareInvoker;
 			$prepareInvoker->getInvoker()->invoke($this);
 		}
-		
+
 		$invokerInfo = $interpreter->interpretCustom($this->getMethodName());
 		if ($invokerInfo === null) return false;
 		

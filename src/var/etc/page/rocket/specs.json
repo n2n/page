@@ -292,7 +292,7 @@
                 "inPath": {
                     "class": "rocket\\spec\\ei\\component\\field\\impl\\bool\\BooleanEiField",
                     "props": {
-                        "displayInOverview": false,
+                        "displayInOverview": true,
                         "displayInDetailView": true,
                         "displayInEditView": true,
                         "displayInAddView": true,
@@ -594,19 +594,6 @@
                     "label": "Method Name",
                     "objectProperty": "methodName",
                     "entityProperty": "methodName"
-                },
-                "pageContent": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\relation\\EmbeddedOneToOneEiField",
-                    "props": {
-                        "mandatory": true,
-                        "displayInOverview": false,
-                        "displayInDetailView": false,
-                        "displayInEditView": false,
-                        "displayInAddView": false
-                    },
-                    "label": "Inhalt",
-                    "objectProperty": "pageContent",
-                    "entityProperty": "pageContent"
                 },
                 "pageControllerTs": {
                     "class": "rocket\\spec\\ei\\component\\field\\impl\\translation\\TranslationEiField",

@@ -239,6 +239,7 @@ class Page extends ObjectAdapter {
 			$leaf = new ExternalLeaf($pageT->getN2nLocale(), $pageT->getName(), $this->externalUrl);
 			$leaf->setAccessible($this->online && $pageT->isActive());
 			$leaf->setPathPart($pageT->getPathPart());
+			$leaf->setSubsystemName($pageT->getPage()->getSubsystemName());
 			$leaf->setTitle($pageT->getTitle());
 			$leaf->setInNavigation($leaf->isAccessible() && $this->inNavigation);
 			$leaf->setTargetNewWindow($this->navTargetNewWindow);
@@ -254,6 +255,7 @@ class Page extends ObjectAdapter {
 			$leafs[] = $leaf = new InternalLeaf($pageT->getN2nLocale(), $pageT->getName());
 			$leaf->setAccessible($this->online && $pageT->isActive());
 			$leaf->setPathPart($pageT->getPathPart());
+			$leaf->setSubsystemName($pageT->getPage()->getSubsystemName());
 			$leaf->setTitle($pageT->getTitle());
 			$leaf->setInNavigation($leaf->isAccessible() && $this->inNavigation);
 			$leaf->setTargetNewWindow($this->navTargetNewWindow);
@@ -286,6 +288,7 @@ class Page extends ObjectAdapter {
 			$leafs[] = $leaf = new ContentLeaf($pageT->getN2nLocale(), $pageT->getName(), $this->id);
 			$leaf->setAccessible($this->online && $pageT->isActive());
 			$leaf->setPathPart($pageT->getPathPart());
+			$leaf->setSubsystemName($pageT->getPage()->getSubsystemName());
 			$leaf->setTitle($pageT->getTitle());
 			$leaf->setInNavigation($leaf->isAccessible() && $this->inNavigation);
 			$leaf->setTargetNewWindow($this->navTargetNewWindow);
