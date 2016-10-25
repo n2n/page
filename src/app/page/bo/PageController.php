@@ -105,7 +105,7 @@ abstract class PageController extends ObjectAdapter implements Controller {
 		$invokerFactory = new ActionInvokerFactory(
 				$controllerContext->getCmdPath(), $controllerContext->getCmdContextPath(),
 				$request->getMethod(), $request->getQuery(), $request->getPostQuery(),
-				$this->getN2nContext());
+				$request->getAcceptRange(), $this->getN2nContext());
 		$invokerFactory->setConstantValues($controllerContext->getParams());
 		$interpreter = new ControllerInterpreter(new \ReflectionClass($this), $invokerFactory);
 		
