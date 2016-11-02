@@ -19,7 +19,7 @@ use n2n\impl\web\ui\view\html\HtmlSnippet;
 use page\ui\nav\NavComposer;
 use page\ui\nav\Nav;
 use n2n\impl\web\ui\view\html\HtmlElement;
-use page\model\nav\murl\PageMurl;
+use page\model\nav\murl\MurlPage;
 use n2n\impl\web\ui\view\html\HtmlUtils;
 
 /**
@@ -156,14 +156,14 @@ class PageHtmlBuilder {
 		$lis = array();
 		$lastNavBranch = array_pop($navBranches);
 		foreach ($navBranches as $navBranch) {
-			$lis[] = $li = new HtmlElement('li', $liAttrs, $html->getLink(PageMurl::obj($navBranch), null, $aAttrs));
+			$lis[] = $li = new HtmlElement('li', $liAttrs, $html->getLink(MurlPage::obj($navBranch), null, $aAttrs));
 			if ($divider !== null) {
 				$li->appendContent(new HtmlElement('span', array('class' => 'divider'), $divider));
 			}
 		}
 		
 		$lis[] = new HtmlElement('li', HtmlUtils::mergeAttrs(array('class' => 'active'), $liAttrs), 
-				$html->getLink(PageMurl::obj($lastNavBranch), null, $aAttrs));
+				$html->getLink(MurlPage::obj($lastNavBranch), null, $aAttrs));
 		
 		return new HtmlElement('ul', $attrs, $lis);		
 	}

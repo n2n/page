@@ -17,10 +17,10 @@ use page\model\NavBranchCriteria;
 use n2n\util\uri\Path;
 
 /**
- * A PageMurlComposer is created by {@link PageMurl} and can be used like a 
+ * A MurlPageComposer is created by {@link MurlPage} and can be used like a 
  * {@link \n2n\web\http\nav\MurlComposer} to build urls to pages in a fluid way.
  */
-class PageMurlComposer implements Murlable {
+class MurlPageComposer implements Murlable {
 	private $navBranchCriteria;
 	
 	private $fallbackAllowed = false;
@@ -34,7 +34,7 @@ class PageMurlComposer implements Murlable {
 	private $accessiblesOnly = true;
 
 	/**
-	 * Use {@link PageMurl} to create a PageMurlComposer. Don't call this constructor manually.
+	 * Use {@link MurlPage} to create a MurlPageComposer. Don't call this constructor manually.
 	 * 
 	 * @param NavBranchCriteria $navBranchCriteria
 	 */
@@ -46,7 +46,7 @@ class PageMurlComposer implements Murlable {
 	 * Specifies to which translation of target page the url will be build.
 	 * 
 	 * @param mixed $n2nLocale N2nLocale or locale id as string of the desired translation. Resetable with null.
-	 * @return \page\model\nav\murl\PageMurlComposer
+	 * @return \page\model\nav\murl\MurlPageComposer
 	 */
 	public function locale($n2nLocale) {
 		$this->n2nLocale = N2nLocale::build($n2nLocale);
@@ -59,7 +59,7 @@ class PageMurlComposer implements Murlable {
 	 * <p>Default is false.</p>
 	 * 
 	 * @param bool $fallbackAllowed
-	 * @return \page\model\nav\murl\PageMurlComposer
+	 * @return \page\model\nav\murl\MurlPageComposer
 	 */
 	public function fallback(bool $fallbackAllowed = true) {
 		$this->fallbackAllowed = $fallbackAllowed;
@@ -71,9 +71,9 @@ class PageMurlComposer implements Murlable {
 	 * {@link \n2n\util\uri\Path::ext()}.
 	 * 
 	 * @param mixed $pathExts
-	 * @return \page\model\nav\murl\PageMurlComposer
+	 * @return \page\model\nav\murl\MurlPageComposer
 	 */
-	public function pathExt(...$pathPartExts): PageMurlComposer {
+	public function pathExt(...$pathPartExts): MurlPageComposer {
 		$this->pathExts[] = $pathPartExts;
 		return $this;
 	}
@@ -83,7 +83,7 @@ class PageMurlComposer implements Murlable {
 	 * {@link \n2n\util\uri\Path::extEnc()}.
 	 *
 	 * @param mixed $pathExts
-	 * @return \page\model\nav\murl\PageMurlComposer
+	 * @return \page\model\nav\murl\MurlPageComposer
 	 */
 	public function pathExtEnc(...$pathExts) {
 		$this->pathExts[] = array_merge($this->pathExts, $pathExts);
@@ -94,9 +94,9 @@ class PageMurlComposer implements Murlable {
 	 * {@link \n2n\util\uri\Query::ext()}.
 	 * 
 	 * @param mixed $queryExt
-	 * @return \page\model\nav\murl\PageMurlComposer
+	 * @return \page\model\nav\murl\MurlPageComposer
 	 */
-	public function queryExt($queryExt): PageMurlComposer {
+	public function queryExt($queryExt): MurlPageComposer {
 		$this->queryExt = $queryExt;
 		return $this;
 	}
@@ -105,9 +105,9 @@ class PageMurlComposer implements Murlable {
 	 * Defines the fragment of the url to the target page.
 	 * 
 	 * @param string $fragment
-	 * @return \page\model\nav\murl\PageMurlComposer
+	 * @return \page\model\nav\murl\MurlPageComposer
 	 */
-	public function fragment(string $fragment): PageMurlComposer {
+	public function fragment(string $fragment): MurlPageComposer {
 		$this->fragment = $fragment;
 		return $this;
 	}
@@ -118,9 +118,9 @@ class PageMurlComposer implements Murlable {
 	 * <p>Default is false.</p>
 	 *
 	 * @param string $absolute
-	 * @return \page\model\nav\murl\PageMurlComposer
+	 * @return \page\model\nav\murl\MurlPageComposer
 	 */
-	public function absolute(bool $absolute = true): PageMurlComposer {
+	public function absolute(bool $absolute = true): MurlPageComposer {
 		$this->absolute = $absolute;
 		return $this;
 	}

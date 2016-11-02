@@ -18,7 +18,7 @@ use page\model\nav\UnknownContentItemPanelException;
 use page\model\IllegalPageStateException;
 use n2n\persistence\orm\store\EntityInfo;
 use page\model\nav\SitemapItem;
-use page\model\nav\murl\PageMurl;
+use page\model\nav\murl\MurlPage;
 use page\model\PageDao;
 
 class ContentLeaf extends LeafAdapter {
@@ -73,7 +73,7 @@ class ContentLeaf extends LeafAdapter {
 	
 	public function createSitemapItems(N2nContext $n2nContext): array {
 		return array(new SitemapItem(
-				PageMurl::obj($this->navBranch)->locale($this->n2nLocale)->absolute()->toUrl($n2nContext)/*, 
+				MurlPage::obj($this->navBranch)->locale($this->n2nLocale)->absolute()->toUrl($n2nContext)/*, 
 				null, $this->determineChangeFreq(), $this->determinePriority()*/));
 	}
 	

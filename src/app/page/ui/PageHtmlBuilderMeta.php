@@ -5,7 +5,7 @@ use page\model\PageState;
 use n2n\web\ui\view\View;
 use n2n\reflection\CastUtils;
 use n2n\core\config\GeneralConfig;
-use page\model\nav\murl\PageMurl;
+use page\model\nav\murl\MurlPage;
 use page\model\nav\NavBranch;
 
 /**
@@ -114,7 +114,7 @@ class PageHtmlBuilderMeta {
 		foreach ($leafs as $leaf) {
 			$n2nLocale = $leaf->getN2nLocale();
 			
-			if (null !== ($href = $this->view->buildUrl(PageMurl::obj($leaf), false))) {
+			if (null !== ($href = $this->view->buildUrl(MurlPage::obj($leaf), false))) {
 				$htmlMeta->addLink(array('rel' => 'alternate', 
 						'hreflang' => $this->view->getHttpContext()->n2nLocaleToHttpId($n2nLocale), 
 						'href' => $href));
@@ -148,7 +148,7 @@ class PageHtmlBuilderMeta {
 	public function getN2nLocaleSwitchUrls() {
 		if (!$this->pageState->hasCurrent()) return array();
 		
-		$pageMurl = PageMurl::obj($this->pageState->getCurrentNavBranch())->fallback();
+		$pageMurl = MurlPage::obj($this->pageState->getCurrentNavBranch())->fallback();
 		
 		$urls = array();
 		foreach ($this->view->getHttpContext()->getContextN2nLocales() as $n2nLocale) {
@@ -178,7 +178,7 @@ class PageHtmlBuilderMeta {
 	 * <pre>
 	 * &lt;ul&gt;
 	 * 	&lt;?php foreach ($pageHtml-&gt;meta()-&gt;getBreadcrumbNavBranches() as $navBranch): ?&gt;
-	 * 		&lt;li&gt;&lt;?php $html-&gt;link(PageMurl::obj($navBranch)) ?&gt;
+	 * 		&lt;li&gt;&lt;?php $html-&gt;link(MurlPage::obj($navBranch)) ?&gt;
 	 * 	&lt;?php endforeach ?&gt;
 	 * &lt;/ul&gt;
 	 * </pre>
