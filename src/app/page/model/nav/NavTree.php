@@ -224,7 +224,7 @@ class NavPathResolver {
 		
 		$leaf = $navBranch->getLeafByN2nLocale($this->n2nLocale);
 		
-		if ($this->subsystemName !== $leaf->getSubsystemName() || $leaf->isHome()) {
+		if (($leaf->getSubsystemName() !== null && $this->subsystemName !== $leaf->getSubsystemName()) || $leaf->isHome()) {
 			return $this->analyzeLevel($navBranch->getChildren(), $cmdPathParts, $contextPathParts);
 		}
 		

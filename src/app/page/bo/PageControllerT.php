@@ -28,15 +28,21 @@ class PageControllerT extends ObjectAdapter implements Translatable {
 	private $contentItems;
 
 	private function _prePersist(PageMonitor $pageMonitor) {
-		$pageMonitor->registerRelatedChange($this->pageController->getPageContent()->getPage());
+		if (null !== ($pageContent = $this->pageController->getPageContent())) {
+			$pageMonitor->registerRelatedChange($pageContent->getPage());
+		}
 	}
 	
 	private function _preUpdate(PageMonitor $pageMonitor) {
-		$pageMonitor->registerRelatedChange($this->pageController->getPageContent()->getPage());
+		if (null !== ($pageContent = $this->pageController->getPageContent())) {
+			$pageMonitor->registerRelatedChange($pageContent->getPage());
+		}
 	}
 	
 	private function _preRemove(PageMonitor $pageMonitor) {
-		$pageMonitor->registerRelatedChange($this->pageController->getPageContent()->getPage());
+		if (null !== ($pageContent = $this->pageController->getPageContent())) {
+			$pageMonitor->registerRelatedChange($pageContent->getPage());
+		}
 	}
 	
 	public function getId() {
