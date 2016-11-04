@@ -1,7 +1,7 @@
 <?php
 namespace page\model\nav\murl;
 
-use n2n\web\http\nav\Murlable;
+use n2n\web\http\nav\UrlComposer;
 use n2n\l10n\N2nLocale;
 use n2n\core\container\N2nContext;
 use n2n\web\http\controller\ControllerContext;
@@ -17,10 +17,10 @@ use page\model\NavBranchCriteria;
 use n2n\util\uri\Path;
 
 /**
- * A MurlPageComposer is created by {@link MurlPage} and can be used like a 
- * {@link \n2n\web\http\nav\MurlComposer} to build urls to pages in a fluid way.
+ * A PageUrlComposer is created by {@link MurlPage} and can be used like a 
+ * {@link \n2n\web\http\nav\ContextUrlComposer} to build urls to pages in a fluid way.
  */
-class MurlPageComposer implements Murlable {
+class PageUrlComposer implements UrlComposer {
 	private $navBranchCriteria;
 	
 	private $fallbackAllowed = false;
@@ -34,7 +34,7 @@ class MurlPageComposer implements Murlable {
 	private $accessiblesOnly = true;
 
 	/**
-	 * Use {@link MurlPage} to create a MurlPageComposer. Don't call this constructor manually.
+	 * Use {@link MurlPage} to create a PageUrlComposer. Don't call this constructor manually.
 	 * 
 	 * @param NavBranchCriteria $navBranchCriteria
 	 */
@@ -46,7 +46,7 @@ class MurlPageComposer implements Murlable {
 	 * Specifies to which translation of target page the url will be build.
 	 * 
 	 * @param mixed $n2nLocale N2nLocale or locale id as string of the desired translation. Resetable with null.
-	 * @return \page\model\nav\murl\MurlPageComposer
+	 * @return \page\model\nav\murl\PageUrlComposer
 	 */
 	public function locale($n2nLocale) {
 		$this->n2nLocale = N2nLocale::build($n2nLocale);
@@ -59,7 +59,7 @@ class MurlPageComposer implements Murlable {
 	 * <p>Default is false.</p>
 	 * 
 	 * @param bool $fallbackAllowed
-	 * @return \page\model\nav\murl\MurlPageComposer
+	 * @return \page\model\nav\murl\PageUrlComposer
 	 */
 	public function fallback(bool $fallbackAllowed = true) {
 		$this->fallbackAllowed = $fallbackAllowed;
@@ -71,9 +71,9 @@ class MurlPageComposer implements Murlable {
 	 * {@link \n2n\util\uri\Path::ext()}.
 	 * 
 	 * @param mixed $pathExts
-	 * @return \page\model\nav\murl\MurlPageComposer
+	 * @return \page\model\nav\murl\PageUrlComposer
 	 */
-	public function pathExt(...$pathPartExts): MurlPageComposer {
+	public function pathExt(...$pathPartExts): PageUrlComposer {
 		$this->pathExts[] = $pathPartExts;
 		return $this;
 	}
@@ -83,7 +83,7 @@ class MurlPageComposer implements Murlable {
 	 * {@link \n2n\util\uri\Path::extEnc()}.
 	 *
 	 * @param mixed $pathExts
-	 * @return \page\model\nav\murl\MurlPageComposer
+	 * @return \page\model\nav\murl\PageUrlComposer
 	 */
 	public function pathExtEnc(...$pathExts) {
 		$this->pathExts[] = array_merge($this->pathExts, $pathExts);
@@ -94,9 +94,9 @@ class MurlPageComposer implements Murlable {
 	 * {@link \n2n\util\uri\Query::ext()}.
 	 * 
 	 * @param mixed $queryExt
-	 * @return \page\model\nav\murl\MurlPageComposer
+	 * @return \page\model\nav\murl\PageUrlComposer
 	 */
-	public function queryExt($queryExt): MurlPageComposer {
+	public function queryExt($queryExt): PageUrlComposer {
 		$this->queryExt = $queryExt;
 		return $this;
 	}
@@ -105,9 +105,9 @@ class MurlPageComposer implements Murlable {
 	 * Defines the fragment of the url to the target page.
 	 * 
 	 * @param string $fragment
-	 * @return \page\model\nav\murl\MurlPageComposer
+	 * @return \page\model\nav\murl\PageUrlComposer
 	 */
-	public function fragment(string $fragment): MurlPageComposer {
+	public function fragment(string $fragment): PageUrlComposer {
 		$this->fragment = $fragment;
 		return $this;
 	}
@@ -118,9 +118,9 @@ class MurlPageComposer implements Murlable {
 	 * <p>Default is false.</p>
 	 *
 	 * @param string $absolute
-	 * @return \page\model\nav\murl\MurlPageComposer
+	 * @return \page\model\nav\murl\PageUrlComposer
 	 */
-	public function absolute(bool $absolute = true): MurlPageComposer {
+	public function absolute(bool $absolute = true): PageUrlComposer {
 		$this->absolute = $absolute;
 		return $this;
 	}
@@ -132,7 +132,7 @@ class MurlPageComposer implements Murlable {
 	
 	/**
 	 * {@inheritDoc}
-	 * @see \n2n\web\http\nav\Murlable::toUrl($n2nContext, $controllerContext)
+	 * @see \n2n\web\http\nav\UrlComposer::toUrl($n2nContext, $controllerContext)
 	 */
 	public function toUrl(N2nContext $n2nContext, ControllerContext $controllerContext = null, 
 			string &$suggestedLabel = null): Url {
