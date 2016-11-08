@@ -21,6 +21,7 @@ use page\ui\nav\Nav;
 use n2n\impl\web\ui\view\html\HtmlElement;
 use page\model\nav\murl\MurlPage;
 use n2n\impl\web\ui\view\html\HtmlUtils;
+use n2n\web\ui\UiComponent;
 
 /**
  * PageHtmlBuilder provides methods for simple html output in views dependent on the state of the site.
@@ -49,18 +50,24 @@ class PageHtmlBuilder {
 		return $this->meta;
 	}
 	
+	
 	/**
 	 * Prints the html encoded title of the current page or the page name specified in app.ini if there is no 
 	 * current page.
+	 * @param string|UiComponent|null $overwriteTitle prints just passed value if not null 
 	 */
-	public function title() {
-		$this->view->out($this->getTitle());
+	public function title($overwriteTitle = null) {
+		$this->view->out($this->getTitle($overwriteTitle));
 	}
 	
 	/**
+	 * Same as {@link PageHtmlBuilder::title()} but returns the output.
 	 * @return \n2n\web\ui\UiComponent
 	 */
-	public function getTitle() {
+	public function getTitle($overwriteTitle = null) {
+		if (null !== $overwriteTitle) {
+			return $this->view->getHtmlBuilder()->getOut($overwriteTitle);
+		}
 		return $this->view->getHtmlBuilder()->getEsc($this->meta->getTitle());
 	}
 	
