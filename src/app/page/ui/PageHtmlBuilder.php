@@ -19,8 +19,9 @@ use n2n\impl\web\ui\view\html\HtmlSnippet;
 use page\ui\nav\NavComposer;
 use page\ui\nav\Nav;
 use n2n\impl\web\ui\view\html\HtmlElement;
-use page\model\nav\murl\PageMurl;
+use page\model\nav\murl\MurlPage;
 use n2n\impl\web\ui\view\html\HtmlUtils;
+use n2n\web\ui\UiComponent;
 
 /**
  * PageHtmlBuilder provides methods for simple html output in views dependent on the state of the site.
@@ -49,18 +50,24 @@ class PageHtmlBuilder {
 		return $this->meta;
 	}
 	
+	
 	/**
 	 * Prints the html encoded title of the current page or the page name specified in app.ini if there is no 
 	 * current page.
+	 * @param string|UiComponent|null $overwriteTitle prints just passed value if not null 
 	 */
-	public function title() {
-		$this->view->out($this->getTitle());
+	public function title($overwriteTitle = null) {
+		$this->view->out($this->getTitle($overwriteTitle));
 	}
 	
 	/**
+	 * Same as {@link PageHtmlBuilder::title()} but returns the output.
 	 * @return \n2n\web\ui\UiComponent
 	 */
-	public function getTitle() {
+	public function getTitle($overwriteTitle = null) {
+		if (null !== $overwriteTitle) {
+			return $this->view->getHtmlBuilder()->getOut($overwriteTitle);
+		}
 		return $this->view->getHtmlBuilder()->getEsc($this->meta->getTitle());
 	}
 	
@@ -156,14 +163,14 @@ class PageHtmlBuilder {
 		$lis = array();
 		$lastNavBranch = array_pop($navBranches);
 		foreach ($navBranches as $navBranch) {
-			$lis[] = $li = new HtmlElement('li', $liAttrs, $html->getLink(PageMurl::obj($navBranch), null, $aAttrs));
+			$lis[] = $li = new HtmlElement('li', $liAttrs, $html->getLink(MurlPage::obj($navBranch), null, $aAttrs));
 			if ($divider !== null) {
 				$li->appendContent(new HtmlElement('span', array('class' => 'divider'), $divider));
 			}
 		}
 		
 		$lis[] = new HtmlElement('li', HtmlUtils::mergeAttrs(array('class' => 'active'), $liAttrs), 
-				$html->getLink(PageMurl::obj($lastNavBranch), null, $aAttrs));
+				$html->getLink(MurlPage::obj($lastNavBranch), null, $aAttrs));
 		
 		return new HtmlElement('ul', $attrs, $lis);		
 	}

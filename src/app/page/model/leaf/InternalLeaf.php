@@ -9,7 +9,7 @@ use page\model\nav\LeafContent;
 use page\model\nav\NavBranch;
 use page\model\nav\impl\CommonLeafContent;
 use n2n\util\ex\IllegalStateException;
-use page\model\nav\murl\PageMurl;
+use page\model\nav\murl\MurlPage;
 use n2n\web\http\Redirect;
 use n2n\web\http\Response;
 
@@ -42,7 +42,7 @@ class InternalController implements Controller {
 	}
 	
 	public function execute(ControllerContext $controllerContext): bool {
-		$targetUrl = PageMurl::obj($this->targetNavBranch)->toUrl($this->n2nContext, $controllerContext);
+		$targetUrl = MurlPage::obj($this->targetNavBranch)->toUrl($this->n2nContext, $controllerContext);
 		
 		$this->n2nContext->getHttpContext()->getResponse()->send(
 				new Redirect((string) $targetUrl, Response::STATUS_301_MOVED_PERMANENTLY));

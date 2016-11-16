@@ -7,7 +7,7 @@ use n2n\impl\web\ui\view\html\HtmlUtils;
 use page\model\nav\Leaf;
 use n2n\impl\web\ui\view\html\HtmlView;
 use n2n\web\ui\UiComponent;
-use page\model\nav\murl\PageMurl;
+use page\model\nav\murl\MurlPage;
 
 abstract class NavItemBuilderAdapter implements NavItemBuilder {
 	protected $classPrefix = '';
@@ -28,7 +28,7 @@ abstract class NavItemBuilderAdapter implements NavItemBuilder {
 		}
 		
 		return new HtmlElement('li', $this->buildLiAttrs($view, $leaf, $attrs, $infos), 
-				$view->getHtmlBuilder()->getLink(PageMurl::obj($leaf), 
+				$view->getHtmlBuilder()->getLink(MurlPage::obj($leaf), 
 						$this->buildLiLabel($view, $leaf, $attrs, $infos),
 						$aAttrs));
 	}
