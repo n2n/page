@@ -176,18 +176,18 @@ class NavComposer {
 			for ($i = 0; $i >= $startLevel; $i--) {
 				$parentNavBranch = $navBranch->getParent();
 				if ($parentNavBranch === null) {
-					return array($navBranch->getNavTree()->getRootNavBranches());
+					return $navBranch->getNavTree()->getRootNavBranches();
 				}
 				$navBranch = $parentNavBranch;
 			}
-				
+			
 			if ($this->parentIncluded) {
 				return array($navBranch);
 			}
-				
+			
 			return $navBranch->getChildren();
 		}
-	
+		
 		if ($startLevel == 0) {
 			$parentNavBranch = $navBranch->getParent();
 			if ($parentNavBranch === null) return array($navBranch);
