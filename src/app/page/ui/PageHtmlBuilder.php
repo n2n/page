@@ -3,18 +3,9 @@ namespace page\ui;
 
 use n2n\impl\web\ui\view\html\HtmlView;
 use n2n\l10n\N2nLocale;
-use page\ui\locale\N2nLocaleNavConfig;
-use page\ui\nav\NavConfig;
-use page\ui\tree\BreadcrumbConfig;
-use page\ui\locale\N2nLocaleNavBuilder;
-use page\ui\nav\NavBuilder;
-use page\ui\tree\BreadcrumbBuilder;
-use n2n\reflection\ArgUtils;
 use rocket\spec\ei\component\field\impl\ci\model\ContentItem;
-use page\model\CiContainerPage;
 use page\model\PageState;
 use page\model\nav\NavBranch;
-use page\model\nav\Leaf;
 use n2n\impl\web\ui\view\html\HtmlSnippet;
 use page\ui\nav\NavComposer;
 use page\ui\nav\Nav;
@@ -223,7 +214,7 @@ class PageHtmlBuilder {
 				$elemLiAttrs = HtmlUtils::mergeAttrs((array) $elemLiAttrs, array('class' => 'active'));
 			}
 			
-			$ul->appendNl(new HtmlElement('li', $elemLiAttrs, $html->getLink($navUrl, $label, $aAttrs)));
+			$ul->appendLn(new HtmlElement('li', $elemLiAttrs, $html->getLink($navUrl, $label, $aAttrs)));
 		}
 		
 		return $ul;
