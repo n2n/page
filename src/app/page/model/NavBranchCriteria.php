@@ -30,7 +30,7 @@ class NavBranchCriteria {
 		return $navBranchCriteria;
 	}
 	
-	public static function createSubHome(stirng $subsystemName = null) {
+	public static function createSubHome(string $subsystemName = null) {
 		$navBranchCriteria = new NavBranchCriteria();
 		$navBranchCriteria->name = self::NAMED_SUBHOME;
 		$navBranchCriteria->subsystemName = $subsystemName;
