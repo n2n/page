@@ -75,6 +75,14 @@ class PageT extends ObjectAdapter implements Translatable {
 		$this->title = $title;
 	}
 	
+	public function getRealTitle() {
+		if ($this->title !== null) {
+			return $this->title;
+		}
+		
+		return $this->name;
+	}
+	
 	public function getPage() {
 		return $this->page;
 	}

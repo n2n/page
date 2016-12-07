@@ -7,6 +7,7 @@ use n2n\reflection\CastUtils;
 use n2n\core\config\GeneralConfig;
 use page\model\nav\murl\MurlPage;
 use page\model\nav\NavBranch;
+use page\model\nav\NavTree;
 
 /**
  * PageHtmlBuilderMeta provides non-html meta information to your views. You can access it over 
@@ -28,6 +29,13 @@ class PageHtmlBuilderMeta {
 	 */
 	public function getPageState() {
 		return $this->pageState;
+	}
+	
+	/**
+	 * @return NavTree 
+	 */
+	public function getNavTree() {
+		return $this->pageState->getNavTree();
 	}
 	
 	/**

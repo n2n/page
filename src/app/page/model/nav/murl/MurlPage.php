@@ -50,7 +50,6 @@ class MurlPage {
 		return new PageUrlComposer(NavBranchCriteria::createSubHome($subsystemName));
 	}
 	
-	
 	/**
 	 * <p>Creates a {@link PageUrlComposer} which points to a page which is affiliated with the passed object.</p>
 	 * 
