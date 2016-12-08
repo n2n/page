@@ -41,7 +41,6 @@ class PageHtmlBuilder {
 		return $this->meta;
 	}
 	
-	
 	/**
 	 * Prints the html encoded title of the current page or the page name specified in app.ini if there is no 
 	 * current page.
