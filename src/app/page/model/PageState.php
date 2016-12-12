@@ -7,6 +7,7 @@ use n2n\core\container\N2nContext;
 use page\model\nav\Leaf;
 use page\model\nav\NavBranch;
 use page\model\nav\LeafContent;
+use n2n\core\N2N;
 
 /**
  * state
@@ -24,7 +25,12 @@ class PageState implements RequestScoped {
 	
 	public function getNavTree(): NavTree {
 		if ($this->navTree === null) {
-			$this->navTree = $this->pageDao->getCachedNavTree();			
+			if (!N2N::isDevelopmentModeOn()) {
+				$this->navTree = $this->pageDao->getCachedNavTree();
+			} else {
+				$this->navTree = $this->pageDao->lookupNavTree();
+			}
+						
 		}
 		
 		return $this->navTree;
