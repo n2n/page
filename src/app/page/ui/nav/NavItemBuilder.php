@@ -14,12 +14,17 @@ interface NavItemBuilder {
 	const INFO_OPEN = 2;
 	
 	/**
+	 * @param int $rootLevel
+	 */
+	public function setRootLevel(int $rootLevel);
+	
+	/**
 	 * @param HtmlView $view
 	 * @param unknown $level
 	 * @param array $attrs
 	 * @return \n2n\impl\web\ui\view\html\HtmlElement
 	 */
-	public function buildRootUl(HtmlView $view, $level, array $attrs): HtmlElement;
+	public function buildRootUl(HtmlView $view, array $attrs): HtmlElement;
 	
 	/**
 	 * @param HtmlView $view

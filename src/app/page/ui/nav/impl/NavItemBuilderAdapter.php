@@ -11,32 +11,60 @@ use page\model\nav\murl\MurlPage;
 
 abstract class NavItemBuilderAdapter implements NavItemBuilder {
 	protected $classPrefix = '';
+	protected $rootLevel = 0;
 	
-	public function buildRootUl(HtmlView $view, $level, array $attrs): HtmlElement {
-		$attrs = HtmlUtils::mergeAttrs(array('class' => $this->classPrefix . 'level-' . $level), $attrs);
+	public function setRootLevel(int $rootLevel) {
+		$this->rootLevel = $rootLevel;
+	}
+	
+	public function buildRootUl(HtmlView $view, array $attrs): HtmlElement {
+		$className = $this->classPrefix . 'level-' . $this->rootLevel 
+				. ' ' . $this->classPrefix . 'level-rel-0';
+		$attrs = HtmlUtils::mergeAttrs(array('class' => $className), $attrs);
 		return new HtmlElement('ul', $attrs, '');
 	}
 	
 	public function buildUl(HtmlView $view, Leaf $parentLeaf, array $attrs, int $infos): HtmlElement {
-		$attrs = HtmlUtils::mergeAttrs(array('class' => $this->classPrefix . 'level-' . ($parentLeaf->getNavBranch()->getLevel() + 1)), $attrs);
+		$level = ($parentLeaf->getNavBranch()->getLevel() + 1);
+		$relLevel = $level - $this->rootLevel;
+		$className = $this->classPrefix . 'level-' . $level . ' ' . $this->classPrefix . 'level-rel-' . $relLevel;
+		
+		$attrs = HtmlUtils::mergeAttrs(array('class' => $className), $attrs);
 		return new HtmlElement('ul', $attrs, '');
 	}
 	
 	public function buildLi(HtmlView $view, Leaf $leaf, array $attrs, array $aAttrs, int $infos): HtmlElement {
-		if ($leaf->isTargetNewWindow() && !($infos & self::INFO_OPEN || $infos & self::INFO_CURRENT)) {
-			$aAttrs = HtmlUtils::mergeAttrs(array('target' => '_blank'), $aAttrs);
-		}
-		
 		return new HtmlElement('li', $this->buildLiAttrs($view, $leaf, $attrs, $infos), 
 				$view->getHtmlBuilder()->getLink(MurlPage::obj($leaf), 
 						$this->buildLiLabel($view, $leaf, $attrs, $infos),
-						$aAttrs));
+						$this->buildAAttrs($view, $leaf, $aAttrs, $infos)));
+	}
+	
+	protected function buildAAttrs(HtmlView $view, Leaf $leaf, array $attrs, int $infos) {
+		if ($leaf->isTargetNewWindow() && !($infos & self::INFO_OPEN || $infos & self::INFO_CURRENT)) {
+			$attrs = HtmlUtils::mergeAttrs(array('target' => '_blank'), $attrs);
+		}
+		
+		$attrs = HtmlUtils::mergeAttrs($this->buildAdditionalLiAttrs($view, $leaf, $attrs, $infos), $attrs);
+		
+		if (!array_key_exists('title', $attrs)) {
+			$attrs['title'] = $leaf->getTitle();
+		}
+		
+		return $attrs;
+	}
+	
+	protected function buildAdditionalAAttrs(HtmlView $view, Leaf $leaf, array $attrs, int $infos) {
+		return array();
 	}
 	
 	protected function buildLiAttrs(HtmlView $view, Leaf $leaf, array $attrs, int $infos): array {
-		$attrs = HtmlUtils::mergeAttrs($this->buildAdditionalAttrs($view, $leaf, $attrs, $infos), $attrs);
+		$attrs = HtmlUtils::mergeAttrs($this->buildAdditionalLiAttrs($view, $leaf, $attrs, $infos), $attrs);
 		
-		$classNames = array($this->classPrefix . 'level-' . $leaf->getNavBranch()->getLevel());
+		$level = $leaf->getNavBranch()->getLevel();
+		$relLevel = $level - $this->rootLevel;
+		$classNames = array($this->classPrefix . 'level-' . $level, 
+				$this->classPrefix . 'level-rel-' . $relLevel);
 		
 		if ($leaf->getNavBranch()->hasChildren()) {
 			$classNames[] = $this->classPrefix . 'has-children';
@@ -53,7 +81,7 @@ abstract class NavItemBuilderAdapter implements NavItemBuilder {
 		return HtmlUtils::mergeAttrs(array('class' => implode(' ', $classNames)), $attrs);
 	}
 	
-	protected function buildAdditionalAttrs(HtmlView $view, Leaf $leaf, array $attrs, int $infos): array {
+	protected function buildAdditionalLiAttrs(HtmlView $view, Leaf $leaf, array $attrs, int $infos): array {
 		return array();
 	}
 	
