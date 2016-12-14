@@ -3,7 +3,6 @@ namespace page\model;
 
 use n2n\core\container\N2nContext;
 use page\model\PageState;
-use n2n\reflection\CastUtils;
 use n2n\reflection\ArgUtils;
 use page\model\nav\Leaf;
 use page\model\nav\NavBranch;
@@ -13,6 +12,7 @@ use page\model\nav\UnknownNavBranchException;
 
 class NavBranchCriteria {
 	const NAMED_ROOT = 'root';
+	const NAMED_NAV_ROOT = 'navRoot';
 	const NAMED_CURRENT = 'current';
 	const NAMED_HOME = 'home';
 	const NAMED_SUBHOME = 'subhome';
@@ -24,7 +24,7 @@ class NavBranchCriteria {
 	protected $subsystemName;
 	
 	public static function createNamed(string $name) {
-		ArgUtils::valEnum($name, array(self::NAMED_ROOT, self::NAMED_CURRENT, self::NAMED_HOME), null, true);
+		ArgUtils::valEnum($name, array(self::NAMED_ROOT, self::NAMED_NAV_ROOT, self::NAMED_CURRENT, self::NAMED_HOME), null, true);
 		$navBranchCriteria = new NavBranchCriteria();
 		$navBranchCriteria->name = $name;
 		return $navBranchCriteria;
@@ -78,6 +78,14 @@ class NavBranchCriteria {
 					return $pageState->getNavTree()->getHomeLeaf($n2nLocale, $subsystemName)->getNavBranch();
 				case self::NAMED_SUBHOME:
 					return $pageState->getNavTree()->getHomeLeaf($n2nLocale, $this->subsystemName)->getNavBranch();
+				case self::NAMED_NAV_ROOT:
+					if (null !== ($navBranch =  $this->determineNavRoot($pageState->getCurrentNavBranch(), 
+							$n2nLocale))) {
+						return $navBranch;
+					}
+					
+					throw new UnknownNavBranchException('No nav root for found for NavBranch: ' 
+							. $pageState->getCurrentNavBranch());
 			}
 		} catch (UnavailableLeafException $e) {
 			throw new UnknownNavBranchException(null, 0, $e);
@@ -88,5 +96,18 @@ class NavBranchCriteria {
 		}
 		
 		return $pageState->getCurrentNavBranch()->getRoot();	
+	}
+	
+	private function determineNavRoot(NavBranch $navBranch, N2nLocale $n2nLocale) {
+		$navRootNavBranch = null;
+		do {
+			if (!$navBranch->containsLeafN2nLocale($n2nLocale)) continue;
+			
+			if ($navBranch->getLeafByN2nLocale($n2nLocale)->isInNavigation()) {
+				$navRootNavBranch = $navBranch;
+			}
+		} while (null !== ($navBranch = $navBranch->getParent()));
+		
+		return $navRootNavBranch;
 	}
 }

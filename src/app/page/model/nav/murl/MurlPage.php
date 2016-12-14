@@ -29,6 +29,13 @@ class MurlPage {
 	}
 	
 	/**
+	 * @return \page\model\nav\murl\PageUrlComposer
+	 */
+	public static function navRoot() {
+		return new PageUrlComposer(NavBranchCriteria::createNamed(NavBranchCriteria::NAMED_NAV_ROOT));
+	}
+	
+	/**
 	 * Creates a {@link PageUrlComposer} which points to the current page according to 
 	 * {@link \page\model\PageState}. If there is no current page any root page will be used.
 	 *
