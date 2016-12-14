@@ -62,6 +62,10 @@ class PageHtmlBuilderMeta {
 		return $this->view->lookup(GeneralConfig::class)->getPageName();
 	}
 	
+	public function find(BranchCriteria $pageCrit) {
+		
+	}
+	
 	
 	/**
 	 * Combines {@link self::applySeMeta()} and {@link self::applyN2nLocaleMeta()} 
