@@ -53,7 +53,8 @@ class NavFactory {
 	public function create(HtmlView $view, array $baseNavBranches) {
 		$ul = null;
 		if (null !== ($navBranch = ArrayUtils::current($baseNavBranches))) {
-			$ul = $this->navItemBuilder->buildRootUl($view, $navBranch->getLevel(), $this->rootUlAttrs);
+			$this->navItemBuilder->setRootLevel($navBranch->getLevel());
+			$ul = $this->navItemBuilder->buildRootUl($view, $this->rootUlAttrs);
 		} else {
 			return null;
 		}

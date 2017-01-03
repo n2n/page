@@ -57,9 +57,14 @@ class PageState implements RequestScoped {
 	}
 	
 	/**
-	 *  @return \page\model\nav\Leaf
+	 * @param bool $required
+	 * @return \page\model\nav\Leaf
 	 */
-	public function getCurrentLeaf() {
+	public function getCurrentLeaf(bool $required = true) {
+		if (!$required && !$this->hasCurrent()) {
+			return null;
+		}
+	
 		return $this->getCurrentLeafContent()->getLeaf();
 	}
 	

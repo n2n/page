@@ -19,6 +19,13 @@ class Nav {
 		return new NavComposer(NavBranchCriteria::createNamed(NavBranchCriteria::NAMED_ROOT));
 	}
 	
+	/**
+	 * @return \page\ui\nav\NavComposer
+	 */
+	public static function navRoot() {
+		return new NavComposer(NavBranchCriteria::createNamed(NavBranchCriteria::NAMED_NAV_ROOT));
+	}
+	
 	public static function home(): NavComposer {
 		return new NavComposer(NavBranchCriteria::createNamed(NavBranchCriteria::NAMED_HOME));
 	}

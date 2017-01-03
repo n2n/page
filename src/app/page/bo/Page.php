@@ -23,6 +23,7 @@ use n2n\reflection\ArgUtils;
 use page\model\PageMonitor;
 use n2n\persistence\orm\annotation\AnnoEntityListeners;
 use n2n\reflection\CastUtils;
+use page\model\leaf\EmptyLeaf;
 
 class Page extends ObjectAdapter {
 	const NS = 'page';
@@ -227,6 +228,8 @@ class Page extends ObjectAdapter {
 			$this->applyInternalLeafs($navBranch, $navInitProcess);
 		} else if ($this->pageContent !== null) {
 			$this->applyContentLeafs($navBranch);
+		} else {
+			$this->applyEmptyLeafs($navBranch);
 		}
 		
 		return $navBranch; 
@@ -286,6 +289,21 @@ class Page extends ObjectAdapter {
 			CastUtils::assertTrue($pageT instanceof PageT);
 			
 			$leafs[] = $leaf = new ContentLeaf($pageT->getN2nLocale(), $pageT->getName(), $this->id);
+			$leaf->setAccessible($this->online && $pageT->isActive());
+			$leaf->setPathPart($pageT->getPathPart());
+			$leaf->setSubsystemName($pageT->getPage()->getSubsystemName());
+			$leaf->setTitle($pageT->getTitle());
+			$leaf->setInNavigation($leaf->isAccessible() && $this->inNavigation);
+			$leaf->setTargetNewWindow($this->navTargetNewWindow);
+			$navBranch->addLeaf($leaf);
+		}
+	}
+	
+	private function applyEmptyLeafs(NavBranch $navBranch) {
+		foreach ($this->pageTs as $pageT) {
+			CastUtils::assertTrue($pageT instanceof PageT);
+			
+			$leaf = new EmptyLeaf($pageT->getN2nLocale(), $pageT->getName());
 			$leaf->setAccessible($this->online && $pageT->isActive());
 			$leaf->setPathPart($pageT->getPathPart());
 			$leaf->setSubsystemName($pageT->getPage()->getSubsystemName());

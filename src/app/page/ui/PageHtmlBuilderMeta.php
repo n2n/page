@@ -62,7 +62,6 @@ class PageHtmlBuilderMeta {
 		return $this->view->lookup(GeneralConfig::class)->getPageName();
 	}
 	
-	
 	/**
 	 * Combines {@link self::applySeMeta()} and {@link self::applyN2nLocaleMeta()} 
 	 * 
@@ -92,10 +91,10 @@ class PageHtmlBuilderMeta {
 	
 		$seTitle = $leafContent->getSeTitle();
 		if ($seTitle === null) {
-			$seTitle = $leafContent->getLeaf()->getName() . $titleSeparator 
-					. $this->view->lookup(GeneralConfig::class)->getPageName();
+			$seTitle = $leafContent->getLeaf()->getName();
 		}
-		$htmlMeta->setTitle($seTitle);
+		$htmlMeta->setTitle($seTitle . $titleSeparator 
+					. $this->view->lookup(GeneralConfig::class)->getPageName());
 	
 		if (null !== ($seDescription = $leafContent->getSeDescription())) {
 			$htmlMeta->addMeta(array('name' => 'description', 'content' => $seDescription));

@@ -16,7 +16,6 @@ use n2n\util\ex\IllegalStateException;
 use n2n\reflection\ReflectionUtils;
 use page\model\nav\UnknownContentItemPanelException;
 use page\model\IllegalPageStateException;
-use n2n\persistence\orm\store\EntityInfo;
 use page\model\nav\SitemapItem;
 use page\model\nav\murl\MurlPage;
 use page\model\PageDao;

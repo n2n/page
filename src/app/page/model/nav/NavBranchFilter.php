@@ -87,5 +87,4 @@ class NavBranchFilter {
 		
 		return null;
 	}
-
 }
