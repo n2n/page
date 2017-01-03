@@ -12,6 +12,7 @@ use n2n\util\ex\IllegalStateException;
 use page\model\nav\murl\MurlPage;
 use n2n\web\http\Redirect;
 use n2n\web\http\Response;
+use page\model\nav\UrlBuildTask;
 
 class InternalLeaf extends LeafAdapter {
 	private $targetNavBranch;
@@ -22,6 +23,10 @@ class InternalLeaf extends LeafAdapter {
 	
 	public function setTargetNavBranch(NavBranch $targetNavBranch) {
 		$this->targetNavBranch = $targetNavBranch;
+	}
+	
+	public function prepareUrl(UrlBuildTask $urlBuildTask) {
+		$urlBuildTask->overwriteNavBranch($this->targetNavBranch);
 	}
 	
 	public function createLeafContent(N2nContext $n2nContext, Path $cmdPath, Path $cmdContextPath): LeafContent {
