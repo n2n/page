@@ -281,7 +281,7 @@
                     "entityProperty": "internalPage"
                 },
                 "externalUrl": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\string\\StringEiField",
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\string\\UrlEiField",
                     "props": {
                         "displayInOverview": false,
                         "displayInDetailView": true,
