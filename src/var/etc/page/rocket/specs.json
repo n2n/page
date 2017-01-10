@@ -138,7 +138,7 @@
                         "readOnly": false,
                         "mandatory": false,
                         "draftable": false,
-                        "maxlength": null,
+                        "maxlength": "70",
                         "multiline": false
                     },
                     "label": "SE Title",
@@ -156,7 +156,7 @@
                         "readOnly": false,
                         "mandatory": false,
                         "draftable": false,
-                        "maxlength": null,
+                        "maxlength": "156",
                         "multiline": true
                     },
                     "label": "SE Description",
