@@ -415,6 +415,25 @@
                     "label": "Online",
                     "objectProperty": "online",
                     "entityProperty": "online"
+                },
+                "type": {
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\enum\\EnumEiField",
+                    "props": {
+                        "displayInOverview": true,
+                        "displayInDetailView": true,
+                        "displayInEditView": true,
+                        "displayInAddView": true,
+                        "constant": false,
+                        "readOnly": false,
+                        "mandatory": true,
+                        "draftable": false,
+                        "options": {
+                            "": null
+                        }
+                    },
+                    "label": "Type",
+                    "objectProperty": "type",
+                    "entityProperty": "type"
                 }
             },
             "commands": {
