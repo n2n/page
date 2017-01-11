@@ -36,6 +36,7 @@ class Page extends ObjectAdapter {
 	}
 		
 	private $id;
+// 	private $type;
 	private $internalPage;
 	private $externalUrl;
 	private $pageContent;
@@ -74,6 +75,28 @@ class Page extends ObjectAdapter {
 	
 	public function setId($id) {
 		$this->id = $id;
+	}
+	
+	const TYPE_EXTERNAL = 'external';
+	const TYPE_INTERNAL = 'internal';
+	const TYPE_CONTENT = 'content';
+	
+	public function getType() {
+		if ($this->externalUrl !== null) {
+			return self::TYPE_EXTERNAL;
+		}
+		
+		if ($this->internalPage !== null) {
+			return self::TYPE_INTERNAL;
+		}
+		
+		return self::TYPE_CONTENT;
+	}
+	
+	public function setType(string $type) {
+// 		ArgUtils::valEnum($type, $allowedValues);
+		
+// 		throw new NotYeti();
 	}
 	
 	public function getInternalPage() {
