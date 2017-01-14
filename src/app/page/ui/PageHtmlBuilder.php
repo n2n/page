@@ -129,7 +129,7 @@ class PageHtmlBuilder {
 	/**
 	 * <p>Prints a breadcrumb navigation of the current page in form of a ul-/li-list.</p> 
 	 * 
-	 * <p>Also see {@link PageHtmlBuilderMeta::getBreadcrumbs()} to find out how to build a breadcrumb navigation.</p>
+	 * <p>Also see {@link PageHtmlBuilderMeta::getBreadcrumbNavBranches()} to find out how to build a breadcrumb navigation.</p>
 	 * 
 	 * @param array $attrs Html attributes of the ul element.
 	 * @param array $liAttrs Html attributes of each li element 
@@ -145,7 +145,7 @@ class PageHtmlBuilder {
 	 * @return \n2n\web\ui\UiComponent
 	 */
 	public function getBreadcrumbs(array $attrs = null, array $liAttrs = null, array $aAttrs = null, $divider = null) {
-		$navBranches = $this->meta->getBreadcrumbs();
+		$navBranches = $this->meta->getBreadcrumbNavBranches();
 		if (empty($navBranches)) return null;
 		
 		$html = $this->view->getHtmlBuilder();
