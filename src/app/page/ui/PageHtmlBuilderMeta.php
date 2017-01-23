@@ -8,6 +8,7 @@ use n2n\core\config\GeneralConfig;
 use page\model\nav\murl\MurlPage;
 use page\model\nav\NavBranch;
 use page\model\nav\NavTree;
+use n2n\impl\web\ui\view\html\HtmlView;
 
 /**
  * PageHtmlBuilderMeta provides non-html meta information to your views. You can access it over 
@@ -18,7 +19,7 @@ class PageHtmlBuilderMeta {
 	private $view;
 	private $pageState;
 	
-	public function __construct(View $view) {
+	public function __construct(HtmlView $view) {
 		$this->view = $view;
 		$this->pageState = $view->lookup(PageState::class);
 		CastUtils::assertTrue($this->pageState instanceof PageState);
@@ -65,10 +66,11 @@ class PageHtmlBuilderMeta {
 	/**
 	 * Combines {@link self::applySeMeta()} and {@link self::applyN2nLocaleMeta()} 
 	 * 
+	 * @param string $seTitle See {@link self::applySeMeta()}
 	 * @param string $titleSeparator See {@link self::applySeMeta()}
 	 */
-	public function applyMeta(string $titleSeparator = self::DEFAULT_TITLE_SEPARATOR) {
-		$this->applySeMeta($titleSeparator);
+	public function applyMeta(string $seTitle = null, string $titleSeparator = self::DEFAULT_TITLE_SEPARATOR) {
+		$this->applySeMeta($seTitle, $titleSeparator);
 		$this->applyN2nLocaleMeta();
 	}
 	
@@ -80,16 +82,19 @@ class PageHtmlBuilderMeta {
 	 * 
 	 * <p>If there is no current page nothing happens.</p>
 	 * 
+	 * @param string $seTitle If you want to overwrite the title for the <code>&lt;title&gt;</code> element.
 	 * @param string $titleSeparator The separator used to join the page title and the page name specified 
 	 * in app.ini together for <code>&lt;title&gt;</code> element.
 	 */
-	public function applySeMeta(string $titleSeparator = self::DEFAULT_TITLE_SEPARATOR) {
+	public function applySeMeta(string $seTitle = null, string $titleSeparator = self::DEFAULT_TITLE_SEPARATOR) {
 		if (!$this->pageState->hasCurrent()) return;
 		
 		$leafContent = $this->pageState->getCurrentLeafContent();
 		$htmlMeta = $this->view->getHtmlBuilder()->meta();
 	
-		$seTitle = $leafContent->getSeTitle();
+		if ($seTitle === null) {
+			$seTitle = $leafContent->getSeTitle();
+		}
 		if ($seTitle === null) {
 			$seTitle = $leafContent->getLeaf()->getName();
 		}
