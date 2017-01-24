@@ -7,6 +7,8 @@ use n2n\util\ex\IllegalStateException;
 
 class NavBranch {
 	private $navTree;
+	private $id;
+	
 	private $leafs = array();
 	private $objAffiliationTester;
 	private $tagNames = array();
@@ -17,23 +19,27 @@ class NavBranch {
 	private $children = array();
 	private $level;
 	
-	
-	/**
-	 * @todo REMOVE AFTER WYSIWYG UPDATE
-	 */
-	private $id;
-	
-	public function __construct(NavTree $navTree, int $id) {
+	public function __construct(NavTree $navTree, string $id = null) {
 		$this->navTree = $navTree;
 		$this->id = $id;
 	}
 	
+	/**
+	 * @return \page\model\nav\NavTree
+	 */
 	public function getNavTree() {
 		return $this->navTree;
 	}
 	
 	/**
-	 * @todo REMOVE AFTER WYSIWYG UPDATE
+	 * @param string $id
+	 */
+	public function setId(string $id = null) {
+		$this->id = $id;
+	}
+
+	/**
+	 * @return string|null
 	 */
 	public function getId() {
 		return $this->id;
@@ -46,11 +52,19 @@ class NavBranch {
 		$this->objAffiliationTester = $objAffiliationTester;
 	}
 	
+	/**
+	 * @param object $obj
+	 * @return boolean
+	 */
 	public function isAffiliatedWith($obj) {
 		ArgUtils::valObject($obj);
 		return $this->objAffiliationTester !== null && $this->objAffiliationTester->isAffiliatedWith($obj);
 	}
 
+	/**
+	 * @param array $tagNames
+	 * @return bool
+	 */
 	public function containsTagNames(array $tagNames): bool {
 		foreach ($tagNames as $tagName) {
 			if (!in_array($tagName, $this->tagNames, true)) return false;

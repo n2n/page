@@ -46,10 +46,11 @@ class NavTree {
 	 * @param unknown $affiliatedObj
 	 * @param array $tagNames
 	 * @param array $hookKeys
+	 * @param string|null id
 	 * @return NavBranch or null if not found
 	 */
-	public function findRoot($affiliatedObj = null, array $tagNames = null, array $hookKeys = null) {
-		$navFilter = new NavBranchFilter($affiliatedObj, $tagNames, $hookKeys);
+	public function findRoot($affiliatedObj = null, array $tagNames = null, array $hookKeys = null, string $id = null) {
+		$navFilter = new NavBranchFilter($affiliatedObj, $tagNames, $hookKeys, $id);
 		return $navFilter->find($this->rootNavBranches);
 	}
 	
@@ -72,16 +73,17 @@ class NavTree {
 	 * @param unknown $affiliatedObj
 	 * @param array $tagNames
 	 * @param array $hookKeys
+	 * @param string|null id
 	 * @return NavBranch or null if not found
 	 */
-	public function find($affiliatedObj = null, array $tagNames = null, array $hookKeys = null) {
-		$navFilter = new NavBranchFilter($affiliatedObj, $tagNames, $hookKeys);
+	public function find($affiliatedObj = null, array $tagNames = null, array $hookKeys = null, string $id = null) {
+		$navFilter = new NavBranchFilter($affiliatedObj, $tagNames, $hookKeys, $id);
 		return $navFilter->findR($this->rootNavBranches);
 	}
 	
 	public function findClosest(NavBranch $navBranch, $affiliatedObj = null, array $tagNames = null, 
-			array $hookKeys = null) {
-		$navFilter = new NavBranchFilter($affiliatedObj, $tagNames, $hookKeys);
+			array $hookKeys = null, string $id = null) {
+		$navFilter = new NavBranchFilter($affiliatedObj, $tagNames, $hookKeys, $id);
 		return $navFilter->findClosest($navBranch);
 	}
 	
@@ -92,23 +94,23 @@ class NavTree {
 	 * @throws UnknownNavBranchException
 	 * @return NavBranch
 	 */
-	public function get($affiliatedObj = null, array $tagNames = null, array $hookKeys = null) {
-		if (null !== ($navBranch = $this->find($affiliatedObj, $tagNames, $hookKeys))) {
+	public function get($affiliatedObj = null, array $tagNames = null, array $hookKeys = null, string $id = null) {
+		if (null !== ($navBranch = $this->find($affiliatedObj, $tagNames, $hookKeys, $id))) {
 			return $navBranch;
 		}
 		
-		throw $this->createException($affiliatedObj, $tagNames, $hookKeys);
+		throw $this->createException($affiliatedObj, $tagNames, $hookKeys, $id);
 	}
 	
-	public function getClosest(NavBranch $navBranch, $affiliatedObj = null, array $tagNames = null, array $hookKeys = null) {
-		if (null !== ($navBranch = $this->findClosest($navBranch, $affiliatedObj, $tagNames, $hookKeys))) {
+	public function getClosest(NavBranch $navBranch, $affiliatedObj = null, array $tagNames = null, array $hookKeys = null, string $id = null) {
+		if (null !== ($navBranch = $this->findClosest($navBranch, $affiliatedObj, $tagNames, $hookKeys, $id))) {
 			return $navBranch;
 		}
 	
-		throw $this->createException($affiliatedObj, $tagNames, $hookKeys);
+		throw $this->createException($affiliatedObj, $tagNames, $hookKeys, $id);
 	}
 	
-	private function createException($affiliatedObj = null, array $tagNames = null, array $hookKeys = null) {
+	private function createException($affiliatedObj = null, array $tagNames = null, array $hookKeys = null, string $id = null) {
 		$chrits = array();
 		if ($affiliatedObj !== null) {
 			$chrits[] = 'affiliated object: ' . get_class($affiliatedObj);
@@ -120,6 +122,10 @@ class NavTree {
 		
 		if (!empty($hookKeys)) {
 			$chrits[] = 'hook keys: [' . implode(', ', $hookKeys) . ']';
+		}
+		
+		if ($id !== null) {
+			$chrits[] = 'id: ' . id;
 		}
 		
 		throw new UnknownNavBranchException('No matching NavBranch found: ' . implode('; ', $chrits));

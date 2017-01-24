@@ -7,11 +7,13 @@ class NavBranchFilter {
 	private $affiliatedObj;
 	private $tagNames = array();
 	private $hookKeys = array();
+	private $id;
 
-	public function __construct($affiliatedObj = null, array $tagNames = null, $hookKeys = null) {
+	public function __construct($affiliatedObj = null, array $tagNames = null, $hookKeys = null, string $id = null) {
 		$this->setAffiliatedObj($affiliatedObj);
 		$this->setTagNames($tagNames);
 		$this->setHookKeys($hookKeys);
+		$this->id = $id;
 	}
 
 	public function setAffiliatedObj($affiliatedObj = null) {
@@ -27,6 +29,10 @@ class NavBranchFilter {
 	public function setHookKeys(array $hookKeys = null) {
 		ArgUtils::valArray($hookKeys, 'string', true, 'hookKeys');
 		$this->hookKeys = (array) $hookKeys;
+	}
+	
+	public function setId(string $id = null) {
+		$this->id = $id;
 	}
 	
 	public function findClosest(NavBranch $navBranch) {
@@ -75,7 +81,8 @@ class NavBranchFilter {
 	public function matches(NavBranch $navBranch) {
 		return ($this->affiliatedObj === null || $navBranch->isAffiliatedWith($this->affiliatedObj))
 				&& (empty($this->tagNames) || $navBranch->containsTagNames($this->tagNames))
-				&& (empty($this->hookKeys) || $navBranch->containsHookKeys($this->hookKeys));
+				&& (empty($this->hookKeys) || $navBranch->containsHookKeys($this->hookKeys))
+				&& ($this->id === null || $navBranch->getId() === $this->id);
 	}
 
 	public function findR(array $navBranches) {

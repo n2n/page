@@ -21,6 +21,7 @@ class NavBranchCriteria {
 	protected $affiliatedObj;
 	protected $tagNames;
 	protected $hookKeys;
+	protected $id;
 	protected $subsystemName;
 	
 	public static function createNamed(string $name) {
@@ -37,12 +38,13 @@ class NavBranchCriteria {
 		return $navBranchCriteria;
 	}
 	
-	public static function create($affiliatedObj = null, array $tagNames = null, array $hookKeys = null) {
+	public static function create($affiliatedObj = null, array $tagNames = null, array $hookKeys = null, string $id = null) {
 		ArgUtils::valObject($affiliatedObj, true);
 		$navBranchCriteria = new NavBranchCriteria();
 		$navBranchCriteria->affiliatedObj = $affiliatedObj;
 		$navBranchCriteria->tagNames = $tagNames;
 		$navBranchCriteria->hookKeys = $hookKeys;
+		$navBranchCriteria->id = $id;
 		return $navBranchCriteria;
 	}
 	
@@ -60,9 +62,9 @@ class NavBranchCriteria {
 				return $this->affiliatedObj->getNavBranch();
 			} else if ($pageState->hasCurrent()) {
 				return $pageState->getNavTree()->getClosest($pageState->getCurrentNavBranch(), 
-						$this->affiliatedObj, $this->tagNames, $this->hookKeys);
+						$this->affiliatedObj, $this->tagNames, $this->hookKeys, $this->id);
 			} else {
-				return $pageState->getNavTree()->get($this->affiliatedObj, $this->tagNames, $this->hookKeys);
+				return $pageState->getNavTree()->get($this->affiliatedObj, $this->tagNames, $this->hookKeys, $this->id);
 			}
 		}
 		
