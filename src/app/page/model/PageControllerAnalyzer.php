@@ -2,9 +2,9 @@
 namespace page\model;
 
 use n2n\reflection\ReflectionContext;
-use page\annotation\AnnoCiPanel;
 use page\annotation\AnnoPage;
 use page\annotation\AnnoPageCiPanels;
+use n2n\reflection\CastUtils;
 
 class PageControllerAnalyzer {
 	private $class;
@@ -23,6 +23,7 @@ class PageControllerAnalyzer {
 		$ciPanelNames = array();
 		
 		foreach ($this->as->getMethodAnnotationsByName(AnnoPageCiPanels::class) as $annoPageCiPanels) {
+			CastUtils::assertTrue($annoPageCiPanels instanceof AnnoPageCiPanels);
 			if (!$this->as->hasMethodAnnotation($annoPageCiPanels->getAnnotatedMethod()->getName(), AnnoPage::class)) {
 				throw new PageErrorException('Panel assigned on non-page method: ' 
 								. implode(', ', $annoPageCiPanels->getNames()),
@@ -105,10 +106,10 @@ class PageControllerAnalyzer {
 		return $pageMethod;
 	}
 		
-	private function createPageCiPanel(AnnoCiPanel $annoCiPanel) {
-		return new PageCiPanel($annoCiPanel->getName(), 
-				$annoCiPanel->getAllowedCiClassNames());
-	}
+// 	private function createPageCiPanel(AnnoCiPanel $annoCiPanel) {
+// 		return new PageCiPanel($annoCiPanel->getName(), 
+// 				$annoCiPanel->getAllowedCiClassNames());
+// 	}
 }
 
 class PageControllerException extends \RuntimeException {

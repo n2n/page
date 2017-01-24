@@ -4,8 +4,6 @@ namespace page\model;
 use n2n\context\RequestScoped;
 use page\model\nav\NavTree;
 use n2n\core\container\N2nContext;
-use page\model\nav\Leaf;
-use page\model\nav\NavBranch;
 use page\model\nav\LeafContent;
 use n2n\core\N2N;
 
@@ -15,6 +13,7 @@ use n2n\core\N2N;
  */
 class PageState implements RequestScoped {
 	private $pageDao;
+	private $n2nContext;
 	private $navTree;
 	private $leafContent;
 	
@@ -23,6 +22,9 @@ class PageState implements RequestScoped {
 		$this->n2nContext = $n2nContext;
 	}
 	
+	/**
+	 * @return NavTree
+	 */
 	public function getNavTree(): NavTree {
 		if ($this->navTree === null) {
 			if (!N2N::isDevelopmentModeOn()) {
@@ -48,7 +50,7 @@ class PageState implements RequestScoped {
 	 * @throws IllegalPageStateException
 	 * @return \page\model\nav\LeafContent
 	 */
-	public function getCurrentLeafContent(): LeafContent {
+	public function getCurrentLeafContent() {
 		if ($this->leafContent !== null) {
 			return $this->leafContent;
 		}
@@ -71,7 +73,7 @@ class PageState implements RequestScoped {
 	/**
 	 * @return \page\model\nav\NavBranch
 	 */
-	public function getCurrentNavBranch(): NavBranch {
+	public function getCurrentNavBranch() {
 		return $this->getCurrentLeaf()->getNavBranch();
 	}
 }

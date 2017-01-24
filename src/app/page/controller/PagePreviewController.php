@@ -53,6 +53,8 @@ class PagePreviewController extends PreviewControllerAdapter {
 			throw new PageNotFoundException('Preview unavailable.', null, $e);	
 		}
 		
+		$this->getResponse()->setHttpCachingEnabled(false);
+		
 		$pageState->setCurrentLeafContent($leafContent);
 		$this->delegateToControllerContext($leafContent->getControllerContext());
 	}

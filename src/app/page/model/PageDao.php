@@ -9,7 +9,6 @@ use n2n\persistence\orm\util\NestedSetStrategy;
 use n2n\persistence\orm\criteria\item\CrIt;
 use n2n\reflection\CastUtils;
 use n2n\persistence\orm\util\NestedSetItem;
-use page\model\nav\NavBranch;
 use page\model\nav\NavTree;
 use n2n\core\container\AppCache;
 
@@ -30,7 +29,7 @@ class PageDao implements ThreadScoped {
 			}
 		}
 		
-		$navTree = $this->rootNavBranches = $this->lookupNavTree();
+		$navTree = $this->lookupNavTree();
 		$this->cacheStore->store('navTree', array(), $navTree);
 		
 		return $navTree;
