@@ -71,7 +71,11 @@ class NavBranchCriteria {
 		try {
 			switch ($this->name) {
 				case self::NAMED_CURRENT:
-					return $pageState->getCurrentNavBranch();
+					try {
+						return $pageState->getCurrentNavBranch();
+					} catch (IllegalPageStateException $e) {
+						throw new UnknownNavBranchException('No nav branche active.', 0, $e);
+					}
 				case self::NAMED_HOME:
 					$subsystemName = null;
 					if (null !== ($subsystem = $n2nContext->getHttpContext()->getRequest()->getSubsystem())) {
