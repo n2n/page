@@ -85,7 +85,7 @@ class NavBranchCriteria {
 				case self::NAMED_SUBHOME:
 					return $pageState->getNavTree()->getHomeLeaf($n2nLocale, $this->subsystemName)->getNavBranch();
 				case self::NAMED_NAV_ROOT:
-					if (null !== ($navBranch =  $this->determineNavRoot($pageState->getCurrentNavBranch(), 
+					if (null !== ($navBranch = $this->determineNavRoot($pageState->getCurrentNavBranch(), 
 							$n2nLocale))) {
 						return $navBranch;
 					}
