@@ -40,7 +40,7 @@ class ContentLeaf extends LeafAdapter {
 		if ($page === null) {
 			$pageDao = $n2nContext->lookup(PageDao::class);
 			CastUtils::assertTrue($pageDao instanceof PageDao);
-			$pageDao->clear();
+			$pageDao->clearCache();
 			throw new IllegalStateException('Old cache conflict. Try to solve with auto clean up. Try again.');
 		}
 		$pageContent = $page->getPageContent();

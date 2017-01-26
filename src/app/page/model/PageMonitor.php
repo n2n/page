@@ -123,6 +123,7 @@ class PageEvent {
 	const TYPE_UPDATE = 'update';
 	const TYPE_REMOVE = 'remove';
 	
+	private $type;
 	private $page;
 	
 	public function __construct(string $type, Page $page) {

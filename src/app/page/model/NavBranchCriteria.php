@@ -21,6 +21,7 @@ class NavBranchCriteria {
 	protected $affiliatedObj;
 	protected $tagNames;
 	protected $hookKeys;
+	protected $id;
 	protected $subsystemName;
 	
 	public static function createNamed(string $name) {
@@ -37,12 +38,13 @@ class NavBranchCriteria {
 		return $navBranchCriteria;
 	}
 	
-	public static function create($affiliatedObj = null, array $tagNames = null, array $hookKeys = null) {
+	public static function create($affiliatedObj = null, array $tagNames = null, array $hookKeys = null, string $id = null) {
 		ArgUtils::valObject($affiliatedObj, true);
 		$navBranchCriteria = new NavBranchCriteria();
 		$navBranchCriteria->affiliatedObj = $affiliatedObj;
 		$navBranchCriteria->tagNames = $tagNames;
 		$navBranchCriteria->hookKeys = $hookKeys;
+		$navBranchCriteria->id = $id;
 		return $navBranchCriteria;
 	}
 	
@@ -60,16 +62,20 @@ class NavBranchCriteria {
 				return $this->affiliatedObj->getNavBranch();
 			} else if ($pageState->hasCurrent()) {
 				return $pageState->getNavTree()->getClosest($pageState->getCurrentNavBranch(), 
-						$this->affiliatedObj, $this->tagNames, $this->hookKeys);
+						$this->affiliatedObj, $this->tagNames, $this->hookKeys, $this->id);
 			} else {
-				return $pageState->getNavTree()->get($this->affiliatedObj, $this->tagNames, $this->hookKeys);
+				return $pageState->getNavTree()->get($this->affiliatedObj, $this->tagNames, $this->hookKeys, $this->id);
 			}
 		}
 		
 		try {
 			switch ($this->name) {
 				case self::NAMED_CURRENT:
-					return $pageState->getCurrentNavBranch();
+					try {
+						return $pageState->getCurrentNavBranch();
+					} catch (IllegalPageStateException $e) {
+						throw new UnknownNavBranchException('No nav branche active.', 0, $e);
+					}
 				case self::NAMED_HOME:
 					$subsystemName = null;
 					if (null !== ($subsystem = $n2nContext->getHttpContext()->getRequest()->getSubsystem())) {
@@ -79,7 +85,7 @@ class NavBranchCriteria {
 				case self::NAMED_SUBHOME:
 					return $pageState->getNavTree()->getHomeLeaf($n2nLocale, $this->subsystemName)->getNavBranch();
 				case self::NAMED_NAV_ROOT:
-					if (null !== ($navBranch =  $this->determineNavRoot($pageState->getCurrentNavBranch(), 
+					if (null !== ($navBranch = $this->determineNavRoot($pageState->getCurrentNavBranch(), 
 							$n2nLocale))) {
 						return $navBranch;
 					}

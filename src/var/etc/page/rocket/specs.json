@@ -263,6 +263,37 @@
                     "objectProperty": "pageTs",
                     "entityProperty": "pageTs"
                 },
+                "type": {
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\enum\\EnumEiField",
+                    "props": {
+                        "displayInOverview": true,
+                        "displayInDetailView": true,
+                        "displayInEditView": true,
+                        "displayInAddView": true,
+                        "constant": false,
+                        "readOnly": false,
+                        "mandatory": true,
+                        "draftable": false,
+                        "options": {
+                            "content": "Content",
+                            "internal": "Internal Redirect",
+                            "external": "Redirect to URL"
+                        },
+                        "associatedGuiFields": {
+                            "content": {
+                                "pageContent": "pageContent"
+                            },
+                            "internal": {
+                                "internalPage": "internalPage"
+                            },
+                            "external": {
+                                "externalUrl": "externalUrl"
+                            }
+                        }
+                    },
+                    "label": "Type",
+                    "objectProperty": "type"
+                },
                 "internalPage": {
                     "class": "rocket\\spec\\ei\\component\\field\\impl\\relation\\ManyToOneSelectEiField",
                     "props": {
@@ -521,6 +552,7 @@
                         "maxlength": "255",
                         "basePropertyFieldId": "name",
                         "allowEmpty": true,
+                        "uniquePerFieldId": "n2nLocale",
                         "critical": true
                     },
                     "label": "URL-Part",

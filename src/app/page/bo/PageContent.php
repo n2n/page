@@ -67,6 +67,9 @@ class PageContent extends ObjectAdapter {
 		$this->page = $page;
 	}
 
+	/**
+	 * @return PageContentT[]
+	 */
 	public function getPageContentTs() {
 		return $this->pageContentTs;
 	}

@@ -43,7 +43,7 @@ interface Leaf {
 	public function getSubsystemName();
 	
 	/**
-	 *	If true than requesting the page of this leaf causes a 404. 
+	 *	If false than requesting the page of this leaf causes a 404. 
 	 */
 	public function isAccessible(): bool;
 	

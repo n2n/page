@@ -95,4 +95,12 @@ class MurlPage {
 	public static function hook(string ...$hookKeys) {
 		return new PageUrlComposer(NavBranchCriteria::create(null, null, $hookKeys));
 	}
+	
+	/**
+	 * @param string $id Page id
+	 * @return \page\model\nav\murl\PageUrlComposer
+	 */
+	public static function id(string $id) {
+		return new PageUrlComposer(NavBranchCriteria::create(null, null, null, $id));
+	}
 }

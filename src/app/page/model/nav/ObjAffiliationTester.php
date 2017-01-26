@@ -1,6 +1,9 @@
 <?php
 namespace page\model\nav;
 
+/**
+ * Must be serializable!
+ */
 interface ObjAffiliationTester {
 	
 	/**

@@ -7,7 +7,7 @@ use n2n\core\container\N2nContext;
 use n2n\web\http\controller\ControllerContext;
 use page\model\nav\NavBranch;
 use page\model\nav\UnknownNavBranchException;
-use n2n\web\http\nav\UnavailableMurlException;
+use n2n\web\http\nav\UnavailableUrlException;
 use page\model\nav\NavUrlBuilder;
 use page\model\nav\BranchUrlBuildException;
 use n2n\reflection\CastUtils;
@@ -147,7 +147,7 @@ class PageUrlComposer implements UrlComposer {
 		try {
 			$navBranch = $this->navBranchCriteria->determine($pageState, $n2nLocale, $n2nContext);
 		} catch (UnknownNavBranchException $e) {
-			throw new UnavailableMurlException(false, null, null, $e);
+			throw new UnavailableUrlException(false, null, null, $e);
 		}
 
 		$navUrlBuilder = new NavUrlBuilder($n2nContext->getHttpContext());
@@ -161,7 +161,7 @@ class PageUrlComposer implements UrlComposer {
 			$url = $navUrlBuilder->build($navBranch, $n2nLocale, true, $curNavBranch);
 			$suggestedLabel = $curNavBranch->getLeafByN2nLocale($n2nLocale)->getName();
 		} catch (BranchUrlBuildException $e) {
-			throw new UnavailableMurlException(false, 'NavBranch not available for locale: ' . $n2nLocale, 0, $e);
+			throw new UnavailableUrlException(false, 'NavBranch not available for locale: ' . $n2nLocale, 0, $e);
 		}
 
 		return $url->queryExt($this->queryExt)->chFragment($this->fragment);
