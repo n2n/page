@@ -29,7 +29,7 @@ class PageSubsystemEiField extends EnumEiField {
 		$enumMag = parent::createMag($propertyName, $eiu);
 		CastUtils::assertTrue($enumMag instanceof EnumMag);
 		
-		if ($eiu->isNew()) {
+		if ($eiu->entry()->isNew()) {
 			return $enumMag;
 		}
 		
