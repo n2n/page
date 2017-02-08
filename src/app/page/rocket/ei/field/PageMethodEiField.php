@@ -2,7 +2,7 @@
 namespace page\rocket\ei\field;
 
 use rocket\spec\ei\component\field\impl\adapter\DraftableEiFieldAdapter;
-use rocket\spec\ei\manage\gui\FieldSourceInfo;
+use rocket\spec\ei\manage\util\model\Eiu;
 use n2n\reflection\CastUtils;
 use page\bo\PageController;
 use n2n\impl\web\dispatch\mag\model\EnumMag;
@@ -18,8 +18,8 @@ use n2n\web\ui\UiComponent;
 
 class PageMethodEiField extends DraftableEiFieldAdapter {
 	
-	public function createMag(string $propertyName, FieldSourceInfo $fieldSourceInfo): Mag {
-		$pageController = $fieldSourceInfo->getEiMapping()->getEiSelection()->getLiveObject();
+	public function createMag(string $propertyName, Eiu $eiu): Mag {
+		$pageController = $eiu->entry()->getEiMapping()->getEiSelection()->getLiveObject();
 		CastUtils::assertTrue($pageController instanceof PageController);
 		
 		$analyzer = new PageControllerAnalyzer(new \ReflectionClass($pageController));
@@ -32,14 +32,14 @@ class PageMethodEiField extends DraftableEiFieldAdapter {
 		}
 		
 		$mag = new PageMethodEnumMag($propertyName, $this->getLabelLstr(), $options, null, 
-				$this->isMandatory($fieldSourceInfo));
+				$this->isMandatory($eiu));
 		$mag->setInputAttrs(array('class' => 'page-method', 'data-panel-names' => json_encode($ciPanelNames)));
 		return $mag;
 	}
 	
-	public function createOutputUiComponent(HtmlView $view, FieldSourceInfo $fieldSourceInfo)  {
+	public function createOutputUiComponent(HtmlView $view, Eiu $eiu)  {
 		return $view->getHtmlBuilder()->getEsc(StringUtils::pretty(
-				$fieldSourceInfo->getValue(EiFieldPath::from($this))));
+				$eiu->field()->getValue(EiFieldPath::from($this))));
 	}
 		
 	public function isStringRepresentable(): bool {
