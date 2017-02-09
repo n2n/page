@@ -303,7 +303,7 @@
                         "displayInAddView": true,
                         "constant": false,
                         "readOnly": false,
-                        "mandatory": true,
+                        "mandatory": false,
                         "draftable": false,
                         "targetRemovalStrategy": "prevent"
                     },
@@ -320,7 +320,7 @@
                         "displayInAddView": true,
                         "constant": false,
                         "readOnly": false,
-                        "mandatory": true,
+                        "mandatory": false,
                         "draftable": false,
                         "maxlength": null,
                         "multiline": false
@@ -338,7 +338,7 @@
                         "displayInAddView": true,
                         "constant": false,
                         "readOnly": false,
-                        "mandatory": true,
+                        "mandatory": false,
                         "draftable": false,
                         "replaceable": false,
                         "targetRemovalStrategy": "prevent"
