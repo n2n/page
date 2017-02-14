@@ -19,6 +19,7 @@ use page\model\IllegalPageStateException;
 use page\model\nav\SitemapItem;
 use page\model\nav\murl\MurlPage;
 use page\model\PageDao;
+use n2n\web\http\nav\UnavailableUrlException;
 
 class ContentLeaf extends LeafAdapter {
 	private $pageId;
@@ -71,9 +72,14 @@ class ContentLeaf extends LeafAdapter {
 	}
 	
 	public function createSitemapItems(N2nContext $n2nContext): array {
-		return array(new SitemapItem(
-				MurlPage::obj($this->navBranch)->locale($this->n2nLocale)->absolute()->toUrl($n2nContext)/*, 
-				null, $this->determineChangeFreq(), $this->determinePriority()*/));
+		try {
+			return array(new SitemapItem(
+					MurlPage::obj($this->navBranch)->locale($this->n2nLocale)->absolute()->toUrl($n2nContext)/*,
+					null, $this->determineChangeFreq(), $this->determinePriority()*/));
+		} catch (UnavailableUrlException $e) {
+			return array();
+		}
+		
 	}
 	
 
