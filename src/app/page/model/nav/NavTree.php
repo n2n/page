@@ -319,7 +319,7 @@ class NavUrlBuilder {
 		while (true) {
 			try {
 				return $this->buildUrl($this->buildUrlBuildTask($curNavBranch, $n2nLocale));
-			} catch(UnavailableLeafException $e) {
+			} catch (UnavailableLeafException $e) {
 				if ($this->fallbackBackAllowed && null !== ($curNavBranch = $curNavBranch->getParent())) {
 					continue;
 				}
