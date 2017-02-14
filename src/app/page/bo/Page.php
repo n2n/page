@@ -94,9 +94,26 @@ class Page extends ObjectAdapter {
 	}
 	
 	public function setType(string $type) {
-// 		ArgUtils::valEnum($type, $allowedValues);
+		ArgUtils::valEnum($type, self::getTypes());
 		
-// 		throw new NotYeti();
+		switch ($type) {
+			case self::TYPE_EXTERNAL:
+				$this->internalPage = null;
+				$this->pageContent = null;
+				break;
+			case self::TYPE_INTERNAL:
+				$this->externalUrl = null;
+				$this->pageContent = null;
+				break;
+			case self::TYPE_CONTENT:
+				$this->externalUrl = null;
+				$this->internalPage = null;
+				break;
+		}
+	}
+	
+	public static function getTypes() {
+		return array(self::TYPE_EXTERNAL, self::TYPE_INTERNAL, self::TYPE_CONTENT);
 	}
 	
 	public function getInternalPage() {
