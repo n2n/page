@@ -714,6 +714,119 @@
             "commands": [],
             "modificators": [],
             "defaultMaskId": null
+        },
+        "page-page-link": {
+            "type": "entity",
+            "entity": "page\\bo\\util\\PageLink",
+            "dataSourceName": null,
+            "label": "Page Link",
+            "pluralLabel": "Page Links",
+            "fields": {
+                "id": {
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\numeric\\IntegerEiField",
+                    "props": {
+                        "displayInOverview": true,
+                        "displayInDetailView": true,
+                        "displayInEditView": false,
+                        "displayInAddView": false,
+                        "constant": false,
+                        "readOnly": true,
+                        "mandatory": false,
+                        "draftable": false,
+                        "minValue": "0",
+                        "maxValue": "4294967295"
+                    },
+                    "label": "Id",
+                    "objectProperty": "id",
+                    "entityProperty": "id"
+                },
+                "type": {
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\enum\\EnumEiField",
+                    "props": {
+                        "displayInOverview": true,
+                        "displayInDetailView": true,
+                        "displayInEditView": true,
+                        "displayInAddView": true,
+                        "constant": false,
+                        "readOnly": false,
+                        "mandatory": false,
+                        "draftable": false,
+                        "options": {
+                            "internal": "Internal",
+                            "external": "External"
+                        },
+                        "associatedGuiFields": {
+                            "internal": {
+                                "linkedPage": "linkedPage"
+                            },
+                            "external": {
+                                "url": "url"
+                            }
+                        }
+                    },
+                    "label": "Type",
+                    "objectProperty": "type",
+                    "entityProperty": "type"
+                },
+                "linkedPage": {
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\relation\\ManyToOneSelectEiField",
+                    "props": {
+                        "displayInOverview": true,
+                        "displayInDetailView": true,
+                        "displayInEditView": true,
+                        "displayInAddView": true,
+                        "constant": false,
+                        "readOnly": false,
+                        "mandatory": true,
+                        "draftable": false,
+                        "targetRemovalStrategy": "prevent"
+                    },
+                    "label": "Linked Page",
+                    "objectProperty": "linkedPage",
+                    "entityProperty": "linkedPage"
+                },
+                "url": {
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\string\\UrlEiField",
+                    "props": {
+                        "displayInOverview": true,
+                        "displayInDetailView": true,
+                        "displayInEditView": true,
+                        "displayInAddView": true,
+                        "constant": false,
+                        "readOnly": false,
+                        "mandatory": true,
+                        "draftable": false,
+                        "maxlength": "255",
+                        "relativeAllowed": true,
+                        "allowedProtocols": [],
+                        "autoScheme": "http"
+                    },
+                    "label": "Url",
+                    "objectProperty": "url",
+                    "entityProperty": "url"
+                },
+                "label": {
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\string\\StringEiField",
+                    "props": {
+                        "displayInOverview": true,
+                        "displayInDetailView": true,
+                        "displayInEditView": true,
+                        "displayInAddView": true,
+                        "constant": false,
+                        "readOnly": false,
+                        "mandatory": false,
+                        "draftable": false,
+                        "maxlength": "255",
+                        "multiline": false
+                    },
+                    "label": "Label",
+                    "objectProperty": "label",
+                    "entityProperty": "label"
+                }
+            },
+            "commands": [],
+            "modificators": [],
+            "defaultMaskId": null
         }
     },
     "commonEiMasks": [],
