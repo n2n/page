@@ -26,15 +26,15 @@ use n2n\reflection\CastUtils;
 use page\model\leaf\EmptyLeaf;
 
 class Page extends ObjectAdapter {
-	const NS = 'page';
-	
 	private static function _annos(AnnoInit $ai) {
 		$ai->c(new AnnoEntityListeners(PageEntityListener::getClass()));
 		$ai->p('pageContent', new AnnoOneToOne(PageContent::getClass(), null, CascadeType::ALL, null, true));
 		$ai->p('internalPage', new AnnoManyToOne(Page::getClass()));
 		$ai->p('pageTs', new AnnoOneToMany(PageT::getClass(), 'page', CascadeType::ALL, null, true));
 	}
-		
+
+	const NS = 'page';
+	
 	private $id;
 // 	private $type;
 	private $internalPage;
