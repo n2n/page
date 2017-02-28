@@ -46,13 +46,13 @@ class PageContentItemsEiField extends ContentItemsEiField {
 		$pageController = $relationMapping->getEiSelection()->getLiveObject();
 		CastUtils::assertTrue($pageController instanceof PageController);
 		
-		$rocket = $eiu->frame()->getEiState()->getN2nContext()->lookup(Rocket::class);
+		$rocket = $eiu->frame()->getEiFrame()->getN2nContext()->lookup(Rocket::class);
 		CastUtils::assertTrue($rocket instanceof Rocket);
 		$specManager = $rocket->getSpecManager();
 		
 		$pageControllerClass = new \ReflectionClass($pageController);
 		$analyzer = new PageControllerAnalyzer($pageControllerClass);
-		$pageConfig = $eiu->frame()->getEiState()->getN2nContext()->getModuleConfig(Page::NS);
+		$pageConfig = $eiu->frame()->getEiFrame()->getN2nContext()->getModuleConfig(Page::NS);
 		CastUtils::assertTrue($pageConfig instanceof PageConfig);
 		
 		$pageControllerConfig = $pageConfig->getPageControllerConfigByEiSpecId(
