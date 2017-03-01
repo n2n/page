@@ -749,7 +749,7 @@
                         "displayInAddView": true,
                         "constant": false,
                         "readOnly": false,
-                        "mandatory": false,
+                        "mandatory": true,
                         "draftable": false,
                         "options": {
                             "internal": "Internal",
