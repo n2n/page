@@ -4,19 +4,18 @@ namespace page\controller;
 use rocket\spec\ei\manage\preview\controller\PreviewControllerAdapter;
 use n2n\reflection\CastUtils;
 use page\bo\Page;
-use rocket\spec\ei\manage\EiFrame;
-use rocket\spec\ei\manage\EiSelection;
 use n2n\l10n\N2nLocale;
 use page\model\PageState;
 use page\model\NavInitProcess;
 use n2n\util\uri\Path;
 use page\model\nav\UnavailableLeafException;
 use n2n\web\http\PageNotFoundException;
+use rocket\spec\ei\manage\util\model\Eiu;
 
 class PagePreviewController extends PreviewControllerAdapter {
-	
-	public function getPreviewTypeOptions(EiFrame $eiFrame, EiSelection $eiSelection): array {
-		$page = $eiSelection->getLiveObject();
+
+	public function getPreviewTypeOptions(Eiu $eiu): array {
+		$page = $eiu->entry()->getLiveEntry()->getEntityObj();
 		CastUtils::assertTrue($page instanceof Page);
 		
 		$pageContent = $page->getPageContent();
@@ -25,7 +24,7 @@ class PagePreviewController extends PreviewControllerAdapter {
 		$options = array();
 		foreach ($pageContent->getPageContentTs() as $pageControllerT) {
 			$n2nLocale = $pageControllerT->getN2nLocale();
-			$options[(string) $n2nLocale] = $n2nLocale->getName($eiFrame->getN2nLocale());
+			$options[(string) $n2nLocale] = $n2nLocale->getName($eiu->frame()->getN2nLocale());
 		}
 		return $options;
 	}
