@@ -96,10 +96,10 @@ class PageHtmlBuilderMeta {
 			$seTitle = $leafContent->getSeTitle();
 		}
 		if ($seTitle === null) {
-			$seTitle = $leafContent->getLeaf()->getName();
+			$seTitle = $leafContent->getLeaf()->getName() . $titleSeparator 
+					. $this->view->lookup(GeneralConfig::class)->getPageName();
 		}
-		$htmlMeta->setTitle($seTitle . $titleSeparator 
-					. $this->view->lookup(GeneralConfig::class)->getPageName());
+		$htmlMeta->setTitle($seTitle);
 	
 		if (null !== ($seDescription = $leafContent->getSeDescription())) {
 			$htmlMeta->addMeta(array('name' => 'description', 'content' => $seDescription));
