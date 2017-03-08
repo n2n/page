@@ -3,9 +3,6 @@ namespace page\ui;
 
 use n2n\impl\web\ui\view\html\HtmlView;
 use n2n\l10n\N2nLocale;
-use rocket\spec\ei\component\field\impl\ci\model\ContentItem;
-use page\model\PageState;
-use page\model\nav\NavBranch;
 use n2n\impl\web\ui\view\html\HtmlSnippet;
 use page\ui\nav\NavComposer;
 use page\ui\nav\Nav;
@@ -76,13 +73,16 @@ class PageHtmlBuilder {
 		$this->view->out($this->getContentItems($panelName));
 	}
 	
-	/**
+/**
 	 * Same as {@link PageHtmlBuilder::contentItems()} but returns the output.
-	 * @return \n2n\web\ui\UiComponent
+	 * @return \n2n\web\ui\UiComponent|null
 	 */
 	public function getContentItems(string $panelName) {
+		$contentItems = $this->meta()->getContentItems($panelName);
+		if (empty($contentItems)) return null;
+		
 		$htmlSnippet = new HtmlSnippet();
-		foreach ($this->meta()->getContentItems($panelName) as $contentItem) {
+		foreach ($contentItems as $contentItem) {
 			$htmlSnippet->appendLn($contentItem->createUiComponent($this->view));
 		}
 		return $htmlSnippet;
