@@ -84,3 +84,14 @@ CREATE TABLE `page_link` (
 	INDEX `page_link_index_1` (`linked_page_id`)
 )
 COLLATE='utf8_general_ci' ENGINE=InnoDB;
+
+
+ALTER TABLE `page_content_t`
+	ADD UNIQUE INDEX `page_content_id_n2n_locale` (`page_content_id`, `n2n_locale`);
+
+ALTER TABLE `page_controller_t`
+	ADD UNIQUE INDEX `page_controller_id_n2n_locale` (`page_controller_id`, `n2n_locale`);
+
+
+
+
