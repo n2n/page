@@ -14,6 +14,10 @@ jQuery(document).ready(function ($) {
 			var display = false;
 			jqCiDivs.each(function () {
 				var jqCiDiv = $(this);
+				
+				//exclude content items in content items - only regard content items in page content item panels
+				if (jqCiDiv.parents("div.rocket-content-item-panel").length > 0) return;
+				
 				var panelName = jqCiDiv.data("name");
 				if (0 <= panelNames.indexOf(panelName)) {
 					jqCiDiv.show();

@@ -162,7 +162,6 @@ jQuery(document).ready(function($) {
 				this.pageConfigField.pageTypes[optionKey].hasOwnProperty(optionIndex)) {
 			label = this.pageConfigField.pageTypes[optionKey][optionIndex];
 		}
-		console.log(label);
 		this.toOne.setTypeSpecLabel(label);
 	};
 	
