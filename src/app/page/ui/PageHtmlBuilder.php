@@ -70,7 +70,9 @@ class PageHtmlBuilder {
 	 * @param string $panelName
 	 */
 	public function contentItems(string $panelName) {
-		$this->view->out($this->getContentItems($panelName));
+		foreach ($this->meta()->getContentItems($panelName) as $contentItem) {
+			$this->view->out($contentItem->createUiComponent($this->view));
+		}		
 	}
 	
 /**
