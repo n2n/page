@@ -20,6 +20,9 @@ use page\model\nav\SitemapItem;
 use page\model\nav\murl\MurlPage;
 use page\model\PageDao;
 use n2n\web\http\nav\UnavailableUrlException;
+use n2n\reflection\magic\MagicMethodInvoker;
+use n2n\util\uri\Url;
+use n2n\reflection\ArgUtils;
 
 class ContentLeaf extends LeafAdapter {
 	private $pageId;
@@ -29,28 +32,32 @@ class ContentLeaf extends LeafAdapter {
 		$this->pageId = $pageId;
 	}
 		
+	private function lookupPageContent(N2nContext $n2nContext) {
+		$em = $n2nContext->lookup(EntityManager::class);
+		CastUtils::assertTrue($em instanceof EntityManager);
+		
+		if (null !== ($page = $em->find(Page::getClass(), $this->pageId))) {
+			return $page->getPageContent();
+		}
+		
+		$pageDao = $n2nContext->lookup(PageDao::class);
+		CastUtils::assertTrue($pageDao instanceof PageDao);
+		$pageDao->clearCache();
+		throw new IllegalStateException('Old cache conflict. Auto clean up executed. Try again.');
+	}
+	
 	/**
 	 * {@inheritDoc}
 	 * @see \page\model\nav\Leaf::createLeafContent($n2nContext, $cmdPath, $cmdContextPath)
 	 */
 	public function createLeafContent(N2nContext $n2nContext, Path $cmdPath, Path $cmdContextPath): LeafContent {
-		$em = $n2nContext->lookup(EntityManager::class);
-		CastUtils::assertTrue($em instanceof EntityManager);
-		
-		$page = $em->find(Page::getClass(), $this->pageId);
-		if ($page === null) {
-			$pageDao = $n2nContext->lookup(PageDao::class);
-			CastUtils::assertTrue($pageDao instanceof PageDao);
-			$pageDao->clearCache();
-			throw new IllegalStateException('Old cache conflict. Try to solve with auto clean up. Try again.');
-		}
-		$pageContent = $page->getPageContent();
+		$pageContent = $this->lookupPageContent($n2nContext);
 		$pageController = $pageContent->getPageController();
 		
 		$analyzer = new PageControllerAnalyzer(new \ReflectionClass($pageController));
 		$leafContent = new PageLeafContent($this, $cmdPath, $cmdContextPath, $pageController);
 		
-		$pageMethod = $analyzer->analyzeMethode($pageController->getMethodName());
+		$pageMethod = $analyzer->analyzeMethod($pageController->getMethodName());
 		if ($pageMethod === null) {
 			throw new IllegalPageStateException('Page method '
 					. ReflectionUtils::prettyMethName(get_class($pageController), $pageController->getMethodName())
@@ -71,15 +78,42 @@ class ContentLeaf extends LeafAdapter {
 		return $leafContent;
 	}
 	
+	const MAGIC_SITEMAP_METHOD = '_createSitemapItems';
+	
 	public function createSitemapItems(N2nContext $n2nContext): array {
+		$sitemapItem = null;
+		$baseUrl = null;
+		
 		try {
-			return array(new SitemapItem(
-					MurlPage::obj($this->navBranch)->locale($this->n2nLocale)->absolute()->toUrl($n2nContext)/*,
-					null, $this->determineChangeFreq(), $this->determinePriority()*/));
+			$sitemapItem = new SitemapItem(MurlPage::obj($this->navBranch)->locale($this->n2nLocale)->absolute()->toUrl($n2nContext));
+			
+			$baseUrl = MurlPage::obj($this->navBranch)->locale($this->n2nLocale)->absolute()->pathExt('some-path')->toUrl($n2nContext);
+			$pathParts = $baseUrl->getPath()->getPathParts();
+			array_pop($pathParts);
+			$baseUrl = $baseUrl->chPath($baseUrl->getPath()->chPathParts($pathParts));
 		} catch (UnavailableUrlException $e) {
-			return array();
+			return array($sitemapItem);
 		}
 		
+		$pageContent = $this->lookupPageContent($n2nContext);
+		$pageController = $pageContent->getPageController();
+		
+		$class = new \ReflectionClass($pageController);
+		if (!$class->hasMethod(self::MAGIC_SITEMAP_METHOD)) {
+			return array($sitemapItem);
+		}
+		
+		$method = $class->getMethod(self::MAGIC_SITEMAP_METHOD);
+		$method->setAccessible(true);
+		
+		$invoker = new MagicMethodInvoker($n2nContext);
+		$invoker->setClassParamObject(Url::class, $baseUrl);
+		$invoker->setClassParamObject(N2nLocale::class, $this->n2nLocale);
+		$sitemapItems = $invoker->invoke($pageController, $method);
+		ArgUtils::valArrayReturn($sitemapItems, $pageController, $method, SitemapItem::class);
+		
+		array_unshift($sitemapItems, $sitemapItem);
+		return $sitemapItems;
 	}
 	
 
