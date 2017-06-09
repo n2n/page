@@ -86,13 +86,8 @@ class ContentLeaf extends LeafAdapter {
 		
 		try {
 			$sitemapItem = new SitemapItem(MurlPage::obj($this->navBranch)->locale($this->n2nLocale)->absolute()->toUrl($n2nContext));
-			
-			$baseUrl = MurlPage::obj($this->navBranch)->locale($this->n2nLocale)->absolute()->pathExt('some-path')->toUrl($n2nContext);
-			$pathParts = $baseUrl->getPath()->getPathParts();
-			array_pop($pathParts);
-			$baseUrl = $baseUrl->chPath($baseUrl->getPath()->chPathParts($pathParts));
 		} catch (UnavailableUrlException $e) {
-			return array($sitemapItem);
+			return array();
 		}
 		
 		$pageContent = $this->lookupPageContent($n2nContext);
@@ -100,6 +95,15 @@ class ContentLeaf extends LeafAdapter {
 		
 		$class = new \ReflectionClass($pageController);
 		if (!$class->hasMethod(self::MAGIC_SITEMAP_METHOD)) {
+			return array($sitemapItem);
+		}
+		
+		try {
+			$baseUrl = MurlPage::obj($this->navBranch)->locale($this->n2nLocale)->absolute()->pathExt('some-path')->toUrl($n2nContext);
+			$pathParts = $baseUrl->getPath()->getPathParts();
+			array_pop($pathParts);
+			$baseUrl = $baseUrl->chPath($baseUrl->getPath()->chPathParts($pathParts));
+		} catch (UnavailableUrlException $e) {
 			return array($sitemapItem);
 		}
 		
