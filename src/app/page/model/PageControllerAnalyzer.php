@@ -80,7 +80,7 @@ class PageControllerAnalyzer {
 	 * @param string $methodName
 	 * @return \page\bo\PageMethod
 	 */
-	public function analyzeMethode(string $methodName) {
+	public function analyzeMethod(string $methodName) {
 		$annoPage = $this->as->getMethodAnnotation($methodName, AnnoPage::class);
 		
 		if ($annoPage !== null) {
