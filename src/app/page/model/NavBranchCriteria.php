@@ -90,7 +90,7 @@ class NavBranchCriteria {
 						return $navBranch;
 					}
 					
-					throw new UnknownNavBranchException('No nav root for found for NavBranch: ' 
+					throw new UnknownNavBranchException('No nav root found for NavBranch: ' 
 							. $pageState->getCurrentNavBranch());
 			}
 		} catch (UnavailableLeafException $e) {
@@ -104,6 +104,11 @@ class NavBranchCriteria {
 		return $pageState->getCurrentNavBranch()->getRoot();	
 	}
 	
+	/**
+	 * @param NavBranch $navBranch
+	 * @param N2nLocale $n2nLocale
+	 * @return NULL|\page\model\nav\NavBranch
+	 */
 	private function determineNavRoot(NavBranch $navBranch, N2nLocale $n2nLocale) {
 		$navRootNavBranch = null;
 		do {
