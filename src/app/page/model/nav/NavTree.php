@@ -125,7 +125,7 @@ class NavTree {
 		}
 		
 		if ($id !== null) {
-			$chrits[] = 'id: ' . id;
+			$chrits[] = 'id: ' . $id;
 		}
 		
 		throw new UnknownNavBranchException('No matching NavBranch found: ' . implode('; ', $chrits));
