@@ -102,11 +102,11 @@ class PageHtmlBuilderMeta {
 		$htmlMeta->setTitle($seTitle);
 	
 		if (null !== ($seDescription = $leafContent->getSeDescription())) {
-			$htmlMeta->addMeta(array('name' => 'description', 'content' => $seDescription));
+			$htmlMeta->addMeta(array('name' => 'description', 'content' => $seDescription), 'name');
 		}
 	
 		if (null !== ($seKeywords = $leafContent->getSeKeywords())) {
-			$htmlMeta->addMeta(array('name' => 'keywords', 'content' => $seKeywords));
+			$htmlMeta->addMeta(array('name' => 'keywords', 'content' => $seKeywords), 'name');
 		}
 	}
 	
