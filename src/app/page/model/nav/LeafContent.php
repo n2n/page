@@ -31,6 +31,10 @@ interface LeafContent {
 	 */
 	public function getSeKeywords();
 	
+	/**
+	 * @return array
+	 */
+	public function getContentItemPanelNames(): array;
 	
 	/**
 	 * @param string $panelName

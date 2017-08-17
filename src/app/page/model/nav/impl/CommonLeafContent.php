@@ -59,6 +59,10 @@ class CommonLeafContent implements LeafContent {
 		$this->seKeywords = $seKeywords;
 	}
 	
+	public function getContentItemPanelNames(): array {
+		return array();
+	}
+	
 	public function containsContentItemPanelName(string $panelName): bool {
 		return false;
 	}
