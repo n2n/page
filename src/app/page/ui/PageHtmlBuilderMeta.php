@@ -17,6 +17,9 @@ use n2n\impl\web\ui\view\html\HtmlView;
  */
 class PageHtmlBuilderMeta {
 	private $view;
+	/**
+	 * @var \page\model\PageState
+	 */
 	private $pageState;
 	
 	public function __construct(HtmlView $view) {
@@ -169,6 +172,13 @@ class PageHtmlBuilderMeta {
 			}
 		}
 		return $urls;
+	}
+	
+	/**
+	 * @return string[]
+	 */
+	public function getContentItemPanelNames() {
+		return $this->pageState->getCurrentLeafContent()->getContentItemPanelNames();
 	}
 	
 	/**

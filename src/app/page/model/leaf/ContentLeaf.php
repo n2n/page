@@ -176,14 +176,34 @@ class PageLeafContent extends CommonLeafContent {
 		$this->contentItems = $contentItems;
 	}
 	
+	/**
+	 * 
+	 * @return \rocket\spec\ei\component\field\impl\ci\model\ContentItem[]
+	 */
 	public function getContentItems() {
 		return $this->contentItems;
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 * @see \page\model\nav\impl\CommonLeafContent::getContentItemPanelNames()
+	 */
+	public function getContentItemPanelNames(): array {
+		return $this->getPageMethod()->getCiPanelNames();
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 * @see \page\model\nav\impl\CommonLeafContent::containsContentItemPanelName()
+	 */
 	public function containsContentItemPanelName(string $panelName): bool {
 		return $this->getPageMethod()->containsCiPanelName($panelName);
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 * @see \page\model\nav\impl\CommonLeafContent::getContentItemsByPanelName()
+	 */
 	public function getContentItemsByPanelName(string $panelName): array {
 		if (!$this->containsContentItemPanelName($panelName)) {
 			$pageController = $this->getControllerContext()->getController();
