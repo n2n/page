@@ -18,7 +18,7 @@ class PageControllerT extends ObjectAdapter implements Translatable {
 	private static function _annos(AnnoInit $ai) {
 		$ai->c(new AnnoEntityListeners(PageEntityListener::getClass()));
 		$ai->p('pageController', new AnnoManyToOne(PageController::getClass(), null, FetchType::EAGER));
-		$ai->p('contentItems', new AnnoOneToMany(ContentItem::getClass(), null, CascadeType::ALL),
+		$ai->p('contentItems', new AnnoOneToMany(ContentItem::getClass(), null, CascadeType::ALL, null, true),
 				new AnnoOrderBy(array('orderIndex' => 'ASC')));
 	}
 	
