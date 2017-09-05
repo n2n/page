@@ -33,17 +33,7 @@
                         "useSystemN2nLocales": true,
                         "systenN2nLocaleDefs": [
                             {
-                                "id": "de_CH",
-                                "mandatory": false,
-                                "label": null
-                            },
-                            {
-                                "id": "fr_CH",
-                                "mandatory": false,
-                                "label": null
-                            },
-                            {
-                                "id": "it_CH",
+                                "id": "de",
                                 "mandatory": false,
                                 "label": null
                             }
@@ -78,23 +68,6 @@
                     "label": "Page Behaviour",
                     "objectProperty": "pageController",
                     "entityProperty": "pageController"
-                },
-                "page": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\relation\\EmbeddedOneToOneEiField",
-                    "props": {
-                        "displayInOverview": false,
-                        "displayInDetailView": false,
-                        "displayInEditView": false,
-                        "displayInAddView": false,
-                        "constant": false,
-                        "readOnly": false,
-                        "mandatory": true,
-                        "draftable": false,
-                        "replaceable": true
-                    },
-                    "label": "Seite",
-                    "objectProperty": "page",
-                    "entityProperty": "page"
                 }
             },
             "commands": [],
