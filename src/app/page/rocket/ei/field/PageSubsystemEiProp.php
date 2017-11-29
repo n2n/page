@@ -11,7 +11,7 @@ use page\rocket\ei\field\conf\PageSubsystemEiPropConfigurator;
 use rocket\spec\ei\manage\gui\DisplayDefinition;
 use n2n\reflection\CastUtils;
 
-class PageSubsystemEiField extends EnumEiProp {
+class PageSubsystemEiProp extends EnumEiProp {
 	
 	public function getTypeName(): string {
 		return 'Subsystem';

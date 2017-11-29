@@ -45,7 +45,7 @@
                     "entityProperty": "pageContentTs"
                 },
                 "ssl": {
-                    "class": "page\\rocket\\ei\\field\\PageSslEiField",
+                    "class": "page\\rocket\\ei\\field\\PageSslEiProp",
                     "props": [],
                     "label": "SSL",
                     "objectProperty": "ssl",
@@ -357,7 +357,7 @@
                     "entityProperty": "lastMod"
                 },
                 "subsystemName": {
-                    "class": "page\\rocket\\ei\\field\\PageSubsystemEiField",
+                    "class": "page\\rocket\\ei\\field\\PageSubsystemEiProp",
                     "props": [],
                     "label": "Subsystem",
                     "objectProperty": "subsystemName",
@@ -379,7 +379,7 @@
                     "entityProperty": "inPath"
                 },
                 "hookKey": {
-                    "class": "page\\rocket\\ei\\field\\PageHookEiField",
+                    "class": "page\\rocket\\ei\\field\\PageHookEiProp",
                     "props": {
                         "displayInOverview": false,
                         "displayInDetailView": true,
@@ -654,7 +654,7 @@
             "pluralLabel": "Page Controllers",
             "fields": {
                 "methodName": {
-                    "class": "page\\rocket\\ei\\field\\PageMethodEiField",
+                    "class": "page\\rocket\\ei\\field\\PageMethodEiProp",
                     "props": {
                         "displayInOverview": false,
                         "displayInDetailView": true,

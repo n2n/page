@@ -8,7 +8,7 @@ use n2n\web\dispatch\mag\MagCollection;
 use rocket\spec\ei\component\EiSetupProcess;
 use page\config\PageConfig;
 use n2n\reflection\CastUtils;
-use page\rocket\ei\field\PageSubsystemEiField;
+use page\rocket\ei\field\PageSubsystemEiProp;
 use rocket\spec\ei\component\field\impl\adapter\AdaptableEiPropConfigurator;
 use n2n\l10n\DynamicTextCollection;
 use rocket\spec\ei\manage\gui\DisplayDefinition;
@@ -16,7 +16,7 @@ use rocket\spec\ei\manage\gui\DisplayDefinition;
 class PageSubsystemEiPropConfigurator extends AdaptableEiPropConfigurator {
 	private $pageSubsystemEiField;
 	
-	public function __construct(PageSubsystemEiField $pageSubsystemEiField) {
+	public function __construct(PageSubsystemEiProp $pageSubsystemEiField) {
 		parent::__construct($pageSubsystemEiField);
 		$this->autoRegister();
 		

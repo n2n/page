@@ -16,7 +16,7 @@ use n2n\web\dispatch\mag\Mag;
 use n2n\web\dispatch\map\PropertyPath;
 use n2n\web\ui\UiComponent;
 
-class PageMethodEiField extends DraftableEiPropAdapter {
+class PageMethodEiProp extends DraftableEiPropAdapter {
 	
 	public function createMag(string $propertyName, Eiu $eiu): Mag {
 		$pageController = $eiu->entry()->getEiMapping()->getEiSelection()->getLiveObject();

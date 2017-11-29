@@ -10,12 +10,12 @@ use n2n\core\container\N2nContext;
 use n2n\web\dispatch\mag\MagDispatchable;
 use n2n\impl\web\dispatch\mag\model\MagForm;
 use n2n\web\dispatch\mag\MagCollection;
-use page\rocket\ei\field\PageSslEiField;
+use page\rocket\ei\field\PageSslEiProp;
 
 class PageSslEiPropConfigurator extends AdaptableEiPropConfigurator {
 	private $pageSslEiField;
 	
-	public function __construct(PageSslEiField $pageSslEiField) {
+	public function __construct(PageSslEiProp $pageSslEiField) {
 		parent::__construct($pageSslEiField);
 		$this->pageSslEiField = $pageSslEiField;
 		$this->autoRegister();

@@ -9,7 +9,7 @@ use rocket\spec\ei\component\field\indepenent\EiPropConfigurator;
 use rocket\spec\ei\component\field\impl\enum\EnumEiProp;
 use page\rocket\ei\field\conf\PageHookEiPropConfigurator;
 
-class PageHookEiField extends EnumEiProp {
+class PageHookEiProp extends EnumEiProp {
 
 	public function createEiPropConfigurator(): EiPropConfigurator {
 		return new PageHookEiPropConfigurator($this);

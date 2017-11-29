@@ -5,12 +5,12 @@ use rocket\spec\ei\component\EiSetupProcess;
 use n2n\reflection\CastUtils;
 use page\config\PageConfig;
 use rocket\spec\ei\component\field\impl\adapter\AdaptableEiPropConfigurator;
-use page\rocket\ei\field\PageHookEiField;
+use page\rocket\ei\field\PageHookEiProp;
 
 class PageHookEiPropConfigurator extends AdaptableEiPropConfigurator {
 	private $pageHookEiField;
 	
-	public function __construct(PageHookEiField $pageHookEiField) {
+	public function __construct(PageHookEiProp $pageHookEiField) {
 		parent::__construct($pageHookEiField);
 		$this->autoRegister();
 		$this->pageHookEiField = $pageHookEiField;
