@@ -11,16 +11,15 @@ use n2n\impl\web\dispatch\mag\model\MagForm;
 use n2n\web\dispatch\mag\MagDispatchable;
 use n2n\util\config\LenientAttributeReader;
 use page\bo\PageController;
-use rocket\spec\ei\component\field\impl\ci\conf\CiConfigUtils;
+use rocket\impl\ei\component\field\ci\conf\CiConfigUtils;
 use n2n\impl\web\dispatch\mag\model\MagCollectionMag;
 use rocket\core\model\Rocket;
 use n2n\reflection\CastUtils;
 use rocket\spec\config\SpecManager;
 use page\model\PageControllerAnalyzer;
-use n2n\impl\web\dispatch\mag\model\StringMag;
 use n2n\reflection\property\TypeConstraint;
 use n2n\reflection\ArgUtils;
-use rocket\spec\ei\component\field\impl\ci\model\PanelConfig;
+use rocket\impl\ei\component\field\ci\model\PanelConfig;
 
 class PageDescriber extends ConfigDescriberAdapter {
 	const ATTR_LOCALES_ACTIVE_KEY = 'n2nLocaleUrls';

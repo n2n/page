@@ -227,7 +227,7 @@ class NavBranch {
 		return $this->children;
 	}
 	/**
-	 * @param unknown $affiliatedObj
+	 * @param object $affiliatedObj
 	 * @param array $tagNames
 	 * @param array $hookKeys
 	 * @return NavBranch or null if not found
@@ -238,7 +238,7 @@ class NavBranch {
 	}
 	
 	/**
-	 * @param unknown $affiliatedObj
+	 * @param object $affiliatedObj
 	 * @param array $tagNames
 	 * @param array $hookKeys
 	 * @return NavBranch or null if not found
@@ -249,7 +249,7 @@ class NavBranch {
 	}
 	
 	/**
-	 * @param unknown $affiliatedObj
+	 * @param object $affiliatedObj
 	 * @param array $tagNames
 	 * @param array $hookKeys
 	 * @return \page\model\nav\NavBranch
@@ -265,7 +265,7 @@ class NavBranch {
 	}
 	
 	/**
-	 * @param unknown $obj
+	 * @param mixed $obj
 	 * @return boolean
 	 */
 	public function equals($obj) {

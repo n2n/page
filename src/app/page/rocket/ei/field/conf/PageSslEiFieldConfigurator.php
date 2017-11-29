@@ -1,7 +1,7 @@
 <?php
 namespace page\rocket\ei\field\conf;
 
-use rocket\spec\ei\component\field\impl\adapter\AdaptableEiFieldConfigurator;
+use rocket\impl\ei\component\field\adapter\AdaptableEiPropConfigurator;
 use rocket\spec\ei\component\EiSetupProcess;
 use page\config\PageConfig;
 use n2n\reflection\CastUtils;
@@ -12,7 +12,7 @@ use n2n\impl\web\dispatch\mag\model\MagForm;
 use n2n\web\dispatch\mag\MagCollection;
 use page\rocket\ei\field\PageSslEiField;
 
-class PageSslEiFieldConfigurator extends AdaptableEiFieldConfigurator {
+class PageSslEiPropConfigurator extends AdaptableEiPropConfigurator {
 	private $pageSslEiField;
 	
 	public function __construct(PageSslEiField $pageSslEiField) {

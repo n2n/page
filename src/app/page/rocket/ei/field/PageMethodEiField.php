@@ -1,7 +1,7 @@
 <?php
 namespace page\rocket\ei\field;
 
-use rocket\spec\ei\component\field\impl\adapter\DraftableEiFieldAdapter;
+use rocket\impl\ei\component\field\adapter\DraftableEiPropAdapter;
 use rocket\spec\ei\manage\util\model\Eiu;
 use n2n\reflection\CastUtils;
 use page\bo\PageController;
@@ -10,13 +10,13 @@ use page\model\PageControllerAnalyzer;
 use n2n\util\StringUtils;
 use rocket\spec\ei\manage\EiObject;
 use n2n\l10n\N2nLocale;
-use rocket\spec\ei\EiFieldPath;
+use rocket\spec\ei\EiPropPath;
 use n2n\impl\web\ui\view\html\HtmlView;
 use n2n\web\dispatch\mag\Mag;
 use n2n\web\dispatch\map\PropertyPath;
 use n2n\web\ui\UiComponent;
 
-class PageMethodEiField extends DraftableEiFieldAdapter {
+class PageMethodEiField extends DraftableEiPropAdapter {
 	
 	public function createMag(string $propertyName, Eiu $eiu): Mag {
 		$pageController = $eiu->entry()->getEiMapping()->getEiSelection()->getLiveObject();
@@ -39,7 +39,7 @@ class PageMethodEiField extends DraftableEiFieldAdapter {
 	
 	public function createOutputUiComponent(HtmlView $view, Eiu $eiu)  {
 		return $view->getHtmlBuilder()->getEsc(StringUtils::pretty(
-				$eiu->field()->getValue(EiFieldPath::from($this))));
+				$eiu->field()->getValue(EiPropPath::from($this))));
 	}
 		
 	public function isStringRepresentable(): bool {

@@ -2,7 +2,6 @@
 namespace page\ui;
 
 use page\model\PageState;
-use n2n\web\ui\view\View;
 use n2n\reflection\CastUtils;
 use n2n\core\config\GeneralConfig;
 use page\model\nav\murl\MurlPage;
@@ -182,11 +181,11 @@ class PageHtmlBuilderMeta {
 	}
 	
 	/**
-	 * Returns the {@link \rocket\spec\ei\component\field\impl\ci\model\ContentItem}s of to the current page
+	 * Returns the {@link \rocket\impl\ei\component\field\ci\model\ContentItem}s of to the current page
 	 * which have been assigned to the panel with the passed name.
 	 * 
 	 * @param string $panelName
-	 * @return \rocket\spec\ei\component\field\impl\ci\model\ContentItem[]
+	 * @return \rocket\impl\ei\component\field\ci\model\ContentItem[]
 	 * @throws \page\model\nav\UnknownContentItemPanelException if there is no panel with passed name defined.   
 	 */
 	public function getContentItems(string $panelName) {

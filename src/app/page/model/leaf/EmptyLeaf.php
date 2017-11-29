@@ -1,7 +1,6 @@
 <?php
 namespace page\model\leaf;
 
-use page\model\nav\Leaf;
 use n2n\core\container\N2nContext;
 use page\bo\Page;
 use n2n\util\uri\Path;

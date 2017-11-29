@@ -6,7 +6,6 @@ use n2n\util\ex\IllegalStateException;
 use page\model\NavBranchCriteria;
 use n2n\web\ui\UiComponent;
 use n2n\reflection\ArgUtils;
-use page\ui\nav\NavItemBuilder;
 use page\ui\nav\impl\CommonNavItemBuilder;
 use n2n\web\ui\UiException;
 use n2n\impl\web\ui\view\html\HtmlView;

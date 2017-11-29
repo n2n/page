@@ -9,11 +9,11 @@ use rocket\spec\ei\component\EiSetupProcess;
 use page\config\PageConfig;
 use n2n\reflection\CastUtils;
 use page\rocket\ei\field\PageSubsystemEiField;
-use rocket\spec\ei\component\field\impl\adapter\AdaptableEiFieldConfigurator;
+use rocket\impl\ei\component\field\adapter\AdaptableEiPropConfigurator;
 use n2n\l10n\DynamicTextCollection;
 use rocket\spec\ei\manage\gui\DisplayDefinition;
 
-class PageSubsystemEiFieldConfigurator extends AdaptableEiFieldConfigurator {
+class PageSubsystemEiPropConfigurator extends AdaptableEiPropConfigurator {
 	private $pageSubsystemEiField;
 	
 	public function __construct(PageSubsystemEiField $pageSubsystemEiField) {

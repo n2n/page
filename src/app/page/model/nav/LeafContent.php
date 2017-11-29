@@ -11,7 +11,7 @@ interface LeafContent {
 	public function getLeaf(): Leaf;
 	
 	/**
-	 * @throws IllegalStateException
+	 * @throws \n2n\util\ex\IllegalStateException
 	 * @return \n2n\web\http\controller\ControllerContext
 	 */
 	public function getControllerContext(): ControllerContext;

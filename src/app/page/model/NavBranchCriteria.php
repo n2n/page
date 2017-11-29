@@ -2,7 +2,6 @@
 namespace page\model;
 
 use n2n\core\container\N2nContext;
-use page\model\PageState;
 use n2n\reflection\ArgUtils;
 use page\model\nav\Leaf;
 use page\model\nav\NavBranch;

@@ -10,9 +10,9 @@ use page\model\nav\NavBranch;
 use page\model\nav\impl\CommonLeafContent;
 use n2n\util\ex\IllegalStateException;
 use page\model\nav\murl\MurlPage;
-use n2n\web\http\Redirect;
 use n2n\web\http\Response;
 use page\model\nav\UrlBuildTask;
+use n2n\web\http\payload\impl\Redirect;
 
 class InternalLeaf extends LeafAdapter {
 	private $targetNavBranch;

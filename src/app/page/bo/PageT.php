@@ -5,7 +5,7 @@ use n2n\reflection\ObjectAdapter;
 use n2n\reflection\annotation\AnnoInit;
 use n2n\l10n\N2nLocale;
 use n2n\persistence\orm\annotation\AnnoManyToOne;
-use rocket\spec\ei\component\field\impl\translation\Translatable;
+use rocket\impl\ei\component\field\translation\Translatable;
 use page\model\PageMonitor;
 use n2n\persistence\orm\annotation\AnnoEntityListeners;
 

@@ -1,7 +1,6 @@
 <?php
 namespace page\model\leaf;
 
-use page\model\nav\Leaf;
 use n2n\core\container\N2nContext;
 use n2n\persistence\orm\EntityManager;
 use n2n\reflection\CastUtils;
@@ -19,10 +18,10 @@ use page\model\IllegalPageStateException;
 use page\model\nav\SitemapItem;
 use page\model\nav\murl\MurlPage;
 use page\model\PageDao;
-use n2n\web\http\nav\UnavailableUrlException;
 use n2n\reflection\magic\MagicMethodInvoker;
 use n2n\util\uri\Url;
 use n2n\reflection\ArgUtils;
+use n2n\util\uri\UnavailableUrlException;
 
 class ContentLeaf extends LeafAdapter {
 	private $pageId;
@@ -178,7 +177,7 @@ class PageLeafContent extends CommonLeafContent {
 	
 	/**
 	 * 
-	 * @return \rocket\spec\ei\component\field\impl\ci\model\ContentItem[]
+	 * @return \rocket\impl\ei\component\field\ci\model\ContentItem[]
 	 */
 	public function getContentItems() {
 		return $this->contentItems;

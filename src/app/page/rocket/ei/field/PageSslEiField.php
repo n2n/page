@@ -1,12 +1,12 @@
 <?php
 namespace page\rocket\ei\field;
 
-use rocket\spec\ei\component\field\impl\bool\BooleanEiField;
+use rocket\impl\ei\component\field\bool\BooleanEiProp;
 use rocket\spec\ei\manage\gui\DisplayDefinition;
-use rocket\spec\ei\component\field\indepenent\EiFieldConfigurator;
-use page\rocket\ei\field\conf\PageSslEiFieldConfigurator;
+use rocket\spec\ei\component\field\indepenent\EiPropConfigurator;
+use page\rocket\ei\field\conf\PageSslEiPropConfigurator;
 
-class PageSslEiField extends BooleanEiField {
+class PageSslEiField extends BooleanEiProp {
 	
 	public function getTypeName(): string {
 		return 'Ssl ScriptField (Page)';
@@ -16,7 +16,7 @@ class PageSslEiField extends BooleanEiField {
 		$this->displayDefinition = $displayDefinition;
 	}
 	
-	public function createEiFieldConfigurator(): EiFieldConfigurator {
-		return new PageSslEiFieldConfigurator($this);
+	public function createEiPropConfigurator(): EiPropConfigurator {
+		return new PageSslEiPropConfigurator($this);
 	}
 }

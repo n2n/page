@@ -21,15 +21,16 @@ class CommonLeafContent implements LeafContent {
 	}
 	
 	/**
-	 * @return \page\model\nav\Leaf
+	 * {@inheritDoc}
+	 * @see \page\model\nav\LeafContent::getLeaf()
 	 */
 	public function getLeaf(): Leaf {
 		return $this->leaf;
 	}
 	
 	/**
-	 * @throws IllegalStateException
-	 * @return \n2n\web\http\controller\ControllerContext
+	 * {@inheritDoc}
+	 * @see \page\model\nav\LeafContent::getControllerContext()
 	 */
 	public function getControllerContext(): ControllerContext {
 		return $this->controllerContext;

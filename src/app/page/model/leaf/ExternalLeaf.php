@@ -6,11 +6,11 @@ use n2n\web\http\controller\Controller;
 use n2n\web\http\controller\ControllerContext;
 use n2n\web\http\PageNotFoundException;
 use n2n\web\http\Response;
-use n2n\web\http\Redirect;
 use n2n\l10n\N2nLocale;
 use page\model\nav\LeafContent;
 use n2n\util\uri\Path;
 use page\model\nav\impl\CommonLeafContent;
+use n2n\web\http\payload\impl\Redirect;
 
 class ExternalLeaf extends LeafAdapter {
 	private $httpLocation;

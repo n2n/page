@@ -3,16 +3,11 @@ namespace page\rocket\ei\field\conf;
 
 use rocket\spec\ei\component\EiSetupProcess;
 use n2n\reflection\CastUtils;
-use n2n\core\container\N2nContext;
 use page\config\PageConfig;
-use rocket\spec\ei\component\field\impl\adapter\AdaptableEiFieldConfigurator;
-use page\model\PageDao;
+use rocket\impl\ei\component\field\adapter\AdaptableEiPropConfigurator;
 use page\rocket\ei\field\PageHookEiField;
-use rocket\spec\ei\component\IndependentEiComponent;
-use n2n\web\dispatch\mag\MagDispatchable;
-use page\rocket\ei\field\modificator\ConfigEiFieldModificator;
 
-class PageHookEiFieldConfigurator extends AdaptableEiFieldConfigurator {
+class PageHookEiPropConfigurator extends AdaptableEiPropConfigurator {
 	private $pageHookEiField;
 	
 	public function __construct(PageHookEiField $pageHookEiField) {

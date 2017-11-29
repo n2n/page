@@ -51,7 +51,7 @@ class PageControllerAnalyzer {
 // 	}
 	
 	/**
-	 * @return \page\bo\PageMethod[]
+	 * @return PageMethod[]
 	 */
 	public function analyzeAllMethods(): array {
 		$pageMethods = array();
@@ -62,7 +62,7 @@ class PageControllerAnalyzer {
 	}
 	
 	/**
-	 * @param unknown $methodName
+	 * @param string $methodName
 	 * @return boolean
 	 */
 	public function containsMethodName($methodName) {
@@ -78,7 +78,7 @@ class PageControllerAnalyzer {
 	
 	/**
 	 * @param string $methodName
-	 * @return \page\bo\PageMethod
+	 * @return PageMethod
 	 */
 	public function analyzeMethod(string $methodName) {
 		$annoPage = $this->as->getMethodAnnotation($methodName, AnnoPage::class);
@@ -92,7 +92,7 @@ class PageControllerAnalyzer {
 	
 	/**
 	 * @param AnnoPage $annoPage
-	 * @return \page\bo\PageMethod
+	 * @return PageMethod
 	 */
 	private function createPageMethod(AnnoPage $annoPage) {
 		$methodName = $annoPage->getAnnotatedMethod()->getName();

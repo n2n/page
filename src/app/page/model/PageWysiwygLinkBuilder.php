@@ -1,13 +1,12 @@
 <?php
 namespace page\model;
 
-use n2n\web\http\Request;
 use n2n\core\container\N2nContext;
-use page\model\ex\UrlBuildingException;
 use n2n\reflection\ObjectAdapter;
-use rocket\spec\ei\component\field\impl\string\wysiwyg\DynamicUrlBuilder;
-use n2n\core\config\WebConfig;
+use rocket\impl\ei\component\field\string\wysiwyg\DynamicUrlBuilder;
 use n2n\web\http\HttpContext;
+use page\model\nav\murl\MurlPage;
+use n2n\util\uri\UnavailableUrlException;
 
 class PageWysiwygLinkBuilder extends ObjectAdapter implements DynamicUrlBuilder {
 
@@ -28,9 +27,8 @@ class PageWysiwygLinkBuilder extends ObjectAdapter implements DynamicUrlBuilder 
 		if (null === $page) return null;
 		
 		try {
-			return $page->buildUrl($this->pageState->getNavTree(), $this->n2nContext, 
-					array($httpContext->getLocale(), $this->n2nContext->getDefaultN2nLocale(), $this->n2nContext->getFallbackLocale()));
-		} catch (UrlBuildingException $e) {
+			return MurlPage::obj($page)->toUrl($httpContext->getN2nContext());
+		} catch (UnavailableUrlException $e) {
 			return null;
 		}
 	}

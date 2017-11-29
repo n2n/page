@@ -43,7 +43,7 @@ class NavTree {
 	
 	
 	/**
-	 * @param unknown $affiliatedObj
+	 * @param object $affiliatedObj
 	 * @param array $tagNames
 	 * @param array $hookKeys
 	 * @param string|null id
@@ -70,7 +70,7 @@ class NavTree {
 	}
 	
 	/**
-	 * @param unknown $affiliatedObj
+	 * @param object $affiliatedObj
 	 * @param array $tagNames
 	 * @param array $hookKeys
 	 * @param string|null id
@@ -88,7 +88,7 @@ class NavTree {
 	}
 	
 	/**
-	 * @param unknown $affiliatedObj
+	 * @param object $affiliatedObj
 	 * @param array $tagNames
 	 * @param array $hookKeys
 	 * @throws UnknownNavBranchException

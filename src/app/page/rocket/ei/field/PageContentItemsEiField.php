@@ -5,21 +5,21 @@ use n2n\persistence\orm\property\EntityProperty;
 use page\bo\Page;
 use n2n\impl\persistence\orm\property\ToManyEntityProperty;
 use n2n\reflection\ArgUtils;
-use rocket\spec\ei\component\field\impl\ci\model\ContentItem;
+use rocket\impl\ei\component\field\ci\model\ContentItem;
 use page\bo\PageControllerT;
 use rocket\spec\ei\manage\util\model\Eiu;
-use rocket\spec\ei\component\field\impl\ci\ContentItemsEiField;
-use rocket\spec\ei\EiFieldPath;
+use rocket\impl\ei\component\field\ci\ContentItemsEiProp;
 use n2n\reflection\CastUtils;
 use page\bo\PageController;
 use page\model\PageControllerAnalyzer;
 use page\config\PageConfig;
-use rocket\spec\ei\component\field\impl\ci\model\PanelConfig;
+use rocket\impl\ei\component\field\ci\model\PanelConfig;
 use n2n\util\StringUtils;
 use rocket\core\model\Rocket;
-use rocket\spec\ei\component\field\impl\ci\model\ContentItemGuiElement;
+use rocket\spec\ei\EiPropPath;
+use rocket\impl\ei\component\field\ci\model\ContentItemGuiField;
 
-class PageContentItemsEiField extends ContentItemsEiField {
+class PageContentItemsEiProp extends ContentItemsEiProp {
 	/**
 	 * @var \page\config\PageConfig
 	 */
@@ -38,7 +38,7 @@ class PageContentItemsEiField extends ContentItemsEiField {
 	}
 	
 	public function determinePanelConfigs(Eiu $eiu) {
-		$relationMapping = $eiu->entry()->getEiMapping()->getValue(EiFieldPath::from($this)->poped()
+		$relationMapping = $eiu->entry()->getEiMapping()->getValue(EiPropPath::from($this)->poped()
 				->pushed('pageController'));
 		if ($relationMapping === null) {
 			return array();
@@ -71,15 +71,15 @@ class PageContentItemsEiField extends ContentItemsEiField {
 		return $panelConfigs;
 	}
 	
-	public function buildGuiElement(Eiu $eiu) {
-		$contentItemGuiElement = parent::buildGuiElement($eiu);
-		CastUtils::assertTrue($contentItemGuiElement instanceof ContentItemGuiElement);
+	public function buildGuiField(Eiu $eiu) {
+	    $contentItemGuiField = parent::buildGuiField($eiu);
+		CastUtils::assertTrue($contentItemGuiField instanceof ContentItemGuiField);
 		
-		if (empty($contentItemGuiElement->getPanelConfigs())) {
+		if (empty($contentItemGuiField->getPanelConfigs())) {
 			return null;
 		}
 		
-		return $contentItemGuiElement;
+		return $contentItemGuiField;
 	}
 	
 }

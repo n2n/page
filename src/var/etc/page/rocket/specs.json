@@ -255,7 +255,7 @@
                     "entityProperty": "pageTs"
                 },
                 "type": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\enum\\EnumEiField",
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\enum\\EnumEiProp",
                     "props": {
                         "displayInOverview": true,
                         "displayInDetailView": true,
@@ -364,7 +364,7 @@
                     "entityProperty": "subsystemName"
                 },
                 "inPath": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\bool\\BooleanEiField",
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\bool\\BooleanEiProp",
                     "props": {
                         "displayInOverview": true,
                         "displayInDetailView": true,
@@ -395,7 +395,7 @@
                     "entityProperty": "hookKey"
                 },
                 "inNavigation": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\bool\\BooleanEiField",
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\bool\\BooleanEiProp",
                     "props": {
                         "displayInOverview": true,
                         "displayInDetailView": true,
@@ -410,7 +410,7 @@
                     "entityProperty": "inNavigation"
                 },
                 "navTargetNewWindow": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\bool\\BooleanEiField",
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\bool\\BooleanEiProp",
                     "props": {
                         "displayInOverview": false,
                         "displayInDetailView": true,
@@ -584,7 +584,7 @@
                     "entityProperty": "page"
                 },
                 "active": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\bool\\BooleanEiField",
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\bool\\BooleanEiProp",
                     "props": {
                         "displayInOverview": true,
                         "displayInDetailView": true,
@@ -626,7 +626,7 @@
                     "entityProperty": "pageController"
                 },
                 "contentItems": {
-                    "class": "page\\rocket\\ei\\field\\PageContentItemsEiField",
+                    "class": "page\\rocket\\ei\\field\\PageContentItemsEiProp",
                     "props": {
                         "displayInOverview": false,
                         "displayInDetailView": true,
@@ -732,7 +732,7 @@
                     "entityProperty": "id"
                 },
                 "type": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\enum\\EnumEiField",
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\enum\\EnumEiProp",
                     "props": {
                         "displayInOverview": true,
                         "displayInDetailView": true,

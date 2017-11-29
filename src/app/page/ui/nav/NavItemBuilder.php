@@ -20,7 +20,6 @@ interface NavItemBuilder {
 	
 	/**
 	 * @param HtmlView $view
-	 * @param unknown $level
 	 * @param array $attrs
 	 * @return \n2n\impl\web\ui\view\html\HtmlElement
 	 */
