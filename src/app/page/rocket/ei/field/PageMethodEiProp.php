@@ -18,7 +18,7 @@ use n2n\web\ui\UiComponent;
 
 class PageMethodEiProp extends DraftableEiPropAdapter {
 	
-	public function createMag(string $propertyName, Eiu $eiu): Mag {
+	public function createMag(Eiu $eiu): Mag {
 		$pageController = $eiu->entry()->getEiMapping()->getEiSelection()->getLiveObject();
 		CastUtils::assertTrue($pageController instanceof PageController);
 		
@@ -31,7 +31,7 @@ class PageMethodEiProp extends DraftableEiPropAdapter {
 			$options[$pageMethod->getName()] = StringUtils::pretty($pageMethod->getName());
 		}
 		
-		$mag = new PageMethodEnumMag($propertyName, $this->getLabelLstr(), $options, null, 
+		$mag = new PageMethodEnumMag($this->getLabelLstr(), $options, null, 
 				$this->isMandatory($eiu));
 		$mag->setInputAttrs(array('class' => 'page-method', 'data-panel-names' => json_encode($ciPanelNames)));
 		return $mag;

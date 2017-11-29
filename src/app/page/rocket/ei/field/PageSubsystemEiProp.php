@@ -25,8 +25,8 @@ class PageSubsystemEiProp extends EnumEiProp {
 		return new PageSubsystemEiPropConfigurator($this);
 	}
 	
-	public function createMag(string $propertyName, Eiu $eiu): Mag {
-		$enumMag = parent::createMag($propertyName, $eiu);
+	public function createMag(Eiu $eiu): Mag {
+		$enumMag = parent::createMag($eiu);
 		CastUtils::assertTrue($enumMag instanceof EnumMag);
 		
 		if ($eiu->entry()->isNew()) {

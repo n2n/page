@@ -19,8 +19,8 @@ class PageHookEiProp extends EnumEiProp {
 		return false;
 	}
 	
-	public function createMag(string $propertyName, Eiu $eiu): Mag {
-		$mag = parent::createMag($propertyName, $eiu);
+	public function createMag(Eiu $eiu): Mag {
+		$mag = parent::createMag($eiu);
 		CastUtils::assertTrue($mag instanceof EnumMag);
 		
 		if (null !== ($characteristicsKey = $eiu->entry()->getEiMapping()->getValue($this))){
