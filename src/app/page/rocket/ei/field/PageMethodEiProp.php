@@ -15,6 +15,7 @@ use n2n\impl\web\ui\view\html\HtmlView;
 use n2n\web\dispatch\mag\Mag;
 use n2n\web\dispatch\map\PropertyPath;
 use n2n\web\ui\UiComponent;
+use n2n\web\dispatch\mag\UiOutfitter;
 
 class PageMethodEiProp extends DraftableEiPropAdapter {
 	
@@ -53,7 +54,7 @@ class PageMethodEiProp extends DraftableEiPropAdapter {
 
 class PageMethodEnumMag extends EnumMag {
 	
-	public function createUiField(PropertyPath $propertyPath, HtmlView $view): UiComponent {
+    public function createUiField(PropertyPath $propertyPath, HtmlView $view, UiOutfitter $uo): UiComponent {
 		$view->getHtmlBuilder()->meta()->addJs('js/page-method.js', 'page');
 		
 		return parent::createUiField($propertyPath, $view);
