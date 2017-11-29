@@ -3,8 +3,8 @@ namespace page\model;
 
 use n2n\core\container\N2nContext;
 use n2n\util\StringUtils;
-use rocket\impl\ei\component\field\string\wysiwyg\WysiwygLinkConfigAdapter;
-use rocket\impl\ei\component\field\string\wysiwyg\DynamicWysiwygLinkConfig;
+use rocket\spec\ei\component\field\impl\string\wysiwyg\WysiwygLinkConfigAdapter;
+use rocket\spec\ei\component\field\impl\string\wysiwyg\DynamicWysiwygLinkConfig;
 use n2n\l10n\N2nLocale;
 use page\model\nav\NavBranch;
 use n2n\util\col\ArrayUtils;

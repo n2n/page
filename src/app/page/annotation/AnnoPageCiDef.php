@@ -2,7 +2,7 @@
 // namespace page\annotation;
 
 // use n2n\reflection\ReflectionUtils;
-// use rocket\impl\ei\component\field\ci\model\ContentItem;
+// use rocket\spec\ei\component\field\impl\ci\model\ContentItem;
 // use n2n\reflection\annotation\ClassAnnotation;
 // use n2n\reflection\annotation\ClassAnnotationTrait;
 // use n2n\reflection\annotation\AnnotationTrait;

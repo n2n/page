@@ -9,7 +9,7 @@ use n2n\persistence\orm\annotation\AnnoOneToMany;
 use n2n\persistence\orm\CascadeType;
 use rocket\user\bo\RocketUser;
 use n2n\l10n\N2nLocale;
-use rocket\impl\ei\component\field\translation\Translator;
+use rocket\spec\ei\component\field\impl\translation\Translator;
 use page\model\leaf\ExternalLeaf;
 use page\model\nav\NavTree;
 use page\model\leaf\InternalLeaf;

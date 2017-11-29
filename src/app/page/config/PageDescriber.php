@@ -11,7 +11,7 @@ use n2n\impl\web\dispatch\mag\model\MagForm;
 use n2n\web\dispatch\mag\MagDispatchable;
 use n2n\util\config\LenientAttributeReader;
 use page\bo\PageController;
-use rocket\impl\ei\component\field\ci\conf\CiConfigUtils;
+use rocket\spec\ei\component\field\impl\ci\conf\CiConfigUtils;
 use n2n\impl\web\dispatch\mag\model\MagCollectionMag;
 use rocket\core\model\Rocket;
 use n2n\reflection\CastUtils;
@@ -19,7 +19,7 @@ use rocket\spec\config\SpecManager;
 use page\model\PageControllerAnalyzer;
 use n2n\reflection\property\TypeConstraint;
 use n2n\reflection\ArgUtils;
-use rocket\impl\ei\component\field\ci\model\PanelConfig;
+use rocket\spec\ei\component\field\impl\ci\model\PanelConfig;
 
 class PageDescriber extends ConfigDescriberAdapter {
 	const ATTR_LOCALES_ACTIVE_KEY = 'n2nLocaleUrls';
@@ -124,11 +124,10 @@ class PageDescriber extends ConfigDescriberAdapter {
 		$this->writeCustomAttributes($attributes);
 	}
 	
-	/**
-	 * @see \n2n\core\module\DescriberAdapter::createCustomConfig()
-	 * 
-	 * @return \page\config\PageConfig
-	 */
+    /**
+     * {@inheritDoc}
+     * @see \n2n\core\module\ConfigDescriber::buildCustomConfig()
+     */
 	public function buildCustomConfig() {
 		$attributes = $this->readCustomAttributes();
 		

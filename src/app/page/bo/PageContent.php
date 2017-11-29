@@ -8,7 +8,7 @@ use n2n\persistence\orm\annotation\AnnoOneToOne;
 use n2n\persistence\orm\annotation\AnnoOneToMany;
 use n2n\persistence\orm\CascadeType;
 use n2n\l10n\N2nLocale;
-use rocket\impl\ei\component\field\translation\Translator;
+use rocket\spec\ei\component\field\impl\translation\Translator;
 use n2n\persistence\orm\FetchType;
 use page\model\PageMonitor;
 

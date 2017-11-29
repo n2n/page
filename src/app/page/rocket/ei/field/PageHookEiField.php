@@ -6,7 +6,7 @@ use n2n\reflection\CastUtils;
 use n2n\impl\web\dispatch\mag\model\EnumMag;
 use n2n\web\dispatch\mag\Mag;
 use rocket\spec\ei\component\field\indepenent\EiPropConfigurator;
-use rocket\impl\ei\component\field\enum\EnumEiProp;
+use rocket\spec\ei\component\field\impl\enum\EnumEiProp;
 use page\rocket\ei\field\conf\PageHookEiPropConfigurator;
 
 class PageHookEiField extends EnumEiProp {

@@ -5,19 +5,19 @@ use n2n\persistence\orm\property\EntityProperty;
 use page\bo\Page;
 use n2n\impl\persistence\orm\property\ToManyEntityProperty;
 use n2n\reflection\ArgUtils;
-use rocket\impl\ei\component\field\ci\model\ContentItem;
+use rocket\spec\ei\component\field\impl\ci\model\ContentItem;
 use page\bo\PageControllerT;
 use rocket\spec\ei\manage\util\model\Eiu;
-use rocket\impl\ei\component\field\ci\ContentItemsEiProp;
+use rocket\spec\ei\component\field\impl\ci\ContentItemsEiProp;
 use n2n\reflection\CastUtils;
 use page\bo\PageController;
 use page\model\PageControllerAnalyzer;
 use page\config\PageConfig;
-use rocket\impl\ei\component\field\ci\model\PanelConfig;
+use rocket\spec\ei\component\field\impl\ci\model\PanelConfig;
 use n2n\util\StringUtils;
 use rocket\core\model\Rocket;
 use rocket\spec\ei\EiPropPath;
-use rocket\impl\ei\component\field\ci\model\ContentItemGuiField;
+use rocket\spec\ei\component\field\impl\ci\model\ContentItemGuiField;
 
 class PageContentItemsEiProp extends ContentItemsEiProp {
 	/**

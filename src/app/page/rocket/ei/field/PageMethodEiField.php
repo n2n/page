@@ -1,7 +1,7 @@
 <?php
 namespace page\rocket\ei\field;
 
-use rocket\impl\ei\component\field\adapter\DraftableEiPropAdapter;
+use rocket\spec\ei\component\field\impl\adapter\DraftableEiPropAdapter;
 use rocket\spec\ei\manage\util\model\Eiu;
 use n2n\reflection\CastUtils;
 use page\bo\PageController;

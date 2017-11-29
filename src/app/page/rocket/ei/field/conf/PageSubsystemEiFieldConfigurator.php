@@ -9,7 +9,7 @@ use rocket\spec\ei\component\EiSetupProcess;
 use page\config\PageConfig;
 use n2n\reflection\CastUtils;
 use page\rocket\ei\field\PageSubsystemEiField;
-use rocket\impl\ei\component\field\adapter\AdaptableEiPropConfigurator;
+use rocket\spec\ei\component\field\impl\adapter\AdaptableEiPropConfigurator;
 use n2n\l10n\DynamicTextCollection;
 use rocket\spec\ei\manage\gui\DisplayDefinition;
 

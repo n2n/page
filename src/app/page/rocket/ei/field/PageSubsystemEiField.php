@@ -3,7 +3,7 @@ namespace page\rocket\ei\field;
 
 use n2n\l10n\DynamicTextCollection;
 use n2n\impl\web\dispatch\mag\model\EnumMag;
-use rocket\impl\ei\component\field\enum\EnumEiProp;
+use rocket\spec\ei\component\field\impl\enum\EnumEiProp;
 use rocket\spec\ei\manage\util\model\Eiu;
 use n2n\web\dispatch\mag\Mag;
 use rocket\spec\ei\component\field\indepenent\EiPropConfigurator;

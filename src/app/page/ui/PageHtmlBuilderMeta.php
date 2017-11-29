@@ -181,11 +181,11 @@ class PageHtmlBuilderMeta {
 	}
 	
 	/**
-	 * Returns the {@link \rocket\impl\ei\component\field\ci\model\ContentItem}s of to the current page
+	 * Returns the {@link \rocket\spec\ei\component\field\impl\ci\model\ContentItem}s of to the current page
 	 * which have been assigned to the panel with the passed name.
 	 * 
 	 * @param string $panelName
-	 * @return \rocket\impl\ei\component\field\ci\model\ContentItem[]
+	 * @return \rocket\spec\ei\component\field\impl\ci\model\ContentItem[]
 	 * @throws \page\model\nav\UnknownContentItemPanelException if there is no panel with passed name defined.   
 	 */
 	public function getContentItems(string $panelName) {

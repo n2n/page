@@ -3,7 +3,7 @@ namespace page\rocket\ei\field\conf;
 
 use n2n\core\container\N2nContext;
 
-use rocket\impl\ei\component\field\ci\conf\ContentItemsEiPropConfigurator;
+use rocket\spec\ei\component\field\impl\ci\conf\ContentItemsEiPropConfigurator;
 
 class PageContentItemsEiPropConfigurator extends ContentItemsEiPropConfigurator {
 	
