@@ -38,12 +38,12 @@ class PageContentItemsEiProp extends ContentItemsEiProp {
 	}
 	
 	public function determinePanelConfigs(Eiu $eiu) {
-		$relationMapping = $eiu->entry()->getEiMapping()->getValue(EiPropPath::from($this)->poped()
+		$relationMapping = $eiu->entry()->getValue(EiPropPath::from($this)->poped()
 				->pushed('pageController'));
 		if ($relationMapping === null) {
 			return array();
 		}
-		$pageController = $relationMapping->getEiSelection()->getLiveObject();
+		$pageController = $pageController = $relationMapping->getEiObject()->getEiEntityObj()->getEntityObj();
 		CastUtils::assertTrue($pageController instanceof PageController);
 		
 		$rocket = $eiu->frame()->getEiFrame()->getN2nContext()->lookup(Rocket::class);
@@ -56,7 +56,7 @@ class PageContentItemsEiProp extends ContentItemsEiProp {
 		CastUtils::assertTrue($pageConfig instanceof PageConfig);
 		
 		$pageControllerConfig = $pageConfig->getPageControllerConfigByEiSpecId(
-				$specManager->getEiSpecByClass($pageControllerClass)->getId());
+				$specManager->getEiTypeByClass($pageControllerClass)->getId());
 		
 		$panelConfigs = array();
 		foreach ($analyzer->analyzeAllCiPanelNames() as $panelName) {

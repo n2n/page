@@ -23,7 +23,7 @@ class PageHookEiProp extends EnumEiProp {
 		$mag = parent::createMag($eiu);
 		CastUtils::assertTrue($mag instanceof EnumMag);
 		
-		if (null !== ($characteristicsKey = $eiu->entry()->getEiMapping()->getValue($this))){
+		if (null !== ($characteristicsKey = $eiu->entry()->getValue($this))){
 			$mag->setOptions(array_merge(array($characteristicsKey => $characteristicsKey), $mag->getOptions()));
 		}
 		

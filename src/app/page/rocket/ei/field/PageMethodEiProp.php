@@ -20,7 +20,7 @@ use n2n\web\dispatch\mag\UiOutfitter;
 class PageMethodEiProp extends DraftableEiPropAdapter {
 	
 	public function createMag(Eiu $eiu): Mag {
-		$pageController = $eiu->entry()->getEiMapping()->getEiSelection()->getLiveObject();
+		$pageController = $eiu->entry()->getEntityObj();
 		CastUtils::assertTrue($pageController instanceof PageController);
 		
 		$analyzer = new PageControllerAnalyzer(new \ReflectionClass($pageController));
@@ -57,6 +57,6 @@ class PageMethodEnumMag extends EnumMag {
     public function createUiField(PropertyPath $propertyPath, HtmlView $view, UiOutfitter $uo): UiComponent {
 		$view->getHtmlBuilder()->meta()->addJs('js/page-method.js', 'page');
 		
-		return parent::createUiField($propertyPath, $view);
+		return parent::createUiField($propertyPath, $view, $uo);
 	}
 }
