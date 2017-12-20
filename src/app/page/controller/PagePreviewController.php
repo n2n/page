@@ -15,7 +15,7 @@ use rocket\spec\ei\manage\util\model\Eiu;
 class PagePreviewController extends PreviewControllerAdapter {
 
 	public function getPreviewTypeOptions(Eiu $eiu): array {
-		$page = $eiu->entry()->getLiveEntry()->getEntityObj();
+		$page = $eiu->entry()->getEntityObj();
 		CastUtils::assertTrue($page instanceof Page);
 		
 		$pageContent = $page->getPageContent();
