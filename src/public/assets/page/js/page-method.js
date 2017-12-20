@@ -2,8 +2,9 @@
  * 
  */
 
-jQuery(document).ready(function ($) {
-	rocketTs.registerUiInitFunction("select.page-method", function(jqSelect) {
+Jhtml.ready(function (elements) {
+	$(elements).find("select.page-method").each(function() {
+		var jqSelect = $(this);
 		var methodPanelNames = jqSelect.data('panel-names');
 		var jqCiContainer = jqSelect.parent().parent().parent().find("div.rocket-property.rocket-gui-field-pageControllerTs-contentItems");
 		var jqCiDivs = jqCiContainer.find("div.rocket-content-items").children("div.rocket-content-item-panel");
