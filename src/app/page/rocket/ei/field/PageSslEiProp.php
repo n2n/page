@@ -2,9 +2,9 @@
 namespace page\rocket\ei\field;
 
 use rocket\spec\ei\component\field\impl\bool\BooleanEiProp;
-use rocket\spec\ei\manage\gui\DisplayDefinition;
 use rocket\spec\ei\component\field\indepenent\EiPropConfigurator;
 use page\rocket\ei\field\conf\PageSslEiPropConfigurator;
+use rocket\spec\ei\component\field\impl\adapter\DisplaySettings;
 
 class PageSslEiProp extends BooleanEiProp {
 	
@@ -12,8 +12,8 @@ class PageSslEiProp extends BooleanEiProp {
 		return 'Ssl ScriptField (Page)';
 	}
 	
-	public function setDisplayDefinition(DisplayDefinition $displayDefinition) {
-		$this->displayDefinition = $displayDefinition;
+	public function setDisplaySettings(DisplaySettings $displaySettings) {
+		$this->displaySettings = $displaySettings;
 	}
 	
 	public function createEiPropConfigurator(): EiPropConfigurator {

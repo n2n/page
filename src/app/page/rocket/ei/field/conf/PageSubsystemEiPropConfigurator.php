@@ -11,7 +11,8 @@ use n2n\reflection\CastUtils;
 use page\rocket\ei\field\PageSubsystemEiProp;
 use rocket\spec\ei\component\field\impl\adapter\AdaptableEiPropConfigurator;
 use n2n\l10n\DynamicTextCollection;
-use rocket\spec\ei\manage\gui\DisplayDefinition;
+use rocket\spec\ei\manage\gui\ViewMode;
+use rocket\spec\ei\component\field\impl\adapter\DisplaySettings;
 
 class PageSubsystemEiPropConfigurator extends AdaptableEiPropConfigurator {
 	private $pageSubsystemEiField;
@@ -32,7 +33,7 @@ class PageSubsystemEiPropConfigurator extends AdaptableEiPropConfigurator {
 		$subsystems = $eiSetupProcess->getN2nContext()->getHttpContext()->getAvailableSubsystems();
 
 		if (empty($subsystems)) {
-			$this->pageSubsystemEiField->setDisplayDefinition(new DisplayDefinition(DisplayDefinition::NO_VIEW_MODES));
+			$this->pageSubsystemEiField->setDisplaySettings(new DisplaySettings(ViewMode::none()));
 		}
 		
 		$options = array(null => $dtc->translate('all_subsystems_label'));
