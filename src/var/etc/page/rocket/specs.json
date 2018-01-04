@@ -9,7 +9,7 @@
             "defaultSort": [],
             "fields": {
                 "id": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\numeric\\IntegerEiField",
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\numeric\\IntegerEiProp",
                     "props": {
                         "displayInOverview": false,
                         "displayInDetailView": false,
@@ -27,7 +27,7 @@
                     "entityProperty": "id"
                 },
                 "pageContentTs": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\translation\\TranslationEiField",
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\translation\\TranslationEiProp",
                     "props": {
                         "draftable": false,
                         "useSystemN2nLocales": true,
@@ -52,7 +52,7 @@
                     "entityProperty": "ssl"
                 },
                 "pageController": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\relation\\EmbeddedOneToOneEiField",
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\relation\\EmbeddedOneToOneEiProp",
                     "props": {
                         "displayInOverview": true,
                         "displayInDetailView": true,
@@ -70,7 +70,7 @@
                     "entityProperty": "pageController"
                 },
                 "page": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\relation\\EmbeddedOneToOneEiField",
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\relation\\EmbeddedOneToOneEiProp",
                     "props": {
                         "displayInOverview": false,
                         "displayInDetailView": false,
@@ -89,7 +89,6 @@
                 }
             },
             "commands": [],
-            "modificators": [],
             "defaultMaskId": null
         },
         "page-page-content-t": {
@@ -101,7 +100,7 @@
             "defaultSort": [],
             "fields": {
                 "id": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\numeric\\IntegerEiField",
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\numeric\\IntegerEiProp",
                     "props": {
                         "displayInOverview": false,
                         "displayInDetailView": false,
@@ -119,7 +118,7 @@
                     "entityProperty": "id"
                 },
                 "seTitle": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\string\\StringEiField",
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\string\\StringEiProp",
                     "props": {
                         "displayInOverview": false,
                         "displayInDetailView": true,
@@ -137,7 +136,7 @@
                     "entityProperty": "seTitle"
                 },
                 "seDescription": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\string\\StringEiField",
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\string\\StringEiProp",
                     "props": {
                         "displayInOverview": false,
                         "displayInDetailView": true,
@@ -155,7 +154,7 @@
                     "entityProperty": "seDescription"
                 },
                 "seKeywords": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\string\\StringEiField",
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\string\\StringEiProp",
                     "props": {
                         "displayInOverview": false,
                         "displayInDetailView": true,
@@ -173,7 +172,7 @@
                     "entityProperty": "seKeywords"
                 },
                 "pageContent": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\relation\\ManyToOneSelectEiField",
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\relation\\ManyToOneSelectEiProp",
                     "props": {
                         "displayInOverview": false,
                         "displayInDetailView": false,
@@ -191,7 +190,6 @@
                 }
             },
             "commands": [],
-            "modificators": [],
             "defaultMaskId": null
         },
         "page-page": {
@@ -209,7 +207,7 @@
             "defaultSort": [],
             "fields": {
                 "id": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\numeric\\IntegerEiField",
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\numeric\\IntegerEiProp",
                     "props": {
                         "displayInOverview": false,
                         "displayInDetailView": true,
@@ -227,7 +225,7 @@
                     "entityProperty": "id"
                 },
                 "pageTs": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\translation\\TranslationEiField",
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\translation\\TranslationEiProp",
                     "props": {
                         "draftable": false,
                         "useSystemN2nLocales": true,
@@ -286,7 +284,7 @@
                     "objectProperty": "type"
                 },
                 "internalPage": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\relation\\ManyToOneSelectEiField",
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\relation\\ManyToOneSelectEiProp",
                     "props": {
                         "displayInOverview": false,
                         "displayInDetailView": true,
@@ -303,7 +301,7 @@
                     "entityProperty": "internalPage"
                 },
                 "externalUrl": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\string\\UrlEiField",
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\string\\UrlEiProp",
                     "props": {
                         "displayInOverview": false,
                         "displayInDetailView": true,
@@ -321,7 +319,7 @@
                     "entityProperty": "externalUrl"
                 },
                 "pageContent": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\relation\\EmbeddedOneToOneEiField",
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\relation\\EmbeddedOneToOneEiProp",
                     "props": {
                         "displayInOverview": false,
                         "displayInDetailView": true,
@@ -339,7 +337,7 @@
                     "entityProperty": "pageContent"
                 },
                 "lastMod": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\date\\DateTimeEiField",
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\date\\DateTimeEiProp",
                     "props": {
                         "displayInOverview": false,
                         "displayInDetailView": true,
@@ -425,7 +423,7 @@
                     "entityProperty": "navTargetNewWindow"
                 },
                 "online": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\bool\\OnlineEiField",
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\bool\\OnlineEiProp",
                     "props": {
                         "displayInOverview": false,
                         "displayInDetailView": true,
@@ -465,7 +463,6 @@
                     "props": []
                 }
             },
-            "modificators": [],
             "defaultMaskId": null
         },
         "page-page-t": {
@@ -477,7 +474,7 @@
             "defaultSort": [],
             "fields": {
                 "id": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\numeric\\IntegerEiField",
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\numeric\\IntegerEiProp",
                     "props": {
                         "displayInOverview": false,
                         "displayInDetailView": false,
@@ -495,7 +492,7 @@
                     "entityProperty": "id"
                 },
                 "name": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\string\\StringEiField",
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\string\\StringEiProp",
                     "props": {
                         "displayInOverview": true,
                         "displayInDetailView": true,
@@ -513,7 +510,7 @@
                     "entityProperty": "name"
                 },
                 "title": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\string\\StringEiField",
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\string\\StringEiProp",
                     "props": {
                         "displayInOverview": false,
                         "displayInDetailView": true,
@@ -531,7 +528,7 @@
                     "entityProperty": "title"
                 },
                 "pathPart": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\string\\PathPartEiField",
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\string\\PathPartEiProp",
                     "props": {
                         "displayInOverview": true,
                         "displayInDetailView": true,
@@ -551,7 +548,7 @@
                     "entityProperty": "pathPart"
                 },
                 "n2nLocale": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\l10n\\N2nLocaleEiField",
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\l10n\\N2nLocaleEiProp",
                     "props": {
                         "displayInOverview": false,
                         "displayInDetailView": false,
@@ -567,7 +564,7 @@
                     "entityProperty": "n2nLocale"
                 },
                 "page": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\relation\\ManyToOneSelectEiField",
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\relation\\ManyToOneSelectEiProp",
                     "props": {
                         "displayInOverview": false,
                         "displayInDetailView": false,
@@ -600,7 +597,6 @@
                 }
             },
             "commands": [],
-            "modificators": [],
             "defaultMaskId": null
         },
         "page-page-controller-t": {
@@ -611,7 +607,7 @@
             "pluralLabel": "Page Controller Ts",
             "fields": {
                 "pageController": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\relation\\ManyToOneSelectEiField",
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\relation\\ManyToOneSelectEiProp",
                     "props": {
                         "displayInOverview": false,
                         "displayInDetailView": false,
@@ -643,7 +639,6 @@
                 }
             },
             "commands": [],
-            "modificators": [],
             "defaultMaskId": null
         },
         "page-page-controller": {
@@ -670,7 +665,7 @@
                     "entityProperty": "methodName"
                 },
                 "pageControllerTs": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\translation\\TranslationEiField",
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\translation\\TranslationEiProp",
                     "props": {
                         "useSystemN2nLocales": true,
                         "systenN2nLocaleDefs": [
@@ -703,7 +698,6 @@
                 }
             },
             "commands": [],
-            "modificators": [],
             "defaultMaskId": null
         },
         "page-page-link": {
@@ -714,7 +708,7 @@
             "pluralLabel": "Page Links",
             "fields": {
                 "id": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\numeric\\IntegerEiField",
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\numeric\\IntegerEiProp",
                     "props": {
                         "displayInOverview": true,
                         "displayInDetailView": true,
@@ -760,7 +754,7 @@
                     "entityProperty": "type"
                 },
                 "linkedPage": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\relation\\ManyToOneSelectEiField",
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\relation\\ManyToOneSelectEiProp",
                     "props": {
                         "displayInOverview": true,
                         "displayInDetailView": true,
@@ -777,7 +771,7 @@
                     "entityProperty": "linkedPage"
                 },
                 "url": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\string\\UrlEiField",
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\string\\UrlEiProp",
                     "props": {
                         "displayInOverview": true,
                         "displayInDetailView": true,
@@ -797,7 +791,7 @@
                     "entityProperty": "url"
                 },
                 "label": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\string\\StringEiField",
+                    "class": "rocket\\spec\\ei\\component\\field\\impl\\string\\StringEiProp",
                     "props": {
                         "displayInOverview": true,
                         "displayInDetailView": true,
@@ -816,7 +810,6 @@
                 }
             },
             "commands": [],
-            "modificators": [],
             "defaultMaskId": null
         }
     },
