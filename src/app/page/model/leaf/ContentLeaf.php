@@ -177,7 +177,7 @@ class PageLeafContent extends CommonLeafContent {
 	
 	/**
 	 * 
-	 * @return \rocket\spec\ei\component\field\impl\ci\model\ContentItem[]
+	 * @return \rocket\impl\ei\component\prop\ci\model\ContentItem[]
 	 */
 	public function getContentItems() {
 		return $this->contentItems;

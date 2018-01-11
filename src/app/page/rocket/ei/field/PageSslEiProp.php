@@ -1,10 +1,10 @@
 <?php
 namespace page\rocket\ei\field;
 
-use rocket\spec\ei\component\field\impl\bool\BooleanEiProp;
-use rocket\spec\ei\component\field\indepenent\EiPropConfigurator;
+use rocket\impl\ei\component\prop\bool\BooleanEiProp;
+use rocket\spec\ei\component\prop\indepenent\EiPropConfigurator;
 use page\rocket\ei\field\conf\PageSslEiPropConfigurator;
-use rocket\spec\ei\component\field\impl\adapter\DisplaySettings;
+use rocket\impl\ei\component\prop\adapter\DisplaySettings;
 
 class PageSslEiProp extends BooleanEiProp {
 	

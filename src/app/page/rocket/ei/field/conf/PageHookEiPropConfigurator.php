@@ -4,7 +4,7 @@ namespace page\rocket\ei\field\conf;
 use rocket\spec\ei\component\EiSetupProcess;
 use n2n\reflection\CastUtils;
 use page\config\PageConfig;
-use rocket\spec\ei\component\field\impl\adapter\AdaptableEiPropConfigurator;
+use rocket\impl\ei\component\prop\adapter\AdaptableEiPropConfigurator;
 use page\rocket\ei\field\PageHookEiProp;
 
 class PageHookEiPropConfigurator extends AdaptableEiPropConfigurator {

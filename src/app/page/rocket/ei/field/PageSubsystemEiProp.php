@@ -3,13 +3,13 @@ namespace page\rocket\ei\field;
 
 use n2n\l10n\DynamicTextCollection;
 use n2n\impl\web\dispatch\mag\model\EnumMag;
-use rocket\spec\ei\component\field\impl\enum\EnumEiProp;
+use rocket\impl\ei\component\prop\enum\EnumEiProp;
 use rocket\spec\ei\manage\util\model\Eiu;
 use n2n\web\dispatch\mag\Mag;
-use rocket\spec\ei\component\field\indepenent\EiPropConfigurator;
+use rocket\spec\ei\component\prop\indepenent\EiPropConfigurator;
 use page\rocket\ei\field\conf\PageSubsystemEiPropConfigurator;
 use n2n\reflection\CastUtils;
-use rocket\spec\ei\component\field\impl\adapter\DisplaySettings;
+use rocket\impl\ei\component\prop\adapter\DisplaySettings;
 
 class PageSubsystemEiProp extends EnumEiProp {
 	

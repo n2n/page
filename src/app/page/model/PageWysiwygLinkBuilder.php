@@ -3,7 +3,7 @@ namespace page\model;
 
 use n2n\core\container\N2nContext;
 use n2n\reflection\ObjectAdapter;
-use rocket\spec\ei\component\field\impl\string\wysiwyg\DynamicUrlBuilder;
+use rocket\impl\ei\component\prop\string\wysiwyg\DynamicUrlBuilder;
 use n2n\web\http\HttpContext;
 use page\model\nav\murl\MurlPage;
 use n2n\util\uri\UnavailableUrlException;
