@@ -9,7 +9,7 @@
             "defaultSort": [],
             "fields": {
                 "id": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\numeric\\IntegerEiProp",
+                    "class": "rocket\\impl\\ei\\component\\prop\\numeric\\IntegerEiProp",
                     "props": {
                         "displayInOverview": false,
                         "displayInDetailView": false,
@@ -27,7 +27,7 @@
                     "entityProperty": "id"
                 },
                 "pageContentTs": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\translation\\TranslationEiProp",
+                    "class": "rocket\\impl\\ei\\component\\prop\\translation\\TranslationEiProp",
                     "props": {
                         "draftable": false,
                         "useSystemN2nLocales": true,
@@ -52,7 +52,7 @@
                     "entityProperty": "ssl"
                 },
                 "pageController": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\relation\\EmbeddedOneToOneEiProp",
+                    "class": "rocket\\impl\\ei\\component\\prop\\relation\\EmbeddedOneToOneEiProp",
                     "props": {
                         "displayInOverview": true,
                         "displayInDetailView": true,
@@ -70,7 +70,7 @@
                     "entityProperty": "pageController"
                 },
                 "page": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\relation\\EmbeddedOneToOneEiProp",
+                    "class": "rocket\\impl\\ei\\component\\prop\\relation\\EmbeddedOneToOneEiProp",
                     "props": {
                         "displayInOverview": false,
                         "displayInDetailView": false,
@@ -100,7 +100,7 @@
             "defaultSort": [],
             "fields": {
                 "id": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\numeric\\IntegerEiProp",
+                    "class": "rocket\\impl\\ei\\component\\prop\\numeric\\IntegerEiProp",
                     "props": {
                         "displayInOverview": false,
                         "displayInDetailView": false,
@@ -118,7 +118,7 @@
                     "entityProperty": "id"
                 },
                 "seTitle": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\string\\StringEiProp",
+                    "class": "rocket\\impl\\ei\\component\\prop\\string\\StringEiProp",
                     "props": {
                         "displayInOverview": false,
                         "displayInDetailView": true,
@@ -136,7 +136,7 @@
                     "entityProperty": "seTitle"
                 },
                 "seDescription": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\string\\StringEiProp",
+                    "class": "rocket\\impl\\ei\\component\\prop\\string\\StringEiProp",
                     "props": {
                         "displayInOverview": false,
                         "displayInDetailView": true,
@@ -154,7 +154,7 @@
                     "entityProperty": "seDescription"
                 },
                 "seKeywords": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\string\\StringEiProp",
+                    "class": "rocket\\impl\\ei\\component\\prop\\string\\StringEiProp",
                     "props": {
                         "displayInOverview": false,
                         "displayInDetailView": true,
@@ -172,7 +172,7 @@
                     "entityProperty": "seKeywords"
                 },
                 "pageContent": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\relation\\ManyToOneSelectEiProp",
+                    "class": "rocket\\impl\\ei\\component\\prop\\relation\\ManyToOneSelectEiProp",
                     "props": {
                         "displayInOverview": false,
                         "displayInDetailView": false,
@@ -207,7 +207,7 @@
             "defaultSort": [],
             "fields": {
                 "id": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\numeric\\IntegerEiProp",
+                    "class": "rocket\\impl\\ei\\component\\prop\\numeric\\IntegerEiProp",
                     "props": {
                         "displayInOverview": false,
                         "displayInDetailView": true,
@@ -225,7 +225,7 @@
                     "entityProperty": "id"
                 },
                 "pageTs": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\translation\\TranslationEiProp",
+                    "class": "rocket\\impl\\ei\\component\\prop\\translation\\TranslationEiProp",
                     "props": {
                         "draftable": false,
                         "useSystemN2nLocales": true,
@@ -253,7 +253,7 @@
                     "entityProperty": "pageTs"
                 },
                 "type": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\enum\\EnumEiProp",
+                    "class": "rocket\\impl\\ei\\component\\prop\\enum\\EnumEiProp",
                     "props": {
                         "displayInOverview": true,
                         "displayInDetailView": true,
@@ -284,7 +284,7 @@
                     "objectProperty": "type"
                 },
                 "internalPage": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\relation\\ManyToOneSelectEiProp",
+                    "class": "rocket\\impl\\ei\\component\\prop\\relation\\ManyToOneSelectEiProp",
                     "props": {
                         "displayInOverview": false,
                         "displayInDetailView": true,
@@ -301,7 +301,7 @@
                     "entityProperty": "internalPage"
                 },
                 "externalUrl": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\string\\UrlEiProp",
+                    "class": "rocket\\impl\\ei\\component\\prop\\string\\UrlEiProp",
                     "props": {
                         "displayInOverview": false,
                         "displayInDetailView": true,
@@ -319,7 +319,7 @@
                     "entityProperty": "externalUrl"
                 },
                 "pageContent": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\relation\\EmbeddedOneToOneEiProp",
+                    "class": "rocket\\impl\\ei\\component\\prop\\relation\\EmbeddedOneToOneEiProp",
                     "props": {
                         "displayInOverview": false,
                         "displayInDetailView": true,
@@ -337,7 +337,7 @@
                     "entityProperty": "pageContent"
                 },
                 "lastMod": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\date\\DateTimeEiProp",
+                    "class": "rocket\\impl\\ei\\component\\prop\\date\\DateTimeEiProp",
                     "props": {
                         "displayInOverview": false,
                         "displayInDetailView": true,
@@ -362,7 +362,7 @@
                     "entityProperty": "subsystemName"
                 },
                 "inPath": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\bool\\BooleanEiProp",
+                    "class": "rocket\\impl\\ei\\component\\prop\\bool\\BooleanEiProp",
                     "props": {
                         "displayInOverview": true,
                         "displayInDetailView": true,
@@ -393,7 +393,7 @@
                     "entityProperty": "hookKey"
                 },
                 "inNavigation": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\bool\\BooleanEiProp",
+                    "class": "rocket\\impl\\ei\\component\\prop\\bool\\BooleanEiProp",
                     "props": {
                         "displayInOverview": true,
                         "displayInDetailView": true,
@@ -408,7 +408,7 @@
                     "entityProperty": "inNavigation"
                 },
                 "navTargetNewWindow": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\bool\\BooleanEiProp",
+                    "class": "rocket\\impl\\ei\\component\\prop\\bool\\BooleanEiProp",
                     "props": {
                         "displayInOverview": false,
                         "displayInDetailView": true,
@@ -423,7 +423,7 @@
                     "entityProperty": "navTargetNewWindow"
                 },
                 "online": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\bool\\OnlineEiProp",
+                    "class": "rocket\\impl\\ei\\component\\prop\\bool\\OnlineEiProp",
                     "props": {
                         "displayInOverview": false,
                         "displayInDetailView": true,
@@ -439,27 +439,27 @@
             },
             "commands": {
                 "overview": {
-                    "class": "rocket\\spec\\ei\\component\\command\\impl\\common\\OverviewEiCommand",
+                    "class": "rocket\\impl\\ei\\component\\command\\common\\OverviewEiCommand",
                     "props": []
                 },
                 "add": {
-                    "class": "rocket\\spec\\ei\\component\\command\\impl\\common\\AddEiCommand",
+                    "class": "rocket\\impl\\ei\\component\\command\\common\\AddEiCommand",
                     "props": []
                 },
                 "detail": {
-                    "class": "rocket\\spec\\ei\\component\\command\\impl\\common\\DetailEiCommand",
+                    "class": "rocket\\impl\\ei\\component\\command\\common\\DetailEiCommand",
                     "props": []
                 },
                 "edit": {
-                    "class": "rocket\\spec\\ei\\component\\command\\impl\\common\\EditEiCommand",
+                    "class": "rocket\\impl\\ei\\component\\command\\common\\EditEiCommand",
                     "props": []
                 },
                 "delete": {
-                    "class": "rocket\\spec\\ei\\component\\command\\impl\\common\\DeleteEiCommand",
+                    "class": "rocket\\impl\\ei\\component\\command\\common\\DeleteEiCommand",
                     "props": []
                 },
                 "tree-move": {
-                    "class": "rocket\\spec\\ei\\component\\command\\impl\\tree\\TreeMoveEiCommand",
+                    "class": "rocket\\impl\\ei\\component\\command\\tree\\TreeMoveEiCommand",
                     "props": []
                 }
             },
@@ -474,7 +474,7 @@
             "defaultSort": [],
             "fields": {
                 "id": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\numeric\\IntegerEiProp",
+                    "class": "rocket\\impl\\ei\\component\\prop\\numeric\\IntegerEiProp",
                     "props": {
                         "displayInOverview": false,
                         "displayInDetailView": false,
@@ -492,7 +492,7 @@
                     "entityProperty": "id"
                 },
                 "name": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\string\\StringEiProp",
+                    "class": "rocket\\impl\\ei\\component\\prop\\string\\StringEiProp",
                     "props": {
                         "displayInOverview": true,
                         "displayInDetailView": true,
@@ -510,7 +510,7 @@
                     "entityProperty": "name"
                 },
                 "title": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\string\\StringEiProp",
+                    "class": "rocket\\impl\\ei\\component\\prop\\string\\StringEiProp",
                     "props": {
                         "displayInOverview": false,
                         "displayInDetailView": true,
@@ -528,7 +528,7 @@
                     "entityProperty": "title"
                 },
                 "pathPart": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\string\\PathPartEiProp",
+                    "class": "rocket\\impl\\ei\\component\\prop\\string\\PathPartEiProp",
                     "props": {
                         "displayInOverview": true,
                         "displayInDetailView": true,
@@ -548,7 +548,7 @@
                     "entityProperty": "pathPart"
                 },
                 "n2nLocale": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\l10n\\N2nLocaleEiProp",
+                    "class": "rocket\\impl\\ei\\component\\prop\\l10n\\N2nLocaleEiProp",
                     "props": {
                         "displayInOverview": false,
                         "displayInDetailView": false,
@@ -564,7 +564,7 @@
                     "entityProperty": "n2nLocale"
                 },
                 "page": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\relation\\ManyToOneSelectEiProp",
+                    "class": "rocket\\impl\\ei\\component\\prop\\relation\\ManyToOneSelectEiProp",
                     "props": {
                         "displayInOverview": false,
                         "displayInDetailView": false,
@@ -581,7 +581,7 @@
                     "entityProperty": "page"
                 },
                 "active": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\bool\\BooleanEiProp",
+                    "class": "rocket\\impl\\ei\\component\\prop\\bool\\BooleanEiProp",
                     "props": {
                         "displayInOverview": true,
                         "displayInDetailView": true,
@@ -607,7 +607,7 @@
             "pluralLabel": "Page Controller Ts",
             "fields": {
                 "pageController": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\relation\\ManyToOneSelectEiProp",
+                    "class": "rocket\\impl\\ei\\component\\prop\\relation\\ManyToOneSelectEiProp",
                     "props": {
                         "displayInOverview": false,
                         "displayInDetailView": false,
@@ -665,7 +665,7 @@
                     "entityProperty": "methodName"
                 },
                 "pageControllerTs": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\translation\\TranslationEiProp",
+                    "class": "rocket\\impl\\ei\\component\\prop\\translation\\TranslationEiProp",
                     "props": {
                         "useSystemN2nLocales": true,
                         "systenN2nLocaleDefs": [
@@ -708,7 +708,7 @@
             "pluralLabel": "Page Links",
             "fields": {
                 "id": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\numeric\\IntegerEiProp",
+                    "class": "rocket\\impl\\ei\\component\\prop\\numeric\\IntegerEiProp",
                     "props": {
                         "displayInOverview": true,
                         "displayInDetailView": true,
@@ -726,7 +726,7 @@
                     "entityProperty": "id"
                 },
                 "type": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\enum\\EnumEiProp",
+                    "class": "rocket\\impl\\ei\\component\\prop\\enum\\EnumEiProp",
                     "props": {
                         "displayInOverview": true,
                         "displayInDetailView": true,
@@ -754,7 +754,7 @@
                     "entityProperty": "type"
                 },
                 "linkedPage": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\relation\\ManyToOneSelectEiProp",
+                    "class": "rocket\\impl\\ei\\component\\prop\\relation\\ManyToOneSelectEiProp",
                     "props": {
                         "displayInOverview": true,
                         "displayInDetailView": true,
@@ -771,7 +771,7 @@
                     "entityProperty": "linkedPage"
                 },
                 "url": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\string\\UrlEiProp",
+                    "class": "rocket\\impl\\ei\\component\\prop\\string\\UrlEiProp",
                     "props": {
                         "displayInOverview": true,
                         "displayInDetailView": true,
@@ -791,7 +791,7 @@
                     "entityProperty": "url"
                 },
                 "label": {
-                    "class": "rocket\\spec\\ei\\component\\field\\impl\\string\\StringEiProp",
+                    "class": "rocket\\impl\\ei\\component\\prop\\string\\StringEiProp",
                     "props": {
                         "displayInOverview": true,
                         "displayInDetailView": true,
