@@ -54,6 +54,7 @@ class Page extends ObjectAdapter {
 	
 	public function __construct() {
 		$this->lastMod = new \DateTime();
+		$this->pageContent = new PageContent();
 	}
 
 	private function _prePersist(PageMonitor $pageMonitor) {

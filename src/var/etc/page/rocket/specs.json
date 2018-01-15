@@ -63,7 +63,8 @@
                         "mandatory": true,
                         "draftable": false,
                         "replaceable": true,
-                        "targetRemovalStrategy": "prevent"
+                        "targetRemovalStrategy": "prevent",
+                        "reduced": true
                     },
                     "label": "Page Behaviour",
                     "objectProperty": "pageController",
@@ -246,6 +247,7 @@
                                 "label": null
                             }
                         ],
+                        "min": 1,
                         "customN2nLocaleDefs": []
                     },
                     "label": "Page Leaf Ts",
@@ -330,7 +332,8 @@
                         "mandatory": true,
                         "draftable": false,
                         "replaceable": false,
-                        "targetRemovalStrategy": "prevent"
+                        "targetRemovalStrategy": "prevent",
+                        "reduced": false
                     },
                     "label": "Inhalt",
                     "objectProperty": "pageContent",
@@ -645,7 +648,7 @@
             "type": "entity",
             "entity": "page\\bo\\PageController",
             "dataSourceName": null,
-            "label": "Page Controller",
+            "label": "Page type",
             "pluralLabel": "Page Controllers",
             "fields": {
                 "methodName": {
