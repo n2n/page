@@ -90,7 +90,7 @@
                 }
             },
             "commands": [],
-            "defaultMaskId": null
+            "defaultMaskId": "page-content-common"
         },
         "page-page-content-t": {
             "type": "entity",
@@ -466,7 +466,7 @@
                     "props": []
                 }
             },
-            "defaultMaskId": null
+            "defaultMaskId": "page-common"
         },
         "page-page-t": {
             "type": "entity",
@@ -816,7 +816,143 @@
             "defaultMaskId": null
         }
     },
-    "commonEiMasks": [],
+    "commonEiMasks": {
+        "page-page-content": {
+            "page-content-common": {
+                "label": "Inhalt",
+                "pluralLabel": "Inhalte",
+                "fields": [],
+                "commands": [],
+                "bulkyOrder": [
+                    {
+                        "label": null,
+                        "type": null,
+                        "guiIdPath": "pageController"
+                    },
+                    {
+                        "label": "SEO",
+                        "type": "autonomic",
+                        "displayStructure": [
+                            {
+                                "label": null,
+                                "type": null,
+                                "guiIdPath": "pageContentTs.seTitle"
+                            },
+                            {
+                                "label": null,
+                                "type": null,
+                                "guiIdPath": "pageContentTs.seDescription"
+                            },
+                            {
+                                "label": null,
+                                "type": null,
+                                "guiIdPath": "pageContentTs.seKeywords"
+                            }
+                        ]
+                    }
+                ],
+                "partialControlOrder": [],
+                "overallControlOrder": [],
+                "entryControlOrder": []
+            }
+        },
+        "page-page": {
+            "page-common": {
+                "label": "Seite",
+                "pluralLabel": "Seiten",
+                "identityStringPattern": "{pageTs.name}",
+                "fields": [],
+                "commands": [],
+                "bulkyOrder": [
+                    {
+                        "label": "General",
+                        "type": "simple",
+                        "displayStructure": [
+                            {
+                                "label": null,
+                                "type": null,
+                                "guiIdPath": "pageTs.name"
+                            },
+                            {
+                                "label": null,
+                                "type": null,
+                                "guiIdPath": "pageTs.title"
+                            },
+                            {
+                                "label": null,
+                                "type": null,
+                                "guiIdPath": "pageTs.pathPart"
+                            },
+                            {
+                                "label": null,
+                                "type": null,
+                                "guiIdPath": "type"
+                            },
+                            {
+                                "label": null,
+                                "type": null,
+                                "guiIdPath": "pageTs.active"
+                            }
+                        ]
+                    },
+                    {
+                        "label": null,
+                        "type": "simple",
+                        "guiIdPath": "internalPage"
+                    },
+                    {
+                        "label": null,
+                        "type": "simple",
+                        "guiIdPath": "externalUrl"
+                    },
+                    {
+                        "label": null,
+                        "type": "simple",
+                        "guiIdPath": "pageContent"
+                    },
+                    {
+                        "label": "Meta",
+                        "type": "simple",
+                        "displayStructure": [
+                            {
+                                "label": null,
+                                "type": null,
+                                "guiIdPath": "subsystemName"
+                            },
+                            {
+                                "label": null,
+                                "type": null,
+                                "guiIdPath": "inPath"
+                            },
+                            {
+                                "label": null,
+                                "type": null,
+                                "guiIdPath": "hookKey"
+                            },
+                            {
+                                "label": null,
+                                "type": null,
+                                "guiIdPath": "inNavigation"
+                            },
+                            {
+                                "label": null,
+                                "type": null,
+                                "guiIdPath": "online"
+                            },
+                            {
+                                "label": null,
+                                "type": null,
+                                "guiIdPath": "navTargetNewWindow"
+                            }
+                        ]
+                    }
+                ],
+                "partialControlOrder": [],
+                "overallControlOrder": [],
+                "entryControlOrder": []
+            }
+        }
+    },
     "menuItems": {
         "page-page": []
     }
