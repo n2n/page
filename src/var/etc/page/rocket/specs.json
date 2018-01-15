@@ -886,12 +886,12 @@
                             {
                                 "label": null,
                                 "type": null,
-                                "guiIdPath": "type"
+                                "guiIdPath": "pageTs.active"
                             },
                             {
                                 "label": null,
                                 "type": null,
-                                "guiIdPath": "pageTs.active"
+                                "guiIdPath": "type"
                             }
                         ]
                     },
