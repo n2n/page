@@ -147,7 +147,7 @@
                         "readOnly": false,
                         "mandatory": false,
                         "draftable": false,
-                        "maxlength": "156",
+                        "maxlength": "255",
                         "multiline": true
                     },
                     "label": "SE Description",
