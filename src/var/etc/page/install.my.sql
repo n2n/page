@@ -92,6 +92,9 @@ ALTER TABLE `page_content_t`
 ALTER TABLE `page_controller_t`
 	ADD UNIQUE INDEX `page_controller_id_n2n_locale` (`page_controller_id`, `n2n_locale`);
 
+ALTER TABLE `page_content_t`
+	CHANGE COLUMN `se_description` `se_description` VARCHAR(320) NULL DEFAULT NULL AFTER `se_title`;
+
 
 
 
