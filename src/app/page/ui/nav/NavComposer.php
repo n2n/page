@@ -103,7 +103,8 @@ class NavComposer {
 	}
 	
 	/**
-	 * Specifies the {@link NavItemBuilder} for this navigation.
+	 * Specifies the {@link NavItemBuilder} for this navigation. If you want to build a custom navigation, create your
+	 * own NavItemBuilder that inherits from {@see NavItemBuilderAdapter}
 	 * 
 	 * @param mixed $navItemBuilder object of {@link NavItemBuilder} or its lookup id as string. 
 	 * @return \page\ui\nav\NavComposer
