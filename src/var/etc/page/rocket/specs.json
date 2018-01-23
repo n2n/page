@@ -821,11 +821,6 @@
                 "commands": [],
                 "bulkyOrder": [
                     {
-                        "label": null,
-                        "type": null,
-                        "guiIdPath": "pageController"
-                    },
-                    {
                         "label": "SEO",
                         "type": "autonomic",
                         "displayStructure": [
@@ -845,6 +840,11 @@
                                 "guiIdPath": "pageContentTs.seKeywords"
                             }
                         ]
+                    },
+                    {
+                        "label": null,
+                        "type": null,
+                        "guiIdPath": "pageController"
                     }
                 ],
                 "partialControlOrder": [],
@@ -862,7 +862,7 @@
                 "bulkyOrder": [
                     {
                         "label": "General",
-                        "type": "simple",
+                        "type": "main",
                         "displayStructure": [
                             {
                                 "label": null,
@@ -882,37 +882,25 @@
                             {
                                 "label": null,
                                 "type": null,
+                                "guiIdPath": "online"
+                            },
+                            {
+                                "label": null,
+                                "type": null,
                                 "guiIdPath": "pageTs.active"
                             },
                             {
                                 "label": null,
                                 "type": null,
                                 "guiIdPath": "type"
-                            }
-                        ]
-                    },
-                    {
-                        "label": null,
-                        "type": "simple",
-                        "guiIdPath": "pageContent"
-                    },
-                    {
-                        "label": "Internal Link",
-                        "type": "simple",
-                        "displayStructure": [
+                            },
                             {
-                                "label": "Page",
+                                "label": null,
                                 "type": null,
                                 "guiIdPath": "internalPage"
-                            }
-                        ]
-                    },
-                    {
-                        "label": "External Link",
-                        "type": "simple",
-                        "displayStructure": [
+                            },
                             {
-                                "label": "URL",
+                                "label": null,
                                 "type": null,
                                 "guiIdPath": "externalUrl"
                             }
@@ -920,11 +908,11 @@
                     },
                     {
                         "label": "Meta",
-                        "type": "simple",
+                        "type": "main",
                         "displayStructure": [
                             {
                                 "label": null,
-                                "type": null,
+                                "type": "main",
                                 "guiIdPath": "subsystemName"
                             },
                             {
@@ -945,14 +933,14 @@
                             {
                                 "label": null,
                                 "type": null,
-                                "guiIdPath": "online"
-                            },
-                            {
-                                "label": null,
-                                "type": null,
                                 "guiIdPath": "navTargetNewWindow"
                             }
                         ]
+                    },
+                    {
+                        "label": null,
+                        "type": "simple",
+                        "guiIdPath": "pageContent"
                     }
                 ],
                 "partialControlOrder": [],
