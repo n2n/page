@@ -226,25 +226,9 @@
                     "props": {
                         "draftable": false,
                         "useSystemN2nLocales": true,
-                        "systenN2nLocaleDefs": [
-                            {
-                                "id": "de_CH",
-                                "mandatory": false,
-                                "label": null
-                            },
-                            {
-                                "id": "fr_CH",
-                                "mandatory": false,
-                                "label": null
-                            },
-                            {
-                                "id": "it_CH",
-                                "mandatory": false,
-                                "label": null
-                            }
-                        ],
-                        "min": 1,
-                        "customN2nLocaleDefs": []
+                        "systenN2nLocaleDefs": [],
+                        "customN2nLocaleDefs": [],
+                        "min": "1"
                     },
                     "label": "Page Leaf Ts",
                     "objectProperty": "pageTs",
@@ -292,7 +276,10 @@
                         "readOnly": false,
                         "mandatory": true,
                         "draftable": false,
-                        "targetRemovalStrategy": "prevent"
+                        "targetRemovalStrategy": "prevent",
+                        "embeddedAddEnabled": false,
+                        "filtered": true,
+                        "hiddenIfTargetEmpty": false
                     },
                     "label": "internal Link",
                     "objectProperty": "internalPage",
@@ -310,7 +297,9 @@
                         "mandatory": true,
                         "draftable": false,
                         "maxlength": null,
-                        "multiline": false
+                        "relativeAllowed": false,
+                        "allowedProtocols": [],
+                        "autoScheme": null
                     },
                     "label": "external Link",
                     "objectProperty": "externalUrl",
@@ -329,6 +318,7 @@
                         "draftable": false,
                         "replaceable": false,
                         "targetRemovalStrategy": "prevent",
+                        "orphansAllowed": false,
                         "reduced": false
                     },
                     "label": "Inhalt",
@@ -441,16 +431,16 @@
                     "class": "rocket\\impl\\ei\\component\\command\\common\\OverviewEiCommand",
                     "props": []
                 },
-                "add": {
-                    "class": "rocket\\impl\\ei\\component\\command\\common\\AddEiCommand",
+                "edit": {
+                    "class": "rocket\\impl\\ei\\component\\command\\common\\EditEiCommand",
                     "props": []
                 },
                 "detail": {
                     "class": "rocket\\impl\\ei\\component\\command\\common\\DetailEiCommand",
                     "props": []
                 },
-                "edit": {
-                    "class": "rocket\\impl\\ei\\component\\command\\common\\EditEiCommand",
+                "add": {
+                    "class": "rocket\\impl\\ei\\component\\command\\common\\AddEiCommand",
                     "props": []
                 },
                 "delete": {
@@ -882,11 +872,6 @@
                             {
                                 "label": null,
                                 "type": null,
-                                "guiIdPath": "online"
-                            },
-                            {
-                                "label": null,
-                                "type": null,
                                 "guiIdPath": "pageTs.active"
                             },
                             {
@@ -907,12 +892,12 @@
                         ]
                     },
                     {
-                        "label": "Meta",
+                        "label": "Advanced",
                         "type": "main",
                         "displayStructure": [
                             {
                                 "label": null,
-                                "type": "main",
+                                "type": null,
                                 "guiIdPath": "subsystemName"
                             },
                             {
@@ -929,6 +914,11 @@
                                 "label": null,
                                 "type": null,
                                 "guiIdPath": "inNavigation"
+                            },
+                            {
+                                "label": null,
+                                "type": null,
+                                "guiIdPath": "online"
                             },
                             {
                                 "label": null,
