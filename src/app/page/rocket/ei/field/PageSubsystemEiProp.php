@@ -10,6 +10,7 @@ use rocket\spec\ei\component\prop\indepenent\EiPropConfigurator;
 use page\rocket\ei\field\conf\PageSubsystemEiPropConfigurator;
 use n2n\reflection\CastUtils;
 use rocket\impl\ei\component\prop\adapter\DisplaySettings;
+use rocket\spec\ei\manage\gui\DisplayDefinition;
 
 class PageSubsystemEiProp extends EnumEiProp {
 	
@@ -23,6 +24,12 @@ class PageSubsystemEiProp extends EnumEiProp {
 	
 	public function createEiPropConfigurator(): EiPropConfigurator {
 		return new PageSubsystemEiPropConfigurator($this);
+	}
+	
+	public function buildDisplayDefinition(Eiu $eiu): ?DisplayDefinition {
+		if (1 == count($this->getOptions())) return null;
+		
+		return parent::buildDisplayDefinition($eiu);
 	}
 	
 	public function createMag(Eiu $eiu): Mag {
