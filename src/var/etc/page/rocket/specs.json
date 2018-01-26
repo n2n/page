@@ -85,7 +85,16 @@
                     "entityProperty": "page"
                 }
             },
-            "commands": [],
+            "commands": {
+                "edit": {
+                    "class": "rocket\\impl\\ei\\component\\command\\common\\EditEiCommand",
+                    "props": []
+                },
+                "detail": {
+                    "class": "rocket\\impl\\ei\\component\\command\\common\\DetailEiCommand",
+                    "props": []
+                }
+            },
             "defaultMaskId": "page-content-common"
         },
         "page-page-content-t": {
