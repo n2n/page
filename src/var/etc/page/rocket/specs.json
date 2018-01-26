@@ -86,24 +86,12 @@
                 }
             },
             "commands": {
-                "overview": {
-                    "class": "rocket\\impl\\ei\\component\\command\\common\\OverviewEiCommand",
-                    "props": []
-                },
                 "edit": {
                     "class": "rocket\\impl\\ei\\component\\command\\common\\EditEiCommand",
                     "props": []
                 },
                 "detail": {
                     "class": "rocket\\impl\\ei\\component\\command\\common\\DetailEiCommand",
-                    "props": []
-                },
-                "add": {
-                    "class": "rocket\\impl\\ei\\component\\command\\common\\AddEiCommand",
-                    "props": []
-                },
-                "delete": {
-                    "class": "rocket\\impl\\ei\\component\\command\\common\\DeleteEiCommand",
                     "props": []
                 }
             },
