@@ -796,7 +796,7 @@
             "defaultMaskId": null
         }
     },
-    "commonEiMasks": {
+    "eiMasks": {
         "page-page-content": {
             "page-content-common": {
                 "label": "Inhalt",
