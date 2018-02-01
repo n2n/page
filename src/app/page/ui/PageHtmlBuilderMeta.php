@@ -128,7 +128,7 @@ class PageHtmlBuilderMeta {
 		foreach ($leafs as $leaf) {
 			$n2nLocale = $leaf->getN2nLocale();
 			
-			if (null !== ($href = $this->view->buildUrl(MurlPage::obj($leaf), false))) {
+			if (null !== ($href = $this->view->buildUrl(MurlPage::obj($leaf)->absolute(), false))) {
 				$htmlMeta->addLink(array('rel' => 'alternate', 
 						'hreflang' => $this->view->getHttpContext()->n2nLocaleToHttpId($n2nLocale), 
 						'href' => $href));
