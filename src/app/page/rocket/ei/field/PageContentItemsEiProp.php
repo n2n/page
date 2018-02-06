@@ -18,6 +18,7 @@ use n2n\util\StringUtils;
 use rocket\core\model\Rocket;
 use rocket\spec\ei\EiPropPath;
 use rocket\impl\ei\component\prop\ci\model\ContentItemGuiField;
+use rocket\spec\ei\manage\gui\GuiField;
 
 class PageContentItemsEiProp extends ContentItemsEiProp {
 	/**
@@ -71,7 +72,7 @@ class PageContentItemsEiProp extends ContentItemsEiProp {
 		return $panelConfigs;
 	}
 	
-	public function buildGuiField(Eiu $eiu) {
+	public function buildGuiField(Eiu $eiu): ?GuiField {
 	    $contentItemGuiField = parent::buildGuiField($eiu);
 		CastUtils::assertTrue($contentItemGuiField instanceof ContentItemGuiField);
 		
@@ -80,6 +81,5 @@ class PageContentItemsEiProp extends ContentItemsEiProp {
 		}
 		
 		return $contentItemGuiField;
-	}
-	
+	}	
 }
