@@ -6,8 +6,8 @@ Jhtml.ready(function (elements) {
 	$(elements).find("select.page-method").each(function() {
 		var jqSelect = $(this);
 		var methodPanelNames = jqSelect.data('panel-names');
-		var jqCiContainer = jqSelect.parent().parent().parent().find("div.rocket-property.rocket-gui-field-pageControllerTs-contentItems");
-		var jqCiDivs = jqCiContainer.find("div.rocket-content-items").children("div.rocket-content-item-panel");
+		var jqCiContainer = jqSelect.parent().parent().parent().find("div.rocket-field.rocket-gui-field-pageControllerTs-contentItems");
+		var jqCiDivs = jqCiContainer.find("div.rocket-impl-content-items > div.rocket-impl-content-item-panel");
 		
 		var restrictCiPanels = function () {
 			var methodName = jqSelect.val();
@@ -17,7 +17,7 @@ Jhtml.ready(function (elements) {
 				var jqCiDiv = $(this);
 				
 				//exclude content items in content items - only regard content items in page content item panels
-				if (jqCiDiv.parents("div.rocket-content-item-panel").length > 0) return;
+				if (jqCiDiv.parents("div.rocket-impl-content-item-panel").length > 0) return;
 				
 				var panelName = jqCiDiv.data("name");
 				if (0 <= panelNames.indexOf(panelName)) {
