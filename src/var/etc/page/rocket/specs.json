@@ -235,28 +235,7 @@
                     "props": {
                         "draftable": false,
                         "useSystemN2nLocales": true,
-                        "systenN2nLocaleDefs": [
-                            {
-                                "id": "de_CH",
-                                "mandatory": false,
-                                "label": null
-                            },
-                            {
-                                "id": "fr_CH",
-                                "mandatory": false,
-                                "label": null
-                            },
-                            {
-                                "id": "it_CH",
-                                "mandatory": false,
-                                "label": null
-                            },
-                            {
-                                "id": "rm_CH",
-                                "mandatory": false,
-                                "label": null
-                            }
-                        ],
+                        "systenN2nLocaleDefs": [],
                         "customN2nLocaleDefs": [],
                         "min": "1"
                     },
@@ -278,15 +257,11 @@
                         "options": {
                             "content": "Content",
                             "internal": "Internal Redirect",
-                            "external": "Redirect to URL",
-                            "": null
+                            "external": "Redirect to URL"
                         },
                         "associatedGuiProps": {
                             "content": {
-                                "pageContent.pageContentTs.seTitle": "pageContent.pageContentTs.seTitle",
-                                "pageContent.pageContentTs.seDescription": "pageContent.pageContentTs.seDescription",
-                                "pageContent.pageContentTs.seKeywords": "pageContent.pageContentTs.seKeywords",
-                                "pageContent.pageController": "pageContent.pageController"
+                                "pageContent": "pageContent"
                             },
                             "internal": {
                                 "internalPage": "internalPage"
@@ -340,11 +315,20 @@
                     "entityProperty": "externalUrl"
                 },
                 "pageContent": {
-                    "class": "rocket\\impl\\ei\\component\\prop\\relation\\IntegratedOneToOneEiProp",
+                    "class": "rocket\\impl\\ei\\component\\prop\\relation\\EmbeddedOneToOneEiProp",
                     "props": {
+                        "displayInOverview": false,
+                        "displayInDetailView": true,
+                        "displayInEditView": true,
+                        "displayInAddView": true,
+                        "constant": false,
+                        "readOnly": false,
+                        "mandatory": true,
                         "draftable": false,
+                        "replaceable": false,
                         "targetRemovalStrategy": "prevent",
-                        "orphansAllowed": false
+                        "orphansAllowed": false,
+                        "reduced": false
                     },
                     "label": "Inhalt",
                     "objectProperty": "pageContent",
@@ -454,9 +438,7 @@
             "commands": {
                 "overview": {
                     "class": "rocket\\impl\\ei\\component\\command\\common\\OverviewEiCommand",
-                    "props": {
-                        "pageSize": "30"
-                    }
+                    "props": []
                 },
                 "edit": {
                     "class": "rocket\\impl\\ei\\component\\command\\common\\EditEiCommand",
@@ -839,7 +821,7 @@
                 "bulkyOrder": [
                     {
                         "label": "SEO",
-                        "type": "autonomic",
+                        "type": "light-group",
                         "displayStructure": [
                             {
                                 "label": null,
@@ -860,7 +842,7 @@
                     },
                     {
                         "label": null,
-                        "type": null,
+                        "type": "panel",
                         "guiIdPath": "pageController"
                     }
                 ],
@@ -879,7 +861,7 @@
                 "bulkyOrder": [
                     {
                         "label": "General",
-                        "type": "main",
+                        "type": "main-group",
                         "displayStructure": [
                             {
                                 "label": null,
@@ -920,7 +902,7 @@
                     },
                     {
                         "label": "Advanced",
-                        "type": "main",
+                        "type": "main-group",
                         "displayStructure": [
                             {
                                 "label": null,
@@ -955,30 +937,9 @@
                         ]
                     },
                     {
-                        "label": "SEO",
-                        "type": "simple",
-                        "displayStructure": [
-                            {
-                                "label": null,
-                                "type": null,
-                                "guiIdPath": "pageContent.pageContentTs.seTitle"
-                            },
-                            {
-                                "label": null,
-                                "type": null,
-                                "guiIdPath": "pageContent.pageContentTs.seDescription"
-                            },
-                            {
-                                "label": null,
-                                "type": null,
-                                "guiIdPath": "pageContent.pageContentTs.seKeywords"
-                            }
-                        ]
-                    },
-                    {
-                        "label": "Inhalt",
-                        "type": "simple",
-                        "guiIdPath": "pageContent.pageController"
+                        "label": null,
+                        "type": "simple-group",
+                        "guiIdPath": "pageContent"
                     }
                 ],
                 "partialControlOrder": [],
