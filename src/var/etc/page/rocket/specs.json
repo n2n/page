@@ -821,7 +821,7 @@
                 "bulkyOrder": [
                     {
                         "label": "SEO",
-                        "type": "autonomic",
+                        "type": "light-group",
                         "displayStructure": [
                             {
                                 "label": null,
@@ -842,7 +842,7 @@
                     },
                     {
                         "label": null,
-                        "type": null,
+                        "type": "panel",
                         "guiIdPath": "pageController"
                     }
                 ],
@@ -861,7 +861,7 @@
                 "bulkyOrder": [
                     {
                         "label": "General",
-                        "type": "main",
+                        "type": "main-group",
                         "displayStructure": [
                             {
                                 "label": null,
@@ -902,7 +902,7 @@
                     },
                     {
                         "label": "Advanced",
-                        "type": "main",
+                        "type": "main-group",
                         "displayStructure": [
                             {
                                 "label": null,
@@ -938,7 +938,7 @@
                     },
                     {
                         "label": null,
-                        "type": "simple",
+                        "type": "simple-group",
                         "guiIdPath": "pageContent"
                     }
                 ],
