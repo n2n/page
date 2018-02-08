@@ -20,17 +20,31 @@ class Nav {
 	}
 	
 	/**
+	 * If there is a current page according to {@link \page\model\PageState} its parent page with the lowest level
+	 * which still is displayed in the navigation will be used as base.
+	 * 
 	 * @return \page\ui\nav\NavComposer
 	 */
 	public static function navRoot() {
 		return new NavComposer(NavBranchCriteria::createNamed(NavBranchCriteria::NAMED_NAV_ROOT));
 	}
 	
-	public static function home(): NavComposer {
+	/**
+	 * The home page (page with an empty path part) will be used as base.
+	 * 
+	 * @return NavComposer
+	 */
+	public static function home() {
 		return new NavComposer(NavBranchCriteria::createNamed(NavBranchCriteria::NAMED_HOME));
 	}
 	
-	public static function subHome(string $subsystemName = null): NavComposer {
+	/**
+	 * The home page (page with an empty path part) of the passed subsystem will be used as base.
+	 * 
+	 * @param string $subsystemName
+	 * @return \page\ui\nav\NavComposer
+	 */
+	public static function subHome(string $subsystemName = null) {
 		return new NavComposer(NavBranchCriteria::createSubHome($subsystemName));
 	}
 	
@@ -69,7 +83,6 @@ class Nav {
 	public static function tag(string ...$tagNames): NavComposer {
 		return new NavComposer(NavBranchCriteria::create(null, $tagNames));
 	}
-	
 	
 	/**
 	 * Uses page as base which is marked with passed hooks.
