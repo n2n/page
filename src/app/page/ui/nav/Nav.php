@@ -67,7 +67,7 @@ class Nav {
 	 * @return \page\ui\nav\NavComposer
 	 */
 	public static function tag(string ...$tagNames): NavComposer {
-		return new NavComposer(NavBranchCriteria::create(null, ...$tagNames));
+		return new NavComposer(NavBranchCriteria::create(null, $tagNames));
 	}
 	
 	
