@@ -535,10 +535,10 @@
                         "constant": false,
                         "readOnly": false,
                         "draftable": false,
-                        "onAssociatedGuiProps": {
+                        "onAssociatedGuiProps": {},
+                        "offAssociatedGuiProps": {
                             "pathPart": "pathPart"
-                        },
-                        "offAssociatedGuiProps": []
+                        }
                     },
                     "label": "Start Page",
                     "objectProperty": "home"
