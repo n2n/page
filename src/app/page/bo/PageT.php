@@ -60,7 +60,7 @@ class PageT extends ObjectAdapter implements Translatable {
 	}
 	
 	public function isHome() {
-		return $this->pathPart === null;
+		return $this->pathPart === null && $this->id !== null;
 	}
 	
 	public function setHome(bool $home) {
