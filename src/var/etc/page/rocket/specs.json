@@ -525,6 +525,24 @@
                     "objectProperty": "title",
                     "entityProperty": "title"
                 },
+                "home": {
+                    "class": "rocket\\impl\\ei\\component\\prop\\bool\\BooleanEiProp",
+                    "props": {
+                        "displayInOverview": true,
+                        "displayInDetailView": true,
+                        "displayInEditView": true,
+                        "displayInAddView": true,
+                        "constant": false,
+                        "readOnly": false,
+                        "draftable": false,
+                        "onAssociatedGuiProps": {},
+                        "offAssociatedGuiProps": {
+                            "pathPart": "pathPart"
+                        }
+                    },
+                    "label": "Start Page",
+                    "objectProperty": "home"
+                },
                 "pathPart": {
                     "class": "rocket\\impl\\ei\\component\\prop\\string\\PathPartEiProp",
                     "props": {
@@ -537,7 +555,7 @@
                         "draftable": false,
                         "maxlength": "255",
                         "basePropertyFieldId": "name",
-                        "allowEmpty": true,
+                        "allowEmpty": false,
                         "uniquePerFieldId": "n2nLocale",
                         "critical": true
                     },
@@ -572,7 +590,10 @@
                         "readOnly": false,
                         "mandatory": true,
                         "draftable": false,
-                        "targetRemovalStrategy": "prevent"
+                        "targetRemovalStrategy": "prevent",
+                        "embeddedAddEnabled": false,
+                        "filtered": true,
+                        "hiddenIfTargetEmpty": false
                     },
                     "label": "Page Leaf",
                     "objectProperty": "page",
@@ -872,6 +893,11 @@
                                 "label": null,
                                 "type": null,
                                 "guiIdPath": "pageTs.title"
+                            },
+                            {
+                                "label": null,
+                                "type": null,
+                                "guiIdPath": "pageTs.home"
                             },
                             {
                                 "label": null,

@@ -58,6 +58,16 @@ class PageT extends ObjectAdapter implements Translatable {
 	public function setName($name) {
 		$this->name = $name;
 	}
+	
+	public function isHome() {
+		return $this->pathPart === null;
+	}
+	
+	public function setHome(bool $home) {
+		if ($home) {
+			$this->pathPart = null;
+		}
+	}
 
 	public function getPathPart() {
 		return $this->pathPart;
