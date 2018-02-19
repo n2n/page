@@ -52,34 +52,30 @@ class PageHtmlBuilderMeta {
 	}
 	
 	/**
-	 * @throws IllegalPageStateException
+	 * @see PageState::getCurrentLeafContent();
+	 * @param bool $required
 	 * @return \page\model\nav\LeafContent
 	 */
-	public function getCurrentLeafContent() {
-		if ($this->pageState->getCurrentLeafContent() !== null) {
-			return $this->pageState->getCurrentLeafContent();
-		}
-		
-		throw new IllegalPageStateException('No current LeafContent assigned.');
+	public function getCurrentLeafContent(bool $required = true) {
+		return $this->pageState->getCurrentLeafContent($required);
 	}
 	
 	/**
+	 * @see PageState::getCurrentLeaf();
 	 * @param bool $required
 	 * @return \page\model\nav\Leaf
 	 */
 	public function getCurrentLeaf(bool $required = true) {
-		if (!$required && !$this->hasCurrent()) {
-			return null;
-		}
-		
-		return $this->getCurrentLeafContent()->getLeaf();
+		return $this->pageState->getCurrentLeaf($required);
 	}
 	
 	/**
+	 * @see PageState::getCurrentNavBranch();
+	 * @param bool $required
 	 * @return \page\model\nav\NavBranch
 	 */
-	public function getCurrentNavBranch() {
-		return $this->getCurrentLeaf()->getNavBranch();
+	public function getCurrentNavBranch(bool $required = true) {
+		return $this->pageState->getCurrentNavBranch($required);
 	}
 	
 	/**
