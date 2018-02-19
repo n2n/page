@@ -52,6 +52,33 @@ class PageHtmlBuilderMeta {
 	}
 	
 	/**
+	 * @see PageState::getCurrentLeafContent();
+	 * @param bool $required
+	 * @return \page\model\nav\LeafContent
+	 */
+	public function getCurrentLeafContent(bool $required = true) {
+		return $this->pageState->getCurrentLeafContent($required);
+	}
+	
+	/**
+	 * @see PageState::getCurrentLeaf();
+	 * @param bool $required
+	 * @return \page\model\nav\Leaf
+	 */
+	public function getCurrentLeaf(bool $required = true) {
+		return $this->pageState->getCurrentLeaf($required);
+	}
+	
+	/**
+	 * @see PageState::getCurrentNavBranch();
+	 * @param bool $required
+	 * @return \page\model\nav\NavBranch
+	 */
+	public function getCurrentNavBranch(bool $required = true) {
+		return $this->pageState->getCurrentNavBranch($required);
+	}
+	
+	/**
 	 * Returns the title of the current page or the page name specified in app.ini if there is no 
 	 * current page.
 	 * 

@@ -47,13 +47,15 @@ class PageState implements RequestScoped {
 	}
 	
 	/**
+	 * @return \page\model\nav\LeafContent|null
 	 * @throws IllegalPageStateException
-	 * @return \page\model\nav\LeafContent
 	 */
-	public function getCurrentLeafContent() {
+	public function getCurrentLeafContent(bool $required = true) {
 		if ($this->leafContent !== null) {
 			return $this->leafContent;
 		}
+		
+		if (!$required) return null;
 		
 		throw new IllegalPageStateException('No current LeafContent assigned.');
 	}
@@ -61,19 +63,26 @@ class PageState implements RequestScoped {
 	/**
 	 * @param bool $required
 	 * @return \page\model\nav\Leaf
+	 * @throws IllegalPageStateException
 	 */
 	public function getCurrentLeaf(bool $required = true) {
-		if (!$required && !$this->hasCurrent()) {
-			return null;
+		if (null !== ($leafContent = $this->getCurrentLeafContent($required))) {
+			return $leafContent->getLeaf();
 		}
 	
-		return $this->getCurrentLeafContent()->getLeaf();
+		return null;
 	}
 	
 	/**
+	 * @param bool $required
 	 * @return \page\model\nav\NavBranch
+	 * @throws IllegalPageStateException
 	 */
-	public function getCurrentNavBranch() {
-		return $this->getCurrentLeaf()->getNavBranch();
+	public function getCurrentNavBranch(bool $required = true) {
+		if (null !== ($leaf = $this->getCurrentLeaf($required))) {
+			return $leaf->getNavBranch();
+		}
+		
+		return null;
 	}
 }
