@@ -67,7 +67,7 @@ class PageState implements RequestScoped {
 	 */
 	public function getCurrentLeaf(bool $required = true) {
 		if (null !== ($leafContent = $this->getCurrentLeafContent($required))) {
-			return $leafContent;
+			return $leafContent->getLeaf();
 		}
 	
 		return null;
