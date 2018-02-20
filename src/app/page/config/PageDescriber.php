@@ -43,33 +43,30 @@ class PageDescriber extends ConfigDescriberAdapter {
 		
 		$magCollection = new MagCollection();
 		
-		$magCollection->addMag(new BoolMag(self::ATTR_LOCALES_ACTIVE_KEY, 
-				'N2nLocales active (if checked, the locales will appear in the URL)',
-				$lar->getBool(self::ATTR_LOCALES_ACTIVE_KEY, self::ATTR_LOCALES_ACTIVE_DEFAULT)));
+		$magCollection->addMag(self::ATTR_LOCALES_ACTIVE_KEY, 
+				new BoolMag('N2nLocales active (if checked, the locales will appear in the URL)',
+						$lar->getBool(self::ATTR_LOCALES_ACTIVE_KEY, self::ATTR_LOCALES_ACTIVE_DEFAULT)));
 		
-		$magCollection->addMag(new BoolMag(self::ATTR_AUTO_LOCALE_REDIRECT_ACTIVE_KEY, 
-				'Auto locale Redirect',
-				$lar->getBool(self::ATTR_AUTO_LOCALE_REDIRECT_ACTIVE_KEY, 
-						self::ATTR_AUTO_LOCALE_REDIRECT_ACTIVE_DEFAULT)));
+		$magCollection->addMag(self::ATTR_AUTO_LOCALE_REDIRECT_ACTIVE_KEY, 
+				new BoolMag('Auto locale Redirect', $lar->getBool(self::ATTR_AUTO_LOCALE_REDIRECT_ACTIVE_KEY, 
+								self::ATTR_AUTO_LOCALE_REDIRECT_ACTIVE_DEFAULT)));
 		
-		$magCollection->addMag(new BoolMag(self::ATTR_SSL_SELECTABLE_KEY, 
-				'Ssl Option in Page Navi Available?',
+		$magCollection->addMag(self::ATTR_SSL_SELECTABLE_KEY, new BoolMag('Ssl Option in Page Navi Available?',
 				$lar->getBool(self::ATTR_SSL_SELECTABLE_KEY, self::ATTR_SSL_SELECTABLE_DEFAULT)));
 		
-		$magCollection->addMag(new BoolMag(self::ATTR_SSL_DEFAULT_KEY, 'Default Value for ssl', 
+		$magCollection->addMag(self::ATTR_SSL_DEFAULT_KEY, new BoolMag('Default Value for ssl', 
 				$lar->getBool(self::ATTR_SSL_DEFAULT_KEY, self::ATTR_SSL_DEFAULT_DEFAULT)));
 		
-		$magCollection->addMag(new StringArrayMag(self::ATTR_HOOK_KEYS_KEY, 
-				'Available Hooks', $lar->getScalarArray(self::ATTR_HOOK_KEYS_KEY)));
+		$magCollection->addMag(self::ATTR_HOOK_KEYS_KEY, 
+				new StringArrayMag('Available Hooks', $lar->getScalarArray(self::ATTR_HOOK_KEYS_KEY)));
 
-		$magCollection->addMag(new BoolMag(self::ATTR_SSL_SELECTABLE_KEY,
-				'Clear Cache on Page Event',
+		$magCollection->addMag(self::ATTR_SSL_SELECTABLE_KEY, new BoolMag('Clear Cache on Page Event',
 				$lar->getBool(self::ATTR_CACHE_CLEARED_ON_PAGE_EVENT_KEY, self::ATTR_CACHE_CLEARED_ON_PAGE_EVENT_DEFAULT)));
 		
-		$magCollection->addMag(new StringArrayMag(self::ATTR_PAGE_LISTENER_LOOKUP_IDS_KEY, 
-				'Page Listener Lookup Ids', $lar->getScalarArray(self::ATTR_PAGE_LISTENER_LOOKUP_IDS_KEY)));
+		$magCollection->addMag(self::ATTR_PAGE_LISTENER_LOOKUP_IDS_KEY, 
+				new StringArrayMag('Page Listener Lookup Ids', $lar->getScalarArray(self::ATTR_PAGE_LISTENER_LOOKUP_IDS_KEY)));
 		
-		$magCollection->addMag(new MagCollectionMag(self::ATTR_PAGE_CONTROLLERS_KEY, 'PageControllers', 
+		$magCollection->addMag(self::ATTR_PAGE_CONTROLLERS_KEY, new MagCollectionMag('PageControllers', 
 				$this->createPcMagCollection($lar->getArray(self::ATTR_PAGE_CONTROLLERS_KEY))));
 				
 		return new MagForm($magCollection);
@@ -79,19 +76,19 @@ class PageDescriber extends ConfigDescriberAdapter {
 		$specManager = $this->n2nContext->lookup(Rocket::class)->getSpecManager();
 		CastUtils::assertTrue($specManager instanceof SpecManager);
 		
-		$pageControllerEiSpec = $specManager->getEiSpecByClass(PageController::getClass());
+		$pageControllerEiSpec = $specManager->getEiTypeByClass(PageController::getClass());
 		
 		$ciConfigUtils = CiConfigUtils::createFromN2nContext($this->n2nContext);
 		
 		$lar = new LenientAttributeReader(new Attributes($pageControllersAttrs));
 		
 		$magCollection = new MagCollection();
-		foreach ($pageControllerEiSpec->getAllSubEiSpecs() as $subEiSpec) {
+		foreach ($pageControllerEiSpec->getAllSubEiTypes() as $subEiSpec) {
 			$pageControllerAttrs = $lar->getArray($subEiSpec->getId());
 			$pcLar = new LenientAttributeReader(new Attributes($pageControllerAttrs));
 			
 			$pcMagCollection = new MagCollection();
-			$magCollection->addMag(new MagCollectionMag($subEiSpec->getId(), $subEiSpec->getEiMaskCollection()
+			$magCollection->addMag($subEiSpec->getId(), new MagCollectionMag($subEiSpec->getEiMaskCollection()
 					->getOrCreateDefault()->getLabelLstr(), $pcMagCollection));
 			
 // 			$pcMagCollection->addMag(new StringMag(self::ATTR_PAGE_CONTROLLER_LABEL_KEY, 'Label', 
@@ -110,9 +107,9 @@ class PageDescriber extends ConfigDescriberAdapter {
 					$panelMagCollection->writeValues($ciConfigUtils->buildPanelConfigMagCollectionValues(
 							$panelsAttrs[$panelName]));
 				}
-				$panelsMagCollection->addMag(new MagCollectionMag($panelName, $panelName, $panelMagCollection));	
+				$panelsMagCollection->addMag($panelName, new MagCollectionMag($panelName, $panelMagCollection));	
 			}
-			$pcMagCollection->addMag(new MagCollectionMag(self::ATTR_PAGE_CONTROLLER_CI_PANELS_KEY, 'Panels', $panelsMagCollection));
+			$pcMagCollection->addMag(self::ATTR_PAGE_CONTROLLER_CI_PANELS_KEY, new MagCollectionMag('Panels', $panelsMagCollection));
 		}
 	
 		return $magCollection;
