@@ -535,7 +535,7 @@
                         "constant": false,
                         "readOnly": false,
                         "draftable": false,
-                        "onAssociatedGuiProps": {},
+                        "onAssociatedGuiProps": [],
                         "offAssociatedGuiProps": {
                             "pathPart": "pathPart"
                         }
