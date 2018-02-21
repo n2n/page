@@ -22,8 +22,8 @@ class PagePreviewController extends PreviewControllerAdapter {
 		if ($pageContent === null) return array();
 		
 		$options = array();
-		foreach ($pageContent->getPageContentTs() as $pageControllerT) {
-			$n2nLocale = $pageControllerT->getN2nLocale();
+		foreach ($page->getPageTs() as $pageT) {
+			$n2nLocale = $pageT->getN2nLocale();
 			$options[(string) $n2nLocale] = $n2nLocale->getName($eiu->frame()->getN2nLocale());
 		}
 		return $options;
