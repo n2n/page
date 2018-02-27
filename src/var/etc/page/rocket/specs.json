@@ -170,7 +170,7 @@
                         "readOnly": false,
                         "mandatory": false,
                         "draftable": false,
-                        "maxlength": null,
+                        "maxlength": 255,
                         "multiline": false
                     },
                     "label": "SE Keywords",
