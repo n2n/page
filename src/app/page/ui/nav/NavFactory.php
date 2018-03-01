@@ -51,13 +51,12 @@ class NavFactory {
 	}
 	
 	public function create(HtmlView $view, array $baseNavBranches) {
-		$ul = null;
-		if (null !== ($navBranch = ArrayUtils::current($baseNavBranches))) {
-			$this->navItemBuilder->setRootLevel($navBranch->getLevel());
-			$ul = $this->navItemBuilder->buildRootUl($view, $this->rootUlAttrs);
-		} else {
+		$navBranch = ArrayUtils::current($baseNavBranches);
+		if (null === $navBranch) {
 			return null;
-		}
+		} 
+		
+		$this->navItemBuilder->setRootLevel($navBranch->getLevel());
 		
 		$numProcessLevels = $this->numLevels;
 		if ($numProcessLevels === null) {
@@ -68,11 +67,18 @@ class NavFactory {
 			$numProcessOpenLevels = PHP_INT_MAX;
 		}
 
+		$liUics = [];
 		foreach ($baseNavBranches as $childNavBranch) {
-			$ul->appendContent($this->buildLi($view, $childNavBranch, $numProcessLevels, $numProcessOpenLevels));
+			if (null !== ($liUic = $this->buildLi($view, $childNavBranch, $numProcessLevels, $numProcessOpenLevels))) {
+				$liUics[] = $liUic;
+			}
 		}
 		
-		return $ul;
+		if (empty($liUics)) {
+			return null;
+		}
+		
+		return $this->navItemBuilder->buildRootUl($view, $this->rootUlAttrs)->append(...$liUics);
 	}
 	
 	private function buildInfos(NavBranch $navBranch): int {
@@ -113,12 +119,20 @@ class NavFactory {
 			return $li;
 		}
 
-		$ul = $this->navItemBuilder->buildUl($view, $leaf, $this->ulAttrs, $infos);
-		$li->appendContent($ul);
-		
+		$liUics = [];
 		foreach ($childNavBranches as $childNavBranch) {
-			$ul->appendContent($this->buildLi($view, $childNavBranch, $numProcessLevels, $numProcessOpenLevels));
+			if (null !== ($uic = $this->buildLi($view, $childNavBranch, $numProcessLevels, $numProcessOpenLevels))) {
+				$liUics[] = $uic;	
+			}
 		}
+		
+		if (empty($liUics)) return $li;
+		
+		$ul = $this->navItemBuilder->buildUl($view, $leaf, $this->ulAttrs, $infos);
+		foreach ($liUics as $liUic) {
+			$ul->appendContent($liUic);
+		}
+		$li->appendContent($ul);
 		
 		return $li;
 	}
