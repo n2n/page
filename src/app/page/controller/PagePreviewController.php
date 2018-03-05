@@ -1,7 +1,7 @@
 <?php
 namespace page\controller;
 
-use rocket\spec\ei\manage\preview\controller\PreviewControllerAdapter;
+use rocket\ei\manage\preview\controller\PreviewControllerAdapter;
 use n2n\reflection\CastUtils;
 use page\bo\Page;
 use n2n\l10n\N2nLocale;
@@ -10,7 +10,7 @@ use page\model\NavInitProcess;
 use n2n\util\uri\Path;
 use page\model\nav\UnavailableLeafException;
 use n2n\web\http\PageNotFoundException;
-use rocket\spec\ei\manage\util\model\Eiu;
+use rocket\ei\manage\util\model\Eiu;
 
 class PagePreviewController extends PreviewControllerAdapter {
 

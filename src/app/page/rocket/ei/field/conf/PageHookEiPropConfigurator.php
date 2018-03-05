@@ -1,7 +1,7 @@
 <?php
 namespace page\rocket\ei\field\conf;
 
-use rocket\spec\ei\component\EiSetupProcess;
+use rocket\ei\component\EiSetupProcess;
 use n2n\reflection\CastUtils;
 use page\config\PageConfig;
 use rocket\impl\ei\component\prop\adapter\AdaptableEiPropConfigurator;

@@ -1,11 +1,11 @@
 <?php
 namespace page\rocket\ei\field;
 
-use rocket\spec\ei\manage\util\model\Eiu;
+use rocket\ei\manage\util\model\Eiu;
 use n2n\reflection\CastUtils;
 use n2n\impl\web\dispatch\mag\model\EnumMag;
 use n2n\web\dispatch\mag\Mag;
-use rocket\spec\ei\component\prop\indepenent\EiPropConfigurator;
+use rocket\ei\component\prop\indepenent\EiPropConfigurator;
 use rocket\impl\ei\component\prop\enum\EnumEiProp;
 use page\rocket\ei\field\conf\PageHookEiPropConfigurator;
 
