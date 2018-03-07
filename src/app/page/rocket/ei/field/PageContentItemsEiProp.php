@@ -54,7 +54,7 @@ class PageContentItemsEiProp extends ContentItemsEiProp {
 		
 		$rocket = $eiu->frame()->getEiFrame()->getN2nContext()->lookup(Rocket::class);
 		CastUtils::assertTrue($rocket instanceof Rocket);
-		$specManager = $rocket->getSpecManager();
+		$specManager = $rocket->getSpec();
 		
 		$pageControllerClass = new \ReflectionClass($pageController);
 		$analyzer = new PageControllerAnalyzer($pageControllerClass);

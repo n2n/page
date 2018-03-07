@@ -15,7 +15,7 @@ use rocket\impl\ei\component\prop\ci\conf\CiConfigUtils;
 use n2n\impl\web\dispatch\mag\model\MagCollectionMag;
 use rocket\core\model\Rocket;
 use n2n\reflection\CastUtils;
-use rocket\spec\config\SpecManager;
+use rocket\spec\Spec;
 use page\model\PageControllerAnalyzer;
 use n2n\reflection\property\TypeConstraint;
 use n2n\reflection\ArgUtils;
@@ -73,8 +73,8 @@ class PageDescriber extends ConfigDescriberAdapter {
 	}
 		
 	private function createPcMagCollection(array $pageControllersAttrs) {
-		$specManager = $this->n2nContext->lookup(Rocket::class)->getSpecManager();
-		CastUtils::assertTrue($specManager instanceof SpecManager);
+		$specManager = $this->n2nContext->lookup(Rocket::class)->getSpec();
+		CastUtils::assertTrue($specManager instanceof Spec);
 		
 		$pageControllerEiSpec = $specManager->getEiTypeByClass(PageController::getClass());
 		
