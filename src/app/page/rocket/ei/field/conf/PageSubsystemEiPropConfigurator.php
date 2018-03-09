@@ -5,7 +5,7 @@ use n2n\impl\web\dispatch\mag\model\MagForm;
 use n2n\core\container\N2nContext;
 use n2n\web\dispatch\mag\MagDispatchable;
 use n2n\web\dispatch\mag\MagCollection;
-use rocket\ei\component\EiSetupProcess;
+use rocket\ei\component\EiSetup;
 use page\config\PageConfig;
 use n2n\reflection\CastUtils;
 use page\rocket\ei\field\PageSubsystemEiProp;
@@ -24,7 +24,7 @@ class PageSubsystemEiPropConfigurator extends AdaptableEiPropConfigurator {
 		$this->pageSubsystemEiField = $pageSubsystemEiField;
 	}
 	
-	public function setup(EiSetupProcess $eiSetupProcess) {
+	public function setup(EiSetup $eiSetupProcess) {
 		$n2nContext = $eiSetupProcess->getN2nContext();
 		$pageConfig = $eiSetupProcess->getN2nContext()->getModuleConfig('page');
 		CastUtils::assertTrue($pageConfig instanceof PageConfig);
