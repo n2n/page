@@ -1,11 +1,12 @@
 {
-    "specs": {
+    "types": {
         "page-page-content": {
-            "type": "entity",
+            "nature": "entity",
             "entity": "page\\bo\\PageContent",
             "dataSourceName": null,
             "label": "Inhalt",
             "pluralLabel": "Inhalte",
+            "iconType": null,
             "defaultSort": [],
             "fields": {
                 "id": {
@@ -95,14 +96,17 @@
                     "props": []
                 }
             },
-            "defaultMaskId": "page-content-common"
+            "partialControlOrder": [],
+            "overallControlOrder": [],
+            "entryControlOrder": []
         },
         "page-page-content-t": {
-            "type": "entity",
+            "nature": "entity",
             "entity": "page\\bo\\PageContentT",
             "dataSourceName": null,
             "label": "Page Content T",
             "pluralLabel": "Page Content Ts",
+            "iconType": null,
             "defaultSort": [],
             "fields": {
                 "id": {
@@ -196,10 +200,12 @@
                 }
             },
             "commands": [],
-            "defaultMaskId": null
+            "partialControlOrder": [],
+            "overallControlOrder": [],
+            "entryControlOrder": []
         },
         "page-page": {
-            "type": "entity",
+            "nature": "entity",
             "entity": "page\\bo\\Page",
             "dataSourceName": null,
             "nestedSetStrategy": {
@@ -208,6 +214,7 @@
             },
             "label": "Seite",
             "pluralLabel": "Seiten",
+            "iconType": null,
             "identityStringPattern": "{pageTs.name}",
             "previewControllerLookupId": "page\\controller\\PagePreviewController",
             "defaultSort": [],
@@ -461,14 +468,17 @@
                     "props": []
                 }
             },
-            "defaultMaskId": "page-common"
+            "partialControlOrder": [],
+            "overallControlOrder": [],
+            "entryControlOrder": []
         },
         "page-page-t": {
-            "type": "entity",
+            "nature": "entity",
             "entity": "page\\bo\\PageT",
             "dataSourceName": null,
             "label": "Page translation",
             "pluralLabel": "Page translations",
+            "iconType": null,
             "defaultSort": [],
             "fields": {
                 "id": {
@@ -616,14 +626,17 @@
                 }
             },
             "commands": [],
-            "defaultMaskId": null
+            "partialControlOrder": [],
+            "overallControlOrder": [],
+            "entryControlOrder": []
         },
         "page-page-controller-t": {
-            "type": "entity",
+            "nature": "entity",
             "entity": "page\\bo\\PageControllerT",
             "dataSourceName": null,
             "label": "Page Controller T",
             "pluralLabel": "Page Controller Ts",
+            "iconType": null,
             "fields": {
                 "pageController": {
                     "class": "rocket\\impl\\ei\\component\\prop\\relation\\ManyToOneSelectEiProp",
@@ -658,14 +671,17 @@
                 }
             },
             "commands": [],
-            "defaultMaskId": null
+            "partialControlOrder": [],
+            "overallControlOrder": [],
+            "entryControlOrder": []
         },
         "page-page-controller": {
-            "type": "entity",
+            "nature": "entity",
             "entity": "page\\bo\\PageController",
             "dataSourceName": null,
             "label": "Page type",
             "pluralLabel": "Page Controllers",
+            "iconType": null,
             "fields": {
                 "methodName": {
                     "class": "page\\rocket\\ei\\field\\PageMethodEiProp",
@@ -717,14 +733,17 @@
                 }
             },
             "commands": [],
-            "defaultMaskId": null
+            "partialControlOrder": [],
+            "overallControlOrder": [],
+            "entryControlOrder": []
         },
         "page-page-link": {
-            "type": "entity",
+            "nature": "entity",
             "entity": "page\\bo\\util\\PageLink",
             "dataSourceName": null,
             "label": "Page Link",
             "pluralLabel": "Page Links",
+            "iconType": null,
             "fields": {
                 "id": {
                     "class": "rocket\\impl\\ei\\component\\prop\\numeric\\IntegerEiProp",
@@ -829,14 +848,17 @@
                 }
             },
             "commands": [],
-            "defaultMaskId": null
+            "partialControlOrder": [],
+            "overallControlOrder": [],
+            "entryControlOrder": []
         }
     },
-    "eiMasks": {
+    "eiTypeExtensions": {
         "page-page-content": {
             "page-content-common": {
                 "label": "Inhalt",
                 "pluralLabel": "Inhalte",
+                "iconType": null,
                 "fields": [],
                 "commands": [],
                 "bulkyOrder": [
@@ -876,6 +898,7 @@
             "page-common": {
                 "label": "Seite",
                 "pluralLabel": "Seiten",
+                "iconType": null,
                 "identityStringPattern": "{pageTs.name}",
                 "fields": [],
                 "commands": [],
@@ -974,7 +997,7 @@
             }
         }
     },
-    "menuItems": {
+    "launchPads": {
         "page-page": []
     }
 }
