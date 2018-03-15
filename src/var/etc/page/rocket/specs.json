@@ -98,7 +98,35 @@
             },
             "partialControlOrder": [],
             "overallControlOrder": [],
-            "entryControlOrder": []
+            "entryControlOrder": [],
+            "bulkyOrder": [
+                {
+                    "label": "SEO",
+                    "type": "light-group",
+                    "displayStructure": [
+                        {
+                            "label": null,
+                            "type": null,
+                            "guiIdPath": "pageContentTs.seTitle"
+                        },
+                        {
+                            "label": null,
+                            "type": null,
+                            "guiIdPath": "pageContentTs.seDescription"
+                        },
+                        {
+                            "label": null,
+                            "type": null,
+                            "guiIdPath": "pageContentTs.seKeywords"
+                        }
+                    ]
+                },
+                {
+                    "label": null,
+                    "type": "panel",
+                    "guiIdPath": "pageController"
+                }
+            ]
         },
         "page-page-content-t": {
             "nature": "entity",
@@ -470,7 +498,96 @@
             },
             "partialControlOrder": [],
             "overallControlOrder": [],
-            "entryControlOrder": []
+            "entryControlOrder": [],
+            "bulkyOrder": [
+                {
+                    "label": "General",
+                    "type": "main-group",
+                    "displayStructure": [
+                        {
+                            "label": null,
+                            "type": null,
+                            "guiIdPath": "pageTs.name"
+                        },
+                        {
+                            "label": null,
+                            "type": null,
+                            "guiIdPath": "pageTs.title"
+                        },
+                        {
+                            "label": null,
+                            "type": null,
+                            "guiIdPath": "pageTs.home"
+                        },
+                        {
+                            "label": null,
+                            "type": null,
+                            "guiIdPath": "pageTs.pathPart"
+                        },
+                        {
+                            "label": null,
+                            "type": null,
+                            "guiIdPath": "pageTs.active"
+                        },
+                        {
+                            "label": null,
+                            "type": null,
+                            "guiIdPath": "type"
+                        },
+                        {
+                            "label": null,
+                            "type": null,
+                            "guiIdPath": "internalPage"
+                        },
+                        {
+                            "label": null,
+                            "type": null,
+                            "guiIdPath": "externalUrl"
+                        }
+                    ]
+                },
+                {
+                    "label": "Advanced",
+                    "type": "main-group",
+                    "displayStructure": [
+                        {
+                            "label": null,
+                            "type": null,
+                            "guiIdPath": "subsystemName"
+                        },
+                        {
+                            "label": null,
+                            "type": null,
+                            "guiIdPath": "inPath"
+                        },
+                        {
+                            "label": null,
+                            "type": null,
+                            "guiIdPath": "hookKey"
+                        },
+                        {
+                            "label": null,
+                            "type": null,
+                            "guiIdPath": "inNavigation"
+                        },
+                        {
+                            "label": null,
+                            "type": null,
+                            "guiIdPath": "online"
+                        },
+                        {
+                            "label": null,
+                            "type": null,
+                            "guiIdPath": "navTargetNewWindow"
+                        }
+                    ]
+                },
+                {
+                    "label": null,
+                    "type": "simple-group",
+                    "guiIdPath": "pageContent"
+                }
+            ]
         },
         "page-page-t": {
             "nature": "entity",
@@ -861,34 +978,7 @@
                 "iconType": null,
                 "fields": [],
                 "commands": [],
-                "bulkyOrder": [
-                    {
-                        "label": "SEO",
-                        "type": "light-group",
-                        "displayStructure": [
-                            {
-                                "label": null,
-                                "type": null,
-                                "guiIdPath": "pageContentTs.seTitle"
-                            },
-                            {
-                                "label": null,
-                                "type": null,
-                                "guiIdPath": "pageContentTs.seDescription"
-                            },
-                            {
-                                "label": null,
-                                "type": null,
-                                "guiIdPath": "pageContentTs.seKeywords"
-                            }
-                        ]
-                    },
-                    {
-                        "label": null,
-                        "type": "panel",
-                        "guiIdPath": "pageController"
-                    }
-                ],
+                
                 "partialControlOrder": [],
                 "overallControlOrder": [],
                 "entryControlOrder": []
@@ -902,95 +992,6 @@
                 "identityStringPattern": "{pageTs.name}",
                 "fields": [],
                 "commands": [],
-                "bulkyOrder": [
-                    {
-                        "label": "General",
-                        "type": "main-group",
-                        "displayStructure": [
-                            {
-                                "label": null,
-                                "type": null,
-                                "guiIdPath": "pageTs.name"
-                            },
-                            {
-                                "label": null,
-                                "type": null,
-                                "guiIdPath": "pageTs.title"
-                            },
-                            {
-                                "label": null,
-                                "type": null,
-                                "guiIdPath": "pageTs.home"
-                            },
-                            {
-                                "label": null,
-                                "type": null,
-                                "guiIdPath": "pageTs.pathPart"
-                            },
-                            {
-                                "label": null,
-                                "type": null,
-                                "guiIdPath": "pageTs.active"
-                            },
-                            {
-                                "label": null,
-                                "type": null,
-                                "guiIdPath": "type"
-                            },
-                            {
-                                "label": null,
-                                "type": null,
-                                "guiIdPath": "internalPage"
-                            },
-                            {
-                                "label": null,
-                                "type": null,
-                                "guiIdPath": "externalUrl"
-                            }
-                        ]
-                    },
-                    {
-                        "label": "Advanced",
-                        "type": "main-group",
-                        "displayStructure": [
-                            {
-                                "label": null,
-                                "type": null,
-                                "guiIdPath": "subsystemName"
-                            },
-                            {
-                                "label": null,
-                                "type": null,
-                                "guiIdPath": "inPath"
-                            },
-                            {
-                                "label": null,
-                                "type": null,
-                                "guiIdPath": "hookKey"
-                            },
-                            {
-                                "label": null,
-                                "type": null,
-                                "guiIdPath": "inNavigation"
-                            },
-                            {
-                                "label": null,
-                                "type": null,
-                                "guiIdPath": "online"
-                            },
-                            {
-                                "label": null,
-                                "type": null,
-                                "guiIdPath": "navTargetNewWindow"
-                            }
-                        ]
-                    },
-                    {
-                        "label": null,
-                        "type": "simple-group",
-                        "guiIdPath": "pageContent"
-                    }
-                ],
                 "partialControlOrder": [],
                 "overallControlOrder": [],
                 "entryControlOrder": []
