@@ -237,13 +237,16 @@ class NavPathResolver {
 		$pathPart = reset($cmdPathParts);
 		
 		if ($navBranch->isInPath()) {
-			if ($leaf->getPathPart() !== $pathPart || !$leaf->isAccessible()) return false;
+			if ($leaf->getPathPart() !== $pathPart) return false;
 			
 			$contextPathParts[] = array_shift($cmdPathParts);
-			$this->leafContents[] = $leaf->createLeafContent($this->n2nContext, new Path($cmdPathParts), 
-						new Path($contextPathParts));
-			$this->analyzeLevel($navBranch->getChildren(), $cmdPathParts, $contextPathParts);
-			return true;
+			if ($leaf->isAccessible()) {
+				$this->leafContents[] = $leaf->createLeafContent($this->n2nContext, new Path($cmdPathParts), 
+							new Path($contextPathParts));
+			}
+			
+			return $this->analyzeLevel($navBranch->getChildren(), $cmdPathParts, $contextPathParts) 
+					|| $leaf->isAccessible();
 		}
 		
 		if ($leaf->getPathPart() === $pathPart) {
@@ -329,7 +332,7 @@ class NavUrlBuilder {
 				throw new BranchUrlBuildException('Failed to build url of branch ' . $navBranch . ' for locale \'' 
 						. $n2nLocale . '\'.', 0, $e);
 			}
-		};
+		}
 	}
 	
 	private function buildUrlBuildTask(NavBranch $navBranch, N2nLocale $n2nLocale)  {

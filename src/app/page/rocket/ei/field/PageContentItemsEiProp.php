@@ -7,7 +7,7 @@ use n2n\impl\persistence\orm\property\ToManyEntityProperty;
 use n2n\reflection\ArgUtils;
 use rocket\impl\ei\component\prop\ci\model\ContentItem;
 use page\bo\PageControllerT;
-use rocket\spec\ei\manage\util\model\Eiu;
+use rocket\ei\util\model\Eiu;
 use rocket\impl\ei\component\prop\ci\ContentItemsEiProp;
 use n2n\reflection\CastUtils;
 use page\bo\PageController;
@@ -16,10 +16,10 @@ use page\config\PageConfig;
 use rocket\impl\ei\component\prop\ci\model\PanelConfig;
 use n2n\util\StringUtils;
 use rocket\core\model\Rocket;
-use rocket\spec\ei\EiPropPath;
+use rocket\ei\EiPropPath;
 use rocket\impl\ei\component\prop\ci\model\ContentItemGuiField;
-use rocket\spec\ei\manage\gui\GuiField;
-use rocket\spec\ei\manage\gui\ui\DisplayItem;
+use rocket\ei\manage\gui\GuiField;
+use rocket\ei\manage\gui\ui\DisplayItem;
 
 class PageContentItemsEiProp extends ContentItemsEiProp {
 	/**
@@ -31,7 +31,7 @@ class PageContentItemsEiProp extends ContentItemsEiProp {
 		return 'ContentItems (Page)';
 	}
 	
-	protected function getDisplayItemType() {
+	protected function getDisplayItemType(): ?string {
 		return DisplayItem::TYPE_PANEL;
 	}
 	
@@ -54,7 +54,7 @@ class PageContentItemsEiProp extends ContentItemsEiProp {
 		
 		$rocket = $eiu->frame()->getEiFrame()->getN2nContext()->lookup(Rocket::class);
 		CastUtils::assertTrue($rocket instanceof Rocket);
-		$specManager = $rocket->getSpecManager();
+		$specManager = $rocket->getSpec();
 		
 		$pageControllerClass = new \ReflectionClass($pageController);
 		$analyzer = new PageControllerAnalyzer($pageControllerClass);

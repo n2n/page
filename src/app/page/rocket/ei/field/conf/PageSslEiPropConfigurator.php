@@ -2,7 +2,7 @@
 namespace page\rocket\ei\field\conf;
 
 use rocket\impl\ei\component\prop\adapter\AdaptableEiPropConfigurator;
-use rocket\spec\ei\component\EiSetupProcess;
+use rocket\ei\component\EiSetup;
 use page\config\PageConfig;
 use n2n\reflection\CastUtils;
 use n2n\core\container\N2nContext;
@@ -11,7 +11,7 @@ use n2n\impl\web\dispatch\mag\model\MagForm;
 use n2n\web\dispatch\mag\MagCollection;
 use page\rocket\ei\field\PageSslEiProp;
 use rocket\impl\ei\component\prop\adapter\DisplaySettings;
-use rocket\spec\ei\manage\gui\ViewMode;
+use rocket\ei\manage\gui\ViewMode;
 
 class PageSslEiPropConfigurator extends AdaptableEiPropConfigurator {
 	private $pageSslEiField;
@@ -22,7 +22,7 @@ class PageSslEiPropConfigurator extends AdaptableEiPropConfigurator {
 		$this->autoRegister();
 	}
 	
-	public function setup(EiSetupProcess $eiSetupProcess) {
+	public function setup(EiSetup $eiSetupProcess) {
 		$pageConfig = $eiSetupProcess->getN2nContext()->getModuleConfig('page');
 		CastUtils::assertTrue($pageConfig instanceof PageConfig);
 		

@@ -1,7 +1,7 @@
 <?php
 namespace page\rocket\ei\field\conf;
 
-use rocket\spec\ei\component\EiSetupProcess;
+use rocket\ei\component\EiSetup;
 use n2n\reflection\CastUtils;
 use page\config\PageConfig;
 use rocket\impl\ei\component\prop\adapter\AdaptableEiPropConfigurator;
@@ -20,7 +20,7 @@ class PageHookEiPropConfigurator extends AdaptableEiPropConfigurator {
 		return 'Hooks Ei Field (Page)';
 	}
 	
-	public function setup(EiSetupProcess $eiSetupProcess) {
+	public function setup(EiSetup $eiSetupProcess) {
 		parent::setup($eiSetupProcess);
 		
 		$pageConfig = $eiSetupProcess->getN2nContext()->getModuleConfig('page');
