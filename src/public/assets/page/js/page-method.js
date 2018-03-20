@@ -3,7 +3,7 @@
  */
 
 Jhtml.ready(function (elements) {
-	$(elements).find("select.page-method").each(function() {
+	$("select.page-method").each(function() {
 		var jqSelect = $(this);
 		var methodPanelNames = jqSelect.data('panel-names');
 		var jqCiContainer = jqSelect.parent().parent().parent().find("div.rocket-field.rocket-gui-field-pageControllerTs-contentItems");
@@ -37,8 +37,8 @@ Jhtml.ready(function (elements) {
 		
 		restrictCiPanels();
 		
-		jqSelect.change(restrictCiPanels);
-		
+		jqSelect.off("change");
+		jqSelect.on("change", restrictCiPanels);
 	});
 });
 
