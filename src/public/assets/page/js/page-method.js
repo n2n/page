@@ -12,7 +12,7 @@ Jhtml.ready(function (elements) {
 		var restrictCiPanels = function () {
 			var methodName = jqSelect.val();
 			var panelNames = methodPanelNames[methodName];
-			var display = false;
+			var display = panelNames.length > 0;
 			jqCiDivs.each(function () {
 				var jqCiDiv = $(this);
 				
