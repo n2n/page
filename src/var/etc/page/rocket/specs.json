@@ -96,9 +96,6 @@
                     "props": []
                 }
             },
-            "partialControlOrder": [],
-            "overallControlOrder": [],
-            "entryControlOrder": [],
             "bulkyOrder": [
                 {
                     "label": "SEO",
@@ -126,7 +123,10 @@
                     "type": "panel",
                     "guiIdPath": "pageController"
                 }
-            ]
+            ],
+            "partialControlOrder": [],
+            "overallControlOrder": [],
+            "entryControlOrder": []
         },
         "page-page-content-t": {
             "nature": "entity",
@@ -270,7 +270,28 @@
                     "props": {
                         "draftable": false,
                         "useSystemN2nLocales": true,
-                        "systenN2nLocaleDefs": [],
+                        "systenN2nLocaleDefs": [
+                            {
+                                "id": "de_CH",
+                                "mandatory": false,
+                                "label": null
+                            },
+                            {
+                                "id": "fr_CH",
+                                "mandatory": false,
+                                "label": null
+                            },
+                            {
+                                "id": "it_CH",
+                                "mandatory": false,
+                                "label": null
+                            },
+                            {
+                                "id": "rm_CH",
+                                "mandatory": false,
+                                "label": null
+                            }
+                        ],
                         "customN2nLocaleDefs": [],
                         "min": "1"
                     },
@@ -436,7 +457,7 @@
                         "readOnly": false,
                         "draftable": false
                     },
-                    "label": "In Navigation",
+                    "label": "In Nav",
                     "objectProperty": "inNavigation",
                     "entityProperty": "inNavigation"
                 },
@@ -473,7 +494,9 @@
             "commands": {
                 "overview": {
                     "class": "rocket\\impl\\ei\\component\\command\\common\\OverviewEiCommand",
-                    "props": []
+                    "props": {
+                        "pageSize": "30"
+                    }
                 },
                 "edit": {
                     "class": "rocket\\impl\\ei\\component\\command\\common\\EditEiCommand",
@@ -496,9 +519,43 @@
                     "props": []
                 }
             },
-            "partialControlOrder": [],
-            "overallControlOrder": [],
-            "entryControlOrder": [],
+            "overviewOrder": [
+                {
+                    "label": null,
+                    "type": null,
+                    "guiIdPath": "pageTs.name"
+                },
+                {
+                    "label": null,
+                    "type": null,
+                    "guiIdPath": "type"
+                },
+                {
+                    "label": null,
+                    "type": null,
+                    "guiIdPath": "pageTs.pathPart"
+                },
+                {
+                    "label": null,
+                    "type": null,
+                    "guiIdPath": "pageTs.active"
+                },
+                {
+                    "label": null,
+                    "type": null,
+                    "guiIdPath": "pageTs.home"
+                },
+                {
+                    "label": null,
+                    "type": null,
+                    "guiIdPath": "inPath"
+                },
+                {
+                    "label": null,
+                    "type": null,
+                    "guiIdPath": "inNavigation"
+                }
+            ],
             "bulkyOrder": [
                 {
                     "label": "General",
@@ -587,7 +644,10 @@
                     "type": "simple-group",
                     "guiIdPath": "pageContent"
                 }
-            ]
+            ],
+            "partialControlOrder": [],
+            "overallControlOrder": [],
+            "entryControlOrder": []
         },
         "page-page-t": {
             "nature": "entity",
@@ -652,24 +712,6 @@
                     "objectProperty": "title",
                     "entityProperty": "title"
                 },
-                "home": {
-                    "class": "rocket\\impl\\ei\\component\\prop\\bool\\BooleanEiProp",
-                    "props": {
-                        "displayInOverview": true,
-                        "displayInDetailView": true,
-                        "displayInEditView": true,
-                        "displayInAddView": true,
-                        "constant": false,
-                        "readOnly": false,
-                        "draftable": false,
-                        "onAssociatedGuiProps": [],
-                        "offAssociatedGuiProps": {
-                            "pathPart": "pathPart"
-                        }
-                    },
-                    "label": "Start Page",
-                    "objectProperty": "home"
-                },
                 "pathPart": {
                     "class": "rocket\\impl\\ei\\component\\prop\\string\\PathPartEiProp",
                     "props": {
@@ -725,6 +767,24 @@
                     "label": "Page Leaf",
                     "objectProperty": "page",
                     "entityProperty": "page"
+                },
+                "home": {
+                    "class": "rocket\\impl\\ei\\component\\prop\\bool\\BooleanEiProp",
+                    "props": {
+                        "displayInOverview": true,
+                        "displayInDetailView": true,
+                        "displayInEditView": true,
+                        "displayInAddView": true,
+                        "constant": false,
+                        "readOnly": false,
+                        "draftable": false,
+                        "onAssociatedGuiProps": [],
+                        "offAssociatedGuiProps": {
+                            "pathPart": "pathPart"
+                        }
+                    },
+                    "label": "Home",
+                    "objectProperty": "home"
                 },
                 "active": {
                     "class": "rocket\\impl\\ei\\component\\prop\\bool\\BooleanEiProp",
@@ -978,7 +1038,6 @@
                 "iconType": null,
                 "fields": [],
                 "commands": [],
-                
                 "partialControlOrder": [],
                 "overallControlOrder": [],
                 "entryControlOrder": []
