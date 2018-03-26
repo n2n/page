@@ -80,7 +80,7 @@ class PageContentItemsEiProp extends ContentItemsEiProp {
 	public function buildGuiField(Eiu $eiu): ?GuiField {
 	    $contentItemGuiField = parent::buildGuiField($eiu);
 		CastUtils::assertTrue($contentItemGuiField instanceof ContentItemGuiField);
-		
+	
 		if (empty($contentItemGuiField->getPanelConfigs())) {
 			return null;
 		}
