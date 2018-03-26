@@ -88,8 +88,8 @@ class PageDescriber extends ConfigDescriberAdapter {
 			$pcLar = new LenientAttributeReader(new Attributes($pageControllerAttrs));
 			
 			$pcMagCollection = new MagCollection();
-			$magCollection->addMag($subEiSpec->getId(), new MagCollectionMag($subEiSpec->getEiTypeExtensionCollection()
-					->getOrCreateDefault()->getLabelLstr(), $pcMagCollection));
+			$magCollection->addMag($subEiSpec->getId(), new MagCollectionMag($subEiSpec->getEiMask()->getLabelLstr(), 
+					$pcMagCollection));
 			
 // 			$pcMagCollection->addMag(new StringMag(self::ATTR_PAGE_CONTROLLER_LABEL_KEY, 'Label', 
 // 					$pcLar->getString(self::ATTR_PAGE_CONTROLLER_LABEL_KEY)));
