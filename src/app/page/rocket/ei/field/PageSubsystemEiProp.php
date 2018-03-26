@@ -41,7 +41,7 @@ class PageSubsystemEiProp extends EnumEiProp {
 		}
 		
 		$attrs['class'] = 'rocket-critical-input';
-		$dtc = new DynamicTextCollection('page', $eiu->frame()->getEiFrame()->getN2nLocale());
+		$dtc = new DynamicTextCollection('page', $eiu->frame()->getN2nLocale());
 		$attrs['data-confirm-message'] = $dtc->translate('field_subsystem_unlock_confirm');
 		$attrs['data-edit-label'] =  $dtc->translate('common_edit_label');
 		$attrs['data-cancel-label'] =  $dtc->translate('common_cancel_label');
