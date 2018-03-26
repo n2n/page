@@ -22,9 +22,9 @@ use n2n\reflection\ArgUtils;
 use rocket\impl\ei\component\prop\ci\model\PanelConfig;
 
 class PageDescriber extends ConfigDescriberAdapter {
-	const ATTR_LOCALES_ACTIVE_KEY = 'n2nLocaleUrls';
+	const ATTR_LOCALES_ACTIVE_KEY = 'localeUrls';
 	const ATTR_LOCALES_ACTIVE_DEFAULT = true;
-	const ATTR_AUTO_LOCALE_REDIRECT_ACTIVE_KEY = 'autoN2nLocaleRedirect';
+	const ATTR_AUTO_LOCALE_REDIRECT_ACTIVE_KEY = 'autoLocaleRedirect';
 	const ATTR_AUTO_LOCALE_REDIRECT_ACTIVE_DEFAULT = true;
 	const ATTR_SSL_SELECTABLE_KEY = 'sslSelectable';
 	const ATTR_SSL_SELECTABLE_DEFAULT = false;
@@ -88,8 +88,8 @@ class PageDescriber extends ConfigDescriberAdapter {
 			$pcLar = new LenientAttributeReader(new Attributes($pageControllerAttrs));
 			
 			$pcMagCollection = new MagCollection();
-			$magCollection->addMag($subEiSpec->getId(), new MagCollectionMag($subEiSpec->getEiTypeExtensionCollection()
-					->getOrCreateDefault()->getLabelLstr(), $pcMagCollection));
+			$magCollection->addMag($subEiSpec->getId(), new MagCollectionMag($subEiSpec->getEiMask()->getLabelLstr(), 
+					$pcMagCollection));
 			
 // 			$pcMagCollection->addMag(new StringMag(self::ATTR_PAGE_CONTROLLER_LABEL_KEY, 'Label', 
 // 					$pcLar->getString(self::ATTR_PAGE_CONTROLLER_LABEL_KEY)));

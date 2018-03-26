@@ -192,7 +192,7 @@ class PageHtmlBuilderMeta {
 		$pageMurl = MurlPage::obj($this->pageState->getCurrentNavBranch())->fallback();
 		
 		$urls = array();
-		foreach ($this->view->getHttpContext()->getContextN2nLocales() as $n2nLocale) {
+		foreach ($this->view->getHttpContext()->getAvailableN2nLocales() as $n2nLocale) {
 			if (null !== ($url = $this->view->buildUrl($pageMurl->locale($n2nLocale), false))) {
 				$urls[$n2nLocale->getId()] = $url; 
 			}

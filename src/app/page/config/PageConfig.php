@@ -5,7 +5,7 @@ use n2n\reflection\ArgUtils;
 
 class PageConfig {
 	private $n2nLocalesActive = true;
-	private $autoN2nLocaleRedirectAllowed = true;
+	private $autoLocaleRedirectAllowed = true;
 	private $sslSelectable = false;
 	private $sslDefault = true;
 	private $hooks = array();
@@ -35,15 +35,15 @@ class PageConfig {
 	 * @return boolean
 	 */
 	public function isAutoN2nLocaleRedirectAllowed(): bool {
-		return $this->autoN2nLocaleRedirectAllowed;
+		return $this->autoLocaleRedirectAllowed;
 	}
 	
 	/**
 	 * @see self::isAutoN2nLocaleRedirectAllowed()
-	 * @param bool $autoN2nLocaleRedirectAllowed
+	 * @param bool $autoLocaleRedirectAllowed
 	 */
-	public function setAutoN2nLocaleRedirectAllowed(bool $autoN2nLocaleRedirectAllowed) {
-		$this->autoN2nLocaleRedirectAllowed = $autoN2nLocaleRedirectAllowed;
+	public function setAutoN2nLocaleRedirectAllowed(bool $autoLocaleRedirectAllowed) {
+		$this->autoLocaleRedirectAllowed = $autoLocaleRedirectAllowed;
 	}
 
 	/**
