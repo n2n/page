@@ -28,7 +28,6 @@ class PageUrlComposer implements UrlComposer {
 	private $queryExt;
 	private $fragment;
 	private $ssl;
-	private $subsystem;
 	private $absolute = false;
 	private $accessiblesOnly = true;
 
