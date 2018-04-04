@@ -18,12 +18,12 @@ use page\model\leaf\ContentLeaf;
 use page\model\nav\NavBranch;
 use page\model\nav\UnknownNavBranchException;
 use page\model\NavInitProcess;
-use page\model\nav\ObjAffiliationTester;
 use n2n\reflection\ArgUtils;
 use page\model\PageMonitor;
 use n2n\persistence\orm\annotation\AnnoEntityListeners;
 use n2n\reflection\CastUtils;
 use page\model\leaf\EmptyLeaf;
+use page\model\PageObjAffiliationTester;
 
 class Page extends ObjectAdapter {
 	private static function _annos(AnnoInit $ai) {
@@ -353,30 +353,5 @@ class Page extends ObjectAdapter {
 			$leaf->setTargetNewWindow($this->navTargetNewWindow);
 			$navBranch->addLeaf($leaf);
 		}
-	}
-}
-
-class PageObjAffiliationTester implements ObjAffiliationTester {
-	private $pageId;
-
-	public function __construct($pageId) {
-		$this->pageId = $pageId;
-	}
-	
-	public function isAffiliatedWith($obj): bool {
-		if ($obj instanceof PageController) {
-			$obj = $obj->getPageContent();
-		}
-			
-		if ($obj instanceof PageContent) {
-			$obj = $obj->getPage();
-		}
-			
-		if ($obj instanceof PageT) {
-			if (!$obj->getN2nLocale()->equals($this->n2nLocale)) return false;
-			$page = $obj->getPage();
-		}
-		
-		return ($obj instanceof Page && $obj->getId() === $this->pageId);
 	}
 }
