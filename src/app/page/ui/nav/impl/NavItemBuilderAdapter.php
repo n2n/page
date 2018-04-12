@@ -45,7 +45,7 @@ abstract class NavItemBuilderAdapter implements NavItemBuilder {
 			$attrs = HtmlUtils::mergeAttrs(array('target' => '_blank'), $attrs);
 		}
 		
-		$attrs = HtmlUtils::mergeAttrs($this->buildAdditionalLiAttrs($view, $leaf, $attrs, $infos), $attrs);
+		$attrs = HtmlUtils::mergeAttrs($this->buildAdditionalAAttrs($view, $leaf, $attrs, $infos), $attrs);
 		
 		if (!array_key_exists('title', $attrs)) {
 			$attrs['title'] = $leaf->getTitle();
