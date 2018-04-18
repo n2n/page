@@ -19,6 +19,7 @@ use rocket\impl\ei\component\prop\translation\Translator;
 use n2n\l10n\N2nLocale;
 use n2n\reflection\ArgUtils;
 use page\model\PageMonitor;
+use n2n\web\http\controller\InterceptorFactory;
 
 abstract class PageController extends ObjectAdapter implements Controller {
 	use ControllingUtilsTrait;
@@ -107,7 +108,8 @@ abstract class PageController extends ObjectAdapter implements Controller {
 				$request->getMethod(), $request->getQuery(), $request->getPostQuery(),
 				$request->getAcceptRange(), $this->getN2nContext());
 		$invokerFactory->setConstantValues($controllerContext->getParams());
-		$interpreter = new ControllerInterpreter(new \ReflectionClass($this), $invokerFactory);
+		$interpreter = new ControllerInterpreter(new \ReflectionClass($this), $invokerFactory,
+				new InterceptorFactory($this->getN2nContext()));
 		
 		$this->resetCacheControl();
 		
