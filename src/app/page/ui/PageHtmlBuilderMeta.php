@@ -208,6 +208,13 @@ class PageHtmlBuilderMeta {
 	}
 	
 	/**
+	 * @return bool
+	 */
+	public function containsContentItemPanelName(string $panelName) {
+		return $this->pageState->getCurrentLeafContent()->containsContentItemPanelName($panelName);
+	}
+	
+	/**
 	 * Returns the {@link \rocket\impl\ei\component\prop\ci\model\ContentItem}s of to the current page
 	 * which have been assigned to the panel with the passed name.
 	 * 
