@@ -121,6 +121,8 @@ class PageDescriber extends ConfigDescriberAdapter {
 		$ciConfigUtils = CiConfigUtils::createFromN2nContext($this->n2nContext);
 		
 		foreach ($values[self::ATTR_PAGE_CONTROLLERS_KEY] as $pagecontrollerKey => $pageControllerValues) {
+			if (empty($pageControllerValues)) continue;
+			
 			foreach ($pageControllerValues[self::ATTR_PAGE_CONTROLLER_CI_PANELS_KEY] as $key => $ciPanelValues) {
 				$values[self::ATTR_PAGE_CONTROLLERS_KEY][$pagecontrollerKey][self::ATTR_PAGE_CONTROLLER_CI_PANELS_KEY][$key] = $ciConfigUtils->buildPanelConfigAttrs($ciPanelValues);
 			}
