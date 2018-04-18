@@ -113,17 +113,27 @@ abstract class PageController extends ObjectAdapter implements Controller {
 		
 		$this->resetCacheControl();
 		
+		if (!$this->intercept(...$interpreter->findControllerInterceptors())) {
+			return true;
+		}
+		
 		$prepareInvokers = $interpreter->interpret(ControllerInterpreter::DETECT_PREPARE_METHOD);
 		foreach ($prepareInvokers as $prepareInvoker) {
 			$this->invokerInfo = $prepareInvoker;
-			$prepareInvoker->getInvoker()->invoke($this);
+			if ($this->intercept(...$prepareInvoker->getInterceptors())) {
+				$prepareInvoker->getInvoker()->invoke($this);
+			} else {
+				return true;
+			}
 		}
 
 		$invokerInfo = $interpreter->interpretCustom($this->getMethodName());
 		if ($invokerInfo === null) return false;
 		
 		$this->cu()->setInvokerInfo($invokerInfo);
-		$invokerInfo->getInvoker()->invoke($this);
+		if ($this->intercept(...$invokerInfo->getInterceptors())) {
+			$invokerInfo->getInvoker()->invoke($this);
+		}
 		return true;
 	}
 	
