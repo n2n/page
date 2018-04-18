@@ -10,6 +10,7 @@ use page\config\PageConfig;
 use n2n\web\http\controller\ControllerContext;
 use n2n\core\container\N2nContext;
 use n2n\reflection\ArgUtils;
+use n2n\web\http\Subsystem;
 
 class NavTree {
 	private $rootNavBranches = array();
@@ -137,17 +138,19 @@ class NavTree {
 		return $urlBuilder;
 	}
 	
-	public function createSitemapItems(N2nContext $n2nContext, string $subsystemName = null) {
-		$sitemapItemBuilder = new SitemapItemBuilder($n2nContext, $subsystemName);
+	public function createSitemapItems(N2nContext $n2nContext, Subsystem $subsystem = null) {
+		$sitemapItemBuilder = new SitemapItemBuilder($n2nContext, $subsystem);
 		return $sitemapItemBuilder->analyzeLevel($this->rootNavBranches);
 	}
 }
 
 class SitemapItemBuilder {
+	private $n2nContext;
+	private $subsystem;
 	
-	public function __construct(N2nContext $n2nContext, string $subsystemName = null) {
+	public function __construct(N2nContext $n2nContext, Subsystem $subsystem = null) {
 		$this->n2nContext = $n2nContext;
-		$this->subsystemName = $subsystemName;
+		$this->subsystem = $subsystem;
 	}
 	
 	public function analyzeLevel(array $navBranches): array {
@@ -162,8 +165,17 @@ class SitemapItemBuilder {
 		$sitemapItems = array();
 		
 		foreach ($navBranch->getLeafs() as $leaf) {
-			if ($this->subsystemName !== $leaf->getSubsystemName() || !$leaf->isAccessible()) continue;
+			if (!$leaf->isAccessible()) continue;
 			
+			if ($leaf->getSubsystemName() !== null 
+					&& ($this->subsystem === null || $this->subsystem->getName() !== $leaf->getSubsystemName())) {
+				continue;
+			}
+			
+			if ($this->subsystem !== null && !$this->subsystem->containsN2nLocaleId($leaf->getN2nLocale())) {
+				continue;
+			}
+					
 			$leafSitemapItems = $leaf->createSitemapItems($this->n2nContext);
 			ArgUtils::valArrayReturn($leafSitemapItems, $leaf, 'createSitemapItems', SitemapItem::class);
 			$sitemapItems = array_merge($sitemapItems, $leafSitemapItems);

@@ -106,12 +106,7 @@ class SiteController extends ControllerAdapter implements RequestScoped {
 	}
 	
 	public function sitemap() {
-		$subsystemName = null;
-		if (null !== ($subsystem = $this->getRequest()->getSubsystem())) {
-			$subsystemName = $subsystem->getName();
-		}
-		
 		$this->forward('..\view\sitemap.xml', array('sitemapItems' => $this->pageState->getNavTree()
-				->createSitemapItems($this->getN2nContext(), $subsystemName)));
+				->createSitemapItems($this->getN2nContext(),  $this->getRequest()->getSubsystem())));
 	}
 }
