@@ -902,8 +902,7 @@
                                 "label": null
                             }
                         ],
-                        "customN2nLocaleDefs": [],
-                        "min": 1
+                        "customN2nLocaleDefs": []
                     },
                     "label": "Page Controller Ts",
                     "objectProperty": "pageControllerTs",
