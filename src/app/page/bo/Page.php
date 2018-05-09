@@ -117,6 +117,9 @@ class Page extends ObjectAdapter {
 		return array(self::TYPE_EXTERNAL, self::TYPE_INTERNAL, self::TYPE_CONTENT);
 	}
 	
+	/**
+	 * @return Page|null
+	 */
 	public function getInternalPage() {
 		return $this->internalPage;
 	}

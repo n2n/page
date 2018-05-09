@@ -299,11 +299,21 @@
                     "objectProperty": "pageTs",
                     "entityProperty": "pageTs"
                 },
-                "type": {
-                    "class": "rocket\\impl\\ei\\component\\prop\\enum\\EnumEiProp",
+                "pageType": {
+                    "class": "page\\rocket\\ei\\field\\PageTypeEiProp",
                     "props": {
                         "displayInOverview": true,
                         "displayInDetailView": true,
+                        "displayInEditView": false,
+                        "displayInAddView": false
+                    },
+                    "label": "Type"
+                },
+                "type": {
+                    "class": "rocket\\impl\\ei\\component\\prop\\enum\\EnumEiProp",
+                    "props": {
+                        "displayInOverview": false,
+                        "displayInDetailView": false,
                         "displayInEditView": true,
                         "displayInAddView": true,
                         "constant": false,
@@ -528,7 +538,7 @@
                 {
                     "label": null,
                     "type": null,
-                    "guiIdPath": "type"
+                    "guiIdPath": "pageType"
                 },
                 {
                     "label": null,
