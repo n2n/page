@@ -651,7 +651,7 @@
                 },
                 {
                     "label": null,
-                    "type": "simple-group",
+                    "type": null,
                     "guiIdPath": "pageContent"
                 }
             ],
