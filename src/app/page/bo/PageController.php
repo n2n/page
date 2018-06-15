@@ -37,7 +37,7 @@ abstract class PageController extends ObjectAdapter implements Controller {
 	private $pageContent;
 	private $pageControllerTs;
 	private $methodName;
-	
+
 	private function _prePersist(PageMonitor $pageMonitor) {
 		if ($this->pageContent !== null) {
 			$pageMonitor->registerRelatedChange($this->pageContent->getPage());
@@ -98,7 +98,7 @@ abstract class PageController extends ObjectAdapter implements Controller {
 	public final function setMethodName(string $methodName) {
 		return $this->methodName = $methodName;
 	}
-	
+
 	public final function execute(ControllerContext $controllerContext): bool {
 		$this->init($controllerContext);
 

@@ -117,15 +117,16 @@ class PageHtmlBuilderMeta {
 	 */
 	public function applySeMeta(string $seTitle = null, string $titleSeparator = self::DEFAULT_TITLE_SEPARATOR) {
 		if (!$this->pageState->hasCurrent()) return;
-		
+
 		$leafContent = $this->pageState->getCurrentLeafContent();
+		$leaf = $leafContent->getLeaf();
 		$htmlMeta = $this->view->getHtmlBuilder()->meta();
 	
 		if ($seTitle === null) {
 			$seTitle = $leafContent->getSeTitle();
 		}
 		if ($seTitle === null) {
-			$seTitle = $leafContent->getLeaf()->getName() . $titleSeparator 
+			$seTitle = $leaf->getName() . $titleSeparator
 					. $this->view->lookup(GeneralConfig::class)->getPageName();
 		}
 		$htmlMeta->setTitle($seTitle);
@@ -136,6 +137,10 @@ class PageHtmlBuilderMeta {
 	
 		if (null !== ($seKeywords = $leafContent->getSeKeywords())) {
 			$htmlMeta->addMeta(array('name' => 'keywords', 'content' => $seKeywords), 'name');
+		}
+
+		if (!$leaf->isIndexable()) {
+			$htmlMeta->addMeta(array('name' => 'robots', 'content' => 'noindex, nofollow'), 'name');
 		}
 	}
 	

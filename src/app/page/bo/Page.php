@@ -51,7 +51,8 @@ class Page extends ObjectAdapter {
 	private $lastMod;
 	private $lastModBy;
 	private $pageTs;
-	
+	private $indexable = true;
+
 	public function __construct() {
 		$this->lastMod = new \DateTime();
 		$this->pageContent = new PageContent();
@@ -237,7 +238,15 @@ class Page extends ObjectAdapter {
 	public function setPageTs(\ArrayObject $pageTs) {
 		$this->pageTs = $pageTs;
 	}
-	
+
+	public function setIndexable(bool $indexable) {
+		$this->indexable = $indexable;
+	}
+
+	public function getIndexable() {
+		return $this->indexable;
+	}
+
 	public function equals($obj) {
 		return $obj instanceof Page && $this->id == $obj->getId();
 	}
@@ -291,6 +300,7 @@ class Page extends ObjectAdapter {
 			$leaf->setInNavigation($leaf->isAccessible() && $this->inNavigation);
 			$leaf->setTargetNewWindow($this->navTargetNewWindow);
 			$navBranch->addLeaf($leaf);
+			$leaf->setIndexable($this->indexable);
 		}
 	}
 	
@@ -307,6 +317,7 @@ class Page extends ObjectAdapter {
 			$leaf->setInNavigation($leaf->isAccessible() && $this->inNavigation);
 			$leaf->setTargetNewWindow($this->navTargetNewWindow);
 			$navBranch->addLeaf($leaf);
+			$leaf->setIndexable($this->indexable);
 		}
 			
 		$that = $this;
@@ -339,6 +350,7 @@ class Page extends ObjectAdapter {
 			$leaf->setTitle($pageT->getTitle());
 			$leaf->setInNavigation($leaf->isAccessible() && $this->inNavigation);
 			$leaf->setTargetNewWindow($this->navTargetNewWindow);
+			$leaf->setIndexable($this->indexable);
 			$navBranch->addLeaf($leaf);
 		}
 	}
@@ -354,6 +366,7 @@ class Page extends ObjectAdapter {
 			$leaf->setTitle($pageT->getTitle());
 			$leaf->setInNavigation($leaf->isAccessible() && $this->inNavigation);
 			$leaf->setTargetNewWindow($this->navTargetNewWindow);
+			$leaf->setIndexable($this->indexable);
 			$navBranch->addLeaf($leaf);
 		}
 	}

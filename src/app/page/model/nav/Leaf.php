@@ -98,6 +98,8 @@ interface Leaf {
 	public function createSitemapItems(N2nContext $n2nContext): array;
 	
 	public function __toString(): string;
+
+	public function isIndexable(): bool;
 }
 
 class SitemapItem {

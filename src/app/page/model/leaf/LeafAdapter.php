@@ -19,7 +19,8 @@ abstract class LeafAdapter implements Leaf {
 	protected $accessible = true;
 	protected $inNavigation = true;
 	protected $targetNewWindow = false;
-	
+	protected $indexable = true;
+
 	public function __construct(N2nLocale $n2nLocale, string $name) {
 		$this->n2nLocale = $n2nLocale;
 		$this->name = $name;
@@ -144,7 +145,15 @@ abstract class LeafAdapter implements Leaf {
 	public function createSitemapItems(N2nContext $n2nContext): array {
 		return array();
 	}
-	
+
+	public function setIndexable(bool $indexable) {
+		$this->indexable = $indexable;
+	}
+
+	public function isIndexable(): bool {
+		return $this->indexable;
+	}
+
 	public function __toString(): string {
 		return (new \ReflectionClass($this))->getShortName() . ' ' . $this->name . ' in ' . $this->n2nLocale;
 	}

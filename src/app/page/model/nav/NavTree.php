@@ -165,7 +165,7 @@ class SitemapItemBuilder {
 		$sitemapItems = array();
 		
 		foreach ($navBranch->getLeafs() as $leaf) {
-			if (!$leaf->isAccessible()) continue;
+			if (!$leaf->isAccessible() || !$leaf->isIndexable()) continue;
 			
 			if ($leaf->getSubsystemName() !== null 
 					&& ($this->subsystem === null || $this->subsystem->getName() !== $leaf->getSubsystemName())) {
