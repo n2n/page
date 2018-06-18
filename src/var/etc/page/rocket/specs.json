@@ -499,6 +499,22 @@
                     "label": "Online",
                     "objectProperty": "online",
                     "entityProperty": "online"
+                },
+                "indexable": {
+                    "class": "rocket\\impl\\ei\\component\\prop\\bool\\BooleanEiProp",
+                    "props": {
+                        "displayInOverview": false,
+                        "displayInDetailView": true,
+                        "displayInEditView": true,
+                        "displayInAddView": true,
+                        "constant": false,
+                        "readOnly": false,
+                        "mandatory": true,
+                        "draft": false
+                    },
+                    "label": "Indexable",
+                    "objectProperty": "indexable",
+                    "entityProperty": "indexable"
                 }
             },
             "commands": {
@@ -646,6 +662,11 @@
                             "label": null,
                             "type": null,
                             "guiIdPath": "navTargetNewWindow"
+                        },
+                        {
+                            "label": null,
+                            "type": null,
+                            "guiIdPath": "indexable"
                         }
                     ]
                 },
