@@ -28,7 +28,7 @@ class PageMonitor implements ThreadScoped {
 	
 	public function registerRelatedChange(Page $page) {
 		$objHash = spl_object_hash($page);
-		if (isset($this->pageEvents[$objHash])) {
+		if (!isset($this->pageEvents[$objHash])) {
 			$this->pageEvents[$objHash] = new PageEvent(PageEvent::TYPE_UPDATE, $page);
 		}
 	}
