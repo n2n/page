@@ -671,7 +671,7 @@
                     ]
                 },
                 {
-                    "label": null,
+                    "label": "panel",
                     "type": null,
                     "guiIdPath": "pageContent"
                 }
