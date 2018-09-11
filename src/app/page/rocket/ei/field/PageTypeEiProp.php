@@ -2,7 +2,7 @@
 namespace page\rocket\ei\field;
 
 use n2n\impl\web\ui\view\html\HtmlView;
-use rocket\ei\util\model\Eiu;
+use rocket\ei\util\Eiu;
 use rocket\impl\ei\component\prop\adapter\DisplayableEiPropAdapter;
 use n2n\reflection\CastUtils;
 use page\bo\Page;
