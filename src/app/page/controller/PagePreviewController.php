@@ -10,7 +10,7 @@ use page\model\NavInitProcess;
 use n2n\util\uri\Path;
 use page\model\nav\UnavailableLeafException;
 use n2n\web\http\PageNotFoundException;
-use rocket\ei\util\model\Eiu;
+use rocket\ei\util\Eiu;
 
 class PagePreviewController extends PreviewControllerAdapter {
 
