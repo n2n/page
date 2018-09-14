@@ -15,7 +15,7 @@ use n2n\reflection\CastUtils;
 use page\annotation\AnnoPage;
 use page\annotation\AnnoPageCiPanels;
 use n2n\web\hangar\WebTemplateDef;
-use hangar\util\Huo;
+use hangar\api\Huo;
 
 class PageControllerTemplateDef implements HangarTemplateDef {
 	const PROP_NAME_PAGE_METHODS = 'pageMethods';
