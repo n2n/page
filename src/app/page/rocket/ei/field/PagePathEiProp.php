@@ -33,7 +33,7 @@ class PagePathEiProp extends DisplayableEiPropAdapter {
 			return new HtmlElement('span', ['class' => 'text-truncate' ], $pathStr);
 		}
 		
-		return new HtmlElement('span', ['title' =>  $pathStr, 'class' => 'text-truncate', 'style' => 'max-width: 50px'], StringUtils::reduceFront($pathStr, 100, '...'));
+		return new HtmlElement('span', ['title' =>  $pathStr], StringUtils::reduceFront($pathStr, 30, '...'));
 	}
 	
 	
