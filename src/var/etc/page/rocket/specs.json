@@ -240,8 +240,8 @@
                 "left": "lft",
                 "right": "rgt"
             },
-            "label": "Seite",
-            "pluralLabel": "Seiten",
+            "label": "page_txt",
+            "pluralLabel": "pages_txt",
             "iconType": null,
             "identityStringPattern": "{pageTs.name}",
             "previewControllerLookupId": "page\\controller\\PagePreviewController",
@@ -307,7 +307,7 @@
                         "displayInEditView": false,
                         "displayInAddView": false
                     },
-                    "label": "Type"
+                    "label": "page_type_txt"
                 },
                 "type": {
                     "class": "rocket\\impl\\ei\\component\\prop\\enum\\EnumEiProp",
@@ -559,27 +559,17 @@
                 {
                     "label": null,
                     "type": null,
-                    "guiIdPath": "pageTs.pathPart"
-                },
-                {
-                    "label": null,
-                    "type": null,
-                    "guiIdPath": "pageTs.active"
-                },
-                {
-                    "label": null,
-                    "type": null,
-                    "guiIdPath": "pageTs.home"
-                },
-                {
-                    "label": null,
-                    "type": null,
-                    "guiIdPath": "inPath"
+                    "guiIdPath": "pageTs.pagePath"
                 },
                 {
                     "label": null,
                     "type": null,
                     "guiIdPath": "inNavigation"
+                },
+                {
+                    "label": "language_txt",
+                    "type": null,
+                    "guiIdPath": "pageTs.active"
                 }
             ],
             "bulkyOrder": [
@@ -608,7 +598,7 @@
                             "guiIdPath": "pageTs.pathPart"
                         },
                         {
-                            "label": null,
+                            "label": "language_active_txt",
                             "type": null,
                             "guiIdPath": "pageTs.active"
                         },
@@ -746,8 +736,8 @@
                 "pathPart": {
                     "class": "rocket\\impl\\ei\\component\\prop\\string\\PathPartEiProp",
                     "props": {
-                        "displayInOverview": true,
-                        "displayInDetailView": true,
+                        "displayInOverview": false,
+                        "displayInDetailView": false,
                         "displayInEditView": true,
                         "displayInAddView": true,
                         "constant": false,
@@ -759,9 +749,19 @@
                         "uniquePerFieldId": "n2nLocale",
                         "critical": true
                     },
-                    "label": "URL-Part",
+                    "label": "path_part_txt",
                     "objectProperty": "pathPart",
                     "entityProperty": "pathPart"
+                },
+                "pagePath": {
+                    "class": "page\\rocket\\ei\\field\\PagePathEiProp",
+                    "props": {
+                        "displayInOverview": true,
+                        "displayInDetailView": true,
+                        "displayInEditView": false,
+                        "displayInAddView": false
+                    },
+                    "label": "path_txt"
                 },
                 "n2nLocale": {
                     "class": "rocket\\impl\\ei\\component\\prop\\l10n\\N2nLocaleEiProp",
@@ -828,7 +828,7 @@
                         "readOnly": false,
                         "draftable": false
                     },
-                    "label": "active",
+                    "label": "language_online_txt",
                     "objectProperty": "active",
                     "entityProperty": "active"
                 }

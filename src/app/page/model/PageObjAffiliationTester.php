@@ -24,8 +24,7 @@ class PageObjAffiliationTester implements ObjAffiliationTester {
 		}
 		
 		if ($obj instanceof PageT) {
-			if (!$obj->getN2nLocale()->equals($this->n2nLocale)) return false;
-			$page = $obj->getPage();
+			$obj = $obj->getPage();
 		}
 		
 		return ($obj instanceof Page && $obj->getId() === $this->pageId);
