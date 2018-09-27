@@ -428,7 +428,7 @@ class NavUrlBuilder {
 		$navBranch = $task->getNavBranch();
 		$n2nLocale = $task->getN2nLocale();
 		
-		$path = buildPath($navBranch, $n2nLocale);
+		$path = $this->buildPath($navBranch, $n2nLocale);
 		
 		return $this->httpContext->buildContextUrl($ssl, $subsystemName, $this->absolute)
 				->pathExt($path, $this->pathExt);
