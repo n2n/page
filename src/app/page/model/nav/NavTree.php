@@ -364,21 +364,6 @@ class NavUrlBuilder {
 	public function buildPath(NavBranch $navBranch, N2nLocale $n2nLocale) {
 		$leaf = $navBranch->getLeafByN2nLocale($n2nLocale);
 		
-		$subsystemName = $leaf->getSubsystemName();
-		
-		if ($subsystemName === null && !$this->httpContext->containsContextN2nLocale($n2nLocale)) {
-			foreach ($this->httpContext->getAvailableSubsystems() as $subsystem) {
-				if (!$subsystem->containsN2nLocaleId($n2nLocale)) continue;
-				
-				$subsystemName = $subsystem->getName();
-			}
-		}
-		
-		$ssl = null;
-		if ($this->pageConfig->isSslSelectable()) {
-			$ssl = $leaf->isSsl();
-		}
-		
 		$pathParts = array();
 		
 		if (!$leaf->isHome()) {
@@ -427,6 +412,22 @@ class NavUrlBuilder {
 
 		$navBranch = $task->getNavBranch();
 		$n2nLocale = $task->getN2nLocale();
+		$leaf = $navBranch->getLeafByN2nLocale($n2nLocale);
+		
+		
+		$ssl = null;
+		if ($this->pageConfig->isSslSelectable()) {
+			$ssl = $leaf->isSsl();
+		}
+		
+		$subsystemName = $leaf->getSubsystemName();
+		if ($subsystemName === null && !$this->httpContext->containsContextN2nLocale($n2nLocale)) {
+			foreach ($this->httpContext->getAvailableSubsystems() as $subsystem) {
+				if (!$subsystem->containsN2nLocaleId($n2nLocale)) continue;
+				
+				$subsystemName = $subsystem->getName();
+			}
+		}
 		
 		$path = $this->buildPath($navBranch, $n2nLocale);
 		
