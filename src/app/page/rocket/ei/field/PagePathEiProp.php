@@ -30,7 +30,7 @@ class PagePathEiProp extends DisplayableEiPropAdapter {
 		$pathStr = (string) $navUrlBuilder->buildPath($navBranch, $pageT->getN2nLocale())->chLeadingDelimiter(true);
 		
 		if (mb_strlen($pathStr) <= 30) {
-			return new HtmlElement('span', null, $pathStr);
+			return new HtmlElement('span', ['class' => 'text-truncate' ], $pathStr);
 		}
 		
 		return new HtmlElement('span', ['title' =>  $pathStr], StringUtils::reduceFront($pathStr, 30, '...'));

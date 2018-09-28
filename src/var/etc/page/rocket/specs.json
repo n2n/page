@@ -337,7 +337,7 @@
                             }
                         }
                     },
-                    "label": "Type",
+                    "label": "type_txt",
                     "objectProperty": "type"
                 },
                 "internalPage": {
@@ -729,7 +729,7 @@
                         "maxlength": null,
                         "multiline": false
                     },
-                    "label": "Title",
+                    "label": "title_txt",
                     "objectProperty": "title",
                     "entityProperty": "title"
                 },
@@ -814,7 +814,7 @@
                             "pathPart": "pathPart"
                         }
                     },
-                    "label": "Home",
+                    "label": "home_txt",
                     "objectProperty": "home"
                 },
                 "active": {
