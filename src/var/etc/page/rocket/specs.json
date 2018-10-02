@@ -63,7 +63,7 @@
                         "targetRemovalStrategy": "prevent",
                         "orphansAllowed": false
                     },
-                    "label": "Page Behaviour",
+                    "label": "content_txt",
                     "objectProperty": "pageController",
                     "entityProperty": "pageController"
                 },
@@ -98,8 +98,13 @@
             },
             "bulkyOrder": [
                 {
+                    "label": null,
+                    "type": "main-group",
+                    "guiIdPath": "pageController"
+                },
+                {
                     "label": "SEO",
-                    "type": "light-group",
+                    "type": "main-group",
                     "displayStructure": [
                         {
                             "label": null,
@@ -117,11 +122,6 @@
                             "guiIdPath": "pageContentTs.seKeywords"
                         }
                     ]
-                },
-                {
-                    "label": null,
-                    "type": "panel",
-                    "guiIdPath": "pageController"
                 }
             ],
             "partialControlOrder": [],
@@ -661,8 +661,8 @@
                     ]
                 },
                 {
-                    "label": "panel",
-                    "type": null,
+                    "label": null,
+                    "type": "panel",
                     "guiIdPath": "pageContent"
                 }
             ],

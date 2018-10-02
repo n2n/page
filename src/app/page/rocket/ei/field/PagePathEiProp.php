@@ -10,6 +10,7 @@ use page\model\PageState;
 use page\model\nav\NavUrlBuilder;
 use n2n\impl\web\ui\view\html\HtmlElement;
 use n2n\util\StringUtils;
+use page\bo\Page;
 
 class PagePathEiProp extends DisplayableEiPropAdapter {
 	
@@ -29,11 +30,17 @@ class PagePathEiProp extends DisplayableEiPropAdapter {
 		
 		$pathStr = (string) $navUrlBuilder->buildPath($navBranch, $pageT->getN2nLocale())->chLeadingDelimiter(true);
 		
-		if (mb_strlen($pathStr) <= 30) {
-			return new HtmlElement('span', ['class' => 'text-truncate' ], $pathStr);
+		$cssClass = null;
+		if (!$pageT->isActive() || !$pageT->getPage()->isOnline() 
+				|| $pageT->getPage()->getType() != Page::TYPE_CONTENT) {
+			$cssClass = 'rocket-inactive';
 		}
 		
-		return new HtmlElement('span', ['title' =>  $pathStr], StringUtils::reduceFront($pathStr, 30, '...'));
+		if (mb_strlen($pathStr) <= 30) {
+			return new HtmlElement('span', ['class' => $cssClass], $pathStr);
+		}
+		
+		return new HtmlElement('span', ['title' =>  $pathStr, 'class' => $cssClass], StringUtils::reduceFront($pathStr, 30, '...'));
 	}
 	
 	
