@@ -11,6 +11,8 @@ use n2n\reflection\CastUtils;
 use n2n\persistence\orm\util\NestedSetItem;
 use page\model\nav\NavTree;
 use n2n\core\container\AppCache;
+use n2n\l10n\N2nLocale;
+use page\bo\PageT;
 
 class PageDao implements ThreadScoped {
 	private $em;
@@ -19,6 +21,21 @@ class PageDao implements ThreadScoped {
 	private function _init(EntityManager $em, AppCache $appCache) {
 		$this->em = $em;
 		$this->cacheStore = $appCache->lookupCacheStore(PageDao::class);
+	}
+	
+	public function getHomePageTExcept(N2nLocale $n2nLocale, ?string $subsystemName, PageT $exceptPageT) {
+		$criteria = $this->em->createCriteria();
+		$criteria->select('pt')->from(PageT::getClass(), 'pt')
+				->where(['pt.n2nLocale' => $n2nLocale, 'pt.pathPart' => null])->match('pt', '!=', $exceptPageT);
+		
+// 		if ($subsystemName === null) {
+			$criteria->where(['pt.page.subsystemName' => $subsystemName]);	
+// 		} else {
+// 			$criteria->where()->andGroup()->match('pt.page.subsystemName', '=', null)
+// 					->orMatch('pt.page.subsystemName', '==', $subsystemName);
+// 		}
+		
+		return $criteria->limit(1)->toQuery()->fetchSingle();
 	}
 	
 	public function getCachedNavTree() {
