@@ -35,9 +35,10 @@ class PageTEiModificator extends IndependentEiModificatorAdapter  {
 			}
 			
 			$homePageT = $pageDao->getHomePageTExcept($n2nLocale, $subsystemName, $pageT);
+			if ($homePageT === null) {
+				return;
+			}
 			
-			
-			test(spl_object_hash($eiuEntry->getEiEntry()));
 			$fieldErrorInfo = $eiuEntry->getEiEntry()->getValidationResult()->getEiFieldValidationResult(EiPropPath::create('home'));
 			$fieldErrorInfo->addError(new MessageCode('home_already_exists_txt', ['current_home' => $homePageT->getRealTitle()],
 					 Message::SEVERITY_ERROR, 'page'));
