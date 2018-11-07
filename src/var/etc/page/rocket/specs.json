@@ -1062,14 +1062,6 @@
             "entryControlOrder": []
         }
     },
-    "eiModificators": {
-    	"page-page-t": {
-    		"page-page-t-ei-modificator": {
-    			"class": "page\\rocket\\ei\\modificator\\PageTEiModificator"
-    		}
-    	
-    	}
-    },
     "eiTypeExtensions": {
         "page-page-content": {
             "page-content-common": {
@@ -1094,6 +1086,14 @@
                 "partialControlOrder": [],
                 "overallControlOrder": [],
                 "entryControlOrder": []
+            }
+        }
+    },
+    "eiModificators": {
+        "page-page-t": {
+            "page-page-t-ei-modificator": {
+                "class": "page\\rocket\\ei\\modificator\\PageTEiModificator",
+                "props": []
             }
         }
     },
