@@ -957,7 +957,7 @@
                 "id": {
                     "class": "rocket\\impl\\ei\\component\\prop\\numeric\\IntegerEiProp",
                     "props": {
-                        "displayInOverview": true,
+                        "displayInOverview": false,
                         "displayInDetailView": true,
                         "displayInEditView": false,
                         "displayInAddView": false,
@@ -1040,7 +1040,7 @@
                 "label": {
                     "class": "rocket\\impl\\ei\\component\\prop\\string\\StringEiProp",
                     "props": {
-                        "displayInOverview": true,
+                        "displayInOverview": false,
                         "displayInDetailView": true,
                         "displayInEditView": true,
                         "displayInAddView": true,
