@@ -9,10 +9,10 @@ use rocket\ei\component\EiSetup;
 use page\config\PageConfig;
 use n2n\reflection\CastUtils;
 use page\rocket\ei\field\PageSubsystemEiProp;
-use rocket\impl\ei\component\prop\adapter\AdaptableEiPropConfigurator;
+use rocket\impl\ei\component\prop\adapter\config\AdaptableEiPropConfigurator;
 use n2n\l10n\DynamicTextCollection;
 use rocket\ei\manage\gui\ViewMode;
-use rocket\impl\ei\component\prop\adapter\DisplaySettings;
+use rocket\impl\ei\component\prop\adapter\config\DisplaySettings;
 
 class PageSubsystemEiPropConfigurator extends AdaptableEiPropConfigurator {
 	private $pageSubsystemEiField;
