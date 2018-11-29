@@ -39,7 +39,7 @@ class PageTEiModificator extends IndependentEiModificatorAdapter  {
 			}
 			
 			$validationResult = $eiuEntry->getEiEntry()->getValidationResult()->getEiFieldValidationResult(EiPropPath::create('home'));
-			$validationResult->addError(Message::createCodeArg('home_already_exists_txt', ['current_home' => $homePageT->getRealTitle()],
+			$validationResult->addError(Message::createCodeArg('home_already_exists_err', ['current_home' => $homePageT->getRealTitle()],
 					 Message::SEVERITY_ERROR, 'page'));
 		});
 	}
