@@ -4,7 +4,7 @@ namespace page\rocket\ei\field;
 use rocket\impl\ei\component\prop\bool\BooleanEiProp;
 use rocket\ei\component\prop\indepenent\EiPropConfigurator;
 use page\rocket\ei\field\conf\PageSslEiPropConfigurator;
-use rocket\impl\ei\component\prop\adapter\DisplaySettings;
+use rocket\impl\ei\component\prop\adapter\config\DisplaySettings;
 
 class PageSslEiProp extends BooleanEiProp {
 	

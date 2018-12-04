@@ -8,7 +8,6 @@ use page\model\PageDao;
 use n2n\reflection\CastUtils;
 use page\bo\PageT;
 use rocket\ei\EiPropPath;
-use n2n\l10n\MessageCode;
 use n2n\l10n\Message;
 
 class PageTEiModificator extends IndependentEiModificatorAdapter  {
@@ -39,8 +38,8 @@ class PageTEiModificator extends IndependentEiModificatorAdapter  {
 				return;
 			}
 			
-			$fieldErrorInfo = $eiuEntry->getEiEntry()->getValidationResult()->getEiFieldValidationResult(EiPropPath::create('home'));
-			$fieldErrorInfo->addError(new MessageCode('home_already_exists_txt', ['current_home' => $homePageT->getRealTitle()],
+			$validationResult = $eiuEntry->getEiEntry()->getValidationResult()->getEiFieldValidationResult(EiPropPath::create('home'));
+			$validationResult->addError(Message::createCodeArg('home_already_exists_err', ['current_home' => $homePageT->getRealTitle()],
 					 Message::SEVERITY_ERROR, 'page'));
 		});
 	}
