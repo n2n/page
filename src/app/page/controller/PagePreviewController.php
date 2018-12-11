@@ -30,7 +30,7 @@ class PagePreviewController extends PreviewControllerAdapter {
 	}
 	
 	public function index(PageState $pageState, Path $cmdPath, Path $cmdContextPath, array $params = null) {
-		$page = $this->getPreviewModel()->getEntityObj();
+		$page = $this->eiu()->object()->getEntityObj();
 		CastUtils::assertTrue($page instanceof Page);
 		
 		$pageContent = $page->getPageContent();
