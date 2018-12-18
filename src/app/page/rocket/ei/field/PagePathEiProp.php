@@ -33,7 +33,8 @@ class PagePathEiProp extends DisplayableEiPropAdapter {
 		try {
 			$pathStr = (string) $navUrlBuilder->buildPath($navBranch, $pageT->getN2nLocale())->chLeadingDelimiter(true);
 		} catch (UnavailableLeafException $e) {
-			return new HtmlElement('span', ['class' => 'rocket-inactive'], $view->getL10nText('unreachable_err'));
+			return new HtmlElement('span', ['class' => 'rocket-inactive'], 
+					$view->getL10nText('unreachable_err', null, null, null, 'page'));
 		}
 		
 		$cssClass = null;
