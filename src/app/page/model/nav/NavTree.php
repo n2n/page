@@ -360,6 +360,7 @@ class NavUrlBuilder {
 	 * @param NavBranch $navBranch
 	 * @param N2nLocale $n2nLocale
 	 * @return \n2n\util\uri\Path
+	 * @throws UnavailableLeafException
 	 */
 	public function buildPath(NavBranch $navBranch, N2nLocale $n2nLocale) {
 		$leaf = $navBranch->getLeafByN2nLocale($n2nLocale);

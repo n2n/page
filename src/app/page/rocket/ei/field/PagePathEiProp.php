@@ -11,6 +11,7 @@ use page\model\nav\NavUrlBuilder;
 use n2n\impl\web\ui\view\html\HtmlElement;
 use n2n\util\StringUtils;
 use page\bo\Page;
+use page\model\nav\UnavailableLeafException;
 
 class PagePathEiProp extends DisplayableEiPropAdapter {
 	
@@ -28,7 +29,12 @@ class PagePathEiProp extends DisplayableEiPropAdapter {
 		$navUrlBuilder->setAccessiblesOnly(false);
 		$navUrlBuilder->setFallbackAllowed(false);
 		
-		$pathStr = (string) $navUrlBuilder->buildPath($navBranch, $pageT->getN2nLocale())->chLeadingDelimiter(true);
+		$pathStr = null;
+		try {
+			$pathStr = (string) $navUrlBuilder->buildPath($navBranch, $pageT->getN2nLocale())->chLeadingDelimiter(true);
+		} catch (UnavailableLeafException $e) {
+			return new HtmlElement('span', ['class' => 'rocket-inactive'], $view->getL10nText('unreachable_err'));
+		}
 		
 		$cssClass = null;
 		if (!$pageT->isActive() || !$pageT->getPage()->isOnline() 
