@@ -37,7 +37,7 @@ class PageMethodEiProp extends DraftablePropertyEiPropAdapter {
 		return $mag;
 	}
 	
-	public function createOutputUiComponent(HtmlView $view, Eiu $eiu)  {
+	public function createUiComponent(HtmlView $view, Eiu $eiu)  {
 		return $view->getHtmlBuilder()->getEsc(StringUtils::pretty(
 				$eiu->field()->getValue(EiPropPath::from($this))));
 	}

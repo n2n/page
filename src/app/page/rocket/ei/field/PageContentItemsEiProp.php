@@ -31,7 +31,7 @@ class PageContentItemsEiProp extends ContentItemsEiProp {
 		return 'ContentItems (Page)';
 	}
 	
-	protected function getDisplayItemType(): ?string {
+	protected function getDisplayItemType(): string {
 		return DisplayItem::TYPE_PANEL;
 	}
 	

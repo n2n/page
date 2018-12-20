@@ -11,7 +11,7 @@ use n2n\impl\web\ui\view\html\HtmlElement;
 
 class PageTypeEiProp extends DisplayableEiPropAdapter {
 	
-	public function createOutputUiComponent(HtmlView $view, Eiu $eiu) {
+	public function createUiComponent(HtmlView $view, Eiu $eiu) {
 		$page = $eiu->entry()->getEntityObj();
 		CastUtils::assertTrue($page instanceof Page);
 		

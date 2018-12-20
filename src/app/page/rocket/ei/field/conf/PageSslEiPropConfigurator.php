@@ -10,7 +10,7 @@ use n2n\web\dispatch\mag\MagDispatchable;
 use n2n\impl\web\dispatch\mag\model\MagForm;
 use n2n\web\dispatch\mag\MagCollection;
 use page\rocket\ei\field\PageSslEiProp;
-use rocket\impl\ei\component\prop\adapter\config\DisplaySettings;
+use rocket\impl\ei\component\prop\adapter\config\DisplayConfig;
 use rocket\ei\manage\gui\ViewMode;
 
 class PageSslEiPropConfigurator extends AdaptableEiPropConfigurator {
@@ -27,7 +27,7 @@ class PageSslEiPropConfigurator extends AdaptableEiPropConfigurator {
 		CastUtils::assertTrue($pageConfig instanceof PageConfig);
 		
 		if (!$pageConfig->isSslSelectable()) {
-			$this->pageSslEiField->setDisplaySettings(new DisplaySettings(ViewMode::none()));
+			$this->pageSslEiField->setDisplayConfig(new DisplayConfig(ViewMode::none()));
 		}
 	}
 	
