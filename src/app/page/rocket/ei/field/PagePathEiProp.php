@@ -4,7 +4,7 @@ namespace page\rocket\ei\field;
 use rocket\ei\util\Eiu;
 use n2n\impl\web\ui\view\html\HtmlView;
 use rocket\impl\ei\component\prop\adapter\DisplayableEiPropAdapter;
-use n2n\reflection\CastUtils;
+use n2n\util\type\CastUtils;
 use page\bo\PageT;
 use page\model\PageState;
 use page\model\nav\NavUrlBuilder;
@@ -15,7 +15,7 @@ use page\model\nav\UnavailableLeafException;
 
 class PagePathEiProp extends DisplayableEiPropAdapter {
 	
-	public function createOutputUiComponent(HtmlView $view, Eiu $eiu) {
+	public function createUiComponent(HtmlView $view, Eiu $eiu) {
 		$pageT = $eiu->entry()->getEntityObj();
 		CastUtils::assertTrue($pageT instanceof PageT);
 		

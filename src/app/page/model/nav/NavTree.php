@@ -5,11 +5,11 @@ use n2n\l10n\N2nLocale;
 use n2n\util\uri\Path;
 use n2n\web\http\HttpContext;
 use n2n\util\uri\Url;
-use n2n\reflection\CastUtils;
+use n2n\util\type\CastUtils;
 use page\config\PageConfig;
 use n2n\web\http\controller\ControllerContext;
 use n2n\core\container\N2nContext;
-use n2n\reflection\ArgUtils;
+use n2n\util\type\ArgUtils;
 use n2n\web\http\Subsystem;
 
 class NavTree {

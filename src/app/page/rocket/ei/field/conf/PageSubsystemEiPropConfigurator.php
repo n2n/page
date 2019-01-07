@@ -7,12 +7,12 @@ use n2n\web\dispatch\mag\MagDispatchable;
 use n2n\web\dispatch\mag\MagCollection;
 use rocket\ei\component\EiSetup;
 use page\config\PageConfig;
-use n2n\reflection\CastUtils;
+use n2n\util\type\CastUtils;
 use page\rocket\ei\field\PageSubsystemEiProp;
 use rocket\impl\ei\component\prop\adapter\config\AdaptableEiPropConfigurator;
 use n2n\l10n\DynamicTextCollection;
 use rocket\ei\manage\gui\ViewMode;
-use rocket\impl\ei\component\prop\adapter\config\DisplaySettings;
+use rocket\impl\ei\component\prop\adapter\config\DisplayConfig;
 
 class PageSubsystemEiPropConfigurator extends AdaptableEiPropConfigurator {
 	private $pageSubsystemEiField;
@@ -33,7 +33,7 @@ class PageSubsystemEiPropConfigurator extends AdaptableEiPropConfigurator {
 		$subsystems = $eiSetupProcess->getN2nContext()->getHttpContext()->getAvailableSubsystems();
 
 		if (empty($subsystems)) {
-			$this->pageSubsystemEiField->setDisplaySettings(new DisplaySettings(ViewMode::none()));
+			$this->pageSubsystemEiField->setDisplayConfig(new DisplayConfig(ViewMode::none()));
 		}
 		
 		$options = array(null => $dtc->translate('all_subsystems_label'));

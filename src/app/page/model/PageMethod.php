@@ -1,7 +1,7 @@
 <?php
 namespace page\model;
 
-use n2n\reflection\ArgUtils;
+use n2n\util\type\ArgUtils;
 
 class PageMethod {
 	private $name;

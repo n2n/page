@@ -3,7 +3,7 @@ namespace page\model\leaf;
 
 use n2n\core\container\N2nContext;
 use n2n\persistence\orm\EntityManager;
-use n2n\reflection\CastUtils;
+use n2n\util\type\CastUtils;
 use page\bo\Page;
 use n2n\l10n\N2nLocale;
 use n2n\util\uri\Path;
@@ -20,7 +20,7 @@ use page\model\nav\murl\MurlPage;
 use page\model\PageDao;
 use n2n\reflection\magic\MagicMethodInvoker;
 use n2n\util\uri\Url;
-use n2n\reflection\ArgUtils;
+use n2n\util\type\ArgUtils;
 use n2n\util\uri\UnavailableUrlException;
 
 class ContentLeaf extends LeafAdapter {

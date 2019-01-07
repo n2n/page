@@ -5,7 +5,7 @@ use n2n\context\RequestScoped;
 use rocket\impl\ei\component\prop\string\cke\model\CkeLinkProviderAdapter;
 use n2n\l10n\N2nLocale;
 use n2n\core\container\N2nContext;
-use n2n\reflection\CastUtils;
+use n2n\util\type\CastUtils;
 use page\model\nav\NavBranch;
 use n2n\web\ui\view\View;
 use page\model\nav\murl\MurlPage;

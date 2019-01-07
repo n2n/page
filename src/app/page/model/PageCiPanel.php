@@ -2,7 +2,7 @@
 namespace page\model;
 
 use n2n\util\ex\IllegalStateException;
-use n2n\reflection\ArgUtils;
+use n2n\util\type\ArgUtils;
 
 class PageCiPanel {
 	private $name;

@@ -8,8 +8,8 @@ use rocket\ei\util\Eiu;
 use n2n\web\dispatch\mag\Mag;
 use rocket\ei\component\prop\indepenent\EiPropConfigurator;
 use page\rocket\ei\field\conf\PageSubsystemEiPropConfigurator;
-use n2n\reflection\CastUtils;
-use rocket\impl\ei\component\prop\adapter\config\DisplaySettings;
+use n2n\util\type\CastUtils;
+use rocket\impl\ei\component\prop\adapter\config\DisplayConfig;
 use rocket\ei\manage\gui\DisplayDefinition;
 
 class PageSubsystemEiProp extends EnumEiProp {
@@ -18,8 +18,8 @@ class PageSubsystemEiProp extends EnumEiProp {
 		return 'Subsystem';
 	}
 		
-	public function setDisplaySettings(DisplaySettings $displaySettings) {
-		$this->displaySettings = $displaySettings;
+	public function setDisplayConfig(DisplayConfig $displayConfig) {
+		$this->displayConfig = $displayConfig;
 	}
 	
 	public function createEiPropConfigurator(): EiPropConfigurator {

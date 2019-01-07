@@ -6,7 +6,7 @@ use n2n\core\container\N2nContext;
 use n2n\util\ex\IllegalStateException;
 use n2n\util\uri\Path;
 use n2n\util\uri\Url;
-use n2n\reflection\ArgUtils;
+use n2n\util\type\ArgUtils;
 
 interface Leaf {
 	/**

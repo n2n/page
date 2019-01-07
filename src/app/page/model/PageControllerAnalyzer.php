@@ -4,7 +4,7 @@ namespace page\model;
 use n2n\reflection\ReflectionContext;
 use page\annotation\AnnoPage;
 use page\annotation\AnnoPageCiPanels;
-use n2n\reflection\CastUtils;
+use n2n\util\type\CastUtils;
 
 class PageControllerAnalyzer {
 	private $class;

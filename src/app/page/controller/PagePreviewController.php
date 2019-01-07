@@ -2,7 +2,7 @@
 namespace page\controller;
 
 use rocket\ei\manage\preview\controller\PreviewControllerAdapter;
-use n2n\reflection\CastUtils;
+use n2n\util\type\CastUtils;
 use page\bo\Page;
 use n2n\l10n\N2nLocale;
 use page\model\PageState;

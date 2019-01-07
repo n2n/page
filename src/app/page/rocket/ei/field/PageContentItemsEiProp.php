@@ -4,12 +4,12 @@ namespace page\rocket\ei\field;
 use n2n\persistence\orm\property\EntityProperty;
 use page\bo\Page;
 use n2n\impl\persistence\orm\property\ToManyEntityProperty;
-use n2n\reflection\ArgUtils;
+use n2n\util\type\ArgUtils;
 use rocket\impl\ei\component\prop\ci\model\ContentItem;
 use page\bo\PageControllerT;
 use rocket\ei\util\Eiu;
 use rocket\impl\ei\component\prop\ci\ContentItemsEiProp;
-use n2n\reflection\CastUtils;
+use n2n\util\type\CastUtils;
 use page\bo\PageController;
 use page\model\PageControllerAnalyzer;
 use page\config\PageConfig;
@@ -31,7 +31,7 @@ class PageContentItemsEiProp extends ContentItemsEiProp {
 		return 'ContentItems (Page)';
 	}
 	
-	protected function getDisplayItemType(): ?string {
+	protected function getDisplayItemType(): string {
 		return DisplayItem::TYPE_PANEL;
 	}
 	

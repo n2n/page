@@ -18,10 +18,10 @@ use page\model\leaf\ContentLeaf;
 use page\model\nav\NavBranch;
 use page\model\nav\UnknownNavBranchException;
 use page\model\NavInitProcess;
-use n2n\reflection\ArgUtils;
+use n2n\util\type\ArgUtils;
 use page\model\PageMonitor;
 use n2n\persistence\orm\annotation\AnnoEntityListeners;
-use n2n\reflection\CastUtils;
+use n2n\util\type\CastUtils;
 use page\model\leaf\EmptyLeaf;
 use page\model\PageObjAffiliationTester;
 

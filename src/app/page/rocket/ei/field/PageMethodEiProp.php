@@ -3,7 +3,7 @@ namespace page\rocket\ei\field;
 
 use rocket\impl\ei\component\prop\adapter\DraftablePropertyEiPropAdapter;
 use rocket\ei\util\Eiu;
-use n2n\reflection\CastUtils;
+use n2n\util\type\CastUtils;
 use page\bo\PageController;
 use n2n\impl\web\dispatch\mag\model\EnumMag;
 use page\model\PageControllerAnalyzer;
@@ -37,7 +37,7 @@ class PageMethodEiProp extends DraftablePropertyEiPropAdapter {
 		return $mag;
 	}
 	
-	public function createOutputUiComponent(HtmlView $view, Eiu $eiu)  {
+	public function createUiComponent(HtmlView $view, Eiu $eiu)  {
 		return $view->getHtmlBuilder()->getEsc(StringUtils::pretty(
 				$eiu->field()->getValue(EiPropPath::from($this))));
 	}
