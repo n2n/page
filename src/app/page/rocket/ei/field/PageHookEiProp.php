@@ -2,7 +2,7 @@
 namespace page\rocket\ei\field;
 
 use rocket\ei\util\Eiu;
-use n2n\reflection\CastUtils;
+use n2n\util\type\CastUtils;
 use n2n\impl\web\dispatch\mag\model\EnumMag;
 use n2n\web\dispatch\mag\Mag;
 use rocket\ei\component\prop\indepenent\EiPropConfigurator;

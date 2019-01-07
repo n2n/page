@@ -3,7 +3,7 @@ namespace page\rocket\ei\field;
 
 use rocket\impl\ei\component\prop\adapter\DraftablePropertyEiPropAdapter;
 use rocket\ei\util\Eiu;
-use n2n\reflection\CastUtils;
+use n2n\util\type\CastUtils;
 use page\bo\PageController;
 use n2n\impl\web\dispatch\mag\model\EnumMag;
 use page\model\PageControllerAnalyzer;

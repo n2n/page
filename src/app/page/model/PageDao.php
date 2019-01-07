@@ -7,7 +7,7 @@ use n2n\persistence\orm\util\NestedSetUtils;
 use page\bo\Page;
 use n2n\persistence\orm\util\NestedSetStrategy;
 use n2n\persistence\orm\criteria\item\CrIt;
-use n2n\reflection\CastUtils;
+use n2n\util\type\CastUtils;
 use n2n\persistence\orm\util\NestedSetItem;
 use page\model\nav\NavTree;
 use n2n\core\container\AppCache;

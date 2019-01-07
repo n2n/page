@@ -3,7 +3,7 @@ namespace page\controller;
 
 use n2n\web\http\controller\ControllerAdapter;
 use page\model\PageState;
-use n2n\reflection\CastUtils;
+use n2n\util\type\CastUtils;
 use page\config\PageConfig;
 use n2n\util\uri\Path;
 use n2n\l10n\IllegalN2nLocaleFormatException;

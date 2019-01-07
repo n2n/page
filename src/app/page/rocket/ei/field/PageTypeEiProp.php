@@ -4,7 +4,7 @@ namespace page\rocket\ei\field;
 use n2n\impl\web\ui\view\html\HtmlView;
 use rocket\ei\util\Eiu;
 use rocket\impl\ei\component\prop\adapter\DisplayableEiPropAdapter;
-use n2n\reflection\CastUtils;
+use n2n\util\type\CastUtils;
 use page\bo\Page;
 use n2n\impl\web\ui\view\html\HtmlSnippet;
 use n2n\impl\web\ui\view\html\HtmlElement;

@@ -7,7 +7,7 @@ use n2n\web\dispatch\mag\MagDispatchable;
 use n2n\web\dispatch\mag\MagCollection;
 use rocket\ei\component\EiSetup;
 use page\config\PageConfig;
-use n2n\reflection\CastUtils;
+use n2n\util\type\CastUtils;
 use page\rocket\ei\field\PageSubsystemEiProp;
 use rocket\impl\ei\component\prop\adapter\config\AdaptableEiPropConfigurator;
 use n2n\l10n\DynamicTextCollection;

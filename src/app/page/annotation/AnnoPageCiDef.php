@@ -6,7 +6,7 @@
 // use n2n\reflection\annotation\ClassAnnotation;
 // use n2n\reflection\annotation\ClassAnnotationTrait;
 // use n2n\reflection\annotation\AnnotationTrait;
-// use n2n\reflection\ArgUtils;
+// use n2n\util\type\ArgUtils;
 
 // class AnnoPageCiDef implements ClassAnnotation {
 // 	use ClassAnnotationTrait, AnnotationTrait;

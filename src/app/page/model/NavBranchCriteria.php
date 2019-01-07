@@ -2,7 +2,7 @@
 namespace page\model;
 
 use n2n\core\container\N2nContext;
-use n2n\reflection\ArgUtils;
+use n2n\util\type\ArgUtils;
 use page\model\nav\Leaf;
 use page\model\nav\NavBranch;
 use n2n\l10n\N2nLocale;

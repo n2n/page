@@ -1,7 +1,7 @@
 <?php
 namespace page\config;
 
-use n2n\reflection\ArgUtils;
+use n2n\util\type\ArgUtils;
 
 class PageConfig {
 	private $n2nLocalesActive = true;

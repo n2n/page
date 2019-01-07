@@ -2,7 +2,7 @@
 namespace page\model\nav;
 
 use n2n\l10n\N2nLocale;
-use n2n\reflection\ArgUtils;
+use n2n\util\type\ArgUtils;
 use n2n\util\ex\IllegalStateException;
 
 class NavBranch {

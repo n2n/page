@@ -8,7 +8,7 @@ use n2n\web\http\controller\ControllerContext;
 use page\model\nav\UnknownNavBranchException;
 use page\model\nav\NavUrlBuilder;
 use page\model\nav\BranchUrlBuildException;
-use n2n\reflection\CastUtils;
+use n2n\util\type\CastUtils;
 use page\model\PageState;
 use n2n\util\uri\Url;
 use page\model\NavBranchCriteria;

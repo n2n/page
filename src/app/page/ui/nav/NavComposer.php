@@ -5,12 +5,12 @@ use page\model\nav\NavBranch;
 use n2n\util\ex\IllegalStateException;
 use page\model\NavBranchCriteria;
 use n2n\web\ui\UiComponent;
-use n2n\reflection\ArgUtils;
+use n2n\util\type\ArgUtils;
 use page\ui\nav\impl\CommonNavItemBuilder;
 use n2n\web\ui\UiException;
 use n2n\impl\web\ui\view\html\HtmlView;
 use page\model\PageState;
-use n2n\reflection\CastUtils;
+use n2n\util\type\CastUtils;
 
 /**
  * Created by {@link Nav} and used to describe navigations in a fluid way. It is usually passed to 

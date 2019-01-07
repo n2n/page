@@ -17,7 +17,7 @@ use n2n\persistence\orm\CascadeType;
 use n2n\persistence\orm\annotation\AnnoTransient;
 use rocket\impl\ei\component\prop\translation\Translator;
 use n2n\l10n\N2nLocale;
-use n2n\reflection\ArgUtils;
+use n2n\util\type\ArgUtils;
 use page\model\PageMonitor;
 use n2n\web\http\controller\InterceptorFactory;
 
