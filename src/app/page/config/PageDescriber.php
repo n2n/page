@@ -1,7 +1,7 @@
 <?php
 namespace page\config;
 
-use n2n\util\config\Attributes;
+use n2n\config\Attributes;
 use n2n\core\module\ConfigDescriberAdapter;
 use n2n\web\dispatch\mag\MagCollection;
 use n2n\impl\web\dispatch\mag\model\StringArrayMag;
@@ -9,7 +9,7 @@ use n2n\impl\web\dispatch\mag\model\BoolMag;
 use n2n\core\N2N;
 use n2n\impl\web\dispatch\mag\model\MagForm;
 use n2n\web\dispatch\mag\MagDispatchable;
-use n2n\util\config\LenientAttributeReader;
+use n2n\config\LenientAttributeReader;
 use page\bo\PageController;
 use rocket\impl\ei\component\prop\ci\conf\CiConfigUtils;
 use n2n\impl\web\dispatch\mag\model\MagCollectionMag;
