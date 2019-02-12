@@ -1,7 +1,7 @@
 <?php
 namespace page\config;
 
-use n2n\util\config\Attributes;
+use n2n\util\type\attrs\Attributes;
 use n2n\core\module\ConfigDescriberAdapter;
 use n2n\web\dispatch\mag\MagCollection;
 use n2n\impl\web\dispatch\mag\model\StringArrayMag;
@@ -9,7 +9,7 @@ use n2n\impl\web\dispatch\mag\model\BoolMag;
 use n2n\core\N2N;
 use n2n\impl\web\dispatch\mag\model\MagForm;
 use n2n\web\dispatch\mag\MagDispatchable;
-use n2n\util\config\LenientAttributeReader;
+use n2n\util\type\attrs\LenientAttributeReader;
 use page\bo\PageController;
 use rocket\impl\ei\component\prop\ci\conf\CiConfigUtils;
 use n2n\impl\web\dispatch\mag\model\MagCollectionMag;
@@ -17,7 +17,7 @@ use rocket\core\model\Rocket;
 use n2n\util\type\CastUtils;
 use rocket\spec\Spec;
 use page\model\PageControllerAnalyzer;
-use n2n\reflection\property\TypeConstraint;
+use n2n\util\type\TypeConstraint;
 use n2n\util\type\ArgUtils;
 use rocket\impl\ei\component\prop\ci\model\PanelConfig;
 
@@ -142,13 +142,13 @@ class PageDescriber extends ConfigDescriberAdapter {
 		$attributes = $this->readCustomAttributes();
 		
 		$pageConfig = new PageConfig();
-		$pageConfig->setN2nLocaleUrlsActive($attributes->getBool(self::ATTR_LOCALES_ACTIVE_KEY, false,
+		$pageConfig->setN2nLocaleUrlsActive($attributes->optBool(self::ATTR_LOCALES_ACTIVE_KEY, 
 				self::ATTR_LOCALES_ACTIVE_DEFAULT));
-		$pageConfig->setAutoN2nLocaleRedirectAllowed($attributes->getBool(self::ATTR_AUTO_LOCALE_REDIRECT_ACTIVE_KEY, 
-				false, self::ATTR_AUTO_LOCALE_REDIRECT_ACTIVE_DEFAULT));
-		$pageConfig->setSslDefault($attributes->getBool(self::ATTR_SSL_SELECTABLE_KEY, false,
+		$pageConfig->setAutoN2nLocaleRedirectAllowed($attributes->optBool(self::ATTR_AUTO_LOCALE_REDIRECT_ACTIVE_KEY, 
+				self::ATTR_AUTO_LOCALE_REDIRECT_ACTIVE_DEFAULT));
+		$pageConfig->setSslDefault($attributes->optBool(self::ATTR_SSL_SELECTABLE_KEY, 
 				self::ATTR_SSL_SELECTABLE_DEFAULT));
-		$pageConfig->setSslDefault($attributes->getBool(self::ATTR_SSL_DEFAULT_KEY, false,
+		$pageConfig->setSslDefault($attributes->optBool(self::ATTR_SSL_DEFAULT_KEY, 
 				self::ATTR_SSL_DEFAULT_DEFAULT));
 		
 		$hooks = array();

@@ -40,7 +40,7 @@ class PageSubsystemEiPropConfigurator extends AdaptableEiPropConfigurator {
 		foreach ($subsystems as $subsystem) {
 			$displayName = $subsystem->getName() . ' (' . $subsystem->getHostName();
 			if (null !== ($contextPath = $subsystem->getContextPath())) {
-				$displayName .= '/' . $subsystem->getContextPath();
+				$displayName .= '/' . $contextPath;
 			}
 			$displayName .= ')';
 			

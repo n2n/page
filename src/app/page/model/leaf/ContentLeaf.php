@@ -12,7 +12,6 @@ use page\model\PageControllerAnalyzer;
 use page\model\nav\impl\CommonLeafContent;
 use page\model\PageMethod;
 use n2n\util\ex\IllegalStateException;
-use n2n\reflection\ReflectionUtils;
 use page\model\nav\UnknownContentItemPanelException;
 use page\model\IllegalPageStateException;
 use page\model\nav\SitemapItem;
@@ -22,6 +21,7 @@ use n2n\reflection\magic\MagicMethodInvoker;
 use n2n\util\uri\Url;
 use n2n\util\type\ArgUtils;
 use n2n\util\uri\UnavailableUrlException;
+use n2n\util\type\TypeUtils;
 
 class ContentLeaf extends LeafAdapter {
 	private $pageId;
@@ -59,7 +59,7 @@ class ContentLeaf extends LeafAdapter {
 		$pageMethod = $analyzer->analyzeMethod($pageController->getMethodName());
 		if ($pageMethod === null) {
 			throw new IllegalPageStateException('Page method '
-					. ReflectionUtils::prettyMethName(get_class($pageController), $pageController->getMethodName())
+					. TypeUtils::prettyMethName(get_class($pageController), $pageController->getMethodName())
 					. ' does not exist. Used in: ' . get_class($pageController) . '#' . $pageController->getId());
 		}
 		$leafContent->setPageMethod($pageMethod);
@@ -207,7 +207,7 @@ class PageLeafContent extends CommonLeafContent {
 		if (!$this->containsContentItemPanelName($panelName)) {
 			$pageController = $this->getControllerContext()->getController();
 			throw new UnknownContentItemPanelException('Undefined ContentItem panel \'' . $panelName . '\' for ' 
-					. ReflectionUtils::prettyMethName(get_class($pageController), 
+					. TypeUtils::prettyMethName(get_class($pageController), 
 							$pageController->getMethodName()));
 		}
 		

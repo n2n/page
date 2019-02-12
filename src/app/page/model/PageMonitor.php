@@ -6,7 +6,7 @@ use page\bo\Page;
 use n2n\core\container\N2nContext;
 use n2n\util\type\CastUtils;
 use page\config\PageConfig;
-use n2n\util\config\InvalidConfigurationException;
+use n2n\config\InvalidConfigurationException;
 use n2n\util\magic\MagicObjectUnavailableException;
 use n2n\web\http\ResponseCacheStore;
 use n2n\web\ui\view\ViewCacheStore;
