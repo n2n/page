@@ -7,7 +7,6 @@ use n2n\persistence\orm\annotation\AnnoOneToOne;
 use n2n\persistence\orm\annotation\AnnoManyToOne;
 use n2n\persistence\orm\annotation\AnnoOneToMany;
 use n2n\persistence\orm\CascadeType;
-use rocket\user\bo\RocketUser;
 use n2n\l10n\N2nLocale;
 use rocket\impl\ei\component\prop\translation\Translator;
 use page\model\leaf\ExternalLeaf;
@@ -49,7 +48,7 @@ class Page extends ObjectAdapter {
 	private $lft;
 	private $rgt;
 	private $lastMod;
-	private $lastModBy;
+//	private $lastModBy;
 	private $pageTs;
 	private $indexable = true;
 
@@ -223,13 +222,13 @@ class Page extends ObjectAdapter {
 	 *
 	 * @return \rocket\user\bo\RocketUser
 	 */
-	public function getLastModBy() {
-		return $this->lastModBy;
-	}
+// 	public function getLastModBy() {
+// 		return $this->lastModBy;
+// 	}
 	
-	public function setLastModBy(RocketUser $lastModBy) {
-		$this->lastModBy = $lastModBy;
-	}
+// 	public function setLastModBy(RocketUser $lastModBy) {
+// 		$this->lastModBy = $lastModBy;
+// 	}
 	
 	public function getPageTs() {
 		return $this->pageTs;

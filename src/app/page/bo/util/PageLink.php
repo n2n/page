@@ -66,16 +66,10 @@ class PageLink extends ObjectAdapter implements UrlComposer {
 		$this->linkedPage = $linkedPage;
 	}
 
-	/**
-	 * @return Url
-	 */
 	public function getUrl() {
 		return $this->url;
 	}
 
-	/**
-	 * @param Url $url
-	 */
 	public function setUrl($url = null) {
 		$this->url = $url;
 	}
