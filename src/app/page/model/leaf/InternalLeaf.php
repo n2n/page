@@ -53,7 +53,7 @@ class InternalController implements Controller {
 		try {
 			$targetUrl = MurlPage::obj($this->targetNavBranch)->toUrl($this->n2nContext, $controllerContext);
 		} catch (UnavailableUrlException $e) {
-			throw new PageNotFoundException();
+			throw new PageNotFoundException($e->getMessage(), 0, $e);
 		}
 		
 		$this->n2nContext->getHttpContext()->getResponse()->send(
