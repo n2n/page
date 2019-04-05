@@ -13,6 +13,8 @@ use page\model\nav\murl\MurlPage;
 use n2n\web\http\Response;
 use page\model\nav\UrlBuildTask;
 use n2n\web\http\payload\impl\Redirect;
+use n2n\web\http\PageNotFoundException;
+use n2n\util\uri\UnavailableUrlException;
 
 class InternalLeaf extends LeafAdapter {
 	private $targetNavBranch;
@@ -47,7 +49,12 @@ class InternalController implements Controller {
 	}
 	
 	public function execute(ControllerContext $controllerContext): bool {
-		$targetUrl = MurlPage::obj($this->targetNavBranch)->toUrl($this->n2nContext, $controllerContext);
+		$targetUrl = null;
+		try {
+			$targetUrl = MurlPage::obj($this->targetNavBranch)->toUrl($this->n2nContext, $controllerContext);
+		} catch (UnavailableUrlException $e) {
+			throw new PageNotFoundException();
+		}
 		
 		$this->n2nContext->getHttpContext()->getResponse()->send(
 				new Redirect((string) $targetUrl, Response::STATUS_301_MOVED_PERMANENTLY));
