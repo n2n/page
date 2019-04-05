@@ -12,10 +12,11 @@ use n2n\impl\web\ui\view\html\HtmlElement;
 use n2n\util\StringUtils;
 use page\bo\Page;
 use page\model\nav\UnavailableLeafException;
+use rocket\si\content\SiField;
 
 class PagePathEiProp extends DisplayableEiPropAdapter {
 	
-	public function createUiComponent(HtmlView $view, Eiu $eiu) {
+	public function createOutSiField(Eiu $eiu): SiField {
 		$pageT = $eiu->entry()->getEntityObj();
 		CastUtils::assertTrue($pageT instanceof PageT);
 		

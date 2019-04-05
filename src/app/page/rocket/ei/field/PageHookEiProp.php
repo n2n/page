@@ -8,6 +8,7 @@ use n2n\web\dispatch\mag\Mag;
 use rocket\ei\component\prop\indepenent\EiPropConfigurator;
 use rocket\impl\ei\component\prop\enum\EnumEiProp;
 use page\rocket\ei\field\conf\PageHookEiPropConfigurator;
+use rocket\si\content\SiField;
 
 class PageHookEiProp extends EnumEiProp {
 
@@ -19,7 +20,7 @@ class PageHookEiProp extends EnumEiProp {
 		return false;
 	}
 	
-	public function createMag(Eiu $eiu): Mag {
+	public function createInSiField(Eiu $eiu): SiField {
 		$mag = parent::createMag($eiu);
 		CastUtils::assertTrue($mag instanceof EnumMag);
 		

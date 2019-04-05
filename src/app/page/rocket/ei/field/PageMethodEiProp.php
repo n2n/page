@@ -15,10 +15,11 @@ use n2n\web\dispatch\mag\Mag;
 use n2n\web\dispatch\map\PropertyPath;
 use n2n\web\ui\UiComponent;
 use n2n\web\dispatch\mag\UiOutfitter;
+use rocket\si\content\SiField;
 
 class PageMethodEiProp extends DraftablePropertyEiPropAdapter {
 	
-	public function createMag(Eiu $eiu): Mag {
+	public function createInSiField(Eiu $eiu): SiField {
 		$pageController = $eiu->entry()->getEntityObj();
 		CastUtils::assertTrue($pageController instanceof PageController);
 		
@@ -37,7 +38,7 @@ class PageMethodEiProp extends DraftablePropertyEiPropAdapter {
 		return $mag;
 	}
 	
-	public function createUiComponent(HtmlView $view, Eiu $eiu)  {
+	public function createOutSiField(Eiu $eiu): SiField  {
 		return $view->getHtmlBuilder()->getEsc(StringUtils::pretty(
 				$eiu->field()->getValue(EiPropPath::from($this))));
 	}

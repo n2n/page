@@ -11,6 +11,7 @@ use page\rocket\ei\field\conf\PageSubsystemEiPropConfigurator;
 use n2n\util\type\CastUtils;
 use rocket\impl\ei\component\prop\adapter\config\DisplayConfig;
 use rocket\ei\manage\gui\DisplayDefinition;
+use rocket\si\content\SiField;
 
 class PageSubsystemEiProp extends EnumEiProp {
 	
@@ -32,7 +33,7 @@ class PageSubsystemEiProp extends EnumEiProp {
 		return parent::buildDisplayDefinition($eiu);
 	}
 	
-	public function createMag(Eiu $eiu): Mag {
+	public function createInSiField(Eiu $eiu): SiField {
 		$enumMag = parent::createMag($eiu);
 		CastUtils::assertTrue($enumMag instanceof EnumMag);
 		

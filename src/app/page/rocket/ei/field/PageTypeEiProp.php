@@ -8,10 +8,11 @@ use n2n\util\type\CastUtils;
 use page\bo\Page;
 use n2n\impl\web\ui\view\html\HtmlSnippet;
 use n2n\impl\web\ui\view\html\HtmlElement;
+use rocket\si\content\SiField;
 
 class PageTypeEiProp extends DisplayableEiPropAdapter {
 	
-	public function createUiComponent(HtmlView $view, Eiu $eiu) {
+	public function createOutSiField(Eiu $eiu): SiField {
 		$page = $eiu->entry()->getEntityObj();
 		CastUtils::assertTrue($page instanceof Page);
 		
