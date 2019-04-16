@@ -19,7 +19,7 @@ use rocket\core\model\Rocket;
 use rocket\ei\EiPropPath;
 use rocket\impl\ei\component\prop\ci\model\ContentItemGuiField;
 use rocket\ei\manage\gui\GuiField;
-use rocket\ei\manage\gui\ui\DisplayItem;
+use rocket\ei\mask\model\DisplayItem;
 
 class PageContentItemsEiProp extends ContentItemsEiProp {
 	/**
@@ -32,7 +32,7 @@ class PageContentItemsEiProp extends ContentItemsEiProp {
 	}
 	
 	protected function getDisplayItemType(): string {
-		return DisplayItem::TYPE_PANEL;
+		return SiStructureTypes::TYPE_PANEL;
 	}
 	
 	public function setEntityProperty(EntityProperty $entityProperty = null) {
