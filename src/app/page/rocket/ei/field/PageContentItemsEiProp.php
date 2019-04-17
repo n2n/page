@@ -32,7 +32,7 @@ class PageContentItemsEiProp extends ContentItemsEiProp {
 	}
 	
 	protected function getDisplayItemType(): string {
-		return SiStructureTypes::PANEL;
+		return SiStructureType::PANEL;
 	}
 	
 	public function setEntityProperty(EntityProperty $entityProperty = null) {
