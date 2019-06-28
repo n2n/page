@@ -77,7 +77,7 @@ class PageContentItemsEiProp extends ContentItemsEiProp {
 		return $panelConfigs;
 	}
 	
-	public function buildGuiField(Eiu $eiu): ?GuiField {
+	public function buildGuiField(Eiu $eiu, bool $readOnly): ?GuiField {
 	    $contentItemGuiField = parent::buildGuiField($eiu);
 		CastUtils::assertTrue($contentItemGuiField instanceof ContentItemGuiField);
 	
