@@ -254,6 +254,7 @@ class PageHtmlBuilderMeta {
 		do {
 			$navBranches[] = $navBranch;
 		} while (null !== ($navBranch = $navBranch->getParent()));
-		return $navBranches;
+		
+		return array_reverse($navBranches);
 	}
 }
