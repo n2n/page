@@ -12,6 +12,7 @@ use n2n\impl\web\ui\view\html\HtmlView;
 interface NavItemBuilder {
 	const INFO_CURRENT = 1;
 	const INFO_OPEN = 2;
+	const INFO_HAS_CHILDREN = 4;
 	
 	/**
 	 * @param int $rootLevel

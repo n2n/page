@@ -249,9 +249,16 @@ class PageHtmlBuilderMeta {
 	public function getBreadcrumbNavBranches() {
 		if (!$this->pageState->hasCurrent()) return array();
 		
+		$n2nLocale = $this->view->getN2nLocale();
+		
 		$navBranches = array();
 		$navBranch = $this->pageState->getCurrentNavBranch();
 		do {
+			if (!$navBranch->containsLeafN2nLocale($n2nLocale)
+					|| !$navBranch->getLeafByN2nLocale($n2nLocale)->isInNavigation()) {
+				continue;
+			}
+			
 			$navBranches[] = $navBranch;
 		} while (null !== ($navBranch = $navBranch->getParent()));
 		

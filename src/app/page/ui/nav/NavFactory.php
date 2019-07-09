@@ -93,7 +93,34 @@ class NavFactory {
 			$infos |= NavItemBuilder::INFO_OPEN;
 		}
 		
+		if (!empty($this->filterVisibles($navBranch->getChildren()))) {
+			$infos |= NavItemBuilder::INFO_HAS_CHILDREN;
+		}
+		
 		return $infos;
+	}
+	
+	/**
+	 * @param NavBranch[] $navBranches
+	 * @return NavBranch[]
+	 */
+	private function filterVisibles(array $navBranches) {
+		$visibles = [];
+		
+		foreach ($navBranches as $navBranch) {
+			if (!$navBranch->containsLeafN2nLocale($this->n2nLocale)) {
+				continue;
+			}
+			
+			$leaf = $navBranch->getLeafByN2nLocale($this->n2nLocale);
+			if (!$leaf->isInNavigation()) {
+				continue;
+			}
+			
+			$visibles[] = $navBranch;
+		}
+		
+		return $visibles;
 	}
 	
 	private function buildLi(HtmlView $view, NavBranch $navBranch, int $numProcessLevels, 
