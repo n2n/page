@@ -66,7 +66,7 @@ abstract class NavItemBuilderAdapter implements NavItemBuilder {
 		$classNames = array($this->classPrefix . 'level-' . $level, 
 				$this->classPrefix . 'level-rel-' . $relLevel);
 		
-		if ($leaf->getNavBranch()->hasChildren()) {
+		if ($infos & self::INFO_HAS_CHILDREN) {
 			$classNames[] = $this->classPrefix . 'has-children';
 		}
 		
