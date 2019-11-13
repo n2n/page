@@ -5,13 +5,10 @@ use n2n\l10n\DynamicTextCollection;
 use n2n\impl\web\dispatch\mag\model\EnumMag;
 use rocket\impl\ei\component\prop\enum\EnumEiProp;
 use rocket\ei\util\Eiu;
-use n2n\web\dispatch\mag\Mag;
-use rocket\ei\component\prop\indepenent\EiPropConfigurator;
-use page\rocket\ei\field\conf\PageSubsystemEiPropConfigurator;
 use n2n\util\type\CastUtils;
-use rocket\impl\ei\component\prop\adapter\config\DisplayConfig;
 use rocket\ei\manage\gui\DisplayDefinition;
 use rocket\si\content\SiField;
+use page\rocket\ei\field\conf\PageSubsystemConfig;
 
 class PageSubsystemEiProp extends EnumEiProp {
 	
@@ -19,12 +16,8 @@ class PageSubsystemEiProp extends EnumEiProp {
 		return 'Subsystem';
 	}
 		
-	public function setDisplayConfig(DisplayConfig $displayConfig) {
-		$this->displayConfig = $displayConfig;
-	}
-	
-	public function createEiPropConfigurator(): EiPropConfigurator {
-		return new PageSubsystemEiPropConfigurator($this);
+	public function prepare() {
+		$this->getConfigurator()->addAdaption(new PageSubsystemConfig($this, $this->getDisplayConfig(), $this->getEnumConfig()));
 	}
 	
 	public function buildDisplayDefinition(Eiu $eiu): ?DisplayDefinition {

@@ -13,7 +13,7 @@ use n2n\util\type\CastUtils;
 use page\bo\PageController;
 use page\model\PageControllerAnalyzer;
 use page\config\PageConfig;
-use rocket\impl\ei\component\prop\ci\model\PanelConfig;
+use rocket\impl\ei\component\prop\ci\model\PanelDeclaration;
 use n2n\util\StringUtils;
 use rocket\core\model\Rocket;
 use rocket\ei\EiPropPath;
@@ -31,7 +31,7 @@ class PageContentItemsEiProp extends ContentItemsEiProp {
 		return 'ContentItems (Page)';
 	}
 	
-	protected function getDisplayItemType(): string {
+	protected function getSiStructureType(): string {
 		return SiStructureType::PANEL;
 	}
 	
@@ -43,7 +43,7 @@ class PageContentItemsEiProp extends ContentItemsEiProp {
 				&& $entityProperty->getTargetEntityModel()->getClass()->getName() === ContentItem::class);
 	}
 	
-	public function determinePanelConfigs(Eiu $eiu) {
+	public function determinePanelDeclarations(Eiu $eiu) {
 		$relationMapping = $eiu->entry()->getValue(EiPropPath::from($this)->poped()
 				->pushed('pageController'));
 		if ($relationMapping === null) {
@@ -64,24 +64,24 @@ class PageContentItemsEiProp extends ContentItemsEiProp {
 		$pageControllerConfig = $pageConfig->getPageControllerConfigByEiSpecId(
 				$specManager->getEiTypeByClass($pageControllerClass)->getId());
 		
-		$panelConfigs = array();
+		$panelDeclarations = array();
 		foreach ($analyzer->analyzeAllCiPanelNames() as $panelName) {
 			if ($pageControllerConfig !== null && 
-					null !== ($panelConfig = $pageControllerConfig->getCiPanelConfigByPanelName($panelName))) {
-				$panelConfigs[$panelName] = $panelConfig;
+					null !== ($panelDeclaration = $pageControllerConfig->getCiPanelDeclarationByPanelName($panelName))) {
+				$panelDeclarations[$panelName] = $panelDeclaration;
 				continue;
 			}
 			
-			$panelConfigs[$panelName] = $panelConfig = new PanelConfig($panelName, StringUtils::pretty($panelName));
+			$panelDeclarations[$panelName] = $panelDeclaration = new PanelDeclaration($panelName, StringUtils::pretty($panelName));
 		}
-		return $panelConfigs;
+		return $panelDeclarations;
 	}
 	
 	public function buildGuiField(Eiu $eiu, bool $readOnly): ?GuiField {
 	    $contentItemGuiField = parent::buildGuiField($eiu);
 		CastUtils::assertTrue($contentItemGuiField instanceof ContentItemGuiField);
 	
-		if (empty($contentItemGuiField->getPanelConfigs())) {
+		if (empty($contentItemGuiField->getPanelDeclarations())) {
 			return null;
 		}
 		

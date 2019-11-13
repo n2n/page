@@ -11,13 +11,15 @@ use n2n\util\StringUtils;
 use n2n\l10n\N2nLocale;
 use rocket\ei\EiPropPath;
 use n2n\impl\web\ui\view\html\HtmlView;
-use n2n\web\dispatch\mag\Mag;
 use n2n\web\dispatch\map\PropertyPath;
 use n2n\web\ui\UiComponent;
 use n2n\web\dispatch\mag\UiOutfitter;
 use rocket\si\content\SiField;
 
 class PageMethodEiProp extends DraftablePropertyEiPropAdapter {
+	
+	protected function prepare() {
+	}
 	
 	public function createInSiField(Eiu $eiu): SiField {
 		$pageController = $eiu->entry()->getEntityObj();
@@ -49,6 +51,9 @@ class PageMethodEiProp extends DraftablePropertyEiPropAdapter {
 	
 	public function buildIdentityString(Eiu $eiu, N2nLocale $n2nLocale): ?string {
 		return $eiu->object()->readNativValue($this);
+	}
+
+	public function saveSiField(SiField $siField, Eiu $eiu) {
 	}
 }
 

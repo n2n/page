@@ -105,9 +105,9 @@ class PageHtmlBuilder {
 	 * 
 	 * <p>See {@link \page\ui\nav\Nav} for further information.</p>
 	 * 
-	 * @param array $attrs html attributes of the outer ul
-	 * @param array $ulAttrs html attributes of every inner ul
-	 * @param array $liAttrs html attributes of every li
+	 * @param array $attrs html dataSet of the outer ul
+	 * @param array $ulAttrs html dataSet of every inner ul
+	 * @param array $liAttrs html dataSet of every li
 	 */
 	public function navigation(NavComposer $navComposer = null, array $attrs = null, array $ulAttrs = null, 
 			array $liAttrs = null, array $aAttrs = null) {
@@ -133,8 +133,8 @@ class PageHtmlBuilder {
 	 * 
 	 * <p>Also see {@link PageHtmlBuilderMeta::getBreadcrumbNavBranches()} to find out how to build a breadcrumb navigation.</p>
 	 * 
-	 * @param array $attrs Html attributes of the ul element.
-	 * @param array $liAttrs Html attributes of each li element 
+	 * @param array $attrs Html dataSet of the ul element.
+	 * @param array $liAttrs Html dataSet of each li element 
 	 * @param string $divider Pass a {@link \n2n\web\ui\UiComponent} or string if a divider span element should be printed
 	 * in each li element. 
 	 */

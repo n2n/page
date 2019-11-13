@@ -19,7 +19,7 @@ use n2n\util\uri\UnavailableUrlException;
 class InternalLeaf extends LeafAdapter {
 	private $targetNavBranch;
 	
-	public function getTragetNavBranch() {
+	public function getTargetNavBranch() {
 		return $this->targetNavBranch;
 	}
 	

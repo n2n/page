@@ -19,7 +19,7 @@ use rocket\spec\Spec;
 use page\model\PageControllerAnalyzer;
 use n2n\util\type\TypeConstraint;
 use n2n\util\type\ArgUtils;
-use rocket\impl\ei\component\prop\ci\model\PanelConfig;
+use rocket\impl\ei\component\prop\ci\model\PanelDeclaration;
 
 class PageDescriber extends ConfigDescriberAdapter {
 	const ATTR_LOCALES_ACTIVE_KEY = 'localeUrls';
@@ -102,9 +102,9 @@ class PageDescriber extends ConfigDescriberAdapter {
 			$panelsAttrs = $pcLar->getArray(self::ATTR_PAGE_CONTROLLER_CI_PANELS_KEY);
 			$panelsMagCollection = new MagCollection();
 			foreach ($panelNames as $panelName) {
-				$panelMagCollection = $ciConfigUtils->createPanelConfigMagCollection(false);
+				$panelMagCollection = $ciConfigUtils->createPanelDeclarationMagCollection(false);
 				if (isset($panelsAttrs[$panelName])) {
-					$panelMagCollection->writeValues($ciConfigUtils->buildPanelConfigMagCollectionValues(
+					$panelMagCollection->writeValues($ciConfigUtils->buildPanelDeclarationMagCollectionValues(
 							$panelsAttrs[$panelName]));
 				}
 				$panelsMagCollection->addMag($panelName, new MagCollectionMag($panelName, $panelMagCollection));	
@@ -124,14 +124,14 @@ class PageDescriber extends ConfigDescriberAdapter {
 			if (empty($pageControllerValues)) continue;
 			
 			foreach ($pageControllerValues[self::ATTR_PAGE_CONTROLLER_CI_PANELS_KEY] as $key => $ciPanelValues) {
-				$values[self::ATTR_PAGE_CONTROLLERS_KEY][$pagecontrollerKey][self::ATTR_PAGE_CONTROLLER_CI_PANELS_KEY][$key] = $ciConfigUtils->buildPanelConfigAttrs($ciPanelValues);
+				$values[self::ATTR_PAGE_CONTROLLERS_KEY][$pagecontrollerKey][self::ATTR_PAGE_CONTROLLER_CI_PANELS_KEY][$key] = $ciConfigUtils->buildPanelDeclarationAttrs($ciPanelValues);
 			}
 		}
 		
-		$attributes = new Attributes($values);
-		$attributes->removeNulls(true);
+		$dataSet = new Attributes($values);
+		$dataSet->removeNulls(true);
 		
-		$this->writeCustomAttributes($attributes);
+		$this->writeCustomAttributes($dataSet);
 	}
 	
     /**
@@ -139,20 +139,20 @@ class PageDescriber extends ConfigDescriberAdapter {
      * @see \n2n\core\module\ConfigDescriber::buildCustomConfig()
      */
 	public function buildCustomConfig() {
-		$attributes = $this->readCustomAttributes();
+		$dataSet = $this->readCustomAttributes();
 		
 		$pageConfig = new PageConfig();
-		$pageConfig->setN2nLocaleUrlsActive($attributes->optBool(self::ATTR_LOCALES_ACTIVE_KEY, 
+		$pageConfig->setN2nLocaleUrlsActive($dataSet->optBool(self::ATTR_LOCALES_ACTIVE_KEY, 
 				self::ATTR_LOCALES_ACTIVE_DEFAULT));
-		$pageConfig->setAutoN2nLocaleRedirectAllowed($attributes->optBool(self::ATTR_AUTO_LOCALE_REDIRECT_ACTIVE_KEY, 
+		$pageConfig->setAutoN2nLocaleRedirectAllowed($dataSet->optBool(self::ATTR_AUTO_LOCALE_REDIRECT_ACTIVE_KEY, 
 				self::ATTR_AUTO_LOCALE_REDIRECT_ACTIVE_DEFAULT));
-		$pageConfig->setSslDefault($attributes->optBool(self::ATTR_SSL_SELECTABLE_KEY, 
+		$pageConfig->setSslDefault($dataSet->optBool(self::ATTR_SSL_SELECTABLE_KEY, 
 				self::ATTR_SSL_SELECTABLE_DEFAULT));
-		$pageConfig->setSslDefault($attributes->optBool(self::ATTR_SSL_DEFAULT_KEY, 
+		$pageConfig->setSslDefault($dataSet->optBool(self::ATTR_SSL_DEFAULT_KEY, 
 				self::ATTR_SSL_DEFAULT_DEFAULT));
 		
 		$hooks = array();
-		foreach ($attributes->getScalarArray(self::ATTR_HOOK_KEYS_KEY, false) as $key => $label) {
+		foreach ($dataSet->getScalarArray(self::ATTR_HOOK_KEYS_KEY, false) as $key => $label) {
 			if (is_numeric($key)) {
 				$hooks[$label] = $label;
 			} else {
@@ -160,20 +160,20 @@ class PageDescriber extends ConfigDescriberAdapter {
 			}
 		}
 		$pageConfig->setHooks($hooks);
-		$pageConfig->setPageListenerLookupIds($attributes->getScalarArray(self::ATTR_PAGE_LISTENER_LOOKUP_IDS_KEY, 
+		$pageConfig->setPageListenerLookupIds($dataSet->getScalarArray(self::ATTR_PAGE_LISTENER_LOOKUP_IDS_KEY, 
 				false));
 		
 		$pageControllerConfigs = array();
-		foreach ($attributes->getArray(self::ATTR_PAGE_CONTROLLERS_KEY, false, array(), 
+		foreach ($dataSet->getArray(self::ATTR_PAGE_CONTROLLERS_KEY, false, array(), 
 				TypeConstraint::createArrayLike('array')) as $pageControllerEiSpecId => $pageControllerAttrs) {
-			$ciPanelConfigs = array();
+			$ciPanelDeclarations = array();
 			$pageControllerAttributes = new Attributes($pageControllerAttrs);
 			foreach ($pageControllerAttributes->getArray(self::ATTR_PAGE_CONTROLLER_CI_PANELS_KEY, false, array(), 
 					TypeConstraint::createArrayLike('array')) as $panelName => $ciPanelAttrs) {
-				$ciPanelConfigs[] = CiConfigUtils::createPanelConfig($ciPanelAttrs, $panelName);
+				$ciPanelDeclarations[] = CiConfigUtils::createPanelDeclaration($ciPanelAttrs, $panelName);
 			}
 				
-			$pageConfig->addPageControllerConfig(new PageControllerConfig($pageControllerEiSpecId, $ciPanelConfigs));
+			$pageConfig->addPageControllerConfig(new PageControllerConfig($pageControllerEiSpecId, $ciPanelDeclarations));
 		}
 		
 		return $pageConfig;
@@ -182,27 +182,27 @@ class PageDescriber extends ConfigDescriberAdapter {
 
 class PageControllerConfig {
 	private $eiSpecId;
-	private $ciPanelConfigs;
+	private $ciPanelDeclarations;
 	
-	public function __construct(string $eiSpecId, array $ciPanelConfigs) {
-		ArgUtils::valArray($ciPanelConfigs, PanelConfig::class);
+	public function __construct(string $eiSpecId, array $ciPanelDeclarations) {
+		ArgUtils::valArray($ciPanelDeclarations, PanelDeclaration::class);
 		$this->eiSpecId = $eiSpecId;
-		$this->ciPanelConfigs = $ciPanelConfigs;
+		$this->ciPanelDeclarations = $ciPanelDeclarations;
 	}
 	
 	public function getEiSpecId() {
 		return $this->eiSpecId;
 	}
 	
-	public function getCiPanelConfigs() {
-		return $this->ciPanelConfigs;
+	public function getCiPanelDeclarations() {
+		return $this->ciPanelDeclarations;
 	}
 	
 
-	public function getCiPanelConfigByPanelName(string $panelName) {
-		foreach ($this->ciPanelConfigs as $ciPanelConfig) {
-			if ($ciPanelConfig->getName() === $panelName) {
-				return $ciPanelConfig;
+	public function getCiPanelDeclarationByPanelName(string $panelName) {
+		foreach ($this->ciPanelDeclarations as $ciPanelDeclaration) {
+			if ($ciPanelDeclaration->getName() === $panelName) {
+				return $ciPanelDeclaration;
 			}
 		}
 		

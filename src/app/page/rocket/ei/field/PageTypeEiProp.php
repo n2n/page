@@ -12,6 +12,9 @@ use rocket\si\content\SiField;
 
 class PageTypeEiProp extends DisplayableEiPropAdapter {
 	
+	protected function prepare() {
+	}
+	
 	public function createOutSiField(Eiu $eiu): SiField {
 		$page = $eiu->entry()->getEntityObj();
 		CastUtils::assertTrue($page instanceof Page);
@@ -39,6 +42,7 @@ class PageTypeEiProp extends DisplayableEiPropAdapter {
 				' ',
 				new HtmlElement('span', null, $label));
 	}
+
 
 	
 }

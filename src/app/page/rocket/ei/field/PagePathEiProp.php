@@ -16,6 +16,10 @@ use rocket\si\content\SiField;
 
 class PagePathEiProp extends DisplayableEiPropAdapter {
 	
+	protected function prepare() {
+	}
+	
+	
 	public function createOutSiField(Eiu $eiu): SiField {
 		$pageT = $eiu->entry()->getEntityObj();
 		CastUtils::assertTrue($pageT instanceof PageT);

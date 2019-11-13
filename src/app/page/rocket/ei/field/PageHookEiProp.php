@@ -4,16 +4,29 @@ namespace page\rocket\ei\field;
 use rocket\ei\util\Eiu;
 use n2n\util\type\CastUtils;
 use n2n\impl\web\dispatch\mag\model\EnumMag;
-use n2n\web\dispatch\mag\Mag;
-use rocket\ei\component\prop\indepenent\EiPropConfigurator;
 use rocket\impl\ei\component\prop\enum\EnumEiProp;
-use page\rocket\ei\field\conf\PageHookEiPropConfigurator;
 use rocket\si\content\SiField;
+use page\config\PageConfig;
 
 class PageHookEiProp extends EnumEiProp {
 
-	public function createEiPropConfigurator(): EiPropConfigurator {
-		return new PageHookEiPropConfigurator($this);
+	function prepare() {
+		$this->getConfigurator()->addSetupCallback(function (Eiu $eiu) {
+			$pageConfig = $eiu->getN2nContext()->getModuleConfig('page');
+			CastUtils::assertTrue($pageConfig instanceof PageConfig);
+			
+			//		@todo later
+			// 		$pageDao = $eiSetupProcess->getN2nContext()->lookup('page\model\PageDao');
+			// 		$pageDao instanceof PageDao;
+			
+			// 		$choicesMap = array();
+			// 		foreach ($pageConfig->getCharacteristicKeys() as $characteristicKey) {
+			// 			if (null !== $pageDao->getPageByCharacteristicKey($characteristicKey)) continue;
+			// 			$choicesMap[$characteristicKey] = $characteristicKey;
+			// 		}
+			
+			$this->getEnumConfig()->setOptions($pageConfig->getHooks());
+		});
 	}
 	
 	public function isMandatory(Eiu $eiu): bool {

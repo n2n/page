@@ -8,7 +8,7 @@
             "pluralLabel": "Inhalte",
             "iconType": null,
             "defaultSort": [],
-            "fields": {
+            "props": {
                 "id": {
                     "class": "rocket\\impl\\ei\\component\\prop\\numeric\\IntegerEiProp",
                     "props": {
@@ -136,7 +136,7 @@
             "pluralLabel": "Page Content Ts",
             "iconType": null,
             "defaultSort": [],
-            "fields": {
+            "props": {
                 "id": {
                     "class": "rocket\\impl\\ei\\component\\prop\\numeric\\IntegerEiProp",
                     "props": {
@@ -246,7 +246,7 @@
             "identityStringPattern": "{pageTs.name}",
             "previewControllerLookupId": "page\\controller\\PagePreviewController",
             "defaultSort": [],
-            "fields": {
+            "props": {
                 "id": {
                     "class": "rocket\\impl\\ei\\component\\prop\\numeric\\IntegerEiProp",
                     "props": {
@@ -567,7 +567,7 @@
                     "guiIdPath": "inNavigation"
                 },
                 {
-                    "label": "language_txt",
+                    "label": null,
                     "type": null,
                     "guiIdPath": "pageTs.active"
                 }
@@ -598,7 +598,7 @@
                             "guiIdPath": "pageTs.pathPart"
                         },
                         {
-                            "label": "language_active_txt",
+                            "label": null,
                             "type": null,
                             "guiIdPath": "pageTs.active"
                         },
@@ -678,7 +678,7 @@
             "pluralLabel": "Page translations",
             "iconType": null,
             "defaultSort": [],
-            "fields": {
+            "props": {
                 "id": {
                     "class": "rocket\\impl\\ei\\component\\prop\\numeric\\IntegerEiProp",
                     "props": {
@@ -845,7 +845,7 @@
             "label": "Page Controller T",
             "pluralLabel": "Page Controller Ts",
             "iconType": null,
-            "fields": {
+            "props": {
                 "pageController": {
                     "class": "rocket\\impl\\ei\\component\\prop\\relation\\ManyToOneSelectEiProp",
                     "props": {
@@ -890,7 +890,7 @@
             "label": "Page type",
             "pluralLabel": "Page Controllers",
             "iconType": null,
-            "fields": {
+            "props": {
                 "methodName": {
                     "class": "page\\rocket\\ei\\field\\PageMethodEiProp",
                     "props": {
@@ -953,7 +953,7 @@
             "label": "Page Link",
             "pluralLabel": "Page Links",
             "iconType": null,
-            "fields": {
+            "props": {
                 "id": {
                     "class": "rocket\\impl\\ei\\component\\prop\\numeric\\IntegerEiProp",
                     "props": {
@@ -1068,7 +1068,7 @@
                 "label": "Inhalt",
                 "pluralLabel": "Inhalte",
                 "iconType": null,
-                "fields": [],
+                "props": [],
                 "commands": [],
                 "partialControlOrder": [],
                 "overallControlOrder": [],
@@ -1081,7 +1081,7 @@
                 "pluralLabel": "Seiten",
                 "iconType": null,
                 "identityStringPattern": "{pageTs.name}",
-                "fields": [],
+                "props": [],
                 "commands": [],
                 "partialControlOrder": [],
                 "overallControlOrder": [],

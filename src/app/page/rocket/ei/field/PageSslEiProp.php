@@ -2,21 +2,25 @@
 namespace page\rocket\ei\field;
 
 use rocket\impl\ei\component\prop\bool\BooleanEiProp;
-use rocket\ei\component\prop\indepenent\EiPropConfigurator;
-use page\rocket\ei\field\conf\PageSslEiPropConfigurator;
-use rocket\impl\ei\component\prop\adapter\config\DisplayConfig;
+use rocket\ei\util\Eiu;
+use page\config\PageConfig;
+use n2n\util\type\CastUtils;
+use rocket\ei\manage\gui\ViewMode;
 
 class PageSslEiProp extends BooleanEiProp {
 	
-	public function getTypeName(): string {
+	function getTypeName(): string {
 		return 'Ssl ScriptField (Page)';
 	}
 	
-	public function setDisplayConfig(DisplayConfig $displayConfig) {
-		$this->displayConfig = $displayConfig;
-	}
-	
-	public function createEiPropConfigurator(): EiPropConfigurator {
-		return new PageSslEiPropConfigurator($this);
+	function prepare() {
+		$this->getConfigurator()->addSetupCallback(function (Eiu $eiu) {
+			$pageConfig = $eiu->getN2nContext()->getModuleConfig('page');
+			CastUtils::assertTrue($pageConfig instanceof PageConfig);
+			
+			if (!$pageConfig->isSslSelectable()) {
+				$this->getDisplayConfig()->setCompatibleViewModes(ViewMode::none());
+			}
+		});
 	}
 }
