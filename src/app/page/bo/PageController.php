@@ -139,7 +139,7 @@ abstract class PageController extends ObjectAdapter implements Controller {
 	
 	public function getTagNames(): array {
 		$additionalTagNames = $this->getAdditionalTagNames();
-		ArgUtils::valArrayReturn($additionalTagNames, $this, 'getAdditionalTagNames', 'scalar');
+		ArgUtils::valArrayReturn($additionalTagNames, $this, 'getAdditionalTagNames', 'string');
 		return array_merge(array(get_class($this), $this->methodName), $additionalTagNames);
 	}
 	
