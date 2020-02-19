@@ -352,6 +352,8 @@ class Page extends ObjectAdapter {
 			$leaf->setIndexable($this->indexable);
 			$navBranch->addLeaf($leaf);
 		}
+		
+		$pageController->navBranchCreated($navBranch);
 	}
 	
 	private function applyEmptyLeafs(NavBranch $navBranch) {

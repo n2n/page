@@ -20,6 +20,7 @@ use n2n\l10n\N2nLocale;
 use n2n\util\type\ArgUtils;
 use page\model\PageMonitor;
 use n2n\web\http\controller\InterceptorFactory;
+use page\model\nav\NavBranch;
 
 abstract class PageController extends ObjectAdapter implements Controller {
 	use ControllingUtilsTrait;
@@ -145,6 +146,13 @@ abstract class PageController extends ObjectAdapter implements Controller {
 	
 	protected function getAdditionalTagNames(): array {
 		return array();
+	}
+	
+	public final function navBranchCreated(NavBranch $navBranch) {
+		$this->enhanceNavBranch($navBranch);
+	}
+	
+	protected function enhanceNavBranch(NavBranch $navBranch) {
 	}
 	
 // 	/**
