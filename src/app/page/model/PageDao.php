@@ -88,6 +88,10 @@ class PageDao implements ThreadScoped {
 		$navInitProcess->finish($navTree);
 		return $navTree;
 	}
+	
+	public function getPageById(int $id) {
+		return $this->em->find(Page::getClass(), $id);
+	}
 }
 
 class NavInitProcess {
