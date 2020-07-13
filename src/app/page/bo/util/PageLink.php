@@ -11,6 +11,8 @@ use n2n\reflection\annotation\AnnoInit;
 use n2n\persistence\orm\annotation\AnnoManyToOne;
 use n2n\persistence\orm\FetchType;
 use page\model\nav\murl\MurlPage;
+use n2n\persistence\orm\annotation\AnnoEntityListeners;
+use n2n\web\http\orm\ResponseCacheClearer;
 
 /**
  * This util entity can be easly intergrated 
@@ -18,6 +20,7 @@ use page\model\nav\murl\MurlPage;
  */
 class PageLink extends ObjectAdapter implements UrlComposer {
 	private static function _annos(AnnoInit $ai) {
+		$ai->c(new AnnoEntityListeners(ResponseCacheClearer::getClass()));
 		$ai->p('linkedPage', new AnnoManyToOne(Page::getClass(), null, FetchType::EAGER));
 	}
 	
