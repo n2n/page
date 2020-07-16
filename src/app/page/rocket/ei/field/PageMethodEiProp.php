@@ -8,15 +8,16 @@ use page\bo\PageController;
 use n2n\impl\web\dispatch\mag\model\EnumMag;
 use page\model\PageControllerAnalyzer;
 use n2n\util\StringUtils;
-use n2n\l10n\N2nLocale;
 use rocket\ei\EiPropPath;
 use n2n\impl\web\ui\view\html\HtmlView;
 use n2n\web\dispatch\map\PropertyPath;
 use n2n\web\ui\UiComponent;
 use n2n\web\dispatch\mag\UiOutfitter;
 use rocket\si\content\SiField;
+use rocket\ei\component\prop\IdNameEiProp;
+use rocket\ei\manage\idname\IdNameProp;
 
-class PageMethodEiProp extends DraftablePropertyEiPropAdapter {
+class PageMethodEiProp extends DraftablePropertyEiPropAdapter implements IdNameEiProp {
 	
 	protected function prepare() {
 	}
@@ -45,12 +46,10 @@ class PageMethodEiProp extends DraftablePropertyEiPropAdapter {
 				$eiu->field()->getValue(EiPropPath::from($this))));
 	}
 		
-	public function isStringRepresentable(): bool {
-		return true;
-	}
-	
-	public function buildIdentityString(Eiu $eiu, N2nLocale $n2nLocale): ?string {
-		return $eiu->object()->readNativValue($this);
+	function buildIdNameProp(Eiu $eiu): ?IdNameProp {
+		return $eiu->factory()->newIdNameProp(function (Eiu $eiu) {
+			return $eiu->object()->readNativValue($this);
+		});
 	}
 
 	public function saveSiField(SiField $siField, Eiu $eiu) {
