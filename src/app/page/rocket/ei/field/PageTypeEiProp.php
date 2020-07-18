@@ -1,14 +1,13 @@
 <?php
 namespace page\rocket\ei\field;
 
-use n2n\impl\web\ui\view\html\HtmlView;
 use rocket\ei\util\Eiu;
 use rocket\impl\ei\component\prop\adapter\DisplayableEiPropAdapter;
 use n2n\util\type\CastUtils;
 use page\bo\Page;
-use n2n\impl\web\ui\view\html\HtmlSnippet;
-use n2n\impl\web\ui\view\html\HtmlElement;
 use rocket\si\content\SiField;
+use rocket\si\content\impl\SiFields;
+use rocket\si\content\impl\meta\SiCrumb;
 
 class PageTypeEiProp extends DisplayableEiPropAdapter {
 	
@@ -37,10 +36,7 @@ class PageTypeEiProp extends DisplayableEiPropAdapter {
 				$label = $eiuMask->getLabel();
 		}
 		
-		return new HtmlSnippet(
-				new HtmlElement('i', array('class' => $iconType), ''),
-				' ',
-				new HtmlElement('span', null, $label));
+		return SiFields::crumbOut(SiCrumb::createIcon($iconType), SiCrumb::createLabel($label));
 	}
 
 
