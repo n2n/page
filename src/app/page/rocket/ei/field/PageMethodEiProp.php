@@ -45,14 +45,16 @@ class PageMethodEiProp extends DraftablePropertyEiPropAdapter implements IdNameE
 		return $view->getHtmlBuilder()->getEsc(StringUtils::pretty(
 				$eiu->field()->getValue(EiPropPath::from($this))));
 	}
-		
-	function buildIdNameProp(Eiu $eiu): ?IdNameProp {
-		return $eiu->factory()->newIdNameProp(function (Eiu $eiu) {
-			return $eiu->object()->readNativValue($this);
-		});
-	}
 
 	public function saveSiField(SiField $siField, Eiu $eiu) {
+	}
+	
+	function buildIdNameProp(Eiu $eiu): ?IdNameProp {
+		return $eiu->factory()
+				->newIdNameProp(function (Eiu $eiu) {
+					return $eiu->object()->readNativValue($this);
+				})
+				->toIdNameProp();
 	}
 }
 
