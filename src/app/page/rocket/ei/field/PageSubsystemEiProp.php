@@ -9,6 +9,7 @@ use n2n\util\type\CastUtils;
 use rocket\ei\manage\gui\DisplayDefinition;
 use rocket\si\content\SiField;
 use page\rocket\ei\field\conf\PageSubsystemConfig;
+use rocket\ei\util\factory\EifGuiField;
 
 class PageSubsystemEiProp extends EnumEiProp {
 	
@@ -26,7 +27,7 @@ class PageSubsystemEiProp extends EnumEiProp {
 		return parent::buildDisplayDefinition($eiu);
 	}
 	
-	public function createInSiField(Eiu $eiu): SiField {
+	public function createInEifGuiField(Eiu $eiu): EifGuiField {
 		$enumMag = parent::createMag($eiu);
 		CastUtils::assertTrue($enumMag instanceof EnumMag);
 		

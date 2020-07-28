@@ -16,13 +16,14 @@ use n2n\web\dispatch\mag\UiOutfitter;
 use rocket\si\content\SiField;
 use rocket\ei\component\prop\IdNameEiProp;
 use rocket\ei\manage\idname\IdNameProp;
+use rocket\ei\util\factory\EifGuiField;
 
 class PageMethodEiProp extends DraftablePropertyEiPropAdapter implements IdNameEiProp {
 	
 	protected function prepare() {
 	}
 	
-	public function createInSiField(Eiu $eiu): SiField {
+	public function createInEifGuiField(Eiu $eiu): EifGuiField {
 		$pageController = $eiu->entry()->getEntityObj();
 		CastUtils::assertTrue($pageController instanceof PageController);
 		
@@ -41,7 +42,7 @@ class PageMethodEiProp extends DraftablePropertyEiPropAdapter implements IdNameE
 		return $mag;
 	}
 	
-	public function createOutSiField(Eiu $eiu): SiField  {
+	public function createOutEifGuiField(Eiu $eiu): EifGuiField  {
 		return $view->getHtmlBuilder()->getEsc(StringUtils::pretty(
 				$eiu->field()->getValue(EiPropPath::from($this))));
 	}

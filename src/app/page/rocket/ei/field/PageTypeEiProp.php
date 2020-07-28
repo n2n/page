@@ -5,16 +5,16 @@ use rocket\ei\util\Eiu;
 use rocket\impl\ei\component\prop\adapter\DisplayableEiPropAdapter;
 use n2n\util\type\CastUtils;
 use page\bo\Page;
-use rocket\si\content\SiField;
 use rocket\si\content\impl\SiFields;
 use rocket\si\content\impl\meta\SiCrumb;
+use rocket\ei\util\factory\EifGuiField;
 
 class PageTypeEiProp extends DisplayableEiPropAdapter {
 	
 	protected function prepare() {
 	}
 	
-	public function createOutSiField(Eiu $eiu): SiField {
+	function createOutEifGuiField(Eiu $eiu): EifGuiField {
 		$page = $eiu->entry()->getEntityObj();
 		CastUtils::assertTrue($page instanceof Page);
 		

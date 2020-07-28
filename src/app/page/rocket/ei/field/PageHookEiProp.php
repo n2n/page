@@ -7,6 +7,7 @@ use n2n\impl\web\dispatch\mag\model\EnumMag;
 use rocket\impl\ei\component\prop\enum\EnumEiProp;
 use rocket\si\content\SiField;
 use page\config\PageConfig;
+use rocket\ei\util\factory\EifGuiField;
 
 class PageHookEiProp extends EnumEiProp {
 
@@ -33,7 +34,7 @@ class PageHookEiProp extends EnumEiProp {
 		return false;
 	}
 	
-	public function createInSiField(Eiu $eiu): SiField {
+	public function createInEifGuiField(Eiu $eiu): EifGuiField {
 		$mag = parent::createMag($eiu);
 		CastUtils::assertTrue($mag instanceof EnumMag);
 		

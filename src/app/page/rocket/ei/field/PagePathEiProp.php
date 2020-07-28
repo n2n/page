@@ -14,6 +14,7 @@ use page\model\nav\UnavailableLeafException;
 use rocket\si\content\SiField;
 use rocket\si\content\impl\SiFields;
 use rocket\si\content\impl\meta\SiCrumb;
+use rocket\ei\util\factory\EifGuiField;
 
 class PagePathEiProp extends DisplayableEiPropAdapter {
 	
@@ -21,7 +22,7 @@ class PagePathEiProp extends DisplayableEiPropAdapter {
 	}
 	
 	
-	public function createOutSiField(Eiu $eiu): SiField {
+	function createOutEifGuiField(Eiu $eiu): EifGuiField {
 		$pageT = $eiu->entry()->getEntityObj();
 		CastUtils::assertTrue($pageT instanceof PageT);
 		
