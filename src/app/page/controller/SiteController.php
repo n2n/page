@@ -8,18 +8,17 @@ use page\config\PageConfig;
 use n2n\util\uri\Path;
 use n2n\l10n\IllegalN2nLocaleFormatException;
 use n2n\web\http\PageNotFoundException;
-use n2n\context\annotation\AnnoSessionScoped;
 use n2n\reflection\annotation\AnnoInit;
 use n2n\context\RequestScoped;
 use n2n\web\http\annotation\AnnoPath;
 
 class SiteController extends ControllerAdapter implements RequestScoped {
 	private static function _annos(AnnoInit $ai) {
-		$ai->p('n2nLocaleRedirected', new AnnoSessionScoped());
+// 		$ai->p('n2nLocaleRedirected', new AnnoSessionScoped());
 		$ai->m('sitemap', new AnnoPath('/sitemap.xml'));
 	}
 	
-	private $n2nLocaleRedirected = false;
+// 	private $n2nLocaleRedirected = false;
 	
 	private $pageState;
 	private $pageConfig;
@@ -53,7 +52,7 @@ class SiteController extends ControllerAdapter implements RequestScoped {
 		}
 
 		if ($cmdPath->isEmpty()) {
-			if ($this->n2nLocaleRedirect()) return null;
+// 			if ($this->n2nLocaleRedirect()) return null;
 			
 			$this->getRequest()->setN2nLocale($this->getHttpContext()->getMainN2nLocale());
 			return $this->createLeafResults($cmdPath, $cmdContextPath, true);
@@ -90,20 +89,20 @@ class SiteController extends ControllerAdapter implements RequestScoped {
 				$this->getN2nContext(), $cmdPath, $cmdContextPath, $n2nLocale, $subsystemName, $homeOnly);
 	}
 	
-	private function n2nLocaleRedirect() {
-		if ($this->pageConfig->isAutoN2nLocaleRedirectAllowed() || $this->n2nLocaleRedirected
-				|| $this->getHttpContext()->getMainN2nLocale()->equals($this->getRequest()->getN2nLocale())) {
-			return false;
-		}
+// 	private function n2nLocaleRedirect() {
+// 		if ($this->pageConfig->isAutoN2nLocaleRedirectAllowed() || $this->n2nLocaleRedirected
+// 				|| $this->getHttpContext()->getMainN2nLocale()->equals($this->getRequest()->getN2nLocale())) {
+// 			return false;
+// 		}
 		
-		$n2nLocale = $this->getRequest()->getN2nLocale();
-		if ($this->pageState->getNavTree()->containsHomeLeafN2nLocale($n2nLocale)) {
-			$this->redirectToController($this->getHttpContext()->n2nLocaleToHttpId());
-			return true;
-		}
+// 		$n2nLocale = $this->getRequest()->getN2nLocale();
+// 		if ($this->pageState->getNavTree()->containsHomeLeafN2nLocale($n2nLocale)) {
+// 			$this->redirectToController($this->getHttpContext()->n2nLocaleToHttpId());
+// 			return true;
+// 		}
 		
-		return false;
-	}
+// 		return false;
+// 	}
 	
 	public function sitemap() {
 		$this->forward('..\view\sitemap.xml', array('sitemapItems' => $this->pageState->getNavTree()
