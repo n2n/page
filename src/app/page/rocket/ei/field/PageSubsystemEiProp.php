@@ -22,9 +22,9 @@ class PageSubsystemEiProp extends EnumEiProp {
 		$this->displayConfig = $displayConfig;
 	}
 	
-	public function createEiPropConfigurator(): EiPropConfigurator {
-		return new PageSubsystemEiPropConfigurator($this);
-	}
+// 	public function createEiPropConfigurator(): EiPropConfigurator {
+// 		return new PageSubsystemEiPropConfigurator($this);
+// 	}
 	
 	public function buildDisplayDefinition(Eiu $eiu): ?DisplayDefinition {
 		if (1 == count($this->getOptions())) return null;

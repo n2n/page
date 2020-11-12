@@ -16,7 +16,7 @@ class PageSslEiProp extends BooleanEiProp {
 		$this->displayConfig = $displayConfig;
 	}
 	
-	public function createEiPropConfigurator(): EiPropConfigurator {
-		return new PageSslEiPropConfigurator($this);
-	}
+// 	public function createEiPropConfigurator(): EiPropConfigurator {
+// 		return new PageSslEiPropConfigurator($this);
+// 	}
 }

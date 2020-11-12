@@ -15,6 +15,9 @@ use page\model\nav\UnavailableLeafException;
 
 class PagePathEiProp extends DisplayableEiPropAdapter {
 	
+	protected function prepare() {
+	}
+	
 	public function createUiComponent(HtmlView $view, Eiu $eiu) {
 		$pageT = $eiu->entry()->getEntityObj();
 		CastUtils::assertTrue($pageT instanceof PageT);

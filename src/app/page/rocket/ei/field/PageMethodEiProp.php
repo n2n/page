@@ -18,6 +18,9 @@ use n2n\web\dispatch\mag\UiOutfitter;
 
 class PageMethodEiProp extends DraftablePropertyEiPropAdapter {
 	
+	protected function prepare() {
+	}
+	
 	public function createMag(Eiu $eiu): Mag {
 		$pageController = $eiu->entry()->getEntityObj();
 		CastUtils::assertTrue($pageController instanceof PageController);

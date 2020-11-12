@@ -13,13 +13,9 @@ use n2n\util\type\CastUtils;
 use page\bo\PageController;
 use page\model\PageControllerAnalyzer;
 use page\config\PageConfig;
-use rocket\impl\ei\component\prop\ci\model\PanelConfig;
 use n2n\util\StringUtils;
 use rocket\core\model\Rocket;
 use rocket\ei\EiPropPath;
-use rocket\impl\ei\component\prop\ci\model\ContentItemGuiField;
-use rocket\ei\manage\gui\GuiField;
-use rocket\ei\manage\gui\ui\DisplayItem;
 
 class PageContentItemsEiProp extends ContentItemsEiProp {
 	/**
@@ -31,9 +27,9 @@ class PageContentItemsEiProp extends ContentItemsEiProp {
 		return 'ContentItems (Page)';
 	}
 	
-	protected function getDisplayItemType(): string {
-		return DisplayItem::TYPE_PANEL;
-	}
+// 	protected function getDisplayItemType(): string {
+// 		return DisplayItem::TYPE_PANEL;
+// 	}
 	
 	public function setEntityProperty(EntityProperty $entityProperty = null) {
 		parent::setEntityProperty($entityProperty);
@@ -77,14 +73,14 @@ class PageContentItemsEiProp extends ContentItemsEiProp {
 		return $panelConfigs;
 	}
 	
-	public function buildGuiField(Eiu $eiu): ?GuiField {
-	    $contentItemGuiField = parent::buildGuiField($eiu);
-		CastUtils::assertTrue($contentItemGuiField instanceof ContentItemGuiField);
+// 	public function buildGuiField(Eiu $eiu): ?GuiField {
+// 	    $contentItemGuiField = parent::buildGuiField($eiu);
+// 		CastUtils::assertTrue($contentItemGuiField instanceof ContentItemGuiField);
 	
-		if (empty($contentItemGuiField->getPanelConfigs())) {
-			return null;
-		}
+// 		if (empty($contentItemGuiField->getPanelConfigs())) {
+// 			return null;
+// 		}
 		
-		return $contentItemGuiField;
-	}	
+// 		return $contentItemGuiField;
+// 	}	
 }

@@ -11,9 +11,9 @@ use page\rocket\ei\field\conf\PageHookEiPropConfigurator;
 
 class PageHookEiProp extends EnumEiProp {
 
-	public function createEiPropConfigurator(): EiPropConfigurator {
-		return new PageHookEiPropConfigurator($this);
-	}
+// 	public function createEiPropConfigurator(): EiPropConfigurator {
+// 		return new PageHookEiPropConfigurator($this);
+// 	}
 	
 	public function isMandatory(Eiu $eiu): bool {
 		return false;

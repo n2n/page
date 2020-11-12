@@ -1,17 +1,19 @@
 <?php
 namespace page\rocket\ei\field;
 
-use n2n\impl\web\ui\view\html\HtmlView;
 use rocket\ei\util\Eiu;
 use rocket\impl\ei\component\prop\adapter\DisplayableEiPropAdapter;
 use n2n\util\type\CastUtils;
 use page\bo\Page;
-use n2n\impl\web\ui\view\html\HtmlSnippet;
-use n2n\impl\web\ui\view\html\HtmlElement;
+use rocket\ei\util\factory\EifGuiField;
+use rocket\si\content\impl\SiFields;
+use rocket\si\content\impl\meta\SiCrumb;
 
 class PageTypeEiProp extends DisplayableEiPropAdapter {
+	protected function prepare() {
+	}
 	
-	public function createUiComponent(HtmlView $view, Eiu $eiu) {
+	function createOutEifGuiField(Eiu $eiu): EifGuiField {
 		$page = $eiu->entry()->getEntityObj();
 		CastUtils::assertTrue($page instanceof Page);
 		
@@ -21,11 +23,12 @@ class PageTypeEiProp extends DisplayableEiPropAdapter {
 		switch ($page->getType()) {
 			case Page::TYPE_INTERNAL:
 				$iconType = 'fa fa-link';
-				$label = $page->getInternalPage()->t($view->getN2nLocale())->getName();
+				$label = $page->getInternalPage()->t($eiu->getN2nLocale())->getName();
 				break;
 			case Page::TYPE_EXTERNAL:
 				$iconType = 'fa fa-link';
-				$label = $view->getHtmlBuilder()->getLink($page->getExternalUrl(), null, array('target' => '_blank'));
+// 				$label = $view->getHtmlBuilder()->getLink($page->getExternalUrl(), null, array('target' => '_blank'));
+				$label = $page->getExternalUrl();
 				break;
 			default:
 				$eiuMask = $eiu->context()->mask($page->getPageContent()->getPageController());
@@ -33,10 +36,12 @@ class PageTypeEiProp extends DisplayableEiPropAdapter {
 				$label = $eiuMask->getLabel();
 		}
 		
-		return new HtmlSnippet(
-				new HtmlElement('i', array('class' => $iconType), ''),
-				' ',
-				new HtmlElement('span', null, $label));
+		if (null === $iconType) {
+			return SiFields::stringOut($label);
+		}
+		
+		return $eiu->factory()->newGuiField(SiFields::crumbOut(SiCrumb::createIcon($iconType),
+				SiCrumb::createLabel($label)));
 	}
 
 	
