@@ -19,7 +19,7 @@ use rocket\spec\Spec;
 use page\model\PageControllerAnalyzer;
 use n2n\util\type\TypeConstraint;
 use n2n\util\type\ArgUtils;
-use rocket\impl\ei\component\prop\ci\model\PanelConfig;
+use rocket\impl\ei\component\prop\ci\model\PanelDeclaration;
 
 class PageDescriber extends ConfigDescriberAdapter {
 	const ATTR_LOCALES_ACTIVE_KEY = 'localeUrls';
@@ -170,7 +170,8 @@ class PageDescriber extends ConfigDescriberAdapter {
 			$pageControllerAttributes = new Attributes($pageControllerAttrs);
 			foreach ($pageControllerAttributes->getArray(self::ATTR_PAGE_CONTROLLER_CI_PANELS_KEY, false, array(), 
 					TypeConstraint::createArrayLike('array')) as $panelName => $ciPanelAttrs) {
-				$ciPanelConfigs[] = CiConfigUtils::createPanelConfig($ciPanelAttrs, $panelName);
+
+				$ciPanelConfigs[] = CiConfigUtils::createPanelDeclaration($ciPanelAttrs, $panelName);
 			}
 				
 			$pageConfig->addPageControllerConfig(new PageControllerConfig($pageControllerEiSpecId, $ciPanelConfigs));
@@ -185,7 +186,7 @@ class PageControllerConfig {
 	private $ciPanelConfigs;
 	
 	public function __construct(string $eiSpecId, array $ciPanelConfigs) {
-		ArgUtils::valArray($ciPanelConfigs, PanelConfig::class);
+		ArgUtils::valArray($ciPanelConfigs, PanelDeclaration::class);
 		$this->eiSpecId = $eiSpecId;
 		$this->ciPanelConfigs = $ciPanelConfigs;
 	}
