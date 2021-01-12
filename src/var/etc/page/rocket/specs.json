@@ -606,16 +606,6 @@
                             "label": null,
                             "type": null,
                             "guiIdPath": "type"
-                        },
-                        {
-                            "label": null,
-                            "type": null,
-                            "guiIdPath": "internalPage"
-                        },
-                        {
-                            "label": null,
-                            "type": null,
-                            "guiIdPath": "externalUrl"
                         }
                     ]
                 },
@@ -659,6 +649,16 @@
                             "guiIdPath": "indexable"
                         }
                     ]
+                },
+                {
+                    "label": null,
+                    "type": "simple-group",
+                    "guiIdPath": "internalPage"
+                },
+                {
+                    "label": null,
+                    "type": "simple-group",
+                    "guiIdPath": "externalUrl"
                 },
                 {
                     "label": null,
