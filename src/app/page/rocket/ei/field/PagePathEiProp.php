@@ -37,8 +37,8 @@ class PagePathEiProp extends DisplayableEiPropAdapter {
 		try {
 			$pathStr = (string) $navUrlBuilder->buildPath($navBranch, $pageT->getN2nLocale())->chLeadingDelimiter(true);
 		} catch (UnavailableLeafException $e) {
-			$siCrumb = SiCrumb::createLabel($eiu->dtc('page')->t('unreachable_err')
-					->setSeverity(SiCrumb::SEVERITY_INACTIVE));
+			$siCrumb = SiCrumb::createLabel($eiu->dtc('page')->t('unreachable_err'))
+					->setSeverity(SiCrumb::SEVERITY_INACTIVE);
 			return $eiu->factory()->newGuiField(SiFields::crumbOut($siCrumb));
 		}
 		
