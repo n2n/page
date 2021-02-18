@@ -16,6 +16,7 @@ use page\config\PageConfig;
 use n2n\util\StringUtils;
 use rocket\core\model\Rocket;
 use rocket\ei\EiPropPath;
+use rocket\impl\ei\component\prop\ci\model\PanelDeclaration;
 
 class PageContentItemsEiProp extends ContentItemsEiProp {
 	/**
@@ -39,13 +40,13 @@ class PageContentItemsEiProp extends ContentItemsEiProp {
 				&& $entityProperty->getTargetEntityModel()->getClass()->getName() === ContentItem::class);
 	}
 	
-	public function determinePanelConfigs(Eiu $eiu) {
+	public function determinePanelDeclarations(Eiu $eiu) {
 		$relationMapping = $eiu->entry()->getValue(EiPropPath::from($this)->poped()
 				->pushed('pageController'));
 		if ($relationMapping === null) {
 			return array();
 		}
-		$pageController = $pageController = $relationMapping->getEiObject()->getEiEntityObj()->getEntityObj();
+		$pageController = $pageController = $relationMapping->getEntityObj();
 		CastUtils::assertTrue($pageController instanceof PageController);
 		
 		$rocket = $eiu->frame()->getEiFrame()->getN2nContext()->lookup(Rocket::class);
@@ -68,7 +69,7 @@ class PageContentItemsEiProp extends ContentItemsEiProp {
 				continue;
 			}
 			
-			$panelConfigs[$panelName] = $panelConfig = new PanelConfig($panelName, StringUtils::pretty($panelName));
+			$panelConfigs[$panelName] = $panelConfig = new PanelDeclaration($panelName, StringUtils::pretty($panelName));
 		}
 		return $panelConfigs;
 	}
