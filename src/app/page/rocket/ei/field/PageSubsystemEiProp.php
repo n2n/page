@@ -1,53 +1,52 @@
 <?php
 namespace page\rocket\ei\field;
 
-use n2n\l10n\DynamicTextCollection;
-use n2n\impl\web\dispatch\mag\model\EnumMag;
 use rocket\impl\ei\component\prop\enum\EnumEiProp;
+use page\rocket\ei\field\conf\PageSubsystemConfig;
 use rocket\ei\util\Eiu;
-use n2n\web\dispatch\mag\Mag;
-use rocket\ei\component\prop\indepenent\EiPropConfigurator;
-use page\rocket\ei\field\conf\PageSubsystemEiPropConfigurator;
-use n2n\util\type\CastUtils;
-use rocket\impl\ei\component\prop\adapter\config\DisplayConfig;
-use rocket\ei\manage\gui\DisplayDefinition;
+use rocket\ei\manage\gui\GuiProp;
 
 class PageSubsystemEiProp extends EnumEiProp {
 	
-	public function getTypeName(): string {
-		return 'Subsystem';
+	function prepare() {
+		$this->getConfigurator()->removeAdaption($this->getEnumConfig());
+		$this->getConfigurator()->addAdaption(new PageSubsystemConfig($this->getEnumConfig()));
 	}
+	
+	function buildGuiProp(Eiu $eiu):?GuiProp {
+		if (empty($this->getEnumConfig()->getOptions())) {
+			return null;
+		}
 		
-	public function setDisplayConfig(DisplayConfig $displayConfig) {
-		$this->displayConfig = $displayConfig;
+		return parent::buildGuiProp($eiu);
 	}
 	
 // 	public function createEiPropConfigurator(): EiPropConfigurator {
 // 		return new PageSubsystemEiPropConfigurator($this);
 // 	}
 	
-	public function buildDisplayDefinition(Eiu $eiu): ?DisplayDefinition {
-		if (1 == count($this->getOptions())) return null;
+// 	public function buildDisplayDefinition(Eiu $eiu): ?DisplayDefinition {
+// 		if (1 == count($this->getOptions())) return null;
 		
-		return parent::buildDisplayDefinition($eiu);
-	}
+// 		return parent::buildDisplayDefinition($eiu);
+// 	}
 	
-	public function createMag(Eiu $eiu): Mag {
-		$enumMag = parent::createMag($eiu);
-		CastUtils::assertTrue($enumMag instanceof EnumMag);
+// 	public function createMag(Eiu $eiu): Mag {
+// 		$enumMag = parent::createMag($eiu);
+// 		CastUtils::assertTrue($enumMag instanceof EnumMag);
 		
-		if ($eiu->entry()->isNew()) {
-			return $enumMag;
-		}
+// 		if ($eiu->entry()->isNew()) {
+// 			return $enumMag;
+// 		}
 		
-		$attrs = [];
-		$attrs['class'] = 'rocket-critical-input';
-		$dtc = new DynamicTextCollection('page', $eiu->frame()->getN2nLocale());
-		$attrs['data-confirm-message'] = $dtc->translate('field_subsystem_unlock_confirm');
-		$attrs['data-edit-label'] =  $dtc->translate('common_edit_label');
-		$attrs['data-cancel-label'] =  $dtc->translate('common_cancel_label');
-		$enumMag->setInputAttrs($attrs);
+// 		$attrs = [];
+// 		$attrs['class'] = 'rocket-critical-input';
+// 		$dtc = new DynamicTextCollection('page', $eiu->frame()->getN2nLocale());
+// 		$attrs['data-confirm-message'] = $dtc->translate('field_subsystem_unlock_confirm');
+// 		$attrs['data-edit-label'] =  $dtc->translate('common_edit_label');
+// 		$attrs['data-cancel-label'] =  $dtc->translate('common_cancel_label');
+// 		$enumMag->setInputAttrs($attrs);
 		
-		return $enumMag;
-	}
+// 		return $enumMag;
+// 	}
 }

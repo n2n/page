@@ -108,17 +108,17 @@
                     "displayStructure": [
                         {
                             "label": null,
-                            "type": null,
+                            "type": "item",
                             "guiIdPath": "pageContentTs.seTitle"
                         },
                         {
                             "label": null,
-                            "type": null,
+                            "type": "item",
                             "guiIdPath": "pageContentTs.seDescription"
                         },
                         {
                             "label": null,
-                            "type": null,
+                            "type": "item",
                             "guiIdPath": "pageContentTs.seKeywords"
                         }
                     ]
@@ -420,7 +420,9 @@
                 },
                 "subsystemName": {
                     "class": "page\\rocket\\ei\\field\\PageSubsystemEiProp",
-                    "props": [],
+                    "props": {
+                        "mandatory": false
+                    },
                     "label": "Subsystem",
                     "objectProperty": "subsystemName",
                     "entityProperty": "subsystemName"
@@ -548,27 +550,27 @@
             "overviewOrder": [
                 {
                     "label": null,
-                    "type": null,
+                    "type": "item",
                     "guiIdPath": "pageTs.name"
                 },
                 {
                     "label": null,
-                    "type": null,
+                    "type": "item",
                     "guiIdPath": "pageType"
                 },
                 {
                     "label": null,
-                    "type": null,
+                    "type": "item",
                     "guiIdPath": "pageTs.pagePath"
                 },
                 {
                     "label": null,
-                    "type": null,
+                    "type": "item",
                     "guiIdPath": "inNavigation"
                 },
                 {
                     "label": null,
-                    "type": null,
+                    "type": "item",
                     "guiIdPath": "pageTs.active"
                 }
             ],
@@ -579,32 +581,32 @@
                     "displayStructure": [
                         {
                             "label": null,
-                            "type": null,
+                            "type": "item",
                             "guiIdPath": "pageTs.name"
                         },
                         {
                             "label": null,
-                            "type": null,
+                            "type": "item",
                             "guiIdPath": "pageTs.title"
                         },
                         {
                             "label": null,
-                            "type": null,
+                            "type": "item",
                             "guiIdPath": "pageTs.home"
                         },
                         {
                             "label": null,
-                            "type": null,
+                            "type": "item",
                             "guiIdPath": "pageTs.pathPart"
                         },
                         {
                             "label": null,
-                            "type": null,
+                            "type": "item",
                             "guiIdPath": "pageTs.active"
                         },
                         {
                             "label": null,
-                            "type": null,
+                            "type": "item",
                             "guiIdPath": "type"
                         }
                     ]
@@ -615,37 +617,37 @@
                     "displayStructure": [
                         {
                             "label": null,
-                            "type": null,
+                            "type": "item",
                             "guiIdPath": "subsystemName"
                         },
                         {
                             "label": null,
-                            "type": null,
+                            "type": "item",
                             "guiIdPath": "inPath"
                         },
                         {
                             "label": null,
-                            "type": null,
+                            "type": "item",
                             "guiIdPath": "hookKey"
                         },
                         {
                             "label": null,
-                            "type": null,
+                            "type": "item",
                             "guiIdPath": "inNavigation"
                         },
                         {
                             "label": null,
-                            "type": null,
+                            "type": "item",
                             "guiIdPath": "online"
                         },
                         {
                             "label": null,
-                            "type": null,
+                            "type": "item",
                             "guiIdPath": "navTargetNewWindow"
                         },
                         {
                             "label": null,
-                            "type": null,
+                            "type": "item",
                             "guiIdPath": "indexable"
                         }
                     ]
