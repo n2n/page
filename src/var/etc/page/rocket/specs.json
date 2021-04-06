@@ -245,6 +245,11 @@
             "iconType": null,
             "identityStringPattern": "{pageTs.name}",
             "previewControllerLookupId": "page\\controller\\PagePreviewController",
+            "filterData": {
+                "useAnd": true,
+                "items": [],
+                "groups": []
+            },
             "defaultSort": [],
             "props": {
                 "id": {
@@ -254,12 +259,15 @@
                         "displayInDetailView": true,
                         "displayInEditView": false,
                         "displayInAddView": false,
+                        "containerType": "item",
                         "constant": false,
                         "readOnly": true,
                         "mandatory": false,
-                        "draftable": false,
                         "minValue": "0",
-                        "maxValue": "4294967295"
+                        "maxValue": "4294967295",
+                        "prefixAddons": [],
+                        "suffixAddons": [],
+                        "quickSearchable": true
                     },
                     "label": "ID",
                     "objectProperty": "id",
@@ -268,7 +276,12 @@
                 "pageTs": {
                     "class": "rocket\\impl\\ei\\component\\prop\\translation\\TranslationEiProp",
                     "props": {
-                        "draftable": false,
+                        "displayInOverview": true,
+                        "displayInDetailView": true,
+                        "displayInEditView": true,
+                        "displayInAddView": true,
+                        "containerType": "item",
+                        "min": "1",
                         "useSystemN2nLocales": true,
                         "systenN2nLocaleDefs": [
                             {
@@ -290,10 +303,19 @@
                                 "id": "rm_CH",
                                 "mandatory": false,
                                 "label": null
+                            },
+                            {
+                                "id": "mn",
+                                "mandatory": false,
+                                "label": null
+                            },
+                            {
+                                "id": "en",
+                                "mandatory": false,
+                                "label": null
                             }
                         ],
-                        "customN2nLocaleDefs": [],
-                        "min": "1"
+                        "customN2nLocaleDefs": []
                     },
                     "label": "Page Leaf Ts",
                     "objectProperty": "pageTs",
@@ -305,7 +327,8 @@
                         "displayInOverview": true,
                         "displayInDetailView": true,
                         "displayInEditView": false,
-                        "displayInAddView": false
+                        "displayInAddView": false,
+                        "containerType": "item"
                     },
                     "label": "page_type_txt"
                 },
@@ -316,10 +339,10 @@
                         "displayInDetailView": false,
                         "displayInEditView": true,
                         "displayInAddView": true,
+                        "containerType": "item",
                         "constant": false,
                         "readOnly": false,
                         "mandatory": true,
-                        "draftable": false,
                         "options": {
                             "content": "Content",
                             "internal": "Internal Redirect",
@@ -335,7 +358,9 @@
                             "external": {
                                 "externalUrl": "externalUrl"
                             }
-                        }
+                        },
+                        "emptyLabel": null,
+                        "quickSearchable": false
                     },
                     "label": "type_txt",
                     "objectProperty": "type"
@@ -347,14 +372,14 @@
                         "displayInDetailView": true,
                         "displayInEditView": true,
                         "displayInAddView": true,
+                        "containerType": "item",
                         "constant": false,
                         "readOnly": false,
                         "mandatory": true,
-                        "draftable": false,
                         "targetRemovalStrategy": "prevent",
-                        "embeddedAddEnabled": false,
-                        "filtered": true,
-                        "hiddenIfTargetEmpty": false
+                        "hiddenIfTargetEmpty": false,
+                        "maxPicksNum": "20",
+                        "quickSearchable": true
                     },
                     "label": "internal Link",
                     "objectProperty": "internalPage",
@@ -367,14 +392,22 @@
                         "displayInDetailView": true,
                         "displayInEditView": true,
                         "displayInAddView": true,
+                        "containerType": "item",
                         "constant": false,
                         "readOnly": false,
                         "mandatory": true,
-                        "draftable": false,
+                        "minlength": null,
                         "maxlength": null,
+                        "quickSearchable": true,
+                        "prefixAddons": [],
+                        "suffixAddons": [],
                         "relativeAllowed": false,
-                        "allowedProtocols": [],
-                        "autoScheme": null
+                        "allowedProtocols": [
+                            "http",
+                            "https"
+                        ],
+                        "autoScheme": null,
+                        "lytebox": false
                     },
                     "label": "external Link",
                     "objectProperty": "externalUrl",
@@ -387,10 +420,10 @@
                         "displayInDetailView": true,
                         "displayInEditView": true,
                         "displayInAddView": true,
+                        "containerType": "simple-group",
                         "constant": false,
                         "readOnly": false,
                         "mandatory": true,
-                        "draftable": false,
                         "replaceable": false,
                         "targetRemovalStrategy": "unset",
                         "orphansAllowed": false,
@@ -407,10 +440,10 @@
                         "displayInDetailView": true,
                         "displayInEditView": false,
                         "displayInAddView": false,
+                        "containerType": "item",
                         "constant": false,
                         "readOnly": false,
                         "mandatory": false,
-                        "draftable": false,
                         "dateStyle": "medium",
                         "timeStyle": "short"
                     },
@@ -421,6 +454,13 @@
                 "subsystemName": {
                     "class": "page\\rocket\\ei\\field\\PageSubsystemEiProp",
                     "props": {
+                        "displayInOverview": true,
+                        "displayInDetailView": true,
+                        "displayInEditView": true,
+                        "displayInAddView": true,
+                        "containerType": "item",
+                        "constant": false,
+                        "readOnly": false,
                         "mandatory": false
                     },
                     "label": "Subsystem",
@@ -434,9 +474,9 @@
                         "displayInDetailView": true,
                         "displayInEditView": true,
                         "displayInAddView": true,
+                        "containerType": "item",
                         "constant": false,
-                        "readOnly": false,
-                        "draftable": false
+                        "readOnly": false
                     },
                     "label": "In Path",
                     "objectProperty": "inPath",
@@ -449,10 +489,10 @@
                         "displayInDetailView": true,
                         "displayInEditView": true,
                         "displayInAddView": true,
+                        "containerType": "item",
                         "constant": false,
                         "readOnly": false,
-                        "mandatory": false,
-                        "draftable": false
+                        "mandatory": false
                     },
                     "label": "Hook Key",
                     "objectProperty": "hookKey",
@@ -465,9 +505,9 @@
                         "displayInDetailView": true,
                         "displayInEditView": true,
                         "displayInAddView": true,
+                        "containerType": "item",
                         "constant": false,
-                        "readOnly": false,
-                        "draftable": false
+                        "readOnly": false
                     },
                     "label": "In Nav",
                     "objectProperty": "inNavigation",
@@ -480,9 +520,9 @@
                         "displayInDetailView": true,
                         "displayInEditView": true,
                         "displayInAddView": false,
+                        "containerType": "item",
                         "constant": false,
-                        "readOnly": false,
-                        "draftable": false
+                        "readOnly": false
                     },
                     "label": "Open in new window",
                     "objectProperty": "navTargetNewWindow",
@@ -495,8 +535,10 @@
                         "displayInDetailView": true,
                         "displayInEditView": true,
                         "displayInAddView": true,
+                        "containerType": "item",
+                        "constant": false,
                         "readOnly": false,
-                        "draftable": false
+                        "mandatory": false
                     },
                     "label": "Online",
                     "objectProperty": "online",
@@ -509,10 +551,9 @@
                         "displayInDetailView": true,
                         "displayInEditView": true,
                         "displayInAddView": true,
+                        "containerType": "item",
                         "constant": false,
-                        "readOnly": false,
-                        "mandatory": true,
-                        "draft": false
+                        "readOnly": false
                     },
                     "label": "Indexable",
                     "objectProperty": "indexable",
@@ -536,7 +577,9 @@
                 },
                 "add": {
                     "class": "rocket\\impl\\ei\\component\\command\\common\\AddEiCommand",
-                    "props": []
+                    "props": {
+                        "duplicateAllowed": true
+                    }
                 },
                 "delete": {
                     "class": "rocket\\impl\\ei\\component\\command\\common\\DeleteEiCommand",
@@ -969,12 +1012,15 @@
                         "displayInDetailView": true,
                         "displayInEditView": false,
                         "displayInAddView": false,
+                        "containerType": "item",
                         "constant": false,
                         "readOnly": true,
                         "mandatory": false,
-                        "draftable": false,
                         "minValue": "0",
-                        "maxValue": "4294967295"
+                        "maxValue": "4294967295",
+                        "prefixAddons": [],
+                        "suffixAddons": [],
+                        "quickSearchable": true
                     },
                     "label": "Id",
                     "objectProperty": "id",
@@ -987,10 +1033,10 @@
                         "displayInDetailView": true,
                         "displayInEditView": true,
                         "displayInAddView": true,
+                        "containerType": "item",
                         "constant": false,
                         "readOnly": false,
                         "mandatory": true,
-                        "draftable": false,
                         "options": {
                             "internal": "Internal",
                             "external": "External"
@@ -1002,7 +1048,9 @@
                             "external": {
                                 "url": "url"
                             }
-                        }
+                        },
+                        "emptyLabel": null,
+                        "quickSearchable": true
                     },
                     "label": "Type",
                     "objectProperty": "type",
@@ -1015,17 +1063,14 @@
                         "displayInDetailView": true,
                         "displayInEditView": true,
                         "displayInAddView": true,
+                        "containerType": "item",
                         "constant": false,
                         "readOnly": false,
                         "mandatory": true,
-                        "draftable": false,
-                        "targetExtensions": {
-                            "page-page": null
-                        },
                         "targetRemovalStrategy": "selfRemove",
-                        "embeddedAddEnabled": false,
-                        "filtered": true,
-                        "hiddenIfTargetEmpty": false
+                        "hiddenIfTargetEmpty": false,
+                        "maxPicksNum": "20",
+                        "quickSearchable": true
                     },
                     "label": "Linked Page",
                     "objectProperty": "linkedPage",
@@ -1038,14 +1083,22 @@
                         "displayInDetailView": true,
                         "displayInEditView": true,
                         "displayInAddView": true,
+                        "containerType": "item",
                         "constant": false,
                         "readOnly": false,
                         "mandatory": true,
-                        "draftable": false,
+                        "minlength": null,
                         "maxlength": "255",
+                        "quickSearchable": true,
+                        "prefixAddons": [],
+                        "suffixAddons": [],
                         "relativeAllowed": true,
-                        "allowedProtocols": [],
-                        "autoScheme": "https"
+                        "allowedProtocols": [
+                            "http",
+                            "https"
+                        ],
+                        "autoScheme": "https",
+                        "lytebox": false
                     },
                     "label": "Url",
                     "objectProperty": "url",
@@ -1058,11 +1111,15 @@
                         "displayInDetailView": true,
                         "displayInEditView": true,
                         "displayInAddView": true,
+                        "containerType": "item",
                         "constant": false,
                         "readOnly": false,
                         "mandatory": false,
-                        "draftable": false,
+                        "minlength": null,
                         "maxlength": "255",
+                        "quickSearchable": true,
+                        "prefixAddons": [],
+                        "suffixAddons": [],
                         "multiline": false
                     },
                     "label": "Label",
