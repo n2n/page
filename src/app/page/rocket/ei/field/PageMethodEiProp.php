@@ -20,6 +20,8 @@ use rocket\si\content\impl\SiFields;
 class PageMethodEiProp extends DraftablePropertyEiPropAdapter {
 	
 	protected function prepare() {
+		$this->getEditConfig()->setMandatory(true)
+				->setMandatoryChoosable(false);
 	}
 	
 	function createOutEifGuiField(Eiu $eiu): EifGuiField {
@@ -39,6 +41,10 @@ class PageMethodEiProp extends DraftablePropertyEiPropAdapter {
 		
 		$siField = SiFields::enumIn($options, $eiu->field()->getValue())
 				->setMandatory(true);
+		
+		if (count($options) === 1) {
+			$siField->setValue(key($options));	
+		}
 		
 		return $eiu->factory()->newGuiField($siField)
 				->setSaver(function () use ($eiu, $siField) {
