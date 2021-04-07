@@ -402,10 +402,7 @@
                         "prefixAddons": [],
                         "suffixAddons": [],
                         "relativeAllowed": false,
-                        "allowedProtocols": [
-                            "http",
-                            "https"
-                        ],
+                        "allowedProtocols": null,
                         "autoScheme": null,
                         "lytebox": false
                     },
@@ -1093,10 +1090,7 @@
                         "prefixAddons": [],
                         "suffixAddons": [],
                         "relativeAllowed": true,
-                        "allowedProtocols": [
-                            "http",
-                            "https"
-                        ],
+                        "allowedProtocols": null,
                         "autoScheme": "https",
                         "lytebox": false
                     },
