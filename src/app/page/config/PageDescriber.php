@@ -102,7 +102,7 @@ class PageDescriber extends ConfigDescriberAdapter {
 			$panelsAttrs = $pcLar->getArray(self::ATTR_PAGE_CONTROLLER_CI_PANELS_KEY);
 			$panelsMagCollection = new MagCollection();
 			foreach ($panelNames as $panelName) {
-				$panelMagCollection = $ciConfigUtils->createPanelConfigMagCollection(false);
+				$panelMagCollection = $ciConfigUtils->createPanelDeclarationMagCollection(false);
 				if (isset($panelsAttrs[$panelName])) {
 					$panelMagCollection->writeValues($ciConfigUtils->buildPanelConfigMagCollectionValues(
 							$panelsAttrs[$panelName]));
