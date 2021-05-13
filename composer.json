@@ -21,14 +21,29 @@
 			"email" : "guenther@hnm.ch"
 		}
 	],
+	"minimum-stability" : "dev",
+	"prefer-stable": true,
+	"config" : {
+		"vendor-dir" : "src/vendor"
+	},
 	"require" : {
 		"php" : ">=7.0",
 		"n2n/n2n-composer-module-installer" : "^7.1",
 		"n2n/rocket" : "^3"
 	},
+	"require-dev" : {
+        "n2n/n2nutil-bootstrap": "^4.3.3",
+        "n2n/hangar" : "^8",
+		"phpunit/phpunit" : "^9.5"
+	},
 	"autoload" : {
 		"psr-4" : {
 			"page\\" : "src/app/page"
+		}
+	},
+	"autoload-dev" : {
+		"psr-4" : {
+			"page\\" : "src/test/page"
 		}
 	}
 }
