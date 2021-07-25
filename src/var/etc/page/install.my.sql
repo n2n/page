@@ -14,7 +14,7 @@ CREATE TABLE `page` (
   `last_mod` datetime DEFAULT NULL,
   `last_mod_by` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 CREATE TABLE `page_content` (
@@ -24,7 +24,7 @@ CREATE TABLE `page_content` (
   `page_id` int(10) unsigned DEFAULT NULL,
   `ssl` tinyint(3) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 CREATE TABLE `page_content_t` (
@@ -35,14 +35,14 @@ CREATE TABLE `page_content_t` (
   `se_keywords` varchar(128) DEFAULT NULL,
   `page_content_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 CREATE TABLE `page_controller` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `method_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 CREATE TABLE `page_controller_t` (
@@ -50,14 +50,14 @@ CREATE TABLE `page_controller_t` (
   `n2n_locale` varchar(16) NOT NULL,
   `page_controller_id` varchar(128) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 CREATE TABLE `page_controller_t_content_items` (
   `page_controller_t_id` int(10) unsigned NOT NULL,
   `content_item_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`page_controller_t_id`,`content_item_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 CREATE TABLE `page_t` (
@@ -71,7 +71,7 @@ CREATE TABLE `page_t` (
   PRIMARY KEY (`id`),
   KEY `path_part` (`path_part`),
   KEY `page_leaf_t_index_1` (`page_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 CREATE TABLE `page_link` (
