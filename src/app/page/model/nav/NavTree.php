@@ -422,11 +422,15 @@ class NavUrlBuilder {
 		}
 		
 		$subsystemName = $leaf->getSubsystemName();
-		if ($subsystemName === null && !$this->httpContext->containsContextN2nLocale($n2nLocale)) {
-			foreach ($this->httpContext->getAvailableSubsystems() as $subsystem) {
+
+		$subsystemMatcher = null;
+		if ($subsystemName !== null) {
+			$subsystemMatcher = $this->httpContext->determineSubsystemMatcher($subsystemName, $n2nLocale);
+		} else if (!$this->httpContext->containsContextN2nLocale($n2nLocale)) {
+			foreach ($this->httpContext->getSubsystems() as $subsystem) {
 				if (!$subsystem->containsN2nLocaleId($n2nLocale)) continue;
-				
-				$subsystemName = $subsystem->getName();
+
+				$subsystemMatcher = $subsystem->getMatcherByN2nLocale($n2nLocale);
 			}
 		}
 		
