@@ -54,7 +54,7 @@ class SiteController extends ControllerAdapter implements RequestScoped {
 		if ($cmdPath->isEmpty()) {
 // 			if ($this->n2nLocaleRedirect()) return null;
 			
-			$this->getRequest()->setN2nLocale($this->getHttpContext()->getMainN2nLocale());
+			$this->getN2nContext()->setN2nLocale($this->getHttpContext()->getMainN2nLocale());
 			return $this->createLeafResults($cmdPath, $cmdContextPath, true);
 		}
 		
@@ -78,15 +78,15 @@ class SiteController extends ControllerAdapter implements RequestScoped {
 	}
 		
 	private function createLeafResults(Path $cmdPath, Path $cmdContextPath, bool $homeOnly) {
-		$n2nLocale = $this->getRequest()->getN2nLocale();
+		$n2nLocale = $this->getN2nContext()->getN2nLocale();
 		
-		$subsystemName = null;
-		if (null !== ($subsystem = $this->getRequest()->getSubsystem())) {
-			$subsystemName = $subsystem->getName();
+		$subsystemRuleName = null;
+		if (null !== ($subsystemRule = $this->getHttpContext()->getActiveSubsystemRule())) {
+			$subsystemRuleName = $subsystemRule->getName();
 		}
 		
 		return $this->pageState->getNavTree()->createLeafContents(
-				$this->getN2nContext(), $cmdPath, $cmdContextPath, $n2nLocale, $subsystemName, $homeOnly);
+				$this->getN2nContext(), $cmdPath, $cmdContextPath, $n2nLocale, $subsystemRuleName, $homeOnly);
 	}
 	
 // 	private function n2nLocaleRedirect() {

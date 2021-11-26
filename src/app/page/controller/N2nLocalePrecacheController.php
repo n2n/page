@@ -21,18 +21,18 @@ class N2nLocalePrecacheController extends ControllerAdapter implements RequestSc
 		CastUtils::assertTrue($this->pageConfig instanceof PageConfig);
 		
 		if (!$this->pageConfig->isAutoN2nLocaleRedirectAllowed() || $this->n2nLocaleRedirected
-				|| $this->getHttpContext()->getMainN2nLocale()->equals($this->getRequest()->getN2nLocale())) {
+				|| $this->getHttpContext()->getMainN2nLocale()->equals($this->getN2nContext()->getN2nLocale())) {
 			return;
 		}
 		
 		$pageState = $this->getN2nContext()->lookup(PageState::class);
 		CastUtils::assertTrue($pageState instanceof PageState);
-		$n2nLocale = $this->getRequest()->getN2nLocale();
+		$n2nLocale = $this->getN2nContext()->getN2nLocale();
 		
-		$subsystem = $this->getHttpContext()->getRequest()->getSubsystem();
+		$subsystemRule = $this->getHttpContext()->getActiveSubsystemRule();
 		
 		if (null === $pageState->getNavTree()->findHomeLeaf($n2nLocale, 
-				($subsystem !== null ? $subsystem->getName() : null))) {
+				($subsystemRule !== null ? $subsystemRule->getName() : null))) {
 			return;
 		}
 		
