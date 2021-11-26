@@ -423,20 +423,20 @@ class NavUrlBuilder {
 		
 		$subsystemName = $leaf->getSubsystemName();
 
-		$subsystemMatcher = null;
+		$subsystemRule = null;
 		if ($subsystemName !== null) {
-			$subsystemMatcher = $this->httpContext->determineSubsystemMatcher($subsystemName, $n2nLocale);
+			$subsystemRule = $this->httpContext->determineSubsystemRule($subsystemName, $n2nLocale);
 		} else if (!$this->httpContext->containsContextN2nLocale($n2nLocale)) {
 			foreach ($this->httpContext->getSubsystems() as $subsystem) {
 				if (!$subsystem->containsN2nLocaleId($n2nLocale)) continue;
 
-				$subsystemMatcher = $subsystem->getMatcherByN2nLocale($n2nLocale);
+				$subsystemRule = $subsystem->getRuleByN2nLocale($n2nLocale);
 			}
 		}
 		
 		$path = $this->buildPath($navBranch, $n2nLocale);
 		
-		return $this->httpContext->buildContextUrl($ssl, $subsystemMatcher, $this->absolute)
+		return $this->httpContext->buildContextUrl($ssl, $subsystemRule, $this->absolute)
 				->pathExt($path, $this->pathExt);
 	}
 	
