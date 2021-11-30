@@ -29,7 +29,8 @@
 	"require" : {
 		"php" : ">=7.0",
 		"n2n/n2n-composer-module-installer" : "^7.1",
-		"n2n/rocket" : "^3"
+		"n2n/rocket" : "^3",
+        "n2n/n2n-web": "^7.3"
 	},
 	"require-dev" : {
         "n2n/n2nutil-bootstrap": "^4.3.3",
