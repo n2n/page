@@ -110,7 +110,14 @@ class NavTree {
 	
 		throw $this->createException($affiliatedObj, $tagNames, $hookKeys, $id);
 	}
-	
+
+	/**
+	 * @param null $affiliatedObj
+	 * @param array|null $tagNames
+	 * @param array|null $hookKeys
+	 * @param string|null $id
+	 * @return UnknownNavBranchException
+	 */
 	private function createException($affiliatedObj = null, array $tagNames = null, array $hookKeys = null, string $id = null) {
 		$chrits = array();
 		if ($affiliatedObj !== null) {
@@ -129,7 +136,7 @@ class NavTree {
 			$chrits[] = 'id: ' . $id;
 		}
 		
-		throw new UnknownNavBranchException('No matching NavBranch found: ' . implode('; ', $chrits));
+		return new UnknownNavBranchException('No matching NavBranch found: ' . implode('; ', $chrits));
 	}
 	
 	public function createUrlBuilder(HttpContext $httpContext, bool $fallbackBackAllowed) {
@@ -425,7 +432,7 @@ class NavUrlBuilder {
 
 		$subsystemRule = null;
 		if ($subsystemName !== null) {
-			$subsystemRule = $this->httpContext->determineSubsystemRule($subsystemName, $n2nLocale);
+			$subsystemRule = $this->httpContext->findBestSubsystemRuleBySubsystemAndN2nLocale($subsystemName, $n2nLocale);
 		} else if (!$this->httpContext->containsContextN2nLocale($n2nLocale)) {
 			foreach ($this->httpContext->getSubsystems() as $subsystem) {
 				if (!$subsystem->containsN2nLocaleId($n2nLocale)) continue;
