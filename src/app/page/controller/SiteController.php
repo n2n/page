@@ -70,7 +70,7 @@ class SiteController extends ControllerAdapter implements RequestScoped {
 		}
 
 		if ($this->getHttpContext()->containsContextN2nLocale($n2nLocale)) {
-			$this->getRequest()->setN2nLocale($n2nLocale);
+			$this->getN2nContext()->setN2nLocale($n2nLocale);
 			return $this->createLeafResults($cmdPath->sub(1), $cmdContextPath->ext($cmdPath->sub(0, 1)), false);
 		}
 
