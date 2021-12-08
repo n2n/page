@@ -104,7 +104,7 @@ class PageDescriber extends ConfigDescriberAdapter {
 			foreach ($panelNames as $panelName) {
 				$panelMagCollection = $ciConfigUtils->createPanelDeclarationMagCollection(false);
 				if (isset($panelsAttrs[$panelName])) {
-					$panelMagCollection->writeValues($ciConfigUtils->buildPanelConfigMagCollectionValues(
+					$panelMagCollection->writeValues($ciConfigUtils->buildPanelDeclarationMagCollectionValues(
 							$panelsAttrs[$panelName]));
 				}
 				$panelsMagCollection->addMag($panelName, new MagCollectionMag($panelName, $panelMagCollection));	
@@ -118,13 +118,14 @@ class PageDescriber extends ConfigDescriberAdapter {
 	public function saveMagDispatchable(MagDispatchable $magDispatchable) {
 		$values = $magDispatchable->getMagCollection()->readValues();
 		
-		$ciConfigUtils = CiConfigUtils::createFromN2nContext($this->n2nContext);
+//		$ciConfigUtils = CiConfigUtils::createFromN2nContext($this->n2nContext);
 		
-		foreach ($values[self::ATTR_PAGE_CONTROLLERS_KEY] as $pagecontrollerKey => $pageControllerValues) {
+		foreach ($values[self::ATTR_PAGE_CONTROLLERS_KEY] as $pageControllerKey => $pageControllerValues) {
 			if (empty($pageControllerValues)) continue;
 			
 			foreach ($pageControllerValues[self::ATTR_PAGE_CONTROLLER_CI_PANELS_KEY] as $key => $ciPanelValues) {
-				$values[self::ATTR_PAGE_CONTROLLERS_KEY][$pagecontrollerKey][self::ATTR_PAGE_CONTROLLER_CI_PANELS_KEY][$key] = $ciConfigUtils->buildPanelConfigAttrs($ciPanelValues);
+				$values[self::ATTR_PAGE_CONTROLLERS_KEY][$pageControllerKey][self::ATTR_PAGE_CONTROLLER_CI_PANELS_KEY][$key]
+						= CiConfigUtils::buildPanelDeclarationAttrs($ciPanelValues);
 			}
 		}
 		
