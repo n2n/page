@@ -10,6 +10,8 @@ use n2n\impl\web\ui\view\html\HtmlElement;
 use page\model\nav\murl\MurlPage;
 use n2n\impl\web\ui\view\html\HtmlUtils;
 use n2n\web\ui\UiComponent;
+use n2n\util\type\ArgUtils;
+use n2n\util\col\ArrayUtils;
 
 /**
  * PageHtmlBuilder provides methods for simple html output in views dependent on the state of the site.
@@ -137,18 +139,26 @@ class PageHtmlBuilder {
 	 * @param array $liAttrs Html attributes of each li element 
 	 * @param string $divider Pass a {@link \n2n\web\ui\UiComponent} or string if a divider span element should be printed
 	 * in each li element. 
+	 * @param array $additionalLiUiComponents 
 	 */
-	public function breadcrumbs(array $attrs = null, array $liAttrs = null, array $aAttrs = null, $divider = null) {
-		$this->view->out($this->getBreadcrumbs($attrs, $liAttrs, $aAttrs, $divider));
+	public function breadcrumbs(array $attrs = null, array $liAttrs = null, array $aAttrs = null, $divider = null, 
+			array $additionalLiUiComponents = []) {
+		$this->view->out($this->getBreadcrumbs($attrs, $liAttrs, $aAttrs, $divider, $additionalLiUiComponents));
 	}
 	
 	/**
 	 * Same as {@link PageHtmlBuilder::breadcrumbs()} but returns the output.
 	 * @return \n2n\web\ui\UiComponent
 	 */
-	public function getBreadcrumbs(array $attrs = null, array $liAttrs = null, array $aAttrs = null, $divider = null) {
+	public function getBreadcrumbs(array $attrs = null, array $liAttrs = null, array $aAttrs = null, $divider = null, 
+			array $additionalLiUiComponents = []) {
+		
+		ArgUtils::valArray($additionalLiUiComponents, UiComponent::class);
+		
 		$navBranches = $this->meta->getBreadcrumbNavBranches();
-		if (empty($navBranches)) return null;
+		if (empty($navBranches) && empty($additionalLiUiComponents)) {
+			return null;
+		}
 		
 		$html = $this->view->getHtmlBuilder();
 		
@@ -161,8 +171,21 @@ class PageHtmlBuilder {
 			}
 		}
 		
-		$lis[] = new HtmlElement('li', HtmlUtils::mergeAttrs(array('class' => 'active'), $liAttrs), 
+		
+		$lis[] = new HtmlElement('li', 
+				(!empty($additionalLiUiComponents) ? $liAttrs : HtmlUtils::mergeAttrs(array('class' => 'active'), $liAttrs)), 
 				$html->getLink(MurlPage::obj($lastNavBranch), null, $aAttrs));
+		
+		
+		$lastAdditionalLiUiComponent = ArrayUtils::end($additionalLiUiComponents);
+		foreach ($additionalLiUiComponents as $additionalLiUiComponent) {
+			$lis[] = new HtmlElement('li', 
+					($lastAdditionalLiUiComponent !== $additionalLiUiComponent ? $liAttrs : HtmlUtils::mergeAttrs(array('class' => 'active'), $liAttrs)),
+					$additionalLiUiComponent);
+			if ($divider !== null) {
+				$li->prependContent(new HtmlElement('span', array('class' => 'divider'), $divider));
+			}
+		}
 		
 		return new HtmlElement('ul', $attrs, $lis);		
 	}
