@@ -20,7 +20,7 @@ class SiteController extends ControllerAdapter implements RequestScoped {
 
 // 	private $n2nLocaleRedirected = false;
 
-	private $pageState;
+	private PageState $pageState;
 	private $pageConfig;
 
 	public function prepare(PageState $pageState) {
@@ -105,7 +105,9 @@ class SiteController extends ControllerAdapter implements RequestScoped {
 // 	}
 
 	public function sitemap() {
+		$subsystemRule = $this->getHttpContext()->getActiveSubsystemRule();
+
 		$this->forward('..\view\sitemap.xml', array('sitemapItems' => $this->pageState->getNavTree()
-				->createSitemapItems($this->getN2nContext(),  $this->getRequest()->getSubsystem())));
+				->createSitemapItems($this->getN2nContext(), $subsystemRule)));
 	}
 }
