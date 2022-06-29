@@ -11,6 +11,10 @@ use n2n\web\http\controller\ControllerContext;
 use n2n\core\container\N2nContext;
 use n2n\util\type\ArgUtils;
 use n2n\web\http\Subsystem;
+use n2n\web\http\SubsystemRule;
+use n2n\util\magic\impl\MagicMethodInvoker;
+use n2n\util\type\TypeConstraints;
+use n2n\web\http\Supersystem;
 
 class NavTree {
 	private $rootNavBranches = array();
@@ -137,22 +141,19 @@ class NavTree {
 		$urlBuilder->setFallbackAllowed($fallbackBackAllowed);
 		return $urlBuilder;
 	}
-	
-	public function createSitemapItems(N2nContext $n2nContext, Subsystem $subsystem = null) {
-		$sitemapItemBuilder = new SitemapItemBuilder($n2nContext, $subsystem);
+
+	public function createSitemapItems(N2nContext $n2nContext, Supersystem $supersystem, ?SubsystemRule $subsystemRule = null) {
+		$sitemapItemBuilder = new SitemapItemBuilder($n2nContext, $supersystem, $subsystemRule);
 		return $sitemapItemBuilder->analyzeLevel($this->rootNavBranches);
 	}
 }
 
 class SitemapItemBuilder {
-	private $n2nContext;
-	private $subsystem;
-	
-	public function __construct(N2nContext $n2nContext, Subsystem $subsystem = null) {
-		$this->n2nContext = $n2nContext;
-		$this->subsystem = $subsystem;
+
+	public function __construct(private N2nContext $n2nContext, private Supersystem $supersystem,
+			private ?SubsystemRule $subsystemRule = null) {
 	}
-	
+
 	public function analyzeLevel(array $navBranches): array {
 		$sitemapItems = array();
 		foreach ($navBranches as $navBranch) {
@@ -160,27 +161,29 @@ class SitemapItemBuilder {
 		}
 		return $sitemapItems;
 	}
-	
+
 	public function analyzeBranch(NavBranch $navBranch) {
 		$sitemapItems = array();
-		
+
 		foreach ($navBranch->getLeafs() as $leaf) {
 			if (!$leaf->isAccessible() || !$leaf->isIndexable()) continue;
-			
-			if ($leaf->getSubsystemName() !== null 
-					&& ($this->subsystem === null || $this->subsystem->getName() !== $leaf->getSubsystemName())) {
+
+			if ($leaf->getSubsystemName() !== null && ($this->subsystemRule === null
+							|| $this->subsystemRule->getSubsystem()->getName() !== $leaf->getSubsystemName())) {
 				continue;
 			}
-			
-			if ($this->subsystem !== null && !$this->subsystem->containsN2nLocaleId($leaf->getN2nLocale())) {
+
+			if (!($this->supersystem->containsN2nLocaleId($leaf->getN2nLocale())
+					|| ($this->subsystemRule !== null
+							&& !$this->subsystemRule->containsN2nLocaleId($leaf->getN2nLocale())))) {
 				continue;
 			}
-					
+
 			$leafSitemapItems = $leaf->createSitemapItems($this->n2nContext);
 			ArgUtils::valArrayReturn($leafSitemapItems, $leaf, 'createSitemapItems', SitemapItem::class);
 			$sitemapItems = array_merge($sitemapItems, $leafSitemapItems);
 		}
-		
+
 		return array_merge($sitemapItems, $this->analyzeLevel($navBranch->getChildren()));
 	}
 }
