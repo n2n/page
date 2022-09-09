@@ -27,7 +27,11 @@ class PagePathEiProp extends DisplayableEiPropAdapter {
 		CastUtils::assertTrue($pageState instanceof PageState);
 		
 		$navBranch = $pageState->getNavTree()->find($pageT);
-		if ($navBranch === null) return null;
+		if ($navBranch === null) {
+			$siCrumb = SiCrumb::createLabel($eiu->dtc('page')->t('unknown_err'))
+					->setSeverity(SiCrumb::SEVERITY_INACTIVE);
+			return $eiu->factory()->newGuiField(SiFields::crumbOut($siCrumb));
+		}
 		
 		$navUrlBuilder = new NavUrlBuilder($eiu->getN2nContext()->getHttpContext());
 		$navUrlBuilder->setAccessiblesOnly(false);
