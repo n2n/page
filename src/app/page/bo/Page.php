@@ -23,7 +23,20 @@ use n2n\persistence\orm\annotation\AnnoEntityListeners;
 use n2n\util\type\CastUtils;
 use page\model\leaf\EmptyLeaf;
 use page\model\PageObjAffiliationTester;
+use rocket\attribute\EiType;
+use rocket\attribute\NestedSet;
+use rocket\attribute\MenuItem;
+use rocket\attribute\EiPreset;
+use rocket\spec\setup\EiPresetMode;
+use rocket\ei\util\Eiu;
+use rocket\attribute\impl\EiSetup;
+use page\rocket\ei\field\PageTypeEiPropNature;
+use page\rocket\ei\field\PagePathEiPropNature;
 
+#[EiType]
+#[NestedSet]
+#[MenuItem('Seitenverwaltung', groupName: 'Inhalt')]
+#[EiPreset(EiPresetMode::EDIT_CMDS, editProps: ['pageTs', 'inNavigation' => 'In Nav'])]
 class Page extends ObjectAdapter {
 	private static function _annos(AnnoInit $ai) {
 		$ai->c(new AnnoEntityListeners(PageEntityListener::getClass()));
@@ -370,5 +383,10 @@ class Page extends ObjectAdapter {
 			$leaf->setIndexable($this->indexable);
 			$navBranch->addLeaf($leaf);
 		}
+	}
+
+	#[EiSetup]
+	static function eiSetup(Eiu $eiu) {
+		$eiu->mask()->addProp(new PageTypeEiPropNature('Seiten Typ'));
 	}
 }

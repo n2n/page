@@ -8,7 +8,15 @@ use n2n\persistence\orm\annotation\AnnoManyToOne;
 use rocket\impl\ei\component\prop\translation\Translatable;
 use page\model\PageMonitor;
 use n2n\persistence\orm\annotation\AnnoEntityListeners;
+use rocket\attribute\EiType;
+use rocket\attribute\EiPreset;
+use rocket\attribute\impl\EiSetup;
+use rocket\ei\util\Eiu;
+use page\rocket\ei\field\PageTypeEiPropNature;
+use page\rocket\ei\field\PagePathEiPropNature;
 
+#[EiType]
+#[EiPreset(editProps: ['name', 'active' => 'Sprache online'])]
 class PageT extends ObjectAdapter implements Translatable {
 	private static function _annos(AnnoInit $ai) {
 		$ai->c(new AnnoEntityListeners(PageEntityListener::getClass()));
@@ -17,11 +25,11 @@ class PageT extends ObjectAdapter implements Translatable {
 	
 	private $id;
 	private $n2nLocale;
-	private $name;
+	private string $name;
 	private $title;
 	private $pathPart;
 	private $page;
-	private $active = true;
+	private bool $active = true;
 
 	private function _prePersist(PageMonitor $pageMonitor) {
 		$pageMonitor->registerRelatedChange($this->page);
@@ -113,5 +121,10 @@ class PageT extends ObjectAdapter implements Translatable {
 		if (!$this->title) return $this->name;
 		
 		return $this->title;
+	}
+
+	#[EiSetup]
+	static function eiSetup(Eiu $eiu) {
+		$eiu->mask()->addProp(new PagePathEiPropNature('Pfad'));
 	}
 }

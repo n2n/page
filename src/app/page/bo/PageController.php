@@ -21,7 +21,9 @@ use n2n\util\type\ArgUtils;
 use page\model\PageMonitor;
 use n2n\web\http\controller\InterceptorFactory;
 use page\model\nav\NavBranch;
+use rocket\attribute\EiType;
 
+#[EiType]
 abstract class PageController extends ObjectAdapter implements Controller {
 	use ControllingUtilsTrait;
 	
