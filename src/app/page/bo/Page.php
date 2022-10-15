@@ -32,6 +32,7 @@ use rocket\ei\util\Eiu;
 use rocket\attribute\impl\EiSetup;
 use page\rocket\ei\field\PageTypeEiPropNature;
 use page\rocket\ei\field\PagePathEiPropNature;
+use rocket\attribute\impl\EiPropOnlineStatus;
 
 #[EiType]
 #[NestedSet]
@@ -53,7 +54,8 @@ class Page extends ObjectAdapter {
 	private $externalUrl;
 	private $pageContent;
 	private $subsystemName;
-	private $online = true;
+	#[EiPropOnlineStatus]
+	private bool $online = true;
 	private $inPath = true;
 	private $hookKey;
 	private $inNavigation = true;
