@@ -81,7 +81,7 @@ class PageMethodEiProp extends DraftablePropertyEiPropAdapter {
 	}
 	
 	public function buildIdentityString(Eiu $eiu, N2nLocale $n2nLocale): ?string {
-		return $eiu->object()->readNativValue($this);
+		return $eiu->object()->readNativValue($eiu->prop()->getEiProp());
 	}
 }
 
