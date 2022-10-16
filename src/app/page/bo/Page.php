@@ -33,11 +33,22 @@ use rocket\attribute\impl\EiSetup;
 use page\rocket\ei\field\PageTypeEiPropNature;
 use page\rocket\ei\field\PagePathEiPropNature;
 use rocket\attribute\impl\EiPropOnlineStatus;
+use rocket\attribute\DisplayScheme;
+use n2n\persistence\orm\attribute\Transient;
+use rocket\attribute\impl\EiPropBool;
+use rocket\attribute\impl\EiPropEnum;
 
 #[EiType]
 #[NestedSet]
 #[MenuItem('Seitenverwaltung', groupName: 'Inhalt')]
 #[EiPreset(EiPresetMode::EDIT_CMDS, editProps: ['pageTs', 'inNavigation' => 'In Nav'])]
+#[DisplayScheme(
+		compact: ['pageTs.name', 'pageType', 'pageTs.pagePath', 'inNavigation', 'pageTs.active'],
+		bulky: [
+			'main-group:General' => ['pageTs.name', 'pageTs.title', 'pageTs.home', 'pageTs.pathPart', 'pageTs.active', 'type'],
+			'main-group:Advanced' => ['subsystemName', 'inPath', 'hookKey', 'inNavigation', 'online', 'navTargetNewWindow', 'indexable']
+		]
+)]
 class Page extends ObjectAdapter {
 	private static function _annos(AnnoInit $ai) {
 		$ai->c(new AnnoEntityListeners(PageEntityListener::getClass()));
@@ -49,7 +60,26 @@ class Page extends ObjectAdapter {
 	const NS = 'page';
 	
 	private $id;
-// 	private $type;
+
+	/**
+	 * This is a temporary hack util a prop with only getter and/or setter methods can be annotated.
+	 *
+	 * @var bool $home
+	 */
+	#[Transient]
+	#[EiPropEnum(
+			options: [
+				self::TYPE_CONTENT => 'Content',
+				self::TYPE_INTERNAL => 'Internal Redirect',
+				self::TYPE_EXTERNAL => 'External Redirect'
+			],
+			guiPropsMap: [
+				self::TYPE_CONTENT => ['pageContent'],
+				self::TYPE_INTERNAL => ['internalPage'],
+				self::TYPE_EXTERNAL => ['externalUrl']
+			])]
+ 	private string $type;
+
 	private $internalPage;
 	private $externalUrl;
 	private $pageContent;
@@ -389,6 +419,6 @@ class Page extends ObjectAdapter {
 
 	#[EiSetup]
 	static function eiSetup(Eiu $eiu) {
-		$eiu->mask()->addProp(new PageTypeEiPropNature('Seiten Typ'));
+		$eiu->mask()->addProp(new PageTypeEiPropNature('Seiten Typ'), 'pageType');
 	}
 }
