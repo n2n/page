@@ -55,7 +55,10 @@ use n2n\persistence\orm\attribute\ManyToOne;
 		compact: ['pageTs.name', 'pageType', 'pageTs.pagePath', 'inNavigation', 'pageTs.active'],
 		bulky: [
 			'main-group:General' => ['pageTs.name', 'pageTs.title', 'pageTs.home', 'pageTs.pathPart', 'pageTs.active', 'type'],
-			'main-group:Advanced' => ['subsystemName', 'inPath', 'hookKey', 'inNavigation', 'online', 'navTargetNewWindow', 'indexable']
+			'main-group:Advanced' => ['subsystemName', 'inPath', 'hookKey', 'inNavigation', 'online', 'navTargetNewWindow', 'indexable'],
+			'internalPage' => 'simple-group:',
+			'externalUrl' => 'simple-group:',
+			'pageContent' => 'panel:'
 		]
 )]
 #[EntityListeners(PageEntityListener::class)]
