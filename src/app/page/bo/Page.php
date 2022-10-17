@@ -24,7 +24,7 @@ use n2n\util\type\CastUtils;
 use page\model\leaf\EmptyLeaf;
 use page\model\PageObjAffiliationTester;
 use rocket\attribute\EiType;
-use rocket\attribute\NestedSet;
+use rocket\attribute\EiNestedSet;
 use rocket\attribute\MenuItem;
 use rocket\attribute\EiPreset;
 use rocket\spec\setup\EiPresetMode;
@@ -33,25 +33,35 @@ use rocket\attribute\impl\EiSetup;
 use page\rocket\ei\field\PageTypeEiPropNature;
 use page\rocket\ei\field\PagePathEiPropNature;
 use rocket\attribute\impl\EiPropOnlineStatus;
-use rocket\attribute\DisplayScheme;
+use rocket\attribute\EiDisplayScheme;
 use n2n\persistence\orm\attribute\Transient;
 use rocket\attribute\impl\EiPropBool;
 use rocket\attribute\impl\EiPropEnum;
+use n2n\util\uri\Url;
+use rocket\attribute\impl\EiPropOneToOneEmbedded;
+use page\rocket\ei\field\PageSubsystemEiPropNature;
+use n2n\reflection\property\PropertiesAnalyzer;
+use n2n\persistence\orm\attribute\EntityListeners;
+use n2n\persistence\orm\attribute\OneToOne;
+use n2n\persistence\orm\attribute\OneToMany;
+use n2n\persistence\orm\attribute\ManyToOne;
 
-#[EiType]
-#[NestedSet]
+#[EiType(label: 'Seite', pluralLabel: 'Seiten')]
+#[EiNestedSet]
 #[MenuItem('Seitenverwaltung', groupName: 'Inhalt')]
-#[EiPreset(EiPresetMode::EDIT_CMDS, editProps: ['pageTs', 'inNavigation' => 'In Nav'])]
-#[DisplayScheme(
+#[EiPreset(EiPresetMode::EDIT_CMDS,
+		editProps: ['pageTs', 'inNavigation' => 'In Nav', 'pageContent', 'internalPage', 'externalUrl'])]
+#[EiDisplayScheme(
 		compact: ['pageTs.name', 'pageType', 'pageTs.pagePath', 'inNavigation', 'pageTs.active'],
 		bulky: [
 			'main-group:General' => ['pageTs.name', 'pageTs.title', 'pageTs.home', 'pageTs.pathPart', 'pageTs.active', 'type'],
 			'main-group:Advanced' => ['subsystemName', 'inPath', 'hookKey', 'inNavigation', 'online', 'navTargetNewWindow', 'indexable']
 		]
 )]
+#[EntityListeners(PageEntityListener::class)]
 class Page extends ObjectAdapter {
 	private static function _annos(AnnoInit $ai) {
-		$ai->c(new AnnoEntityListeners(PageEntityListener::getClass()));
+//		$ai->c(new AnnoEntityListeners(PageEntityListener::getClass()));
 		$ai->p('pageContent', new AnnoOneToOne(PageContent::getClass(), null, CascadeType::ALL, null, true));
 		$ai->p('internalPage', new AnnoManyToOne(Page::getClass()));
 		$ai->p('pageTs', new AnnoOneToMany(PageT::getClass(), 'page', CascadeType::ALL, null, true));
@@ -64,7 +74,7 @@ class Page extends ObjectAdapter {
 	/**
 	 * This is a temporary hack util a prop with only getter and/or setter methods can be annotated.
 	 *
-	 * @var bool $home
+	 * @var string $type
 	 */
 	#[Transient]
 	#[EiPropEnum(
@@ -80,22 +90,25 @@ class Page extends ObjectAdapter {
 			])]
  	private string $type;
 
-	private $internalPage;
-	private $externalUrl;
-	private $pageContent;
-	private $subsystemName;
+	#[ManyToOne]
+	private ?Page $internalPage;
+	private ?Url $externalUrl;
+	#[EiPropOneToOneEmbedded(reduced: false)]
+	private ?PageContent $pageContent;
+	private ?string $subsystemName = null;
 	#[EiPropOnlineStatus]
 	private bool $online = true;
-	private $inPath = true;
-	private $hookKey;
-	private $inNavigation = true;
-	private $navTargetNewWindow = false;
+	private bool $inPath = true;
+	private ?string $hookKey;
+	private bool $inNavigation = true;
+	private bool $navTargetNewWindow = false;
 	private $lft;
 	private $rgt;
 	private $lastMod;
 //	private $lastModBy;
-	private $pageTs;
-	private $indexable = true;
+	#[OneToMany(PageT::class, 'page', cascade: CascadeType::ALL, orphanRemoval: true)]
+	private \ArrayObject $pageTs;
+	private bool $indexable = true;
 
 	public function __construct() {
 		$this->lastMod = new \DateTime();
@@ -420,5 +433,9 @@ class Page extends ObjectAdapter {
 	#[EiSetup]
 	static function eiSetup(Eiu $eiu) {
 		$eiu->mask()->addProp(new PageTypeEiPropNature('Seiten Typ'), 'pageType');
+
+		$accessProxy = (new PropertiesAnalyzer(new \ReflectionClass(__CLASS__)))
+				->analyzeProperty('subsystemName');
+		$eiu->mask()->addProp(new PageSubsystemEiPropNature($accessProxy, 'Subsystem'), 'subsystemName');
 	}
 }

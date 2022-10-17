@@ -16,6 +16,8 @@ use page\rocket\ei\field\PageTypeEiPropNature;
 use page\rocket\ei\field\PagePathEiPropNature;
 use n2n\persistence\orm\attribute\Transient;
 use rocket\attribute\impl\EiPropBool;
+use n2n\reflection\property\PropertiesAnalyzer;
+use page\rocket\ei\field\PageSubsystemEiPropNature;
 
 #[EiType]
 #[EiPreset(editProps: [
