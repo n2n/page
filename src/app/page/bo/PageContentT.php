@@ -8,7 +8,11 @@ use n2n\reflection\annotation\AnnoInit;
 use n2n\reflection\ObjectAdapter;
 use n2n\persistence\orm\annotation\AnnoManyToOne;
 use page\model\PageMonitor;
+use rocket\attribute\EiType;
+use rocket\attribute\EiPreset;
 
+#[EiType]
+#[EiPreset(editProps: ['seTitle', 'seDescription', 'seKeywords'])]
 class PageContentT extends ObjectAdapter implements Translatable {
 	private static function _annos(AnnoInit $ai) {
 		$ai->c(new AnnoEntityListeners(PageEntityListener::getClass()));

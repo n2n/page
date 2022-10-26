@@ -21,7 +21,16 @@ use n2n\util\type\ArgUtils;
 use page\model\PageMonitor;
 use n2n\web\http\controller\InterceptorFactory;
 use page\model\nav\NavBranch;
+use rocket\attribute\EiType;
+use rocket\attribute\impl\EiSetup;
+use rocket\ei\util\Eiu;
+use n2n\reflection\property\PropertiesAnalyzer;
+use page\rocket\ei\field\PageSslEiPropNature;
+use page\rocket\ei\field\PageMethodEiPropNature;
+use rocket\attribute\EiPreset;
 
+#[EiType]
+#[EiPreset(editProps: ['pageControllerTs'])]
 abstract class PageController extends ObjectAdapter implements Controller {
 	use ControllingUtilsTrait;
 	
@@ -162,4 +171,11 @@ abstract class PageController extends ObjectAdapter implements Controller {
 // 	 * @return Controller
 // 	 */
 // 	public abstract function delegateRequest(N2nContext $n2nContext, Path $cmdPath, Path $cmdContextPath, ControllingPlan $controllingPlan);
+
+	#[EiSetup]
+	static function eiSetup(Eiu $eiu) {
+		$accessProxy = (new PropertiesAnalyzer(new \ReflectionClass(__CLASS__)))
+				->analyzeProperty('methodName');
+		$eiu->mask()->addProp(new PageMethodEiPropNature($accessProxy, 'Type'), 'methodName');
+	}
 }

@@ -9,14 +9,14 @@ use n2n\core\container\N2nContext;
 use n2n\web\dispatch\mag\MagDispatchable;
 use n2n\impl\web\dispatch\mag\model\MagForm;
 use n2n\web\dispatch\mag\MagCollection;
-use page\rocket\ei\field\PageSslEiProp;
+use page\rocket\ei\field\PageSslEiPropNature;
 use rocket\impl\ei\component\prop\adapter\config\DisplayConfig;
 use rocket\ei\manage\gui\ViewMode;
 
 class PageSslEiPropConfigurator extends AdaptableEiPropConfigurator {
 	private $pageSslEiField;
 	
-	public function __construct(PageSslEiProp $pageSslEiField) {
+	public function __construct(PageSslEiPropNature $pageSslEiField) {
 		parent::__construct($pageSslEiField);
 		$this->pageSslEiField = $pageSslEiField;
 		$this->autoRegister();

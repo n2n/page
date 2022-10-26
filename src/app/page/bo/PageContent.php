@@ -11,7 +11,20 @@ use n2n\l10n\N2nLocale;
 use rocket\impl\ei\component\prop\translation\Translator;
 use n2n\persistence\orm\FetchType;
 use page\model\PageMonitor;
+use rocket\attribute\EiType;
+use rocket\attribute\EiPreset;
+use rocket\attribute\impl\EiSetup;
+use n2n\reflection\property\PropertiesAnalyzer;
+use page\rocket\ei\field\PageSslEiPropNature;
+use rocket\ei\util\Eiu;
+use rocket\attribute\EiDisplayScheme;
 
+#[EiType]
+#[EiPreset(editProps: ['pageContentTs', 'pageController'])]
+#[EiDisplayScheme(bulky: [
+	'pageController' => 'main-group:',
+	'main-group:SEO' => ['pageContentTs.seTitle', 'pageContentTs.seDescription', 'pageContentTs.seKeywords']
+])]
 class PageContent extends ObjectAdapter {
 	private static function _annos(AnnoInit $ai) {
 		$ai->c(new AnnoEntityListeners(PageEntityListener::getClass()));
@@ -96,5 +109,12 @@ class PageContent extends ObjectAdapter {
 	 */
 	public function t(N2nLocale ...$n2nLocales) {
 		return Translator::find($this->pageContentTs, ...$n2nLocales);
+	}
+
+	#[EiSetup]
+	static function eiSetup(Eiu $eiu) {
+		$accessProxy = (new PropertiesAnalyzer(new \ReflectionClass(__CLASS__)))
+				->analyzeProperty('ssl');
+		$eiu->mask()->addProp(new PageSslEiPropNature($accessProxy, 'Subsystem'), 'ssl');
 	}
 }

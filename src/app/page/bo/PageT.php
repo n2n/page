@@ -8,7 +8,21 @@ use n2n\persistence\orm\annotation\AnnoManyToOne;
 use rocket\impl\ei\component\prop\translation\Translatable;
 use page\model\PageMonitor;
 use n2n\persistence\orm\annotation\AnnoEntityListeners;
+use rocket\attribute\EiType;
+use rocket\attribute\EiPreset;
+use rocket\attribute\impl\EiSetup;
+use rocket\ei\util\Eiu;
+use page\rocket\ei\field\PageTypeEiPropNature;
+use page\rocket\ei\field\PagePathEiPropNature;
+use n2n\persistence\orm\attribute\Transient;
+use rocket\attribute\impl\EiPropBool;
+use n2n\reflection\property\PropertiesAnalyzer;
+use page\rocket\ei\field\PageSubsystemEiPropNature;
 
+#[EiType]
+#[EiPreset(editProps: [
+	'name', 'active' => 'Sprache online', 'title' => 'Titel', 'home' => 'Startseite', 'pathPart' => 'Pfad Teil'
+])]
 class PageT extends ObjectAdapter implements Translatable {
 	private static function _annos(AnnoInit $ai) {
 		$ai->c(new AnnoEntityListeners(PageEntityListener::getClass()));
@@ -17,11 +31,21 @@ class PageT extends ObjectAdapter implements Translatable {
 	
 	private $id;
 	private $n2nLocale;
-	private $name;
-	private $title;
-	private $pathPart;
+	private string $name;
+	private ?string $title;
+	private ?string $pathPart;
 	private $page;
-	private $active = true;
+	private bool $active = true;
+
+
+	/**
+	 * This is a temporary hack util a prop with only getter and/or setter methods can be annotated.
+	 *
+	 * @var bool $home
+	 */
+	#[Transient]
+	#[EiPropBool(offGuiProps: ['pathPart'])]
+	private bool $home;
 
 	private function _prePersist(PageMonitor $pageMonitor) {
 		$pageMonitor->registerRelatedChange($this->page);
@@ -113,5 +137,10 @@ class PageT extends ObjectAdapter implements Translatable {
 		if (!$this->title) return $this->name;
 		
 		return $this->title;
+	}
+
+	#[EiSetup]
+	static function eiSetup(Eiu $eiu) {
+		$eiu->mask()->addProp(new PagePathEiPropNature('Pfad'), 'pagePath');
 	}
 }

@@ -13,7 +13,11 @@ use rocket\impl\ei\component\prop\translation\Translatable;
 use n2n\persistence\orm\FetchType;
 use page\model\PageMonitor;
 use n2n\persistence\orm\annotation\AnnoEntityListeners;
+use rocket\attribute\EiType;
+use rocket\attribute\EiPreset;
 
+#[EiType]
+#[EiPreset(readProps: ['contentItems'])]
 class PageControllerT extends ObjectAdapter implements Translatable {
 	private static function _annos(AnnoInit $ai) {
 		$ai->c(new AnnoEntityListeners(PageEntityListener::getClass()));
