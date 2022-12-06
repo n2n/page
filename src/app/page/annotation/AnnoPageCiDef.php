@@ -28,7 +28,7 @@
 // 			} else {
 // 				try {
 // 					$allowedCiClass = ReflectionUtils::createReflectionClass($allowedCiClassName);
-// 				} catch (\n2n\core\TypeNotFoundException $e) {
+// 				} catch (\ReflectionException $e) {
 // 					throw new \InvalidArgumentException('Unknown ContentItem type: ' . $allowedCiClassName);
 // 				}
 // 			}
