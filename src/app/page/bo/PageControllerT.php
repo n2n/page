@@ -15,9 +15,17 @@ use page\model\PageMonitor;
 use n2n\persistence\orm\annotation\AnnoEntityListeners;
 use rocket\attribute\EiType;
 use rocket\attribute\EiPreset;
+use rocket\attribute\impl\EiSetup;
+use rocket\ei\util\Eiu;
+use page\rocket\ei\field\PageTypeEiPropNature;
+use n2n\reflection\property\PropertiesAnalyzer;
+use page\rocket\ei\field\PageSubsystemEiPropNature;
+use page\rocket\ei\field\PageContentItemsEiPropNature;
+use rocket\attribute\EiDisplayScheme;
 
 #[EiType]
-#[EiPreset(readProps: ['contentItems'])]
+#[EiPreset(readProps: ['pageController', 'contentItems'])]
+#[EiDisplayScheme(compact: ['contentItems'], bulky: ['contentItems'])]
 class PageControllerT extends ObjectAdapter implements Translatable {
 	private static function _annos(AnnoInit $ai) {
 		$ai->c(new AnnoEntityListeners(PageEntityListener::getClass()));
@@ -79,5 +87,13 @@ class PageControllerT extends ObjectAdapter implements Translatable {
 	
 	public function setContentItems(\ArrayObject $contentItems) {
 		$this->contentItems = $contentItems;
-	}	
+	}
+
+	#[EiSetup]
+	static function eiSetup(Eiu $eiu) {
+		$entityProperty = $eiu->mask()->type()->getEiType()->getEntityModel()->getEntityPropertyByName('contentItems');
+		$accessProxy = (new PropertiesAnalyzer(new \ReflectionClass(__CLASS__)))
+				->analyzeProperty('contentItems');
+		$eiu->mask()->addProp(new PageContentItemsEiPropNature($entityProperty, $accessProxy), 'contentItems');
+	}
 }
