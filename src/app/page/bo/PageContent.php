@@ -18,6 +18,7 @@ use n2n\reflection\property\PropertiesAnalyzer;
 use page\rocket\ei\field\PageSslEiPropNature;
 use rocket\ei\util\Eiu;
 use rocket\attribute\EiDisplayScheme;
+use rocket\attribute\impl\EiPropOneToOneEmbedded;
 
 #[EiType]
 #[EiPreset(editProps: ['pageContentTs', 'pageController'])]
@@ -39,6 +40,7 @@ class PageContent extends ObjectAdapter {
 	private $ssl = false;
 	private $page;
 	private $pageContentTs;
+	#[EiPropOneToOneEmbedded(reduced: false)]
 	private $pageController;
 	
 	private function _prePersist(PageMonitor $pageMonitor) {
