@@ -15,8 +15,7 @@ class CommonLeafContent implements LeafContent {
 	private $seDescription;
 	private $seKeywords;
 	
-	public function __construct(Leaf $leaf, Path $cmdPath, Path $cmdContextPath, Controller $controller) {
-		$this->leaf = $leaf;
+	public function __construct(private Leaf $leaf, Path $cmdPath, Path $cmdContextPath, Controller $controller) {
 		$this->controllerContext = new ControllerContext($cmdPath, $cmdContextPath, $controller);
 	}
 	
