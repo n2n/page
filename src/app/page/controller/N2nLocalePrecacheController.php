@@ -17,10 +17,10 @@ class N2nLocalePrecacheController extends ControllerAdapter implements RequestSc
 	private $n2nLocaleRedirected = false;
 
 	function index() {
-		$this->pageConfig = $this->getN2nContext()->getModuleConfig('page');
-		CastUtils::assertTrue($this->pageConfig instanceof PageConfig);
+		$pageConfig = $this->getN2nContext()->getModuleConfig('page');
+		CastUtils::assertTrue($pageConfig instanceof PageConfig);
 		
-		if (!$this->pageConfig->isAutoN2nLocaleRedirectAllowed() || $this->n2nLocaleRedirected
+		if (!$pageConfig->isAutoN2nLocaleRedirectAllowed() || $this->n2nLocaleRedirected
 				|| $this->getHttpContext()->getMainN2nLocale()->equals($this->getN2nContext()->getN2nLocale())) {
 			return;
 		}
