@@ -11,11 +11,13 @@ use n2n\reflection\annotation\AnnoInit;
 use n2n\persistence\orm\annotation\AnnoManyToOne;
 use n2n\persistence\orm\FetchType;
 use page\model\nav\murl\MurlPage;
+use rocket\attribute\EiType;
 
 /**
  * This util entity can be easly intergrated 
  *
  */
+#[EiType]
 class PageLink extends ObjectAdapter implements UrlComposer {
 	private static function _annos(AnnoInit $ai) {
 		$ai->p('linkedPage', new AnnoManyToOne(Page::getClass(), null, FetchType::EAGER));
