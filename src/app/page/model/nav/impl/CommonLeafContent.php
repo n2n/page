@@ -9,6 +9,7 @@ use n2n\web\http\controller\ControllerContext;
 use page\model\nav\UnknownContentItemPanelException;
 
 class CommonLeafContent implements LeafContent {
+	private $leaf;
 	private $controller;
 	private $controllerContext;
 	private $seTitle;
