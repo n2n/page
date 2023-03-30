@@ -15,6 +15,7 @@ class N2nLocalePrecacheController extends ControllerAdapter implements RequestSc
 	}
 	
 	private $n2nLocaleRedirected = false;
+	private $pageConfig;
 
 	function index() {
 		$this->pageConfig = $this->getN2nContext()->getModuleConfig('page');
