@@ -15,7 +15,7 @@ use n2n\reflection\magic\MagicMethodInvoker;
 
 class PageMonitor implements ThreadScoped {
 	private $n2nContext;
-	private $pageDao;
+	private PageDao $pageDao;
 	private $pageConfig;
 	private $pageEvents = array();
 	
