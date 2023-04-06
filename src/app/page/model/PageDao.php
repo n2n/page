@@ -20,7 +20,7 @@ class PageDao implements ThreadScoped {
 	
 	private function _init(EntityManager $em, AppCache $appCache) {
 		$this->em = $em;
-		$this->cacheStore = $appCache->lookupCacheStore(PageDao::class);
+		$this->cacheStore = $appCache->lookupCacheStore(PageDao::class, true);
 	}
 	
 	public function getHomePageTExcept(N2nLocale $n2nLocale, ?string $subsystemName, PageT $exceptPageT) {
@@ -57,7 +57,7 @@ class PageDao implements ThreadScoped {
 	}
 	
 	/**
-	 * @return \page\model\nav\NavTree
+	 * @return NavTree
 	 */
 	public function lookupNavTree() {
 		$navTree = new NavTree();
@@ -103,7 +103,7 @@ class NavInitProcess {
 	}
 	
 	/**
-	 * @return \page\model\nav\NavTree
+	 * @return NavTree
 	 */
 	public function getNavTree() {
 		return $this->navTree;
