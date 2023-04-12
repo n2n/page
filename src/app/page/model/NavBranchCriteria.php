@@ -93,7 +93,7 @@ class NavBranchCriteria {
 							. $pageState->getCurrentNavBranch());
 			}
 		} catch (UnavailableLeafException $e) {
-			throw new UnknownNavBranchException(null, 0, $e);
+			throw new UnknownNavBranchException($e->getMessage(), 0, $e);
 		}
 		
 		if (!$pageState->hasCurrent()) {
