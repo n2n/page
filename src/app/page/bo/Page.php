@@ -25,7 +25,7 @@ use page\model\leaf\EmptyLeaf;
 use page\model\PageObjAffiliationTester;
 use rocket\attribute\EiType;
 use rocket\attribute\EiNestedSet;
-use rocket\attribute\MenuItem;
+use rocket\attribute\EiMenuItem;
 use rocket\attribute\EiPreset;
 use rocket\op\spec\setup\EiPresetMode;
 use rocket\op\ei\util\Eiu;
@@ -48,7 +48,7 @@ use n2n\persistence\orm\attribute\ManyToOne;
 
 #[EiType(label: 'Seite', pluralLabel: 'Seiten')]
 #[EiNestedSet]
-#[MenuItem('Seitenverwaltung', groupName: 'Inhalt')]
+#[EiMenuItem('Seitenverwaltung', groupName: 'Inhalt')]
 #[EiPreset(EiPresetMode::EDIT_CMDS,
 		editProps: ['pageTs', 'inNavigation' => 'In Nav', 'pageContent', 'internalPage', 'externalUrl'])]
 #[EiDisplayScheme(
