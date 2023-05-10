@@ -23,7 +23,7 @@ use n2n\web\http\controller\InterceptorFactory;
 use page\model\nav\NavBranch;
 use rocket\attribute\EiType;
 use rocket\attribute\impl\EiSetup;
-use rocket\ei\util\Eiu;
+use rocket\op\ei\util\Eiu;
 use n2n\reflection\property\PropertiesAnalyzer;
 use page\rocket\ei\field\PageSslEiPropNature;
 use page\rocket\ei\field\PageMethodEiPropNature;

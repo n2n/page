@@ -16,7 +16,7 @@ use rocket\attribute\EiPreset;
 use rocket\attribute\impl\EiSetup;
 use n2n\reflection\property\PropertiesAnalyzer;
 use page\rocket\ei\field\PageSslEiPropNature;
-use rocket\ei\util\Eiu;
+use rocket\op\ei\util\Eiu;
 use rocket\attribute\EiDisplayScheme;
 use rocket\attribute\impl\EiPropOneToOneEmbedded;
 

@@ -15,7 +15,7 @@ use rocket\impl\ei\component\prop\ci\conf\CiConfigUtils;
 use n2n\impl\web\dispatch\mag\model\MagCollectionMag;
 use rocket\core\model\Rocket;
 use n2n\util\type\CastUtils;
-use rocket\spec\Spec;
+use rocket\op\spec\Spec;
 use page\model\PageControllerAnalyzer;
 use n2n\util\type\TypeConstraint;
 use n2n\util\type\ArgUtils;

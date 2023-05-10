@@ -16,7 +16,7 @@ use n2n\persistence\orm\annotation\AnnoEntityListeners;
 use rocket\attribute\EiType;
 use rocket\attribute\EiPreset;
 use rocket\attribute\impl\EiSetup;
-use rocket\ei\util\Eiu;
+use rocket\op\ei\util\Eiu;
 use page\rocket\ei\field\PageTypeEiPropNature;
 use n2n\reflection\property\PropertiesAnalyzer;
 use page\rocket\ei\field\PageSubsystemEiPropNature;
@@ -24,7 +24,7 @@ use page\rocket\ei\field\PageContentItemsEiPropNature;
 use rocket\attribute\EiDisplayScheme;
 
 #[EiType]
-#[EiPreset(readProps: ['pageController', 'contentItems'])]
+#[EiPreset(readProps: ['pageController'])]
 #[EiDisplayScheme(compact: ['contentItems'], bulky: ['contentItems'])]
 class PageControllerT extends ObjectAdapter implements Translatable {
 	private static function _annos(AnnoInit $ai) {
