@@ -7,7 +7,7 @@ use n2n\impl\persistence\orm\property\ToManyEntityProperty;
 use n2n\util\type\ArgUtils;
 use rocket\impl\ei\component\prop\ci\model\ContentItem;
 use page\bo\PageControllerT;
-use rocket\ei\util\Eiu;
+use rocket\op\ei\util\Eiu;
 use rocket\impl\ei\component\prop\ci\ContentItemsEiPropNature;
 use n2n\util\type\CastUtils;
 use page\bo\PageController;
@@ -15,7 +15,7 @@ use page\model\PageControllerAnalyzer;
 use page\config\PageConfig;
 use n2n\util\StringUtils;
 use rocket\core\model\Rocket;
-use rocket\ei\EiPropPath;
+use rocket\op\ei\EiPropPath;
 use rocket\impl\ei\component\prop\ci\model\PanelDeclaration;
 
 class PageContentItemsEiPropNature extends ContentItemsEiPropNature {

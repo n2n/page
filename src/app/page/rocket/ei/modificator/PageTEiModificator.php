@@ -2,12 +2,12 @@
 namespace page\rocket\ei\modificator;
 
 use rocket\impl\ei\component\modificator\adapter\IndependentEiModificatorAdapter;
-use rocket\ei\util\Eiu;
+use rocket\op\ei\util\Eiu;
 use n2n\core\config\WebConfig;
 use page\model\PageDao;
 use n2n\util\type\CastUtils;
 use page\bo\PageT;
-use rocket\ei\EiPropPath;
+use rocket\op\ei\EiPropPath;
 use n2n\l10n\Message;
 
 class PageTEiModificator extends IndependentEiModificatorAdapter  {

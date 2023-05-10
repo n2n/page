@@ -2,8 +2,8 @@
 namespace page\rocket\ei\field;
 
 use rocket\impl\ei\component\prop\enum\EnumEiProp;
-use rocket\ei\util\Eiu;
-use rocket\ei\manage\gui\GuiProp;
+use rocket\op\ei\util\Eiu;
+use rocket\op\ei\manage\gui\GuiProp;
 use rocket\impl\ei\component\prop\enum\EnumEiPropNature;
 use n2n\reflection\property\PropertyAccessProxy;
 

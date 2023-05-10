@@ -11,7 +11,7 @@ use n2n\persistence\orm\annotation\AnnoEntityListeners;
 use rocket\attribute\EiType;
 use rocket\attribute\EiPreset;
 use rocket\attribute\impl\EiSetup;
-use rocket\ei\util\Eiu;
+use rocket\op\ei\util\Eiu;
 use page\rocket\ei\field\PageTypeEiPropNature;
 use page\rocket\ei\field\PagePathEiPropNature;
 use n2n\persistence\orm\attribute\Transient;
