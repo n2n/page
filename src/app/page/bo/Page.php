@@ -56,7 +56,7 @@ use n2n\l10n\DynamicTextCollection;
 
 #[EiType(label: 'Seite', pluralLabel: 'Seiten')]
 #[EiNestedSet]
-#[EiMenuItem('Seitenverwaltung', groupName: 'Inhalt')]
+#[EiMenuItem('Seitenverwaltung', groupName: 'Inhalt', groupOrderIndex: 5)]
 #[EiPreset(EiPresetMode::EDIT_CMDS,
 		editProps: ['pageTs', 'inNavigation' => 'In Nav', 'pageContent', 'internalPage', 'externalUrl'])]
 #[EiDisplayScheme(

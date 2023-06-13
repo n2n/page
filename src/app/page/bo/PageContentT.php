@@ -25,6 +25,7 @@ class PageContentT extends ObjectAdapter implements Translatable {
 	private $seTitle;
 	private $seDescription;
 	private $seKeywords;
+
 	
 	public function __construct() {
 		$this->contentItems = new \ArrayObject();
