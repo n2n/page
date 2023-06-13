@@ -75,7 +75,6 @@ class Page extends ObjectAdapter {
 //		$ai->c(new AnnoEntityListeners(PageEntityListener::getClass()));
 		$ai->p('pageContent', new AnnoOneToOne(PageContent::getClass(), null, CascadeType::ALL, null, true));
 		$ai->p('internalPage', new AnnoManyToOne(Page::getClass()));
-		$ai->p('pageTs', new AnnoOneToMany(PageT::getClass(), 'page', CascadeType::ALL, null, true));
 	}
 
 	const NS = 'page';
