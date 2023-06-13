@@ -25,7 +25,7 @@ use page\model\leaf\EmptyLeaf;
 use page\model\PageObjAffiliationTester;
 use rocket\attribute\EiType;
 use rocket\attribute\EiNestedSet;
-use rocket\attribute\MenuItem;
+use rocket\attribute\EiMenuItem;
 use rocket\attribute\EiPreset;
 use rocket\op\spec\setup\EiPresetMode;
 use rocket\op\ei\util\Eiu;
@@ -45,10 +45,18 @@ use n2n\persistence\orm\attribute\EntityListeners;
 use n2n\persistence\orm\attribute\OneToOne;
 use n2n\persistence\orm\attribute\OneToMany;
 use n2n\persistence\orm\attribute\ManyToOne;
+use page\rocket\ei\field\PageHookEiPropNature;
+use page\config\PageConfig;
+use n2n\reflection\property\InaccessiblePropertyException;
+use n2n\reflection\property\UnknownPropertyException;
+use n2n\reflection\property\InvalidPropertyAccessMethodException;
+use ReflectionException;
+use n2n\core\container\N2nContext;
+use n2n\l10n\DynamicTextCollection;
 
 #[EiType(label: 'Seite', pluralLabel: 'Seiten')]
 #[EiNestedSet]
-#[MenuItem('Seitenverwaltung', groupName: 'Inhalt')]
+#[EiMenuItem('Seitenverwaltung', groupName: 'Inhalt')]
 #[EiPreset(EiPresetMode::EDIT_CMDS,
 		editProps: ['pageTs', 'inNavigation' => 'In Nav', 'pageContent', 'internalPage', 'externalUrl'])]
 #[EiDisplayScheme(
@@ -67,7 +75,6 @@ class Page extends ObjectAdapter {
 //		$ai->c(new AnnoEntityListeners(PageEntityListener::getClass()));
 		$ai->p('pageContent', new AnnoOneToOne(PageContent::getClass(), null, CascadeType::ALL, null, true));
 		$ai->p('internalPage', new AnnoManyToOne(Page::getClass()));
-		$ai->p('pageTs', new AnnoOneToMany(PageT::getClass(), 'page', CascadeType::ALL, null, true));
 	}
 
 	const NS = 'page';
@@ -279,10 +286,10 @@ class Page extends ObjectAdapter {
 	public function setLastMod(\DateTime $lastMod = null) {
 		$this->lastMod = $lastMod;
 	}
-	/**
-	 *
-	 * @return \rocket\user\bo\RocketUser
-	 */
+//	/**
+//	 *
+//	 * @return \rocket\user\bo\RocketUser
+//	 */
 // 	public function getLastModBy() {
 // 		return $this->lastModBy;
 // 	}
@@ -433,12 +440,48 @@ class Page extends ObjectAdapter {
 		}
 	}
 
+	/**
+	 * @throws InaccessiblePropertyException
+	 * @throws UnknownPropertyException
+	 * @throws InvalidPropertyAccessMethodException
+	 * @throws ReflectionException
+	 */
 	#[EiSetup]
-	static function eiSetup(Eiu $eiu) {
+	static function eiSetup(Eiu $eiu): void {
 		$eiu->mask()->addProp(new PageTypeEiPropNature('Seiten Typ'), 'pageType');
 
-		$accessProxy = (new PropertiesAnalyzer(new \ReflectionClass(__CLASS__)))
-				->analyzeProperty('subsystemName');
-		$eiu->mask()->addProp(new PageSubsystemEiPropNature($accessProxy, 'Subsystem'), 'subsystemName');
+		$pageConfig = $eiu->getN2nContext()->getModuleConfig('page');
+		assert($pageConfig instanceof PageConfig);
+
+		$propertiesAnalyzer = (new PropertiesAnalyzer(new \ReflectionClass(__CLASS__)));
+
+		$subsystemAccessProxy = $propertiesAnalyzer->analyzeProperty('subsystemName');
+		$eiu->mask()->addProp(new PageSubsystemEiPropNature($subsystemAccessProxy, 'Subsystem',
+				self::createSubsystemOptions($pageConfig, $eiu->getN2nContext())), 'subsystemName');
+
+		$hookKeyAccessProxy = $propertiesAnalyzer->analyzeProperty('hookKey');
+		$eiu->mask()->addProp(new PageHookEiPropNature($hookKeyAccessProxy, 'Hook Key', $pageConfig->getHooks()), 'hookKey');
+	}
+
+	private static function createSubsystemOptions(PageConfig $pageConfig, N2nContext $n2nContext): array {
+		$dtc = new DynamicTextCollection('page', $n2nContext->getN2nLocale());
+		$subsystems = $n2nContext->getHttpContext()->getAvailableSubsystems();
+
+	// 		if (empty($subsystems)) {
+	// 			$this->pageSubsystemEiField->setDisplayConfig(new DisplayConfig(ViewMode::none()));
+	// 		}
+
+		$options = array(null => $dtc->translate('all_subsystems_label'));
+		foreach ($subsystems as $subsystem) {
+			$displayName = $subsystem->getName() . ' (' . $subsystem->getHostName();
+			if (null !== ($contextPath = $subsystem->getContextPath())) {
+				$displayName .= '/' . $contextPath;
+			}
+			$displayName .= ')';
+
+			$options[$subsystem->getName()] = $displayName;
+		}
+
+		return $options;
 	}
 }

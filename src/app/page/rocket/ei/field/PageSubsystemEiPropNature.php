@@ -1,7 +1,6 @@
 <?php
 namespace page\rocket\ei\field;
 
-use rocket\impl\ei\component\prop\enum\EnumEiProp;
 use rocket\op\ei\util\Eiu;
 use rocket\op\ei\manage\gui\GuiProp;
 use rocket\impl\ei\component\prop\enum\EnumEiPropNature;
@@ -9,9 +8,10 @@ use n2n\reflection\property\PropertyAccessProxy;
 
 class PageSubsystemEiPropNature extends EnumEiPropNature {
 
-	function __construct(PropertyAccessProxy $propertyAccessProxy, string $label) {
+	function __construct(PropertyAccessProxy $propertyAccessProxy, string $label, array $options) {
 		parent::__construct($propertyAccessProxy);
 		$this->setLabel($label);
+		$this->setOptions($options);
 	}
 	
 	function buildGuiProp(Eiu $eiu):?GuiProp {
