@@ -28,12 +28,12 @@ class PageT extends ObjectAdapter implements Translatable {
 		$ai->c(new AnnoEntityListeners(PageEntityListener::getClass()));
 		$ai->p('page', new AnnoManyToOne(Page::getClass()));
 	}
-	
+
 	private $id;
 	private $n2nLocale;
 	private string $name;
-	private ?string $title;
-	private ?string $pathPart;
+	private ?string $title = null;
+	private ?string $pathPart = null;
 	private $page;
 	private bool $active = true;
 
@@ -50,15 +50,15 @@ class PageT extends ObjectAdapter implements Translatable {
 	private function _prePersist(PageMonitor $pageMonitor) {
 		$pageMonitor->registerRelatedChange($this->page);
 	}
-	
+
 	private function _preUpdate(PageMonitor $pageMonitor) {
 		$pageMonitor->registerRelatedChange($this->page);
 	}
-	
+
 	private function _preRemove(PageMonitor $pageMonitor) {
 		$pageMonitor->registerRelatedChange($this->page);
 	}
-	
+
 	public function getId() {
 		return $this->id;
 	}
@@ -76,17 +76,17 @@ class PageT extends ObjectAdapter implements Translatable {
 	}
 
 	public function getName() {
-		return $this->name;
+		return $this->name ?? null;
 	}
 
 	public function setName($name) {
 		$this->name = $name;
 	}
-	
+
 	public function isHome() {
 		return $this->pathPart === null && $this->id !== null;
 	}
-	
+
 	public function setHome(bool $home) {
 		if ($home) {
 			$this->pathPart = null;
@@ -96,11 +96,11 @@ class PageT extends ObjectAdapter implements Translatable {
 	public function getPathPart() {
 		return $this->pathPart;
 	}
-	
+
 	public function setPathPart($pathPart) {
 		$this->pathPart = $pathPart;
 	}
-	
+
 	public function getTitle() {
 		return $this->title;
 	}
@@ -108,15 +108,15 @@ class PageT extends ObjectAdapter implements Translatable {
 	public function setTitle($title) {
 		$this->title = $title;
 	}
-	
+
 	public function getRealTitle() {
 		if ($this->title !== null) {
 			return $this->title;
 		}
-		
+
 		return $this->name;
 	}
-	
+
 	public function getPage() {
 		return $this->page;
 	}
@@ -124,18 +124,18 @@ class PageT extends ObjectAdapter implements Translatable {
 	public function setPage(Page $page) {
 		$this->page = $page;
 	}
-	
+
 	public function isActive(): bool {
 		return $this->active;
 	}
-	
+
 	public function setActive(bool $active) {
 		$this->active = $active;
 	}
 
 	public function getHeading() {
 		if (!$this->title) return $this->name;
-		
+
 		return $this->title;
 	}
 
