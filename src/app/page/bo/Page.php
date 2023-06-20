@@ -123,6 +123,7 @@ class Page extends ObjectAdapter {
 	public function __construct() {
 		$this->lastMod = new \DateTime();
 		$this->pageContent = new PageContent();
+		$this->pageTs = new \ArrayObject();
 	}
 
 	private function _prePersist(PageMonitor $pageMonitor) {
