@@ -98,18 +98,18 @@ class Page extends ObjectAdapter {
 				self::TYPE_INTERNAL => ['internalPage'],
 				self::TYPE_EXTERNAL => ['externalUrl']
 			])]
- 	private string $type;
+	private string $type;
 
 	#[ManyToOne]
-	private ?Page $internalPage;
-	private ?Url $externalUrl;
+	private ?Page $internalPage = null;
+	private ?Url $externalUrl = null;
 	#[EiPropOneToOneEmbedded(reduced: false)]
-	private ?PageContent $pageContent;
+	private ?PageContent $pageContent = null;
 	private ?string $subsystemName = null;
 	#[EiPropOnlineStatus]
 	private bool $online = true;
 	private bool $inPath = true;
-	private ?string $hookKey;
+	private ?string $hookKey = null;
 	private bool $inNavigation = true;
 	private bool $navTargetNewWindow = false;
 	private $lft;
@@ -232,47 +232,47 @@ class Page extends ObjectAdapter {
 	public function isInPath(): bool {
 		return $this->inPath;
 	}
-	
+
 	public function setInPath(bool $inPath) {
 		$this->inPath = $inPath;
 	}
-	
+
 	public function isInNavigation(): bool {
 		return $this->inNavigation;
 	}
-	
+
 	public function setInNavigation(bool $inNavigation) {
 		$this->inNavigation = $inNavigation;
 	}
-	
+
 	public function isNavTargetNewWindow(): bool {
 		return $this->navTargetNewWindow;
 	}
-	
+
 	public function setNavTargetNewWindow(bool $targetNewWindow) {
 		$this->navTargetNewWindow = $targetNewWindow;
 	}
-	
+
 	public function getHookKey() {
 		return $this->hookKey;
 	}
-	
+
 	public function setHookKey($hookKey) {
 		$this->hookKey = $hookKey;
 	}
-	
+
 	public function getLft() {
 		return $this->lft;
 	}
-	
+
 	public function setLft($lft) {
 		$this->lft = $lft;
 	}
-	
+
 	public function getRgt() {
 		return $this->rgt;
 	}
-	
+
 	public function setRgt($rgt) {
 		$this->rgt = $rgt;
 	}
@@ -283,7 +283,7 @@ class Page extends ObjectAdapter {
 	public function getLastMod() {
 		return $this->lastMod;
 	}
-	
+
 	public function setLastMod(\DateTime $lastMod = null) {
 		$this->lastMod = $lastMod;
 	}
@@ -294,15 +294,15 @@ class Page extends ObjectAdapter {
 // 	public function getLastModBy() {
 // 		return $this->lastModBy;
 // 	}
-	
+
 // 	public function setLastModBy(RocketUser $lastModBy) {
 // 		$this->lastModBy = $lastModBy;
 // 	}
-	
+
 	public function getPageTs() {
 		return $this->pageTs;
 	}
-	
+
 	public function setPageTs(\ArrayObject $pageTs) {
 		$this->pageTs = $pageTs;
 	}
@@ -318,31 +318,31 @@ class Page extends ObjectAdapter {
 	public function equals($obj) {
 		return $obj instanceof Page && $this->id == $obj->getId();
 	}
-	
+
 	/**
 	 *
-	 * @param N2nLocale ...$n2nLocales        	
+	 * @param N2nLocale ...$n2nLocales
 	 * @return PageT
 	 */
 	public function t(N2nLocale ...$n2nLocales) {
 		return Translator::findAny($this->pageTs, ...$n2nLocales);
 	}
-	
+
 	/**
 	 * @param NavInitProcess $navInitProcess
 	 * @throws IllegalPageStateException
 	 */
 	public function createNavBranch(NavInitProcess $navInitProcess) {
 		$navBranch = new NavBranch($navInitProcess->getNavTree(), $this->id);
-		
+
 		if ($this->hookKey !== null) {
 			$navBranch->setHookKeys(array($this->hookKey));
 		}
-		
+
 		$pageId = $this->getId();
 		$navBranch->setObjAffiliationTester(new PageObjAffiliationTester($pageId));
 		$navBranch->setInPath($this->isInPath());
-		
+
 		if ($this->externalUrl !== null) {
 			$this->applyExternalLeafs($navBranch);
 		} else if ($this->internalPage !== null) {
@@ -352,14 +352,14 @@ class Page extends ObjectAdapter {
 		} else {
 			$this->applyEmptyLeafs($navBranch);
 		}
-		
-		return $navBranch; 
+
+		return $navBranch;
 	}
-	
+
 	private function applyExternalLeafs(NavBranch $navBranch) {
 		foreach ($this->pageTs as $pageT) {
 			CastUtils::assertTrue($pageT instanceof PageT);
-			
+
 			$leaf = new ExternalLeaf($pageT->getN2nLocale(), $pageT->getName(), $this->externalUrl);
 			$leaf->setAccessible($this->online && $pageT->isActive());
 			$leaf->setPathPart($pageT->getPathPart());
@@ -371,12 +371,12 @@ class Page extends ObjectAdapter {
 			$leaf->setIndexable($this->indexable);
 		}
 	}
-	
+
 	private function applyInternalLeafs(NavBranch $navBranch, NavInitProcess $navInitProcess) {
 		$leafs = array();
 		foreach ($this->pageTs as $pageT) {
 			CastUtils::assertTrue($pageT instanceof PageT);
-			
+
 			$leafs[] = $leaf = new InternalLeaf($pageT->getN2nLocale(), $pageT->getName());
 			$leaf->setAccessible($this->online && $pageT->isActive());
 			$leaf->setPathPart($pageT->getPathPart());
@@ -387,7 +387,7 @@ class Page extends ObjectAdapter {
 			$navBranch->addLeaf($leaf);
 			$leaf->setIndexable($this->indexable);
 		}
-			
+
 		$that = $this;
 		$navInitProcess->onInitialized(function (NavTree $navTree) use ($that, $leafs) {
 			try {
@@ -396,21 +396,21 @@ class Page extends ObjectAdapter {
 					$leaf->setTargetNavBranch($targetNavBranch);
 				}
 			} catch (UnknownNavBranchException $e) {
-				throw new IllegalPageStateException('Internal link page (id: ' . $that->id 
+				throw new IllegalPageStateException('Internal link page (id: ' . $that->id
 						. ') contains invalid target.', 0, $e);
 			}
 		});
 	}
-	
+
 	private function applyContentLeafs(NavBranch $navBranch) {
 		$pageController = $this->pageContent->getPageController();
 		$tagNames = $pageController->getTagNames();
 		ArgUtils::valArrayReturn($tagNames, $pageController, 'getTagNames', array('scalar', null));
 		$navBranch->setTagNames($tagNames);
-		
+
 		foreach ($this->pageTs as $pageT) {
 			CastUtils::assertTrue($pageT instanceof PageT);
-			
+
 			$leafs[] = $leaf = new ContentLeaf($pageT->getN2nLocale(), $pageT->getName(), $this->id);
 			$leaf->setAccessible($this->online && $pageT->isActive());
 			$leaf->setPathPart($pageT->getPathPart());
@@ -421,14 +421,14 @@ class Page extends ObjectAdapter {
 			$leaf->setIndexable($this->indexable);
 			$navBranch->addLeaf($leaf);
 		}
-		
+
 		$pageController->navBranchCreated($navBranch);
 	}
-	
+
 	private function applyEmptyLeafs(NavBranch $navBranch) {
 		foreach ($this->pageTs as $pageT) {
 			CastUtils::assertTrue($pageT instanceof PageT);
-			
+
 			$leaf = new EmptyLeaf($pageT->getN2nLocale(), $pageT->getName());
 			$leaf->setAccessible($this->online && $pageT->isActive());
 			$leaf->setPathPart($pageT->getPathPart());
@@ -468,9 +468,9 @@ class Page extends ObjectAdapter {
 		$dtc = new DynamicTextCollection('page', $n2nContext->getN2nLocale());
 		$subsystems = $n2nContext->getHttpContext()->getAvailableSubsystems();
 
-	// 		if (empty($subsystems)) {
-	// 			$this->pageSubsystemEiField->setDisplayConfig(new DisplayConfig(ViewMode::none()));
-	// 		}
+		// 		if (empty($subsystems)) {
+		// 			$this->pageSubsystemEiField->setDisplayConfig(new DisplayConfig(ViewMode::none()));
+		// 		}
 
 		$options = array(null => $dtc->translate('all_subsystems_label'));
 		foreach ($subsystems as $subsystem) {
