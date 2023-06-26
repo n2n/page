@@ -54,7 +54,7 @@ use ReflectionException;
 use n2n\core\container\N2nContext;
 use n2n\l10n\DynamicTextCollection;
 
-#[EiType(label: 'Seite', pluralLabel: 'Seiten')]
+#[EiType(label: 'Seite', pluralLabel: 'Seiten', identityStringPattern: '{pageTs.name}')]
 #[EiNestedSet]
 #[EiMenuItem('Seitenverwaltung', groupName: 'Inhalt', groupOrderIndex: 5)]
 #[EiPreset(EiPresetMode::EDIT_CMDS,
