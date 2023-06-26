@@ -12,36 +12,36 @@ use n2n\persistence\orm\annotation\AnnoManyToOne;
 use n2n\persistence\orm\FetchType;
 use page\model\nav\murl\MurlPage;
 use rocket\attribute\EiType;
+use rocket\attribute\EiPreset;
+use rocket\op\spec\setup\EiPresetMode;
+use rocket\attribute\impl\EiPropEnum;
 
 /**
- * This util entity can be easly intergrated 
+ * This util entity can be easly intergrated
  *
  */
-#[EiType]
+#[EiType(label: 'Link')]
+#[EiPreset(EiPresetMode::EDIT_PROPS, editProps: ['type' => 'Typ', 'linkedPage' => 'Seite', 'url' => 'externer Link', 'label'],
+		excludeProps: ['id'])]
 class PageLink extends ObjectAdapter implements UrlComposer {
 	private static function _annos(AnnoInit $ai) {
 		$ai->p('linkedPage', new AnnoManyToOne(Page::getClass(), null, FetchType::EAGER));
 	}
-	
+
 	const TYPE_INTERNAL = 'internal';
 	const TYPE_EXTERNAL = 'external';
-	
-	private $id;
-	private $type = self::TYPE_INTERNAL;
-	private $linkedPage;
-	private $url;
-	private $label;
 
-	/**
-	 * @return int
-	 */
-	public function getId() {
-		return $this->id;
+	private int $id;
+	#[EiPropEnum([self::TYPE_INTERNAL => 'intern', self::TYPE_EXTERNAL => 'extern'], guiPropsMap: ['type' => ['internal' => ['linkedPage'], 'external' => ['url']]])]
+	private string $type = self::TYPE_INTERNAL;
+	private ?Page $linkedPage = null;
+	private ?string $url = null;
+	private ?string $label = null;
+
+	public function getId(): ?int {
+		return $this->id ?? null;
 	}
 
-	/**
-	 * @param int $id
-	 */
 	public function setId($id) {
 		$this->id = $id;
 	}
@@ -49,21 +49,15 @@ class PageLink extends ObjectAdapter implements UrlComposer {
 	public function getType() {
 		return $this->type;
 	}
-	
+
 	public function setType($type) {
 		$this->type = $type;
 	}
-	
-	/**
-	 * @return Page|null
-	 */
+
 	public function getLinkedPage() {
 		return $this->linkedPage;
 	}
 
-	/**
-	 * @param Page|null $linkedPage
-	 */
 	public function setLinkedPage(Page $linkedPage = null) {
 		$this->linkedPage = $linkedPage;
 	}
@@ -76,37 +70,27 @@ class PageLink extends ObjectAdapter implements UrlComposer {
 		$this->url = $url;
 	}
 
-	/**
-	 * @return string
-	 */
 	public function getLabel() {
 		return $this->label;
 	}
 
-	/**
-	 * @param string $label
-	 */
 	public function setLabel($label) {
 		$this->label = $label;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 * @see \n2n\web\http\nav\UrlComposer::toUrl()
-	 */
-	public function toUrl(N2nContext $n2nContext, ControllerContext $controllerContext = null, 
+	public function toUrl(N2nContext $n2nContext, ControllerContext $controllerContext = null,
 			string &$suggestedLabel = null): Url {
-		
+
 		if ($this->type == self::TYPE_EXTERNAL) {
 			$suggestedLabel = $this->label;
 			return Url::create($this->url);
 		}
-		
+
 		$url = MurlPage::obj($this->linkedPage)->toUrl($n2nContext, $controllerContext, $suggestedLabel);
 		if ($this->label !== null) {
 			$suggestedLabel = $this->label;
 		}
-		
+
 		return $url;
 	}
 }
