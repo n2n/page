@@ -94,6 +94,8 @@ class PageControllerT extends ObjectAdapter implements Translatable {
 		$entityProperty = $eiu->mask()->type()->getEiType()->getEntityModel()->getEntityPropertyByName('contentItems');
 		$accessProxy = (new PropertiesAnalyzer(new \ReflectionClass(__CLASS__)))
 				->analyzeProperty('contentItems');
-		$eiu->mask()->addProp(new PageContentItemsEiPropNature($entityProperty, $accessProxy), 'contentItems');
+		$eiPropNature = new PageContentItemsEiPropNature($entityProperty, $accessProxy);
+		$eiPropNature->setLabel('Content Items');
+		$eiu->mask()->addProp($eiPropNature, 'contentItems');
 	}
 }

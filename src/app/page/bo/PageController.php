@@ -176,6 +176,8 @@ abstract class PageController extends ObjectAdapter implements Controller {
 	static function eiSetup(Eiu $eiu) {
 		$accessProxy = (new PropertiesAnalyzer(new \ReflectionClass(__CLASS__)))
 				->analyzeProperty('methodName');
-		$eiu->mask()->addProp(new PageMethodEiPropNature($accessProxy, 'Type'), 'methodName');
+		$eiPropNature = new PageMethodEiPropNature($accessProxy, 'Type');
+		$eiPropNature->setLabel('Seitentyp');
+		$eiu->mask()->addProp($eiPropNature, 'methodName');
 	}
 }

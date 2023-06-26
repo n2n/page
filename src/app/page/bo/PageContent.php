@@ -21,7 +21,7 @@ use rocket\attribute\EiDisplayScheme;
 use rocket\attribute\impl\EiPropOneToOneEmbedded;
 
 #[EiType]
-#[EiPreset(editProps: ['pageContentTs', 'pageController'])]
+#[EiPreset(editProps: ['pageContentTs', 'pageController' => 'Inhalt'])]
 #[EiDisplayScheme(bulky: [
 	'pageController' => 'main-group:',
 	'main-group:SEO' => ['pageContentTs.seTitle', 'pageContentTs.seDescription', 'pageContentTs.seKeywords']
