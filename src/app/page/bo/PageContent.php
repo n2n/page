@@ -21,17 +21,17 @@ use rocket\attribute\EiDisplayScheme;
 use rocket\attribute\impl\EiPropOneToOneEmbedded;
 
 #[EiType]
-#[EiPreset(editProps: ['pageContentTs', 'pageController' => 'Inhalt'])]
+#[EiPreset(readProps: ['page'], editProps: ['pageContentTs', 'pageController' => 'Inhalt'])]
 #[EiDisplayScheme(bulky: [
 	'pageController' => 'main-group:',
-	'main-group:SEO' => ['pageContentTs.seTitle', 'pageContentTs.seDescription', 'pageContentTs.seKeywords']
+	'main-group:SEO' => ['pageContentTs/seTitle', 'pageContentTs/seDescription', 'pageContentTs/seKeywords']
 ])]
 class PageContent extends ObjectAdapter {
 	private static function _annos(AnnoInit $ai) {
 		$ai->c(new AnnoEntityListeners(PageEntityListener::getClass()));
 		$ai->p('page', new AnnoOneToOne(Page::getClass(), 'pageContent', CascadeType::PERSIST));
-		$ai->p('pageContentTs', new AnnoOneToMany(PageContentT::getClass(), 'pageContent', CascadeType::ALL, 
-				null, true));
+		$ai->p('pageContentTs', new AnnoOneToMany(PageContentT::getClass(), 'pageContent',
+				CascadeType::ALL, null, true));
 		$ai->p('pageController', new AnnoOneToOne(PageController::getClass(), null, CascadeType::ALL, 
 				FetchType::EAGER, true));
 	}
@@ -41,7 +41,7 @@ class PageContent extends ObjectAdapter {
 	private $page;
 	private $pageContentTs;
 	#[EiPropOneToOneEmbedded(reduced: false)]
-	private $pageController;
+	private PageController $pageController;
 	
 	private function _prePersist(PageMonitor $pageMonitor) {
 		$pageMonitor->registerRelatedChange($this->page);
@@ -66,8 +66,8 @@ class PageContent extends ObjectAdapter {
 	/**
 	 * @return PageController
 	 */
-	public function getPageController() {
-		return $this->pageController;
+	public function getPageController(): ?PageController {
+		return $this->pageController ?? null;
 	}
 
 	public function setPageController(PageController $pageController) {
@@ -78,7 +78,7 @@ class PageContent extends ObjectAdapter {
 		return $this->page;
 	}
 
-	public function setPage(Page $page) {
+	public function setPage(Page $page): void {
 		$this->page = $page;
 	}
 

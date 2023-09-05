@@ -79,7 +79,7 @@ class PageT extends ObjectAdapter implements Translatable {
 		return $this->name ?? null;
 	}
 
-	public function setName($name) {
+	public function setName(string $name) {
 		$this->name = $name;
 	}
 

@@ -28,7 +28,7 @@ class PageContentT extends ObjectAdapter implements Translatable {
 
 	
 	public function __construct() {
-		$this->contentItems = new \ArrayObject();
+//		$this->contentItems = new \ArrayObject();
 	}
 	
 	private function _prePersist(PageMonitor $pageMonitor) {
@@ -91,19 +91,19 @@ class PageContentT extends ObjectAdapter implements Translatable {
 		$this->seKeywords = $seKeywords;
 	}
 
-	public function getContentItems() {
-		return $this->contentItems;
-	}
-
-	public function setContentItems(\ArrayObject $contentItems) {
-		$this->contentItems = $contentItems;
-	}
-	
-	public function hasPanel($panel) {
-		foreach ($this->contentItems as $contentItem) {
-			if ($contentItem->getPanel() === $panel) return true;
-		}
-		
-		return false;
-	}
+//	public function getContentItems() {
+//		return $this->contentItems;
+//	}
+//
+//	public function setContentItems(\ArrayObject $contentItems) {
+//		$this->contentItems = $contentItems;
+//	}
+//
+//	public function hasPanel($panel) {
+//		foreach ($this->contentItems as $contentItem) {
+//			if ($contentItem->getPanel() === $panel) return true;
+//		}
+//
+//		return false;
+//	}
 }

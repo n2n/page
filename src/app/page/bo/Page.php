@@ -54,15 +54,15 @@ use ReflectionException;
 use n2n\core\container\N2nContext;
 use n2n\l10n\DynamicTextCollection;
 
-#[EiType(label: 'Seite', pluralLabel: 'Seiten', identityStringPattern: '{pageTs.name}')]
+#[EiType(label: 'Seite', pluralLabel: 'Seiten', identityStringPattern: '{pageTs/name}')]
 #[EiNestedSet]
 #[EiMenuItem('Seitenverwaltung', groupName: 'Inhalt', groupOrderIndex: 5)]
 #[EiPreset(EiPresetMode::EDIT_CMDS,
 		editProps: ['pageTs', 'inNavigation' => 'In Nav', 'pageContent', 'internalPage', 'externalUrl'])]
 #[EiDisplayScheme(
-		compact: ['pageTs.name', 'pageType', 'pageTs.pagePath', 'inNavigation', 'pageTs.active'],
+		compact: ['pageTs/name', 'pageType', 'pageTs/pagePath', 'inNavigation', 'pageTs/active'],
 		bulky: [
-			'main-group:General' => ['pageTs.name', 'pageTs.title', 'pageTs.home', 'pageTs.pathPart', 'pageTs.active', 'type'],
+			'main-group:General' => ['pageTs/name', 'pageTs/title', 'pageTs/home', 'pageTs/pathPart', 'pageTs/active', 'type'],
 			'main-group:Advanced' => ['subsystemName', 'inPath', 'hookKey', 'inNavigation', 'online', 'navTargetNewWindow', 'indexable'],
 			'internalPage' => 'simple-group:',
 			'externalUrl' => 'simple-group:',
@@ -123,6 +123,7 @@ class Page extends ObjectAdapter {
 	public function __construct() {
 		$this->lastMod = new \DateTime();
 		$this->pageContent = new PageContent();
+		$this->pageContent->setPage($this);
 		$this->pageTs = new \ArrayObject();
 	}
 
