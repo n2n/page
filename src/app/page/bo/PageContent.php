@@ -24,7 +24,7 @@ use rocket\attribute\impl\EiPropOneToOneEmbedded;
 #[EiPreset(readProps: ['page'], editProps: ['pageContentTs', 'pageController' => 'Inhalt'])]
 #[EiDisplayScheme(bulky: [
 	'pageController' => 'main-group:',
-	'main-group:SEO' => ['pageContentTs.seTitle', 'pageContentTs.seDescription', 'pageContentTs.seKeywords']
+	'main-group:SEO' => ['pageContentTs/seTitle', 'pageContentTs/seDescription', 'pageContentTs/seKeywords']
 ])]
 class PageContent extends ObjectAdapter {
 	private static function _annos(AnnoInit $ai) {
