@@ -16,12 +16,12 @@ use n2n\util\uri\Path;
 use n2n\util\uri\UnavailableUrlException;
 
 /**
- * A PageUrlComposer is created by {@link MurlPage} and can be used like a 
+ * A PageUrlComposer is created by {@link MurlPage} and can be used like a
  * {@link \n2n\web\http\nav\ContextUrlComposer} to build urls to pages in a fluid way.
  */
 class PageUrlComposer implements UrlComposer {
 	private $navBranchCriteria;
-	
+
 	private $fallbackAllowed = false;
 	private $n2nLocale;
 	private $pathExts = array();
@@ -33,7 +33,7 @@ class PageUrlComposer implements UrlComposer {
 
 	/**
 	 * Use {@link MurlPage} to create a PageUrlComposer. Don't call this constructor manually.
-	 * 
+	 *
 	 * @param NavBranchCriteria $navBranchCriteria
 	 */
 	public function __construct(NavBranchCriteria $navBranchCriteria) {
@@ -42,7 +42,7 @@ class PageUrlComposer implements UrlComposer {
 
 	/**
 	 * Specifies to which translation of target page the url will be build.
-	 * 
+	 *
 	 * @param mixed $n2nLocale N2nLocale or locale id as string of the desired translation. Resetable with null.
 	 * @return \page\model\nav\murl\PageUrlComposer
 	 */
@@ -50,12 +50,12 @@ class PageUrlComposer implements UrlComposer {
 		$this->n2nLocale = N2nLocale::build($n2nLocale);
 		return $this;
 	}
-	
+
 	/**
 	 * <p>If true and the target page is not availablethe one of its ancestor pages will be used as fallback.</p>
-	 * 
+	 *
 	 * <p>Default is false.</p>
-	 * 
+	 *
 	 * @param bool $fallbackAllowed
 	 * @return \page\model\nav\murl\PageUrlComposer
 	 */
@@ -65,9 +65,9 @@ class PageUrlComposer implements UrlComposer {
 	}
 
 	/**
-	 * Extends the url to the target page with passed paths. This method behaves like 
+	 * Extends the url to the target page with passed paths. This method behaves like
 	 * {@link \n2n\util\uri\Path::ext()}.
-	 * 
+	 *
 	 * @param mixed $pathExts
 	 * @return \page\model\nav\murl\PageUrlComposer
 	 */
@@ -75,7 +75,7 @@ class PageUrlComposer implements UrlComposer {
 		$this->pathExts[] = $pathPartExts;
 		return $this;
 	}
-	
+
 	/**
 	 * Extends the url to the target page with passed paths. This method behaves like
 	 * {@link \n2n\util\uri\Path::extEnc()}.
@@ -85,12 +85,13 @@ class PageUrlComposer implements UrlComposer {
 	 */
 	public function pathExtEnc(...$pathExts) {
 		$this->pathExts[] = array_merge($this->pathExts, $pathExts);
+		return $this;
 	}
-	
+
 	/**
-	 * Extends the url to the target page with passed query. This method behaves like 
+	 * Extends the url to the target page with passed query. This method behaves like
 	 * {@link \n2n\util\uri\Query::ext()}.
-	 * 
+	 *
 	 * @param mixed $queryExt
 	 * @return \page\model\nav\murl\PageUrlComposer
 	 */
@@ -101,7 +102,7 @@ class PageUrlComposer implements UrlComposer {
 
 	/**
 	 * Defines the fragment of the url to the target page.
-	 * 
+	 *
 	 * @param string $fragment
 	 * @return \page\model\nav\murl\PageUrlComposer
 	 */
@@ -112,7 +113,7 @@ class PageUrlComposer implements UrlComposer {
 
 	/**
 	 * <p>If true and the url will be absolute.</p>
-	 * 
+	 *
 	 * <p>Default is false.</p>
 	 *
 	 * @param string $absolute
@@ -122,17 +123,17 @@ class PageUrlComposer implements UrlComposer {
 		$this->absolute = $absolute;
 		return $this;
 	}
-	
+
 	public function inaccessibles(bool $includeInaccessibles = true) {
 		$this->accessiblesOnly = !$includeInaccessibles;
 		return $this;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 * @see \n2n\web\http\nav\UrlComposer::toUrl($n2nContext, $controllerContext)
 	 */
-	public function toUrl(N2nContext $n2nContext, ControllerContext $controllerContext = null, 
+	public function toUrl(N2nContext $n2nContext, ControllerContext $controllerContext = null,
 			string &$suggestedLabel = null): Url {
 		$pageState = $n2nContext->lookup(PageState::class);
 		CastUtils::assertTrue($pageState instanceof PageState);
@@ -162,6 +163,6 @@ class PageUrlComposer implements UrlComposer {
 			throw new UnavailableUrlException(false, 'NavBranch not available for locale: ' . $n2nLocale, 0, $e);
 		}
 
-		return $url->queryExt($this->queryExt)->chFragment($this->fragment);
+		return $url->queryExt($this->queryExt)->chFragment($this->fragment ?? $url->getFragment());
 	}
 }

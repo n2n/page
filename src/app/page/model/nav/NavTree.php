@@ -12,6 +12,8 @@ use n2n\core\container\N2nContext;
 use n2n\util\type\ArgUtils;
 use n2n\web\http\Subsystem;
 use n2n\web\http\SubsystemRule;
+use n2n\util\magic\impl\MagicMethodInvoker;
+use n2n\util\type\TypeConstraints;
 
 class NavTree {
 	private $rootNavBranches = array();
@@ -439,9 +441,17 @@ class NavUrlBuilder {
 		}
 
 		$path = $this->buildPath($navBranch, $n2nLocale);
-
-		return $this->httpContext->buildContextUrl($ssl, $subsystemRule, $this->absolute)
+		$url = $this->httpContext->buildContextUrl($ssl, $subsystemRule, $this->absolute)
 				->pathExt($path, $this->pathExt);
+
+		if (null !== ($urlEnhancer = $task->getUrlEnhancer())) {
+			$invoker = new MagicMethodInvoker($this->httpContext->getN2nContext());
+			$invoker->setClosure($urlEnhancer);
+			$invoker->setReturnTypeConstraint(TypeConstraints::type(Url::class));
+			$url = $invoker->invoke(null, null, [$url]);
+		}
+
+		return $url;
 	}
 
 
@@ -452,6 +462,7 @@ class UrlBuildTask {
 	private $n2nLocale;
 
 	private $url;
+	private ?\Closure $urlEnhancer = null;
 
 	public function __construct(NavBranch $navBranch, N2nLocale $n2nLocale) {
 		$this->navBranches[spl_object_hash($navBranch)] = $navBranch;
@@ -464,6 +475,14 @@ class UrlBuildTask {
 
 	public function overwriteUrl(Url $url) {
 		$this->url = $url;
+	}
+
+	function setUrlEnhancer(?\Closure $closure) {
+		return $this->urlEnhancer = $closure;
+	}
+
+	function getUrlEnhancer(): ?\Closure {
+		return $this->urlEnhancer;
 	}
 
 	/**
