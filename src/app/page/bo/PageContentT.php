@@ -23,7 +23,7 @@ class PageContentT extends ObjectAdapter implements Translatable {
 	private $seKeywords;
 	
 	public function __construct() {
-		$this->contentItems = new \ArrayObject();
+//		$this->contentItems = new \ArrayObject();
 	}
 	
 	private function _prePersist(PageMonitor $pageMonitor) {
