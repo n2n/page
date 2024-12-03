@@ -210,7 +210,7 @@ class Page extends ObjectAdapter {
 		return $this->pageContent;
 	}
 	
-	public function setPageContent(PageContent $pageContent = null) {
+	public function setPageContent(?PageContent $pageContent = null) {
 		$this->pageContent = $pageContent;
 	}
 	
@@ -218,7 +218,7 @@ class Page extends ObjectAdapter {
 		return $this->subsystemName;
 	}
 	
-	public function setSubsystemName(string $subsystemName = null) {
+	public function setSubsystemName(?string $subsystemName = null) {
 		$this->subsystemName = $subsystemName;
 	}
 	
@@ -285,7 +285,7 @@ class Page extends ObjectAdapter {
 		return $this->lastMod;
 	}
 
-	public function setLastMod(\DateTime $lastMod = null) {
+	public function setLastMod(?\DateTime $lastMod = null) {
 		$this->lastMod = $lastMod;
 	}
 //	/**

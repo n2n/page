@@ -71,7 +71,7 @@ class PageContentT extends ObjectAdapter implements Translatable {
 		return $this->seTitle;
 	}
 
-	public function setSeTitle(string $seTitle = null) {
+	public function setSeTitle(?string $seTitle = null) {
 		$this->seTitle = $seTitle;
 	}
 
@@ -79,7 +79,7 @@ class PageContentT extends ObjectAdapter implements Translatable {
 		return $this->seDescription;
 	}
 
-	public function setSeDescription(string $seDescription = null) {
+	public function setSeDescription(?string $seDescription = null) {
 		$this->seDescription = $seDescription;
 	}
 
@@ -87,7 +87,7 @@ class PageContentT extends ObjectAdapter implements Translatable {
 		return $this->seKeywords;
 	}
 
-	public function setSeKeywords(string $seKeywords = null) {
+	public function setSeKeywords(?string $seKeywords = null) {
 		$this->seKeywords = $seKeywords;
 	}
 

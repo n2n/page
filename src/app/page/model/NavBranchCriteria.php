@@ -30,14 +30,14 @@ class NavBranchCriteria {
 		return $navBranchCriteria;
 	}
 	
-	public static function createSubHome(string $subsystemName = null) {
+	public static function createSubHome(?string $subsystemName = null) {
 		$navBranchCriteria = new NavBranchCriteria();
 		$navBranchCriteria->name = self::NAMED_SUBHOME;
 		$navBranchCriteria->subsystemName = $subsystemName;
 		return $navBranchCriteria;
 	}
 	
-	public static function create($affiliatedObj = null, array $tagNames = null, array $hookKeys = null, string $id = null) {
+	public static function create($affiliatedObj = null, ?array $tagNames = null, ?array $hookKeys = null, ?string $id = null) {
 		ArgUtils::valObject($affiliatedObj, true);
 		$navBranchCriteria = new NavBranchCriteria();
 		$navBranchCriteria->affiliatedObj = $affiliatedObj;

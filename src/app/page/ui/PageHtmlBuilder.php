@@ -111,8 +111,8 @@ class PageHtmlBuilder {
 	 * @param array $ulAttrs html attributes of every inner ul
 	 * @param array $liAttrs html attributes of every li
 	 */
-	public function navigation(NavComposer $navComposer = null, array $attrs = null, array $ulAttrs = null, 
-			array $liAttrs = null, array $aAttrs = null) {
+	public function navigation(?NavComposer $navComposer = null, ?array $attrs = null, ?array $ulAttrs = null,
+			?array $liAttrs = null, ?array $aAttrs = null) {
 		$this->view->out($this->getNavigation($navComposer, $attrs, $ulAttrs, $liAttrs, $aAttrs));
 	}
 	
@@ -121,8 +121,8 @@ class PageHtmlBuilder {
 	 *  
 	 * @return \n2n\web\ui\UiComponent
 	 */
-	public function getNavigation(NavComposer $navComposer = null, array $attrs = null, array $ulAttrs = null, 
-			array $liAttrs = null, array $aAttrs = null) {
+	public function getNavigation(?NavComposer $navComposer = null, ?array $attrs = null, ?array $ulAttrs = null,
+			?array $liAttrs = null, ?array $aAttrs = null) {
 		if ($navComposer === null) {
 			$navComposer = Nav::root();
 		}
@@ -141,7 +141,7 @@ class PageHtmlBuilder {
 	 * in each li element. 
 	 * @param array $additionalLiUiComponents 
 	 */
-	public function breadcrumbs(array $attrs = null, array $liAttrs = null, array $aAttrs = null, $divider = null, 
+	public function breadcrumbs(?array $attrs = null, ?array $liAttrs = null, ?array $aAttrs = null, $divider = null,
 			array $additionalLiUiComponents = []) {
 		$this->view->out($this->getBreadcrumbs($attrs, $liAttrs, $aAttrs, $divider, $additionalLiUiComponents));
 	}
@@ -150,7 +150,7 @@ class PageHtmlBuilder {
 	 * Same as {@link PageHtmlBuilder::breadcrumbs()} but returns the output.
 	 * @return \n2n\web\ui\UiComponent
 	 */
-	public function getBreadcrumbs(array $attrs = null, array $liAttrs = null, array $aAttrs = null, $divider = null, 
+	public function getBreadcrumbs(?array $attrs = null, ?array $liAttrs = null, ?array $aAttrs = null, $divider = null,
 			array $additionalLiUiComponents = []) {
 		
 		ArgUtils::valArray($additionalLiUiComponents, UiComponent::class);
@@ -198,7 +198,7 @@ class PageHtmlBuilder {
 	 * @param array $ulAttrs
 	 * @param array $liAttrs
 	 */
-	public function localeSwitch(array $ulAttrs = null, array $liAttrs = null, array $aAttrs = null) {
+	public function localeSwitch(?array $ulAttrs = null, ?array $liAttrs = null, ?array $aAttrs = null) {
 		$this->view->out($this->getN2nLocaleSwitch($ulAttrs, $liAttrs, $aAttrs));
 	}
 	
@@ -206,7 +206,7 @@ class PageHtmlBuilder {
 	 * Same as {@link PageHtmlBuilder::breadcrumbs()} but returns the output.
 	 * @return \n2n\web\ui\UiComponent
 	 */
-	public function getN2nLocaleSwitch(array $ulAttrs = null, array $liAttrs = null, array $aAttrs = null) {
+	public function getN2nLocaleSwitch(?array $ulAttrs = null, ?array $liAttrs = null, ?array $aAttrs = null) {
 		$urls = $this->meta->getN2nLocaleSwitchUrls();
 		if (empty($urls)) {
 			return null;
@@ -264,7 +264,7 @@ class PageHtmlBuilder {
 // 		return $this->meta;
 // 	}
 	
-// 	public function getLink($target, $label = null, array $attrs = null, $n2nLocales = null) {
+// 	public function getLink($target, $label = null, ?array $attrs = null, $n2nLocales = null) {
 // 		$n2nLocales = (null !== $n2nLocales) ? ArgUtils::toArray($n2nLocales) : array($this->request->getN2nLocale());
 // 		$leaf = $this->meta->determineLeaf($target);
 // 		$label = (null !== $label) ? $label : $leaf->getName($n2nLocales);
@@ -279,15 +279,15 @@ class PageHtmlBuilder {
 // 		return $this->html->getLink($this->meta->getUrl($target, $n2nLocales), $label, $attrs);
 // 	}
 	
-// 	public function link($target, $label = null, array $attrs = null, N2nLocale $n2nLocale = null) {
+// 	public function link($target, $label = null, ?array $attrs = null, ?N2nLocale $n2nLocale = null) {
 // 		$this->view->out($this->getLink($target, $label, $attrs, $n2nLocale));
 // 	}
 	
-// 	public function getLinkStart($target, array $attrs = null, N2nLocale $n2nLocale = null) {
+// 	public function getLinkStart($target, ?array $attrs = null, ?N2nLocale $n2nLocale = null) {
 // 		return $this->html->getLinkStart($this->meta->getUrl($target, $n2nLocale), $attrs);
 // 	}
 	
-// 	public function linkStart($target, array $attrs = null, N2nLocale $n2nLocale = null) {
+// 	public function linkStart($target, ?array $attrs = null, ?N2nLocale $n2nLocale = null) {
 // 		$this->view->out($this->getLinkStart($target, $attrs, $n2nLocale));
 // 	}
 	
@@ -303,12 +303,12 @@ class PageHtmlBuilder {
 // 	 * @param N2nLocaleNavConfig $n2nLocaleNavConfig
 // 	 * @return \n2n\impl\web\ui\view\html\HtmlElement
 // 	 */
-// 	public function getN2nLocaleNavigation(N2nLocaleNavConfig $n2nLocaleNavConfig = null) {
+// 	public function getN2nLocaleNavigation(?N2nLocaleNavConfig $n2nLocaleNavConfig = null) {
 // 		$builder = new N2nLocaleNavBuilder($this->view, $this);
 // 		return $builder->build($n2nLocaleNavConfig);
 // 	}
 
-// 	public function localeNavigation(N2nLocaleNavConfig $n2nLocaleNavConfig = null) {
+// 	public function localeNavigation(?N2nLocaleNavConfig $n2nLocaleNavConfig = null) {
 // 		$this->view->out($this->getN2nLocaleNavigation($n2nLocaleNavConfig));
 // 	}
 	
@@ -318,13 +318,13 @@ class PageHtmlBuilder {
 // 	 * @param N2nLocale $n2nLocale
 // 	 * @return \n2n\impl\web\ui\view\html\HtmlElement
 // 	 */
-// 	public function getBreadCrumb($target = null, BreadcrumbConfig $breadCrumbConfig = null, 
+// 	public function getBreadCrumb($target = null, ?BreadcrumbConfig $breadCrumbConfig = null,
 // 			N2nLocale $n2nLocale = null) {
 // 		$builder = new BreadcrumbBuilder($this->view, $this);
 // 		return $builder->build($target, $breadCrumbConfig, $n2nLocale);
 // 	}
 	
-// 	public function breadCrumb($target = null, BreadcrumbConfig $breadCrumbConfig = null, 
+// 	public function breadCrumb($target = null, ?BreadcrumbConfig $breadCrumbConfig = null,
 // 			N2nLocale $n2nLocale = null) {
 // 		$this->view->out($this->getBreadCrumb($target, $breadCrumbConfig, $n2nLocale));
 // 	}
@@ -348,14 +348,14 @@ class PageHtmlBuilder {
 // 		$this->view->getHtmlBuilder()->out($this->getTitle($title, $n2nLocales));
 // 	}
 	
-// 	public function getNavigation($baseTarget, NavConfig $navConfig = null, 
-// 			$activeTarget = null, N2nLocale $n2nLocale = null) {
+// 	public function getNavigation($baseTarget, ?NavConfig $navConfig = null,
+// 			$activeTarget = null, ?N2nLocale $n2nLocale = null) {
 // 		$builder = new NavBuilder($this->view, $this);
 		
 // 		return $builder->build($baseTarget, $activeTarget, $navConfig, $n2nLocale);
 // 	}
 	
-// 	public function navigation($baseTarget, NavConfig $navConfig = null, $activeTarget = null, N2nLocale $n2nLocale = null) {
+// 	public function navigation($baseTarget, ?NavConfig $navConfig = null, $activeTarget = null, ?N2nLocale $n2nLocale = null) {
 // 		$this->view->out($this->getNavigation($baseTarget, $navConfig, $activeTarget));
 // 	}
 	

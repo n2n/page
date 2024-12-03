@@ -9,7 +9,7 @@ class NavBranchFilter {
 	private $hookKeys = array();
 	private $id;
 
-	public function __construct($affiliatedObj = null, array $tagNames = null, $hookKeys = null, string $id = null) {
+	public function __construct($affiliatedObj = null, ?array $tagNames = null, $hookKeys = null, ?string $id = null) {
 		$this->setAffiliatedObj($affiliatedObj);
 		$this->setTagNames($tagNames);
 		$this->setHookKeys($hookKeys);
@@ -21,17 +21,17 @@ class NavBranchFilter {
 		$this->affiliatedObj = $affiliatedObj;
 	}
 
-	public function setTagNames(array $tagNames = null) {
+	public function setTagNames(?array $tagNames = null) {
 		ArgUtils::valArray($tagNames, 'string', true, 'tagNames');
 		$this->tagNames = (array) $tagNames;
 	}
 
-	public function setHookKeys(array $hookKeys = null) {
+	public function setHookKeys(?array $hookKeys = null) {
 		ArgUtils::valArray($hookKeys, 'string', true, 'hookKeys');
 		$this->hookKeys = (array) $hookKeys;
 	}
 	
-	public function setId(string $id = null) {
+	public function setId(?string $id = null) {
 		$this->id = $id;
 	}
 	

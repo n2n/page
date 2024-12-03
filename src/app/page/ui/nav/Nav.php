@@ -44,7 +44,7 @@ class Nav {
 	 * @param string $subsystemName
 	 * @return \page\ui\nav\NavComposer
 	 */
-	public static function subHome(string $subsystemName = null) {
+	public static function subHome(?string $subsystemName = null) {
 		return new NavComposer(NavBranchCriteria::createSubHome($subsystemName));
 	}
 	

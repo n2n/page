@@ -29,7 +29,7 @@ class PagePreviewController extends PreviewControllerAdapter {
 		return $options;
 	}
 	
-	public function index(PageState $pageState, Path $cmdPath, Path $cmdContextPath, array $params = null) {
+	public function index(PageState $pageState, Path $cmdPath, Path $cmdContextPath, ?array $params = null) {
 		$page = $this->eiu()->object()->getEntityObj();
 		CastUtils::assertTrue($page instanceof Page);
 		

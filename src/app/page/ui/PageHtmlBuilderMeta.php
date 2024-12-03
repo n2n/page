@@ -98,7 +98,7 @@ class PageHtmlBuilderMeta {
 	 * @param string $seTitle See {@link self::applySeMeta()}
 	 * @param string $titleSeparator See {@link self::applySeMeta()}
 	 */
-	public function applyMeta(string $seTitle = null, string $titleSeparator = self::DEFAULT_TITLE_SEPARATOR) {
+	public function applyMeta(?string $seTitle = null, string $titleSeparator = self::DEFAULT_TITLE_SEPARATOR) {
 		$this->applySeMeta($seTitle, $titleSeparator);
 		$this->applyN2nLocaleMeta();
 	}
@@ -115,7 +115,7 @@ class PageHtmlBuilderMeta {
 	 * @param string $titleSeparator The separator used to join the page title and the page name specified 
 	 * in app.ini together for <code>&lt;title&gt;</code> element.
 	 */
-	public function applySeMeta(string $seTitle = null, string $titleSeparator = self::DEFAULT_TITLE_SEPARATOR) {
+	public function applySeMeta(?string $seTitle = null, string $titleSeparator = self::DEFAULT_TITLE_SEPARATOR) {
 		if (!$this->pageState->hasCurrent()) return;
 
 		$leafContent = $this->pageState->getCurrentLeafContent();

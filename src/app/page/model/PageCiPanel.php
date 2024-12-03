@@ -10,7 +10,7 @@ class PageCiPanel {
 	private $min;
 	private $max;
 	
-	public function __construct(string $name, array $allowedCiClasses = null, int $min = 0, int $max = null) {
+	public function __construct(string $name, ?array $allowedCiClasses = null, int $min = 0, ?int $max = null) {
 		$this->name = $name;
 		$this->setAllowedCiClassNames($allowedCiClasses);
 		$this->min = $min;
@@ -21,7 +21,7 @@ class PageCiPanel {
 		return $this->name;
 	}
 	
-	public function setAllowedCiClassNames(array $allowedCiClassNames = null) {
+	public function setAllowedCiClassNames(?array $allowedCiClassNames = null) {
 		ArgUtils::valArray($allowedCiClassNames, \ReflectionClass::class, true);
 		$this->allowedCiClasses = $allowedCiClassNames;
 	}

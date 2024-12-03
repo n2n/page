@@ -133,8 +133,8 @@ class PageUrlComposer implements UrlComposer {
 	 * {@inheritDoc}
 	 * @see \n2n\web\http\nav\UrlComposer::toUrl($n2nContext, $controllerContext)
 	 */
-	public function toUrl(N2nContext $n2nContext, ControllerContext $controllerContext = null,
-			string &$suggestedLabel = null): Url {
+	public function toUrl(N2nContext $n2nContext, ?ControllerContext $controllerContext = null,
+			?string &$suggestedLabel = null): Url {
 		$pageState = $n2nContext->lookup(PageState::class);
 		CastUtils::assertTrue($pageState instanceof PageState);
 

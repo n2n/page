@@ -58,7 +58,7 @@ class PageLink extends ObjectAdapter implements UrlComposer {
 		return $this->linkedPage;
 	}
 
-	public function setLinkedPage(Page $linkedPage = null) {
+	public function setLinkedPage(?Page $linkedPage = null) {
 		$this->linkedPage = $linkedPage;
 	}
 
@@ -78,8 +78,8 @@ class PageLink extends ObjectAdapter implements UrlComposer {
 		$this->label = $label;
 	}
 
-	public function toUrl(N2nContext $n2nContext, ControllerContext $controllerContext = null,
-			string &$suggestedLabel = null): Url {
+	public function toUrl(N2nContext $n2nContext, ?ControllerContext $controllerContext = null,
+			?string &$suggestedLabel = null): Url {
 
 		if ($this->type == self::TYPE_EXTERNAL) {
 			$suggestedLabel = $this->label;
