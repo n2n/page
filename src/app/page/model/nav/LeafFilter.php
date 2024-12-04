@@ -7,7 +7,7 @@ class LeafFilter {
 	private $n2nLocale;
 	private $subsystemName;
 	
-	public function __construct(N2nLocale $n2nLocale, string $subsystemName = null) {
+	public function __construct(N2nLocale $n2nLocale, ?string $subsystemName = null) {
 		$this->n2nLocale = $n2nLocale;
 		$this->subsystemName = $subsystemName;
 	}
@@ -25,7 +25,7 @@ class LeafFilter {
 		return $acceptableLeaf;
 	}
 		
-	private function findHomeR(array $navBranches, Leaf &$acceptableLeaf = null) {
+	private function findHomeR(array $navBranches, ?Leaf &$acceptableLeaf = null) {
 		foreach ($navBranches as $navBranch) {
 			if ($navBranch->containsLeafN2nLocale($this->n2nLocale)) {
 				$leaf = $navBranch->getLeafByN2nLocale($this->n2nLocale);

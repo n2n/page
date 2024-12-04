@@ -22,15 +22,15 @@ class NavFactory {
 		$this->n2nLocale = $n2nLocale;
 	}
 	
-	public function setNumLevels(int $numLevels = null) {
+	public function setNumLevels(?int $numLevels = null) {
 		$this->numLevels = $numLevels;
 	}
 	
-	public function setNumOpenLevels(int $numOpenLevels = null) {
+	public function setNumOpenLevels(?int $numOpenLevels = null) {
 		$this->numOpenLevels = $numOpenLevels;
 	}
 	
-	public function setCurrentNavBranch(NavBranch $currentNavBranch = null) {
+	public function setCurrentNavBranch(?NavBranch $currentNavBranch = null) {
 		$this->currentNavBranch = $currentNavBranch;
 	}
 	
@@ -185,7 +185,7 @@ class NavFactory {
 // 	}
 	
 // 	public function build($baseTarget, $activeTarget = null, 
-// 			NavConfig $navConfig = null, N2nLocale $n2nLocale = null) {
+// 			NavConfig $navConfig = null, ?N2nLocale $n2nLocale = null) {
 		
 // 		$baseBranch = $this->pageHtml->meta()->determineBranch($baseTarget);
 // 		$this->setup($activeTarget, $navConfig, $n2nLocale);
@@ -223,7 +223,7 @@ class NavFactory {
 // 	}
 	
 // 	private function setup($activeTarget = null, 
-// 			NavConfig $navConfig = null, N2nLocale $n2nLocale = null) {
+// 			NavConfig $navConfig = null, ?N2nLocale $n2nLocale = null) {
 // 		$this->activeBranch = $this->determineActiveBranch($activeTarget);
 // 		$this->navConfig = (null !== $navConfig) ? $navConfig : NavConfig::create();
 		

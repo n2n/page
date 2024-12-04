@@ -19,7 +19,7 @@ class NavBranch {
 	private $children = array();
 	private $level;
 	
-	public function __construct(NavTree $navTree, string $id = null) {
+	public function __construct(NavTree $navTree, ?string $id = null) {
 		$this->navTree = $navTree;
 		$this->id = $id;
 	}
@@ -34,7 +34,7 @@ class NavBranch {
 	/**
 	 * @param string $id
 	 */
-	public function setId(string $id = null) {
+	public function setId(?string $id = null) {
 		$this->id = $id;
 	}
 
@@ -48,7 +48,7 @@ class NavBranch {
 	/**
 	 * @param \Closure $objAffiliationTester
 	 */
-	public function setObjAffiliationTester(ObjAffiliationTester $objAffiliationTester = null) {
+	public function setObjAffiliationTester(?ObjAffiliationTester $objAffiliationTester = null) {
 		$this->objAffiliationTester = $objAffiliationTester;
 	}
 	
@@ -173,7 +173,7 @@ class NavBranch {
 		return $root;
 	}
 	
-	protected function setParent(NavBranch $navBranch = null) {
+	protected function setParent(?NavBranch $navBranch = null) {
 		if ($this->parent === null) {
 			$this->parent = $navBranch;
 			return;
@@ -194,7 +194,7 @@ class NavBranch {
 		throw new IllegalStateException('NavBranch not part of any NavTree.');
 	}
 	
-	protected function setLevel(int $level = null) {
+	protected function setLevel(?int $level = null) {
 		$this->level = $level;
 	}
 	
@@ -232,7 +232,7 @@ class NavBranch {
 	 * @param array $hookKeys
 	 * @return NavBranch or null if not found
 	 */
-	public function findChild($affiliatedObj = null, array $tagNames = null, array $hookKeys = null) {
+	public function findChild($affiliatedObj = null, ?array $tagNames = null, ?array $hookKeys = null) {
 		$navFilter = new NavBranchFilter($affiliatedObj, $tagNames, $hookKeys);
 		return $navFilter->find($this->children);
 	}
@@ -243,7 +243,7 @@ class NavBranch {
 	 * @param array $hookKeys
 	 * @return NavBranch or null if not found
 	 */
-	public function find($affiliatedObj = null, array $tagNames = null, array $hookKeys = null) {
+	public function find($affiliatedObj = null, ?array $tagNames = null, ?array $hookKeys = null) {
 		$navFilter = new NavBranchFilter($affiliatedObj, $tagNames, $hookKeys);
 		return $navFilter->findR($this->children);
 	}
@@ -254,7 +254,7 @@ class NavBranch {
 	 * @param array $hookKeys
 	 * @return \page\model\nav\NavBranch
 	 */
-	public function findAncestor($affiliatedObj = null, array $tagNames = null, array $hookKeys = null) {
+	public function findAncestor($affiliatedObj = null, ?array $tagNames = null, ?array $hookKeys = null) {
 		$navFilter = new NavBranchFilter($affiliatedObj, $tagNames, $hookKeys);
 		
 		$navBranch = $this;

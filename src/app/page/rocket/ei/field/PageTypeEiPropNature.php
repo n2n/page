@@ -8,6 +8,7 @@ use rocket\op\ei\util\factory\EifGuiField;
 use rocket\si\content\impl\SiFields;
 use rocket\si\content\impl\meta\SiCrumb;
 use rocket\impl\ei\component\prop\adapter\DisplayableEiPropNatureAdapter;
+use rocket\ui\gui\field\GuiField;
 
 class PageTypeEiPropNature extends DisplayableEiPropNatureAdapter {
 
@@ -46,5 +47,8 @@ class PageTypeEiPropNature extends DisplayableEiPropNatureAdapter {
 				SiCrumb::createLabel($label)));
 	}
 
-	
+
+	function getGuiField(): ?GuiField {
+		// TODO: Implement getGuiField() method.
+	}
 }

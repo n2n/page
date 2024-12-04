@@ -16,7 +16,7 @@
 // 	private $min;
 // 	private $max;
 	
-// 	public function __construct(string $panelName, array $allowedCiClassNames = null, int $min = 0, int $max = null)  {
+// 	public function __construct(string $panelName, ?array $allowedCiClassNames = null, int $min = 0, ?int $max = null)  {
 // 		$this->panelName = $panelName;
 		
 // 		ArgUtils::valArray($allowedCiClassNames, array('string', \ReflectionClass::class), true);

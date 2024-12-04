@@ -32,7 +32,7 @@ class PageContentItemsEiPropNature extends ContentItemsEiPropNature {
 // 		return DisplayItem::TYPE_PANEL;
 // 	}
 	
-	public function setEntityProperty(EntityProperty $entityProperty = null) {
+	public function setEntityProperty(?EntityProperty $entityProperty = null) {
 		parent::setEntityProperty($entityProperty);
 		
 		ArgUtils::assertTrue($entityProperty instanceof ToManyEntityProperty
