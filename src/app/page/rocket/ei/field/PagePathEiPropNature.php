@@ -2,7 +2,6 @@
 namespace page\rocket\ei\field;
 
 use rocket\op\ei\util\Eiu;
-use rocket\impl\ei\component\prop\adapter\DisplayableEiPropAdapter;
 use n2n\util\type\CastUtils;
 use page\bo\PageT;
 use page\model\PageState;
@@ -10,10 +9,11 @@ use page\model\nav\NavUrlBuilder;
 use n2n\util\StringUtils;
 use page\bo\Page;
 use page\model\nav\UnavailableLeafException;
-use rocket\op\ei\util\factory\EifGuiField;
-use rocket\si\content\impl\SiFields;
-use rocket\si\content\impl\meta\SiCrumb;
 use rocket\impl\ei\component\prop\adapter\DisplayableEiPropNatureAdapter;
+use rocket\ui\gui\field\impl\GuiFields;
+use rocket\ui\gui\field\BackableGuiField;
+use rocket\ui\si\content\impl\meta\SiCrumb;
+use rocket\ui\si\content\impl\SiFields;
 
 class PagePathEiPropNature extends DisplayableEiPropNatureAdapter {
 	
@@ -22,7 +22,7 @@ class PagePathEiPropNature extends DisplayableEiPropNatureAdapter {
 	}
 
 	
-	function createOutEifGuiField(Eiu $eiu): EifGuiField {
+	function buildOutGuiField(Eiu $eiu): ?BackableGuiField {
 		$pageT = $eiu->entry()->getEntityObj();
 		CastUtils::assertTrue($pageT instanceof PageT);
 		
@@ -33,7 +33,7 @@ class PagePathEiPropNature extends DisplayableEiPropNatureAdapter {
 		if ($navBranch === null) {
 			$siCrumb = SiCrumb::createLabel($eiu->dtc('page')->t('unknown_err'))
 					->setSeverity(SiCrumb::SEVERITY_INACTIVE);
-			return $eiu->factory()->newGuiField(SiFields::crumbOut($siCrumb));
+			return GuiFields::out(SiFields::crumbOut($siCrumb));
 		}
 		
 		$navUrlBuilder = new NavUrlBuilder($eiu->getN2nContext()->getHttpContext());
@@ -46,7 +46,7 @@ class PagePathEiPropNature extends DisplayableEiPropNatureAdapter {
 		} catch (UnavailableLeafException $e) {
 			$siCrumb = SiCrumb::createLabel($eiu->dtc('page')->t('unreachable_err'))
 					->setSeverity(SiCrumb::SEVERITY_INACTIVE);
-			return $eiu->factory()->newGuiField(SiFields::crumbOut($siCrumb));
+			return GuiFields::out(SiFields::crumbOut($siCrumb));
 		}
 		
 		$siCrumb = null;
@@ -61,7 +61,7 @@ class PagePathEiPropNature extends DisplayableEiPropNatureAdapter {
 			$siCrumb->setSeverity(SiCrumb::SEVERITY_INACTIVE);
 		}
 		
-		return $eiu->factory()->newGuiField(SiFields::crumbOut($siCrumb));
+		return GuiFields::out(SiFields::crumbOut($siCrumb));
 	}
 }
 
