@@ -58,7 +58,8 @@ use n2n\l10n\DynamicTextCollection;
 #[EiNestedSet]
 #[EiMenuItem('Seitenverwaltung', groupName: 'Inhalt', groupOrderIndex: 5)]
 #[EiPreset(EiPresetMode::EDIT_CMDS,
-		editProps: ['pageTs', 'inNavigation' => 'In Nav', 'pageContent', 'internalPage', 'externalUrl'])]
+		editProps: ['pageTs', 'inNavigation' => 'In Nav', 'pageContent', 'internalPage', 'externalUrl', 'inPath',
+				'navTargetNewWindow', 'indexable'])]
 #[EiDisplayScheme(
 		compact: ['pageTs/name', 'pageType', 'pageTs/pagePath', 'inNavigation', 'pageTs/active'],
 		bulky: [

@@ -14,9 +14,11 @@ use n2n\web\dispatch\map\PropertyPath;
 use n2n\web\ui\UiComponent;
 use n2n\web\dispatch\mag\UiOutfitter;
 use rocket\op\ei\util\factory\EifGuiField;
-use rocket\si\content\impl\SiFields;
 use n2n\reflection\property\PropertyAccessProxy;
 use rocket\impl\ei\component\prop\adapter\DraftablePropertyEiPropNatureAdapter;
+use rocket\ui\gui\field\impl\GuiFields;
+use rocket\ui\gui\field\BackableGuiField;
+use rocket\ui\si\content\impl\SiFields;
 
 class PageMethodEiPropNature extends DraftablePropertyEiPropNatureAdapter {
 
@@ -28,7 +30,7 @@ class PageMethodEiPropNature extends DraftablePropertyEiPropNatureAdapter {
 		return $eiu->factory()->newGuiField(SiFields::stringOut($eiu->field()->getValue()));
 	}
 	
-	function createInEifGuiField(Eiu $eiu): EifGuiField {
+	function buildInGuiField(Eiu $eiu): ?BackableGuiField  {
 		$pageController = $eiu->entry()->getEntityObj();
 		CastUtils::assertTrue($pageController instanceof PageController);
 		
@@ -39,17 +41,13 @@ class PageMethodEiPropNature extends DraftablePropertyEiPropNatureAdapter {
 			$options[$pageMethod->getName()] = StringUtils::pretty($pageMethod->getName());
 		}
 		
-		$siField = SiFields::enumIn($options, $eiu->field()->getValue())
-				->setMandatory(true);
+		$guiField = GuiFields::enumIn(true, $options)->setValue($eiu->field()->getValue());
 		
 		if (count($options) === 1) {
-			$siField->setValue(key($options));	
+			$guiField->setValue(key($options));
 		}
 		
-		return $eiu->factory()->newGuiField($siField)
-				->setSaver(function () use ($eiu, $siField) {
-					$eiu->field()->setValue($siField->getValue());
-				});
+		return $guiField;
 	}
 	
 // 	public function createMag(Eiu $eiu): Mag {
