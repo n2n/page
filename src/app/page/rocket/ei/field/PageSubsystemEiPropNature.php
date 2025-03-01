@@ -2,7 +2,6 @@
 namespace page\rocket\ei\field;
 
 use rocket\op\ei\util\Eiu;
-use rocket\op\ei\manage\gui\GuiProp;
 use rocket\impl\ei\component\prop\enum\EnumEiPropNature;
 use n2n\reflection\property\PropertyAccessProxy;
 use rocket\op\ei\manage\gui\EiGuiProp;
@@ -15,14 +14,16 @@ class PageSubsystemEiPropNature extends EnumEiPropNature {
 		$this->setOptions($options);
 	}
 	
-	function buildEiGuiProp(Eiu $eiu): ?EiGuiProp {
-		$subsystems = $eiu->getN2nContext()->getHttpContext()->getAvailableSubsystems();
-		if (empty($subsystems)) {
-			return null;
-		}
-		
-		return parent::buildEiGuiProp($eiu);
-	}
+//	function buildEiGuiProp(Eiu $eiu): ?EiGuiProp {
+//		$subsystems = $eiu->getN2nContext()->getHttpContext()->getAvailableSubsystems();
+//		if (empty($subsystems)) {
+//			return null;
+//		}
+//
+//		return parent::buildEiGuiProp($eiu);
+//	}
+//
+//
 	
 // 	public function createEiPropConfigurator(): EiPropConfigurator {
 // 		return new PageSubsystemEiPropConfigurator($this);

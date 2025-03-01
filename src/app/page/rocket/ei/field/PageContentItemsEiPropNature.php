@@ -40,7 +40,7 @@ class PageContentItemsEiPropNature extends ContentItemsEiPropNature {
 				&& $entityProperty->getTargetEntityModel()->getClass()->getName() === ContentItem::class);
 	}
 	
-	public function determinePanelDeclarations(Eiu $eiu) {
+	public function determinePanelDeclarations(Eiu $eiu): array {
 		$relationMapping = $eiu->entry()->getValue(EiPropPath::from($eiu->prop()->getEiProp())->poped()
 				->pushed('pageController'));
 		if ($relationMapping === null) {
