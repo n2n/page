@@ -139,7 +139,7 @@ class PageHtmlBuilder {
 	 * @param array $liAttrs Html attributes of each li element 
 	 * @param string $divider Pass a {@link \n2n\web\ui\UiComponent} or string if a divider span element should be printed
 	 * in each li element. 
-	 * @param array $additionalLiUiComponents 
+	 * @param array $additionalLiUiComponents
 	 */
 	public function breadcrumbs(?array $attrs = null, ?array $liAttrs = null, ?array $aAttrs = null, $divider = null,
 			array $additionalLiUiComponents = []) {
@@ -152,9 +152,9 @@ class PageHtmlBuilder {
 	 */
 	public function getBreadcrumbs(?array $attrs = null, ?array $liAttrs = null, ?array $aAttrs = null, $divider = null,
 			array $additionalLiUiComponents = []) {
-		
+
 		ArgUtils::valArray($additionalLiUiComponents, UiComponent::class);
-		
+
 		$navBranches = $this->meta->getBreadcrumbNavBranches();
 		if (empty($navBranches) && empty($additionalLiUiComponents)) {
 			return null;
@@ -171,23 +171,23 @@ class PageHtmlBuilder {
 			}
 		}
 		
-		
-		$lis[] = new HtmlElement('li', 
-				(!empty($additionalLiUiComponents) ? $liAttrs : HtmlUtils::mergeAttrs(array('class' => 'active'), $liAttrs)), 
+
+		$lis[] = new HtmlElement('li',
+				(!empty($additionalLiUiComponents) ? $liAttrs : HtmlUtils::mergeAttrs(array('class' => 'active'), $liAttrs)),
 				$html->getLink(MurlPage::obj($lastNavBranch), null, $aAttrs));
 		
-		
+
 		$lastAdditionalLiUiComponent = ArrayUtils::end($additionalLiUiComponents);
 		foreach ($additionalLiUiComponents as $additionalLiUiComponent) {
-			$lis[] = new HtmlElement('li', 
+			$lis[] = new HtmlElement('li',
 					($lastAdditionalLiUiComponent !== $additionalLiUiComponent ? $liAttrs : HtmlUtils::mergeAttrs(array('class' => 'active'), $liAttrs)),
 					$additionalLiUiComponent);
 			if ($divider !== null) {
 				$li->prependContent(new HtmlElement('span', array('class' => 'divider'), $divider));
 			}
 		}
-		
-		return new HtmlElement('ul', $attrs, $lis);		
+
+		return new HtmlElement('ul', $attrs, $lis);
 	}
 	
 	/**
