@@ -41,7 +41,7 @@ class PageTypeEiPropNature extends DisplayableEiPropNatureAdapter {
 				$label = $page->getExternalUrl();
 				break;
 			default:
-				$eiuMask = $eiu->context()->mask($page->getPageContent()->getPageController()
+				$eiuMask = $eiu->context()->mask($page->getPageContent()?->getPageController()
 						?? new \ReflectionClass(PageController::class));
 				$iconType = $eiuMask->getIconType();
 				$label = $eiuMask->getLabel();

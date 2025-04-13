@@ -53,8 +53,11 @@ use n2n\reflection\property\InvalidPropertyAccessMethodException;
 use ReflectionException;
 use n2n\core\container\N2nContext;
 use n2n\l10n\DynamicTextCollection;
+use rocket\attribute\EiPreview;
+use page\controller\PagePreviewController;
 
 #[EiType(label: 'Seite', pluralLabel: 'Seiten', identityStringPattern: '{pageTs/name}')]
+#[EiPreview(PagePreviewController::class)]
 #[EiNestedSet]
 #[EiMenuItem('Seitenverwaltung', groupName: 'Inhalt', groupOrderIndex: 5)]
 #[EiPreset(EiPresetMode::EDIT_CMDS,
