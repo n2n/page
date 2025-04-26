@@ -18,6 +18,7 @@ use n2n\persistence\orm\attribute\Transient;
 use rocket\attribute\impl\EiPropBool;
 use n2n\reflection\property\PropertiesAnalyzer;
 use page\rocket\ei\field\PageSubsystemEiPropNature;
+use rocket\attribute\impl\EiPropPathPart;
 
 #[EiType]
 #[EiPreset(editProps: [
@@ -33,6 +34,7 @@ class PageT extends ObjectAdapter implements Translatable {
 	private $n2nLocale;
 	private string $name;
 	private ?string $title = null;
+	#[EiPropPathPart(baseProp: 'name')]
 	private ?string $pathPart = null;
 	private $page;
 	private bool $active = true;
