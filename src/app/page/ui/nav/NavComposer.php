@@ -13,19 +13,19 @@ use page\model\PageState;
 use n2n\util\type\CastUtils;
 
 /**
- * Created by {@link Nav} and used to describe navigations in a fluid way. It is usually passed to 
+ * Created by {@link Nav} and used to describe navigations in a fluid way. It is usually passed to
  * {@link \page\ui\PageHtmlBuilder::navigation()} to build the navigation.
  */
 class NavComposer {
 	private $navBranchCriteria;
-	
+
 	private $parentIncluded = false;
 	private $relStartLevelNo;
 	private $absStartlevelNo;
 	private $numLevels;
 	private $numOpenLevels = 0;
 	private $navItemBuilder;
-	
+
 	/**
 	 * Use {@link Nav} to create a NavComposer. Don't call this constructor manually.
 	 * @param NavBranchCriteria $navBranchCriteria Will be used as base.
@@ -33,7 +33,7 @@ class NavComposer {
 	public function __construct(NavBranchCriteria $navBranchCriteria) {
 		$this->navBranchCriteria = $navBranchCriteria;
 	}
-	
+
 	/**
 	 * Default is false.
 	 * @param bool $parentIncluded
@@ -43,11 +43,11 @@ class NavComposer {
 		$this->parentIncluded = $parentIncluded;
 		return $this;
 	}
-	
+
 	/**
 	 * Specifies the first navigation level absolute to the root page
 	 * (e.g. <code>Nav::root()->absStartLevel(2)</code>).
-	 * 
+	 *
 	 * @param int $absStartLevelNo
 	 * @return \page\ui\nav\NavComposer
 	 */
@@ -55,15 +55,15 @@ class NavComposer {
 		if ($this->relStartLevelNo !== null) {
 			throw new IllegalStateException('Relative start level already defined.');
 		}
-		
+
 		$this->absStartlevelNo = $absStartLevelNo;
 		return $this;
 	}
-	
+
 	/**
-	 * Specifies the first navigation level relative to the base page 
+	 * Specifies the first navigation level relative to the base page
 	 * (e.g. <code>Nav::current()->relStartLevel(-1)</code>).
-	 * 
+	 *
 	 * @param int $relStartLevelNo
 	 * @return \page\ui\nav\NavComposer
 	 */
@@ -71,29 +71,29 @@ class NavComposer {
 		if ($this->absStartlevelNo !== null) {
 			throw new IllegalStateException('Absolute start level already defined.');
 		}
-			
+
 		$this->relStartLevelNo = $relStartLevel;
 		return $this;
-		
+
 	}
-	
+
 	/**
 	 * Restricts the maximum number of navigation levels.
-	 * 
-	 * @param int $numLevels or null for no maximum. 
-	 * @return \page\ui\nav\NavComposer
+	 *
+	 * @param int|null $numLevels or null for no maximum.
+	 * @return NavComposer
 	 */
 	public function levels(?int $numLevels = null): NavComposer {
 		$this->numLevels = $numLevels;
 		return $this;
 	}
-	
+
 	/**
-	 * This method is used in combination with {@link NavComposer::levels()} and advises the NavComposer to include 
+	 * This method is used in combination with {@link NavComposer::levels()} and advises the NavComposer to include
 	 * active and open navigation items even if they are outside of the range defined be {@link NavComposer::levels()}.
-	 * 
+	 *
 	 * Default is 0
-	 * 
+	 *
 	 * @param mixed $numOpenLevels num open level or null if active or open navigation items should be included.
 	 * @return \page\ui\nav\NavComposer
 	 */
@@ -101,12 +101,12 @@ class NavComposer {
 		$this->numOpenLevels = $numOpenLevels;
 		return $this;
 	}
-	
+
 	/**
 	 * Specifies the {@link NavItemBuilder} for this navigation. If you want to build a custom navigation, create your
 	 * own NavItemBuilder that inherits from {@see NavItemBuilderAdapter}
-	 * 
-	 * @param mixed $navItemBuilder object of {@link NavItemBuilder} or its lookup id as string. 
+	 *
+	 * @param mixed $navItemBuilder object of {@link NavItemBuilder} or its lookup id as string.
 	 * @return \page\ui\nav\NavComposer
 	 */
 	public function builder($navItemBuilder) {
@@ -114,23 +114,25 @@ class NavComposer {
 		$this->navItemBuilder = $navItemBuilder;
 		return $this;
 	}
-	
-	
+
+
 	/**
-	 * Usally invoked by {@link \page\ui\PageHtmlBuilder::navigation()} to build an UiComponent of the 
+	 * Usally invoked by {@link \page\ui\PageHtmlBuilder::navigation()} to build an UiComponent of the
 	 * described navigation.
-	 * 
+	 *
 	 * @param HtmlView $view
-	 * @param array $attrs
-	 * @param array $ulAttrs
-	 * @param array $liAttrs
-	 * @throws UiException
+	 * @param array|null $attrs
+	 * @param array|null $ulAttrs
+	 * @param array|null $liAttrs
+	 * @param array|null $aAttrs
+	 * @param array|null $currentAAttrs
 	 * @return UiComponent
 	 */
-	public function build(HtmlView $view, ?array $attrs = null, ?array $ulAttrs = null, ?array $liAttrs = null, ?array $aAttrs = null) {
+	public function build(HtmlView $view, ?array $attrs = null, ?array $ulAttrs = null, ?array $liAttrs = null,
+			?array $aAttrs = null, ?array $currentAAttrs = null): UiComponent {
 		$pageState = $view->lookup(PageState::class);
 		CastUtils::assertTrue($pageState instanceof PageState);
-		
+
 		$navItemBuilder = null;
 		if ($this->navItemBuilder === null) {
 			$navItemBuilder = new CommonNavItemBuilder();
@@ -142,7 +144,7 @@ class NavComposer {
 				throw new UiException('Invalid NavItemBuilder: ' . $navItemBuilder);
 			}
 		}
-		
+
 		$navFactory = new NavFactory($navItemBuilder, $view->getN2nLocale(), $this->numLevels, $this->numOpenLevels);
 		if ($pageState->hasCurrent()) {
 			$navFactory->setCurrentNavBranch($pageState->getCurrentNavBranch());
@@ -153,7 +155,8 @@ class NavComposer {
 		$navFactory->setUlAttrs((array) $ulAttrs);
 		$navFactory->setLiAttrs((array) $liAttrs);
 		$navFactory->setAAttrs((array) $aAttrs);
-		
+		$navFactory->setCurrentAAttrs((array) $currentAAttrs);
+
 		$n2nLocale = $view->getN2nLocale();
 		$navBranch = $this->navBranchCriteria->determine($pageState, $n2nLocale, $view->getN2nContext());
 		$startLevel = 1;
@@ -162,10 +165,10 @@ class NavComposer {
 		} else if ($this->relStartLevelNo !== null) {
 			$startLevel = $this->relStartLevelNo;
 		}
-		
+
 		return $navFactory->create($view, $this->dertermineBases($navBranch, $startLevel));
 	}
-	
+
 	/**
 	 * @param NavBranch $navBranch
 	 * @param int $startLevel
@@ -180,14 +183,14 @@ class NavComposer {
 				}
 				$navBranch = $parentNavBranch;
 			}
-			
+
 			if ($this->parentIncluded) {
 				return array($navBranch);
 			}
-			
+
 			return $navBranch->getChildren();
 		}
-		
+
 		if ($startLevel == 0) {
 			$parentNavBranch = $navBranch->getParent();
 			if ($parentNavBranch === null) return array($navBranch);
@@ -196,12 +199,12 @@ class NavComposer {
 			}
 			return $parentNavBranch->getChildren();
 		}
-	
-	
+
+
 		if ($this->parentIncluded) {
 			$startLevel--;
 		}
-		
+
 		$baseNavBranches = array($navBranch);
 		for ($i = 0; $i < $startLevel; $i++) {
 			$nextNavBranches = array();
