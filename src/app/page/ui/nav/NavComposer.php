@@ -126,10 +126,10 @@ class NavComposer {
 	 * @param array|null $liAttrs
 	 * @param array|null $aAttrs
 	 * @param array|null $currentAAttrs
-	 * @return UiComponent
+	 * @return UiComponent|null
 	 */
 	public function build(HtmlView $view, ?array $attrs = null, ?array $ulAttrs = null, ?array $liAttrs = null,
-			?array $aAttrs = null, ?array $currentAAttrs = null): UiComponent {
+			?array $aAttrs = null, ?array $currentAAttrs = null): ?UiComponent {
 		$pageState = $view->lookup(PageState::class);
 		CastUtils::assertTrue($pageState instanceof PageState);
 
