@@ -14,6 +14,7 @@ use n2n\web\http\Subsystem;
 use n2n\web\http\SubsystemRule;
 use n2n\util\magic\impl\MagicMethodInvoker;
 use n2n\util\type\TypeConstraints;
+use n2n\web\http\Supersystem;
 
 class NavTree {
 	private $rootNavBranches = array();
@@ -148,15 +149,16 @@ class NavTree {
 		return $urlBuilder;
 	}
 
-	public function createSitemapItems(N2nContext $n2nContext, ?SubsystemRule $subsystemRule = null) {
-		$sitemapItemBuilder = new SitemapItemBuilder($n2nContext, $subsystemRule);
+	public function createSitemapItems(N2nContext $n2nContext, Supersystem $supersystem, ?SubsystemRule $subsystemRule = null) {
+		$sitemapItemBuilder = new SitemapItemBuilder($n2nContext, $supersystem, $subsystemRule);
 		return $sitemapItemBuilder->analyzeLevel($this->rootNavBranches);
 	}
 }
 
 class SitemapItemBuilder {
 
-	public function __construct(private N2nContext $n2nContext, private ?SubsystemRule $subsystemRule = null) {
+	public function __construct(private N2nContext $n2nContext, private Supersystem $supersystem,
+			private ?SubsystemRule $subsystemRule = null) {
 	}
 
 	public function analyzeLevel(array $navBranches): array {
@@ -178,7 +180,9 @@ class SitemapItemBuilder {
 				continue;
 			}
 
-			if ($this->subsystemRule !== null && !$this->subsystemRule->containsN2nLocaleId($leaf->getN2nLocale())) {
+			if (!($this->supersystem->containsN2nLocaleId($leaf->getN2nLocale())
+					|| ($this->subsystemRule !== null
+							&& !$this->subsystemRule->containsN2nLocaleId($leaf->getN2nLocale())))) {
 				continue;
 			}
 
