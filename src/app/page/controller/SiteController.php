@@ -29,7 +29,7 @@ class SiteController extends ControllerAdapter implements RequestScoped {
 		CastUtils::assertTrue($this->pageConfig instanceof PageConfig);
 	}
 
-	public function index(Path $cmdPath, Path $cmdContextPath, array $params = null) {
+	public function index(Path $cmdPath, Path $cmdContextPath, ?array $params = null) {
 		$leafContents = $this->determineLeafContents($cmdPath, $cmdContextPath);
 		if ($leafContents === null) return;
 
