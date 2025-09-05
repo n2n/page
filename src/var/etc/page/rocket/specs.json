@@ -1085,7 +1085,7 @@
                         "readOnly": false,
                         "mandatory": true,
                         "minlength": null,
-                        "maxlength": "255",
+                        "maxlength": "1000",
                         "quickSearchable": true,
                         "prefixAddons": [],
                         "suffixAddons": [],
