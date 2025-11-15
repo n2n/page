@@ -471,7 +471,7 @@ class Page extends ObjectAdapter {
 
 	private static function createSubsystemOptions(PageConfig $pageConfig, N2nContext $n2nContext): array {
 		$dtc = new DynamicTextCollection('page', $n2nContext->getN2nLocale());
-		$subsystems = $n2nContext->getHttpContext()->getAvailableSubsystems();
+		$subsystems = $n2nContext->lookup(\n2n\web\http\HttpContext::class)->getAvailableSubsystems();
 
 		// 		if (empty($subsystems)) {
 		// 			$this->pageSubsystemEiField->setDisplayConfig(new DisplayConfig(ViewMode::none()));

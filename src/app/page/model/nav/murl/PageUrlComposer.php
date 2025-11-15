@@ -149,7 +149,7 @@ class PageUrlComposer implements UrlComposer {
 			throw new UnavailableUrlException(false, null, null, $e);
 		}
 
-		$navUrlBuilder = new NavUrlBuilder($n2nContext->getHttpContext());
+		$navUrlBuilder = new NavUrlBuilder($n2nContext->lookup(\n2n\web\http\HttpContext::class));
 		$navUrlBuilder->setFallbackAllowed($this->fallbackAllowed);
 		$navUrlBuilder->setAbsolute($this->absolute);
 		$navUrlBuilder->setAccessiblesOnly($this->accessiblesOnly);
