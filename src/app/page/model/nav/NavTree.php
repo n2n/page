@@ -166,16 +166,7 @@ class SitemapItemBuilder {
 		$sitemapItems = array();
 
 		foreach ($navBranch->getLeafs() as $leaf) {
-			if (!$leaf->isAccessible() || !$leaf->isIndexable()) continue;
-
-			if ($leaf->getSubsystemName() !== null && ($this->subsystemRule === null
-							|| $this->subsystemRule->getSubsystem()->getName() !== $leaf->getSubsystemName())) {
-				continue;
-			}
-
-			if (!($this->supersystem->containsN2nLocaleId($leaf->getN2nLocale())
-					|| ($this->subsystemRule !== null
-							&& !$this->subsystemRule->containsN2nLocaleId($leaf->getN2nLocale())))) {
+			if (!$this->isLeafAccessible($navBranch, $leaf)) {
 				continue;
 			}
 
@@ -185,6 +176,33 @@ class SitemapItemBuilder {
 		}
 
 		return array_merge($sitemapItems, $this->analyzeLevel($navBranch->getChildren()));
+	}
+	
+	private function isLeafAccessible(NavBranch $navBranch, Leaf $leaf) {
+		if (!$leaf->isAccessible() || !$leaf->isIndexable()) {
+			return false;
+		}
+		
+		if ($leaf->getSubsystemName() !== null && ($this->subsystemRule === null
+				|| $this->subsystemRule->getSubsystem()->getName() !== $leaf->getSubsystemName())) {
+			return false;
+		}
+				
+		if (!($this->supersystem->containsN2nLocaleId($leaf->getN2nLocale())
+						|| ($this->subsystemRule !== null
+				&& !$this->subsystemRule->containsN2nLocaleId($leaf->getN2nLocale())))) {
+			return false;
+		}
+		
+		if (null !== ($parent = $navBranch->getParent())) {
+			if ($parent->containsLeafN2nLocale($leaf->getN2nLocale())) {
+				return $this->isLeafAccessible($parent, $parent->getLeafByN2nLocale($leaf->getN2nLocale()));
+			}
+			
+			return false;
+		}
+		
+		return true; 
 	}
 }
 
@@ -479,4 +497,5 @@ class UrlBuildTask {
 		return $this->n2nLocale;
 	}
 	
+
 }
