@@ -26,7 +26,7 @@ class PageControllerTemplateDef implements HangarTemplateDef {
 		return 'PageController';
 	}
 	
-	public function applyTemplate(Huo $huo, PhpClass $phpClass, MagDispatchable $magDispatchable = null) {
+	public function applyTemplate(Huo $huo, PhpClass $phpClass, ?MagDispatchable $magDispatchable = null) {
 		$phpClass->setSuperClassTypeDef(PhpTypeDef::fromTypeName(PageController::class));
 		
 		WebTemplateDef::applyResponseCacheClearerValue($phpClass, $magDispatchable);
