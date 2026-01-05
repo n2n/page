@@ -58,11 +58,10 @@ use page\controller\PagePreviewController;
 
 #[EiType(label: 'Seite', pluralLabel: 'Seiten', identityStringPattern: '{pageTs/name}')]
 #[EiPreview(PagePreviewController::class)]
-#[EiNestedSet]
 #[EiMenuItem('Seitenverwaltung', groupName: 'Inhalt', groupOrderIndex: 5)]
 #[EiPreset(EiPresetMode::EDIT_CMDS,
 		editProps: ['pageTs', 'inNavigation' => 'In Nav', 'pageContent', 'internalPage', 'externalUrl', 'inPath',
-				'navTargetNewWindow', 'indexable'])]
+				'navTargetNewWindow', 'indexable', 'rgt', 'lft'])]
 #[EiDisplayScheme(
 		compact: ['pageTs/name', 'pageType', 'pageTs/pagePath', 'inNavigation', 'pageTs/active'],
 		bulky: [
@@ -116,8 +115,8 @@ class Page extends ObjectAdapter {
 	private ?string $hookKey = null;
 	private bool $inNavigation = true;
 	private bool $navTargetNewWindow = false;
-	private $lft;
-	private $rgt;
+	private int $lft;
+	private int $rgt;
 	private $lastMod;
 //	private $lastModBy;
 	#[OneToMany(PageT::class, 'page', cascade: CascadeType::ALL, orphanRemoval: true)]
@@ -270,7 +269,7 @@ class Page extends ObjectAdapter {
 		return $this->lft;
 	}
 
-	public function setLft($lft) {
+	public function setLft(int $lft) {
 		$this->lft = $lft;
 	}
 
@@ -278,7 +277,7 @@ class Page extends ObjectAdapter {
 		return $this->rgt;
 	}
 
-	public function setRgt($rgt) {
+	public function setRgt(int $rgt) {
 		$this->rgt = $rgt;
 	}
 	/**
