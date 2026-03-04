@@ -48,7 +48,7 @@ class ExternalController implements Controller {
 			throw new PageNotFoundException();
 		}
 		
-		$this->n2nContext->getHttpContext()->getResponse()->send(
+		$this->n2nContext->lookup(\n2n\web\http\HttpContext::class)->getResponse()->send(
 				new Redirect($this->httpLocation, Response::STATUS_301_MOVED_PERMANENTLY));
 		return true;
 	}

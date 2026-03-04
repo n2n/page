@@ -77,7 +77,7 @@ class NavBranchCriteria {
 					}
 				case self::NAMED_HOME:
 					$subsystemName = null;
-					if (null !== ($subsystem = $n2nContext->getHttpContext()->getActiveSubsystemRule()?->getSubsystem())) {
+					if (null !== ($subsystem = $n2nContext->lookup(\n2n\web\http\HttpContext::class)->getActiveSubsystemRule()?->getSubsystem())) {
 						$subsystemName = $subsystem->getName();
 					}
 					return $pageState->getNavTree()->getHomeLeaf($n2nLocale, $subsystemName)->getNavBranch();

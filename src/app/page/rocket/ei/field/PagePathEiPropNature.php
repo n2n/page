@@ -14,6 +14,7 @@ use rocket\ui\gui\field\impl\GuiFields;
 use rocket\ui\gui\field\BackableGuiField;
 use rocket\ui\si\content\impl\meta\SiCrumb;
 use rocket\ui\si\content\impl\SiFields;
+use n2n\web\http\HttpContext;
 
 class PagePathEiPropNature extends DisplayableEiPropNatureAdapter {
 	
@@ -36,7 +37,7 @@ class PagePathEiPropNature extends DisplayableEiPropNatureAdapter {
 			return GuiFields::out(SiFields::crumbOut($siCrumb));
 		}
 		
-		$navUrlBuilder = new NavUrlBuilder($eiu->getN2nContext()->getHttpContext());
+		$navUrlBuilder = new NavUrlBuilder($eiu->getN2nContext()->lookup(HttpContext::class));
 		$navUrlBuilder->setAccessiblesOnly(false);
 		$navUrlBuilder->setFallbackAllowed(false);
 		

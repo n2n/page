@@ -11,6 +11,7 @@ use n2n\web\http\PageNotFoundException;
 use n2n\reflection\annotation\AnnoInit;
 use n2n\context\RequestScoped;
 use n2n\web\http\annotation\AnnoPath;
+use n2n\web\http\controller\ControllerErrorException;
 
 class SiteController extends ControllerAdapter implements RequestScoped {
 	private static function _annos(AnnoInit $ai) {
@@ -104,10 +105,12 @@ class SiteController extends ControllerAdapter implements RequestScoped {
 // 		return false;
 // 	}
 
+
 	public function sitemap() {
+		$supersystem = $this->getHttpContext()->getSupersystem();
 		$subsystemRule = $this->getHttpContext()->getActiveSubsystemRule();
 
 		$this->forward('..\view\sitemap.xml', array('sitemapItems' => $this->pageState->getNavTree()
-				->createSitemapItems($this->getN2nContext(), $subsystemRule)));
+				->createSitemapItems($this->getN2nContext(), $supersystem, $subsystemRule)));
 	}
 }
