@@ -13,10 +13,12 @@ use page\model\nav\NavTree;
 use n2n\core\container\AppCache;
 use n2n\l10n\N2nLocale;
 use page\bo\PageT;
+use n2n\cache\CacheStore;
+use n2n\cache\CharacteristicsList;
 
 class PageDao implements ThreadScoped {
 	private $em;
-	private $cacheStore;
+	private CacheStore $cacheStore;
 	
 	private function _init(EntityManager $em, AppCache $appCache) {
 		$this->em = $em;
@@ -38,8 +40,10 @@ class PageDao implements ThreadScoped {
 		return $criteria->limit(1)->toQuery()->fetchSingle();
 	}
 	
-	public function getCachedNavTree() {
-		if (null !== ($cacheItem = $this->cacheStore->get('navTree', array()))) {
+	public function getCachedNavTree(): NavTree {
+		$characteristicsList = CharacteristicsList::fromArg([]);
+
+		if (null !== ($cacheItem = $this->cacheStore->get('navTree', $characteristicsList))) {
 			$navTree = $cacheItem->getData();			
 			if ($navTree instanceof NavTree) {
 				return $navTree;
@@ -47,7 +51,7 @@ class PageDao implements ThreadScoped {
 		}
 		
 		$navTree = $this->lookupNavTree();
-		$this->cacheStore->store('navTree', array(), $navTree);
+		$this->cacheStore->store('navTree', $characteristicsList, $navTree);
 		
 		return $navTree;
 	}
