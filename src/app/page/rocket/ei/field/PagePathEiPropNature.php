@@ -43,7 +43,9 @@ class PagePathEiPropNature extends DisplayableEiPropNatureAdapter {
 		
 		$pathStr = null;
 		try {
-			$pathStr = (string) $navUrlBuilder->buildPath($navBranch, $pageT->getN2nLocale())->chLeadingDelimiter(true);
+			$pathStr = (string) $navUrlBuilder->buildPath($navBranch,
+					$navUrlBuilder->determineSubsystemRule($navBranch, $pageT->getN2nLocale()),
+					$pageT->getN2nLocale())->chLeadingDelimiter(true);
 		} catch (UnavailableLeafException $e) {
 			$siCrumb = SiCrumb::createLabel($eiu->dtc('page')->t('unreachable_err'))
 					->setSeverity(SiCrumb::SEVERITY_INACTIVE);
