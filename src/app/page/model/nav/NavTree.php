@@ -15,6 +15,7 @@ use n2n\web\http\SubsystemRule;
 use n2n\util\magic\impl\MagicMethodInvoker;
 use n2n\util\type\TypeConstraints;
 use n2n\web\http\Supersystem;
+use n2n\web\http\HttpSystemContext;
 
 class NavTree {
 	private $rootNavBranches = array();
@@ -35,7 +36,7 @@ class NavTree {
 	}
 
 	public function createLeafContents(N2nContext $n2nContext, Path $cmdPath, Path $contextPath,
-			N2nLocale $n2nLocale, ?string $subsystemName = null, bool $homeOnly = false) {
+			N2nLocale $n2nLocale, string $subsystemName = null, bool $homeOnly = false) {
 		$resolver = new NavPathResolver($n2nContext, $n2nLocale, $subsystemName);
 		if ($homeOnly || $cmdPath->isEmpty()) {
 			$resolver->analyzeHome($this->rootNavBranches, $cmdPath->getPathParts(), $contextPath->getPathParts());
@@ -173,16 +174,7 @@ class SitemapItemBuilder {
 		$sitemapItems = array();
 
 		foreach ($navBranch->getLeafs() as $leaf) {
-			if (!$leaf->isAccessible() || !$leaf->isIndexable()) continue;
-
-			if ($leaf->getSubsystemName() !== null && ($this->subsystemRule === null
-							|| $this->subsystemRule->getSubsystem()->getName() !== $leaf->getSubsystemName())) {
-				continue;
-			}
-
-			if (!($this->supersystem->containsN2nLocaleId($leaf->getN2nLocale())
-					|| ($this->subsystemRule !== null
-							&& !$this->subsystemRule->containsN2nLocaleId($leaf->getN2nLocale())))) {
+			if (!$this->isLeafAccessible($navBranch, $leaf)) {
 				continue;
 			}
 
@@ -192,6 +184,33 @@ class SitemapItemBuilder {
 		}
 
 		return array_merge($sitemapItems, $this->analyzeLevel($navBranch->getChildren()));
+	}
+
+	private function isLeafAccessible(NavBranch $navBranch, Leaf $leaf) {
+		if (!$leaf->isAccessible() || !$leaf->isIndexable()) {
+			return false;
+		}
+
+		if ($leaf->getSubsystemName() !== null && ($this->subsystemRule === null
+						|| $this->subsystemRule->getSubsystem()->getName() !== $leaf->getSubsystemName())) {
+			return false;
+		}
+
+		if (!($this->supersystem->containsN2nLocaleId($leaf->getN2nLocale())
+				|| ($this->subsystemRule !== null
+						&& !$this->subsystemRule->containsN2nLocaleId($leaf->getN2nLocale())))) {
+			return false;
+		}
+
+		if (null !== ($parent = $navBranch->getParent())) {
+			if ($parent->containsLeafN2nLocale($leaf->getN2nLocale())) {
+				return $this->isLeafAccessible($parent, $parent->getLeafByN2nLocale($leaf->getN2nLocale()));
+			}
+
+			return false;
+		}
+
+		return true;
 	}
 }
 
@@ -341,14 +360,8 @@ class NavUrlBuilder {
 		$this->pathExt = $pathExt;
 	}
 
-	/**
-	 * @param NavBranch $navBranch
-	 * @param N2nLocale $n2nLocale
-	 * @param bool $required
-	 * @throws BranchUrlBuildException
-	 * @return \n2n\util\uri\Url
-	 */
-	public function build(NavBranch $navBranch, N2nLocale $n2nLocale, bool $required = false, ?NavBranch &$curNavBranch = null) {
+	public function build(NavBranch $navBranch, N2nLocale $n2nLocale, bool $required = false,
+			?NavBranch &$curNavBranch = null): ?Url {
 		$curNavBranch = $navBranch;
 		while (true) {
 			try {
@@ -367,12 +380,9 @@ class NavUrlBuilder {
 	}
 
 	/**
-	 * @param NavBranch $navBranch
-	 * @param N2nLocale $n2nLocale
-	 * @return \n2n\util\uri\Path
 	 * @throws UnavailableLeafException
 	 */
-	public function buildPath(NavBranch $navBranch, N2nLocale $n2nLocale) {
+	public function buildPath(NavBranch $navBranch, SubsystemRule $subsystemRule, N2nLocale $n2nLocale): Path {
 		$leaf = $navBranch->getLeafByN2nLocale($n2nLocale);
 
 		$pathParts = array();
@@ -392,8 +402,10 @@ class NavUrlBuilder {
 			}
 		}
 
+		$mainLocale = (new HttpSystemContext($this->httpContext->getSupersystem(), $subsystemRule))->mainN2nLocale;
+
 		if ($this->pageConfig->areN2nLocaleUrlsActive()
-				&& !($leaf->isHome() && $n2nLocale->equals($this->httpContext->getMainN2nLocale())
+				&& !($leaf->isHome() && $n2nLocale->equals($mainLocale)
 						&& ($this->pathExt === null || $this->pathExt->isEmpty()))) {
 			$pathParts[] = $this->httpContext->n2nLocaleToHttpId($n2nLocale);
 		}
@@ -431,20 +443,9 @@ class NavUrlBuilder {
 			$ssl = $leaf->isSsl();
 		}
 
-		$subsystemName = $leaf->getSubsystemName();
+		$subsystemRule = $this->determineSubsystemRule($navBranch, $n2nLocale);
 
-		$subsystemRule = null;
-		if ($subsystemName !== null) {
-			$subsystemRule = $this->httpContext->findBestSubsystemRuleBySubsystemAndN2nLocale($subsystemName, $n2nLocale);
-		} else if (!$this->httpContext->containsContextN2nLocale($n2nLocale)) {
-			foreach ($this->httpContext->getSubsystems() as $subsystem) {
-				if (!$subsystem->containsN2nLocaleId($n2nLocale)) continue;
-
-				$subsystemRule = $subsystem->getRuleByN2nLocale($n2nLocale);
-			}
-		}
-
-		$path = $this->buildPath($navBranch, $n2nLocale);
+		$path = $this->buildPath($navBranch, $subsystemRule, $n2nLocale);
 		$url = $this->httpContext->buildContextUrl($ssl, $subsystemRule, $this->absolute)
 				->pathExt($path, $this->pathExt);
 
@@ -458,6 +459,23 @@ class NavUrlBuilder {
 		return $url;
 	}
 
+	function determineSubsystemRule(NavBranch $navBranch, N2nLocale $n2nLocale): ?SubsystemRule {
+		$leaf = $navBranch->getLeafByN2nLocale($n2nLocale);
+
+		$subsystemName = $leaf->getSubsystemName();
+		$subsystemRule = null;
+		if ($subsystemName !== null) {
+			$subsystemRule = $this->httpContext->findBestSubsystemRuleBySubsystemAndN2nLocale($subsystemName, $n2nLocale);
+		} else if (!$this->httpContext->containsContextN2nLocale($n2nLocale)) {
+			foreach ($this->httpContext->getSubsystems() as $subsystem) {
+				if (!$subsystem->containsN2nLocaleId($n2nLocale)) continue;
+
+				$subsystemRule = $subsystem->getRuleByN2nLocale($n2nLocale);
+			}
+		}
+
+		return $subsystemRule;
+	}
 
 }
 
@@ -490,7 +508,7 @@ class UrlBuildTask {
 	}
 
 	/**
-	 * @return \n2n\util\uri\Url
+	 * @return Url
 	 */
 	public function getUrl() {
 		return $this->url;
