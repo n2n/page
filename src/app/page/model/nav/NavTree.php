@@ -36,7 +36,7 @@ class NavTree {
 	}
 
 	public function createLeafContents(N2nContext $n2nContext, Path $cmdPath, Path $contextPath,
-			N2nLocale $n2nLocale, string $subsystemName = null, bool $homeOnly = false) {
+			N2nLocale $n2nLocale, ?string $subsystemName = null, bool $homeOnly = false) {
 		$resolver = new NavPathResolver($n2nContext, $n2nLocale, $subsystemName);
 		if ($homeOnly || $cmdPath->isEmpty()) {
 			$resolver->analyzeHome($this->rootNavBranches, $cmdPath->getPathParts(), $contextPath->getPathParts());
