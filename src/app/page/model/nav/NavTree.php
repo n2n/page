@@ -403,7 +403,7 @@ class NavUrlBuilder {
 
 		$n2nLocales = $this->httpContext->getSupersystem()->getN2nLocales();
 		if (null !== ($subsystemRule = $this->determineSubsystemRule($navBranch, $n2nLocale))) {
-			$n2nLocales = [...$subsystemRule->getN2nLocales()];
+			$n2nLocales = [...$n2nLocales, ...$subsystemRule->getN2nLocales()];
 		}
 		$mainLocale = ArrayUtils::first($n2nLocales);
 
