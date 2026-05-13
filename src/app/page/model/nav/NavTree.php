@@ -382,7 +382,7 @@ class NavUrlBuilder {
 	/**
 	 * @throws UnavailableLeafException
 	 */
-	public function buildPath(NavBranch $navBranch, SubsystemRule $subsystemRule, N2nLocale $n2nLocale): Path {
+	public function buildPath(NavBranch $navBranch, ?SubsystemRule $subsystemRule, N2nLocale $n2nLocale): Path {
 		$leaf = $navBranch->getLeafByN2nLocale($n2nLocale);
 
 		$pathParts = array();
