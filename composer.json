@@ -29,5 +29,10 @@
         "psr-4": {
             "page\\": "src/app/page"
         }
+    },
+    "config": {
+        "allow-plugins": {
+            "n2n/n2n-composer-module-installer": true
+        }
     }
 }

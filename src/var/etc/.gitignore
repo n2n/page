@@ -5,3 +5,5 @@
 /n2n-impl-persistence-orm
 /n2n
 /rocket
+/n2n-persistence
+/n2n-batch

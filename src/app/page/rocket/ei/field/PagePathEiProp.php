@@ -12,6 +12,7 @@ use n2n\impl\web\ui\view\html\HtmlElement;
 use n2n\util\StringUtils;
 use page\bo\Page;
 use page\model\nav\UnavailableLeafException;
+use n2n\web\http\HttpContext;
 
 class PagePathEiProp extends DisplayableEiPropAdapter {
 	
@@ -25,7 +26,7 @@ class PagePathEiProp extends DisplayableEiPropAdapter {
 		$navBranch = $pageState->getNavTree()->find($pageT);
 		if ($navBranch === null) return null;
 		
-		$navUrlBuilder = new NavUrlBuilder($eiu->getN2nContext()->getHttpContext());
+		$navUrlBuilder = new NavUrlBuilder($eiu->getN2nContext()->lookup(HttpContext::class);
 		$navUrlBuilder->setAccessiblesOnly(false);
 		$navUrlBuilder->setFallbackAllowed(false);
 		

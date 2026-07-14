@@ -116,8 +116,8 @@ class SitemapItem {
     private $changeFreq;
     private $priority;
 	
-	public function __construct(Url $loc, \DateTime $lastMod = null, string $changeFreq = null, 
-			float $priority = null) {
+	public function __construct(Url $loc, ?\DateTime $lastMod = null, ?string $changeFreq = null, 
+			?float $priority = null) {
 		$this->loc = $loc;
 		$this->lastMod = $lastMod;
 		$this->setChangeFreq($changeFreq);
@@ -162,7 +162,7 @@ class SitemapItem {
     /**
      * @param string $changeFreq
      */
-    public function setChangeFreq(string $changeFreq = null) {
+    public function setChangeFreq(?string $changeFreq = null) {
     	ArgUtils::valEnum($changeFreq, self::getChangeFreqs(), null, true);
     	$this->changeFreq = $changeFreq;
     }
@@ -174,7 +174,7 @@ class SitemapItem {
     	return $this->priority;
     }
     
-    public function setPriority(float $priority = null) {
+    public function setPriority(?float $priority = null) {
     	ArgUtils::assertTrue($priority === null || ($priority >= 0 && $priority <= 1), 
     			'Argument priority must be between 1 and 0. Given: ' . $priority);
     	$this->priority = $priority;

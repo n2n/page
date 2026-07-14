@@ -53,7 +53,7 @@ class MurlPage {
 		return new PageUrlComposer(NavBranchCriteria::createNamed(NavBranchCriteria::NAMED_HOME));
 	}
 	
-	public static function subHome(string $subsystemName = null) {
+	public static function subHome(?string $subsystemName = null) {
 		return new PageUrlComposer(NavBranchCriteria::createSubHome($subsystemName));
 	}
 	

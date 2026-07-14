@@ -42,7 +42,7 @@ class PageState implements RequestScoped {
 		return $this->leafContent !== null;
 	}
 	
-	public function setCurrentLeafContent(LeafContent $leafContent = null) {
+	public function setCurrentLeafContent(?LeafContent $leafContent = null) {
 		$this->leafContent = $leafContent;
 	}
 	

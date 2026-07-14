@@ -51,7 +51,7 @@ class NavComposer {
 	 * @param int $absStartLevelNo
 	 * @return \page\ui\nav\NavComposer
 	 */
-	public function absStartLevel(int $absStartLevelNo = null) {
+	public function absStartLevel(?int $absStartLevelNo = null) {
 		if ($this->relStartLevelNo !== null) {
 			throw new IllegalStateException('Relative start level already defined.');
 		}
@@ -67,7 +67,7 @@ class NavComposer {
 	 * @param int $relStartLevelNo
 	 * @return \page\ui\nav\NavComposer
 	 */
-	public function relStartLevel(int $relStartLevel = null) {
+	public function relStartLevel(?int $relStartLevel = null) {
 		if ($this->absStartlevelNo !== null) {
 			throw new IllegalStateException('Absolute start level already defined.');
 		}
@@ -83,7 +83,7 @@ class NavComposer {
 	 * @param int $numLevels or null for no maximum. 
 	 * @return \page\ui\nav\NavComposer
 	 */
-	public function levels(int $numLevels = null): NavComposer {
+	public function levels(?int $numLevels = null): NavComposer {
 		$this->numLevels = $numLevels;
 		return $this;
 	}
@@ -97,7 +97,7 @@ class NavComposer {
 	 * @param mixed $numOpenLevels num open level or null if active or open navigation items should be included.
 	 * @return \page\ui\nav\NavComposer
 	 */
-	public function openLevels(int $numOpenLevels = null): NavComposer {
+	public function openLevels(?int $numOpenLevels = null): NavComposer {
 		$this->numOpenLevels = $numOpenLevels;
 		return $this;
 	}
@@ -127,7 +127,7 @@ class NavComposer {
 	 * @throws UiException
 	 * @return UiComponent
 	 */
-	public function build(HtmlView $view, array $attrs = null, array $ulAttrs = null, array $liAttrs = null, array $aAttrs = null) {
+	public function build(HtmlView $view, ?array $attrs = null, ?array $ulAttrs = null, ?array $liAttrs = null, ?array $aAttrs = null) {
 		$pageState = $view->lookup(PageState::class);
 		CastUtils::assertTrue($pageState instanceof PageState);
 		

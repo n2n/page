@@ -14,6 +14,7 @@ use n2n\util\uri\Url;
 use page\model\NavBranchCriteria;
 use n2n\util\uri\Path;
 use n2n\util\uri\UnavailableUrlException;
+use n2n\web\http\HttpContext;
 
 /**
  * A PageUrlComposer is created by {@link MurlPage} and can be used like a 
@@ -132,8 +133,8 @@ class PageUrlComposer implements UrlComposer {
 	 * {@inheritDoc}
 	 * @see \n2n\web\http\nav\UrlComposer::toUrl($n2nContext, $controllerContext)
 	 */
-	public function toUrl(N2nContext $n2nContext, ControllerContext $controllerContext = null, 
-			string &$suggestedLabel = null): Url {
+	public function toUrl(N2nContext $n2nContext, ?ControllerContext $controllerContext = null, 
+			?string &$suggestedLabel = null): Url {
 		$pageState = $n2nContext->lookup(PageState::class);
 		CastUtils::assertTrue($pageState instanceof PageState);
 
@@ -148,7 +149,7 @@ class PageUrlComposer implements UrlComposer {
 			throw new UnavailableUrlException(false, null, null, $e);
 		}
 
-		$navUrlBuilder = new NavUrlBuilder($n2nContext->getHttpContext());
+		$navUrlBuilder = new NavUrlBuilder($n2nContext->lookup(HttpContext::class));
 		$navUrlBuilder->setFallbackAllowed($this->fallbackAllowed);
 		$navUrlBuilder->setAbsolute($this->absolute);
 		$navUrlBuilder->setAccessiblesOnly($this->accessiblesOnly);

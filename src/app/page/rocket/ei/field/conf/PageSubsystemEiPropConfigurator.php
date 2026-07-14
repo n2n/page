@@ -13,6 +13,7 @@ use rocket\impl\ei\component\prop\adapter\config\AdaptableEiPropConfigurator;
 use n2n\l10n\DynamicTextCollection;
 use rocket\ei\manage\gui\ViewMode;
 use rocket\impl\ei\component\prop\adapter\config\DisplayConfig;
+use n2n\web\http\HttpContext;
 
 class PageSubsystemEiPropConfigurator extends AdaptableEiPropConfigurator {
 	private $pageSubsystemEiField;
@@ -30,7 +31,7 @@ class PageSubsystemEiPropConfigurator extends AdaptableEiPropConfigurator {
 		CastUtils::assertTrue($pageConfig instanceof PageConfig);
 		
 		$dtc = new DynamicTextCollection('page', $n2nContext->getN2nLocale());
-		$subsystems = $eiSetupProcess->getN2nContext()->getHttpContext()->getAvailableSubsystems();
+		$subsystems = $eiSetupProcess->getN2nContext()->lookup(HttpContext::class)->getAvailableSubsystems();
 
 		if (empty($subsystems)) {
 			$this->pageSubsystemEiField->setDisplayConfig(new DisplayConfig(ViewMode::none()));

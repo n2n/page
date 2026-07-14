@@ -56,7 +56,7 @@ class InternalController implements Controller {
 			throw new PageNotFoundException($e->getMessage(), 0, $e);
 		}
 		
-		$this->n2nContext->getHttpContext()->getResponse()->send(
+		$this->n2nContext->lookup(Response::class)->send(
 				new Redirect((string) $targetUrl, Response::STATUS_301_MOVED_PERMANENTLY));
 		
 		return true;

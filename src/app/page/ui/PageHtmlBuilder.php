@@ -109,8 +109,8 @@ class PageHtmlBuilder {
 	 * @param array $ulAttrs html attributes of every inner ul
 	 * @param array $liAttrs html attributes of every li
 	 */
-	public function navigation(NavComposer $navComposer = null, array $attrs = null, array $ulAttrs = null, 
-			array $liAttrs = null, array $aAttrs = null) {
+	public function navigation(?NavComposer $navComposer = null, ?array $attrs = null, ?array $ulAttrs = null, 
+			?array $liAttrs = null, ?array $aAttrs = null) {
 		$this->view->out($this->getNavigation($navComposer, $attrs, $ulAttrs, $liAttrs, $aAttrs));
 	}
 	
@@ -119,8 +119,8 @@ class PageHtmlBuilder {
 	 *  
 	 * @return \n2n\web\ui\UiComponent
 	 */
-	public function getNavigation(NavComposer $navComposer = null, array $attrs = null, array $ulAttrs = null, 
-			array $liAttrs = null, array $aAttrs = null) {
+	public function getNavigation(?NavComposer $navComposer = null, ?array $attrs = null, ?array $ulAttrs = null,
+			?array $liAttrs = null, ?array $aAttrs = null) {
 		if ($navComposer === null) {
 			$navComposer = Nav::root();
 		}
@@ -138,7 +138,7 @@ class PageHtmlBuilder {
 	 * @param string $divider Pass a {@link \n2n\web\ui\UiComponent} or string if a divider span element should be printed
 	 * in each li element. 
 	 */
-	public function breadcrumbs(array $attrs = null, array $liAttrs = null, array $aAttrs = null, $divider = null) {
+	public function breadcrumbs(?array $attrs = null, ?array $liAttrs = null, ?array $aAttrs = null, $divider = null) {
 		$this->view->out($this->getBreadcrumbs($attrs, $liAttrs, $aAttrs, $divider));
 	}
 	
@@ -146,7 +146,7 @@ class PageHtmlBuilder {
 	 * Same as {@link PageHtmlBuilder::breadcrumbs()} but returns the output.
 	 * @return \n2n\web\ui\UiComponent
 	 */
-	public function getBreadcrumbs(array $attrs = null, array $liAttrs = null, array $aAttrs = null, $divider = null) {
+	public function getBreadcrumbs(?array $attrs = null, ?array $liAttrs = null, ?array $aAttrs = null, $divider = null) {
 		$navBranches = $this->meta->getBreadcrumbNavBranches();
 		if (empty($navBranches)) return null;
 		
@@ -175,7 +175,7 @@ class PageHtmlBuilder {
 	 * @param array $ulAttrs
 	 * @param array $liAttrs
 	 */
-	public function localeSwitch(array $ulAttrs = null, array $liAttrs = null, array $aAttrs = null) {
+	public function localeSwitch(?array $ulAttrs = null, ?array $liAttrs = null, ?array $aAttrs = null) {
 		$this->view->out($this->getN2nLocaleSwitch($ulAttrs, $liAttrs, $aAttrs));
 	}
 	
@@ -183,7 +183,7 @@ class PageHtmlBuilder {
 	 * Same as {@link PageHtmlBuilder::breadcrumbs()} but returns the output.
 	 * @return \n2n\web\ui\UiComponent
 	 */
-	public function getN2nLocaleSwitch(array $ulAttrs = null, array $liAttrs = null, array $aAttrs = null) {
+	public function getN2nLocaleSwitch(?array $ulAttrs = null, ?array $liAttrs = null, ?array $aAttrs = null) {
 		$urls = $this->meta->getN2nLocaleSwitchUrls();
 		if (empty($urls)) {
 			return null;

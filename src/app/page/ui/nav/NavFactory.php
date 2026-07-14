@@ -22,15 +22,15 @@ class NavFactory {
 		$this->n2nLocale = $n2nLocale;
 	}
 	
-	public function setNumLevels(int $numLevels = null) {
+	public function setNumLevels(?int $numLevels = null) {
 		$this->numLevels = $numLevels;
 	}
 	
-	public function setNumOpenLevels(int $numOpenLevels = null) {
+	public function setNumOpenLevels(?int $numOpenLevels = null) {
 		$this->numOpenLevels = $numOpenLevels;
 	}
 	
-	public function setCurrentNavBranch(NavBranch $currentNavBranch = null) {
+	public function setCurrentNavBranch(?NavBranch $currentNavBranch = null) {
 		$this->currentNavBranch = $currentNavBranch;
 	}
 	

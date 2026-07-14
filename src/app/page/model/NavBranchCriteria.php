@@ -8,6 +8,7 @@ use page\model\nav\NavBranch;
 use n2n\l10n\N2nLocale;
 use page\model\nav\UnavailableLeafException;
 use page\model\nav\UnknownNavBranchException;
+use n2n\web\http\Request;
 
 class NavBranchCriteria {
 	const NAMED_ROOT = 'root';
@@ -30,14 +31,14 @@ class NavBranchCriteria {
 		return $navBranchCriteria;
 	}
 	
-	public static function createSubHome(string $subsystemName = null) {
+	public static function createSubHome(?string $subsystemName = null) {
 		$navBranchCriteria = new NavBranchCriteria();
 		$navBranchCriteria->name = self::NAMED_SUBHOME;
 		$navBranchCriteria->subsystemName = $subsystemName;
 		return $navBranchCriteria;
 	}
 	
-	public static function create($affiliatedObj = null, array $tagNames = null, array $hookKeys = null, string $id = null) {
+	public static function create($affiliatedObj = null, ?array $tagNames = null, ?array $hookKeys = null, ?string $id = null) {
 		ArgUtils::valObject($affiliatedObj, true);
 		$navBranchCriteria = new NavBranchCriteria();
 		$navBranchCriteria->affiliatedObj = $affiliatedObj;
@@ -77,7 +78,7 @@ class NavBranchCriteria {
 					}
 				case self::NAMED_HOME:
 					$subsystemName = null;
-					if (null !== ($subsystem = $n2nContext->getHttpContext()->getRequest()->getSubsystem())) {
+					if (null !== ($subsystem = $n2nContext->lookup(Request::class)->getSubsystem())) {
 						$subsystemName = $subsystem->getName();
 					}
 					return $pageState->getNavTree()->getHomeLeaf($n2nLocale, $subsystemName)->getNavBranch();

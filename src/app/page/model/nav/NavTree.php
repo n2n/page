@@ -33,7 +33,7 @@ class NavTree {
 	}
 
 	public function createLeafContents(N2nContext $n2nContext, Path $cmdPath, Path $contextPath,
-			N2nLocale $n2nLocale, string $subsystemName = null, bool $homeOnly = false) {
+			N2nLocale $n2nLocale, ?string $subsystemName = null, bool $homeOnly = false) {
 		$resolver = new NavPathResolver($n2nContext, $n2nLocale, $subsystemName);
 		if ($homeOnly || $cmdPath->isEmpty()) {
 			$resolver->analyzeHome($this->rootNavBranches, $cmdPath->getPathParts(), $contextPath->getPathParts());
@@ -52,17 +52,17 @@ class NavTree {
 	 * @param string|null id
 	 * @return NavBranch or null if not found
 	 */
-	public function findRoot($affiliatedObj = null, array $tagNames = null, array $hookKeys = null, string $id = null) {
+	public function findRoot($affiliatedObj = null, ?array $tagNames = null, ?array $hookKeys = null, ?string $id = null) {
 		$navFilter = new NavBranchFilter($affiliatedObj, $tagNames, $hookKeys, $id);
 		return $navFilter->find($this->rootNavBranches);
 	}
 
-	public function findHomeLeaf(N2nLocale $n2nLocale, string $subsystemName = null) {
+	public function findHomeLeaf(N2nLocale $n2nLocale, ?string $subsystemName = null) {
 		$leafFilter = new LeafFilter($n2nLocale, $subsystemName);
 		return $leafFilter->findHome($this->rootNavBranches);
 	}
 
-	public function getHomeLeaf(N2nLocale $n2nLocale, string $subsystemName = null) {
+	public function getHomeLeaf(N2nLocale $n2nLocale, ?string $subsystemName = null) {
 		$leafFilter = new LeafFilter($n2nLocale, $subsystemName);
 		if (null !== ($leaf = $leafFilter->findHome($this->rootNavBranches))) {
 			return $leaf;
@@ -79,13 +79,13 @@ class NavTree {
 	 * @param string|null id
 	 * @return NavBranch or null if not found
 	 */
-	public function find($affiliatedObj = null, array $tagNames = null, array $hookKeys = null, string $id = null) {
+	public function find($affiliatedObj = null, ?array $tagNames = null, ?array $hookKeys = null, ?string $id = null) {
 		$navFilter = new NavBranchFilter($affiliatedObj, $tagNames, $hookKeys, $id);
 		return $navFilter->findR($this->rootNavBranches);
 	}
 
-	public function findClosest(NavBranch $navBranch, $affiliatedObj = null, array $tagNames = null,
-			array $hookKeys = null, string $id = null) {
+	public function findClosest(NavBranch $navBranch, $affiliatedObj = null, ?array $tagNames = null,
+			?array $hookKeys = null, ?string $id = null) {
 		$navFilter = new NavBranchFilter($affiliatedObj, $tagNames, $hookKeys, $id);
 		return $navFilter->findClosest($navBranch);
 	}
@@ -97,7 +97,7 @@ class NavTree {
 	 * @throws UnknownNavBranchException
 	 * @return NavBranch
 	 */
-	public function get($affiliatedObj = null, array $tagNames = null, array $hookKeys = null, string $id = null) {
+	public function get($affiliatedObj = null, ?array $tagNames = null, ?array $hookKeys = null, ?string $id = null) {
 		if (null !== ($navBranch = $this->find($affiliatedObj, $tagNames, $hookKeys, $id))) {
 			return $navBranch;
 		}
@@ -105,7 +105,7 @@ class NavTree {
 		throw $this->createException($affiliatedObj, $tagNames, $hookKeys, $id);
 	}
 
-	public function getClosest(NavBranch $navBranch, $affiliatedObj = null, array $tagNames = null, array $hookKeys = null, string $id = null) {
+	public function getClosest(NavBranch $navBranch, $affiliatedObj = null, ?array $tagNames = null, ?array $hookKeys = null, ?string $id = null) {
 		if (null !== ($navBranch = $this->findClosest($navBranch, $affiliatedObj, $tagNames, $hookKeys, $id))) {
 			return $navBranch;
 		}
@@ -113,7 +113,7 @@ class NavTree {
 		throw $this->createException($affiliatedObj, $tagNames, $hookKeys, $id);
 	}
 
-	private function createException($affiliatedObj = null, array $tagNames = null, array $hookKeys = null, string $id = null) {
+	private function createException($affiliatedObj = null, ?array $tagNames = null, ?array $hookKeys = null, ?string $id = null) {
 		$chrits = array();
 		if ($affiliatedObj !== null) {
 			$chrits[] = 'affiliated object: ' . get_class($affiliatedObj);
@@ -210,7 +210,7 @@ class NavPathResolver {
 	private $subsystemName;
 	private $leafContents = array();
 
-	public function __construct(N2nContext $n2nContext, N2nLocale $n2nLocale, string $subsystemName = null) {
+	public function __construct(N2nContext $n2nContext, N2nLocale $n2nLocale, ?string $subsystemName = null) {
 		$this->n2nContext = $n2nContext;
 		$this->n2nLocale = $n2nLocale;
 		$this->subsystemName = $subsystemName;
@@ -346,7 +346,7 @@ class NavUrlBuilder {
 		$this->accessiblesOnly = $accessiblesOnly;
 	}
 
-	public function setPathExt(Path $pathExt = null) {
+	public function setPathExt(?Path $pathExt = null) {
 		$this->pathExt = $pathExt;
 	}
 
@@ -357,7 +357,7 @@ class NavUrlBuilder {
 	 * @throws BranchUrlBuildException
 	 * @return \n2n\util\uri\Url
 	 */
-	public function build(NavBranch $navBranch, N2nLocale $n2nLocale, bool $required = false, NavBranch &$curNavBranch = null) {
+	public function build(NavBranch $navBranch, N2nLocale $n2nLocale, bool $required = false, ?NavBranch &$curNavBranch = null) {
 		$curNavBranch = $navBranch;
 		while (true) {
 			try {
