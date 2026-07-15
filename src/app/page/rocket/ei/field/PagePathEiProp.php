@@ -26,7 +26,7 @@ class PagePathEiProp extends DisplayableEiPropAdapter {
 		$navBranch = $pageState->getNavTree()->find($pageT);
 		if ($navBranch === null) return null;
 		
-		$navUrlBuilder = new NavUrlBuilder($eiu->getN2nContext()->lookup(HttpContext::class);
+		$navUrlBuilder = new NavUrlBuilder($eiu->getN2nContext()->lookup(HttpContext::class));
 		$navUrlBuilder->setAccessiblesOnly(false);
 		$navUrlBuilder->setFallbackAllowed(false);
 		
