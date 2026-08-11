@@ -1,6 +1,6 @@
 <?php
 namespace page\model;
-
+ 
 use n2n\context\ThreadScoped;
 use n2n\persistence\orm\EntityManager;
 use n2n\persistence\orm\util\NestedSetUtils;
@@ -13,7 +13,9 @@ use page\model\nav\NavTree;
 use n2n\core\container\AppCache;
 use n2n\l10n\N2nLocale;
 use page\bo\PageT;
-
+use n2n\cache\CharacteristicsList;
+use n2n\core\N2N;
+ 
 class PageDao implements ThreadScoped {
 	private $em;
 	private $cacheStore;
@@ -39,7 +41,7 @@ class PageDao implements ThreadScoped {
 	}
 	
 	public function getCachedNavTree() {
-		if (null !== ($cacheItem = $this->cacheStore->get('navTree', array()))) {
+		if (null !== ($cacheItem = $this->cacheStore->get('navTree', $this->getCacheCharacteristics()))) {
 			$navTree = $cacheItem->getData();			
 			if ($navTree instanceof NavTree) {
 				return $navTree;
@@ -47,9 +49,22 @@ class PageDao implements ThreadScoped {
 		}
 		
 		$navTree = $this->lookupNavTree();
-		$this->cacheStore->store('navTree', array(), $navTree);
+		$this->cacheStore->store('navTree', $this->getCacheCharacteristics(), $navTree);
 		
 		return $navTree;
+	}
+
+	/**
+	 * Andi hat diesem Vorschlag zähhneknirschend zugestimmt
+	 * 
+	 * @return \n2n\cache\CharacteristicsList|array
+	 */
+	private function getCacheCharacteristics() {
+		if (class_exists('n2n\cache\CharacteristicsList')) {
+			return new CharacteristicsList([]);
+		}
+		
+		return [];
 	}
 	
 	public function clearCache() {
@@ -63,7 +78,7 @@ class PageDao implements ThreadScoped {
 		$navTree = new NavTree();
 		$navInitProcess = new NavInitProcess($navTree);
 		
-		$nsUtils = new NestedSetUtils($this->em, Page::getClass(), 
+		$nsUtils = new NestedSetUtils($this->em, Page::getClass(),
 				new NestedSetStrategy(CrIt::p('lft'), CrIt::p('rgt')));
 		
 		$levelNavBranches = array();
@@ -83,7 +98,7 @@ class PageDao implements ThreadScoped {
 				$levelNavBranches[$parentLevel]->appendChild($navBranch);
 			}
 		}
-
+ 
 		
 		$navInitProcess->finish($navTree);
 		return $navTree;
@@ -93,7 +108,7 @@ class PageDao implements ThreadScoped {
 		return $this->em->find(Page::getClass(), $id);
 	}
 }
-
+ 
 class NavInitProcess {
 	private $navTree;
 	private $onInitializedClosures = array();
