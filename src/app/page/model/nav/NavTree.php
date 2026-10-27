@@ -423,7 +423,9 @@ class NavUrlBuilder {
 		$subsystemRule = null;
 		if ($subsystemName !== null) {
 			$subsystemRule = $this->httpContext->findBestSubsystemRuleBySubsystemAndN2nLocale($subsystemName, $n2nLocale);
-		} else if (!$this->httpContext->containsContextN2nLocale($n2nLocale)) {
+		} else if ($this->httpContext->containsContextN2nLocale($n2nLocale)) {
+			$subsystemRule = $this->httpContext->getActiveSubsystemRule();
+		} else {
 			foreach ($this->httpContext->getSubsystems() as $subsystem) {
 				if (!$subsystem->containsN2nLocaleId($n2nLocale)) continue;
 
