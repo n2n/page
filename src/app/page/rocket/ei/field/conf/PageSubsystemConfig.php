@@ -3,7 +3,7 @@
 //
 //use n2n\l10n\DynamicTextCollection;
 //use n2n\util\type\CastUtils;
-//use n2n\util\type\attrs\DataSet;
+//use n2n\util\attr\DataSet;
 //use n2n\web\dispatch\mag\MagCollection;
 //use page\config\PageConfig;
 //use rocket\op\ei\manage\gui\ViewMode;

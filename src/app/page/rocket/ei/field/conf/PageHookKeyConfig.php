@@ -1,7 +1,7 @@
 <?php
 //namespace page\rocket\ei\field\conf;
 //
-//use n2n\util\type\attrs\DataSet;
+//use n2n\util\attr\DataSet;
 //use n2n\web\dispatch\mag\MagCollection;
 //
 //use rocket\op\ei\util\Eiu;

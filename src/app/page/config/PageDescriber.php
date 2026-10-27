@@ -1,15 +1,13 @@
 <?php
 namespace page\config;
 
-use n2n\util\type\attrs\Attributes;
 use n2n\core\module\ConfigDescriberAdapter;
 use n2n\web\dispatch\mag\MagCollection;
 use n2n\impl\web\dispatch\mag\model\StringArrayMag;
 use n2n\impl\web\dispatch\mag\model\BoolMag;
-use n2n\core\N2N;
 use n2n\impl\web\dispatch\mag\model\MagForm;
 use n2n\web\dispatch\mag\MagDispatchable;
-use n2n\util\type\attrs\LenientAttributeReader;
+use n2n\util\attr\LenientAttributeReader;
 use page\bo\PageController;
 use rocket\impl\ei\component\prop\ci\conf\CiConfigUtils;
 use n2n\impl\web\dispatch\mag\model\MagCollectionMag;
@@ -20,6 +18,7 @@ use page\model\PageControllerAnalyzer;
 use n2n\util\type\TypeConstraint;
 use n2n\util\type\ArgUtils;
 use rocket\impl\ei\component\prop\ci\model\PanelDeclaration;
+use n2n\util\attr\DataSet;
 
 class PageDescriber extends ConfigDescriberAdapter {
 	const ATTR_LOCALES_ACTIVE_KEY = 'localeUrls';
@@ -115,7 +114,7 @@ class PageDescriber extends ConfigDescriberAdapter {
 		return $magCollection;
 	}
 	
-	public function saveMagDispatchable(MagDispatchable $magDispatchable) {
+	public function saveMagDispatchable(MagDispatchable $magDispatchable): void {
 		$values = $magDispatchable->getMagCollection()->readValues();
 		
 //		$ciConfigUtils = CiConfigUtils::createFromN2nContext($this->n2nContext);
@@ -129,7 +128,7 @@ class PageDescriber extends ConfigDescriberAdapter {
 			}
 		}
 		
-		$attributes = new Attributes($values);
+		$attributes = new DataSet($values);
 		$attributes->removeNulls(true);
 		
 		$this->writeCustomAttributes($attributes);
@@ -168,7 +167,7 @@ class PageDescriber extends ConfigDescriberAdapter {
 		foreach ($attributes->getArray(self::ATTR_PAGE_CONTROLLERS_KEY, false, array(), 
 				TypeConstraint::createArrayLike('array')) as $pageControllerEiSpecId => $pageControllerAttrs) {
 			$ciPanelConfigs = array();
-			$pageControllerAttributes = new Attributes($pageControllerAttrs);
+			$pageControllerAttributes = new DataSet($pageControllerAttrs);
 			foreach ($pageControllerAttributes->getArray(self::ATTR_PAGE_CONTROLLER_CI_PANELS_KEY, false, array(), 
 					TypeConstraint::createArrayLike('array')) as $panelName => $ciPanelAttrs) {
 
