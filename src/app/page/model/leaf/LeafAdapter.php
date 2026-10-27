@@ -79,7 +79,7 @@ abstract class LeafAdapter implements Leaf {
 		return $this->name;
 	}
 	
-	public function setTitle(string $title = null) {
+	public function setTitle(?string $title = null) {
 		$this->title = $title;
 	}
 
@@ -91,7 +91,7 @@ abstract class LeafAdapter implements Leaf {
 		return $this->subsystemName;
 	}
 	
-	public function setSubsystemName(string $subsystemName = null) {
+	public function setSubsystemName(?string $subsystemName = null) {
 		$this->subsystemName = $subsystemName;
 	}
 
@@ -119,7 +119,7 @@ abstract class LeafAdapter implements Leaf {
 		throw new IllegalStateException('No pathPart for home leaf available.');
 	}
 	
-	public function setPathPart(string $pathPart = null) {
+	public function setPathPart(?string $pathPart = null) {
 		$this->pathPart = $pathPart;
 	}
 	
