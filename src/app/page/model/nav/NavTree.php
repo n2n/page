@@ -188,7 +188,7 @@ class SitemapItemBuilder {
 
 		if (!($this->supersystem->containsN2nLocaleId($leaf->getN2nLocale())
 				|| ($this->subsystemRule !== null
-						&& !$this->subsystemRule->containsN2nLocaleId($leaf->getN2nLocale())))) {
+						&& $this->subsystemRule->containsN2nLocaleId($leaf->getN2nLocale())))) {
 			return false;
 		}
 
