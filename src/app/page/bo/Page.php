@@ -476,7 +476,7 @@ class Page extends ObjectAdapter {
 		// 			$this->pageSubsystemEiField->setDisplayConfig(new DisplayConfig(ViewMode::none()));
 		// 		}
 
-		$options = array(null => $dtc->translate('all_subsystems_label'));
+		$options = array('' => $dtc->translate('all_subsystems_label'));
 		foreach ($subsystems as $subsystem) {
 			$displayName = $subsystem->getName() . ' (' . $subsystem->getHostName();
 			if (null !== ($contextPath = $subsystem->getContextPath())) {
