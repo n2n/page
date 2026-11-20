@@ -107,7 +107,6 @@ class ContentLeaf extends LeafAdapter {
 		}
 		
 		$method = $class->getMethod(self::MAGIC_SITEMAP_METHOD);
-		$method->setAccessible(true);
 		
 		$invoker = new MagicMethodInvoker($n2nContext);
 		$invoker->setClassParamObject(Url::class, $baseUrl);

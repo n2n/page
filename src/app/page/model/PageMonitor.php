@@ -27,22 +27,22 @@ class PageMonitor implements ThreadScoped {
 	}
 	
 	public function registerRelatedChange(Page $page) {
-		$objHash = spl_object_hash($page);
+		$objHash = spl_object_id($page);
 		if (!isset($this->pageEvents[$objHash])) {
 			$this->pageEvents[$objHash] = new PageEvent(PageEvent::TYPE_UPDATE, $page);
 		}
 	}
 	
 	public function registerInsert(Page $page) {
-		$this->pageEvents[spl_object_hash($page)] = new PageEvent(PageEvent::TYPE_INSERT, $page);
+		$this->pageEvents[spl_object_id($page)] = new PageEvent(PageEvent::TYPE_INSERT, $page);
 	}
 	
 	public function registerUpdate(Page $page) {
-		$this->pageEvents[spl_object_hash($page)] = new PageEvent(PageEvent::TYPE_UPDATE, $page);
+		$this->pageEvents[spl_object_id($page)] = new PageEvent(PageEvent::TYPE_UPDATE, $page);
 	}
 	
 	public function registerRemove(Page $page) {
-		$this->pageEvents[spl_object_hash($page)] = new PageEvent(PageEvent::TYPE_REMOVE, $page);		
+		$this->pageEvents[spl_object_id($page)] = new PageEvent(PageEvent::TYPE_REMOVE, $page);		
 	}
 	
 	private function lookupPageListeners() {
@@ -110,7 +110,6 @@ class PageMonitor implements ThreadScoped {
 		$magicMethodInvoker->setClassParamObject(PageEvent::class, $pageEvent);
 		
 		foreach ($changeCallbackMethods as $method) {
-			$method->setAccessible(true);
 			$magicMethodInvoker->invoke($pageController, $method);
 		}
 		

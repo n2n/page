@@ -489,12 +489,12 @@ class UrlBuildTask {
 	private ?\Closure $urlEnhancer = null;
 
 	public function __construct(NavBranch $navBranch, N2nLocale $n2nLocale) {
-		$this->navBranches[spl_object_hash($navBranch)] = $navBranch;
+		$this->navBranches[spl_object_id($navBranch)] = $navBranch;
 		$this->n2nLocale = $n2nLocale;
 	}
 
 	public function overwriteNavBranch(NavBranch $navBranch) {
-		$this->navBranches[spl_object_hash($navBranch)] = $navBranch;
+		$this->navBranches[spl_object_id($navBranch)] = $navBranch;
 	}
 
 	public function overwriteUrl(Url $url) {
